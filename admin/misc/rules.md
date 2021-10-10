@@ -26,4 +26,4 @@ All members will be expected to check Slack from anyone in the group on a daily 
 
 
  #### Conflict Resolution
- If a team member is not abiding by the rules above, the team leader will question the member before bringing the issue to a TA or professor.
+ If a team member is not abiding by the rules above, the team leader will discuss the issue with the member before bringing the issue to a TA or professor.
