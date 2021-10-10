@@ -21,6 +21,8 @@ All members will be expected to check Slack from anyone in the group on a daily 
  2. Be respectful of other's feedback, comments, questions.
  3. Let the team know ASAP about your schedule and whethher you can make it to meetings.
  4. Try to follow through with what you committed to.
+ 5. Be an active participant/listener.
+ 6. Take thorough meeting notes if assigned note taker for the meeting.
 
 
  #### Conflict Resolution
