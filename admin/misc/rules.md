@@ -35,3 +35,6 @@ Whoever is leading the meeting is responsible for putting together an agenda and
 
  #### Conflict Resolution
  If a team member is not abiding by the rules above, the team leader will discuss the issue with the member before bringing the issue to a TA or professor.
+ 
+ #### Sign the document below.
+ 
