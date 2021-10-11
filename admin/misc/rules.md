@@ -14,7 +14,13 @@ All members will be expected to check Slack from anyone in the group on a daily 
 
 #### Scheduling Meetings
 
- Leads will send a when2meet on Thursday mornings and will pick a time where the majority is avaliable. Team members should fill out the when2meet no later than 5pm PST, before Thursday's lecture. Meeting will be decided after lecture. 
+Leads will send a when2meet the week of October 11th to schedule meetings for the rest of the quarter. All group members are expected to be present at the meetings if possible.
+
+In the event of an emergency meeting, the notice should be posted in the Slack scheduling channel and everyone should react to signal whether they can attend.
+
+If a sub-team needs to meet, the emergency meeting procedure should be followed along with a Slack notice of who needs to attend.
+
+Whoever is leading the meeting is responsible for putting together an agenda and assigning a scribe.
 
  #### General Responsibilities
  1. Be willing to ask for help when needed.
@@ -22,8 +28,9 @@ All members will be expected to check Slack from anyone in the group on a daily 
  3. Be respectful of other's feedback, comments, questions.
  4. Let the team know ASAP about your schedule and whether you can make it to meetings.
  5. Try to follow through with what you committed to.
- 6. Be an active participant/listener.
- 7. Take thorough meeting notes if assigned note taker for the meeting.
+ 6. Communicate early and often. Let the team know if you run into any problems that might impede progress.
+ 7. Be an active participant/listener.
+ 8. Take thorough meeting notes if assigned note taker for the meeting. The note taker will rotate at each group meeting.
 
 
  #### Conflict Resolution
