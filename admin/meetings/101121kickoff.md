@@ -21,7 +21,7 @@
 
 ### Agenda
 * Unresolved business
-      * n/a
+     * n/a
 
 * New Business
     * Introductions 
@@ -42,23 +42,23 @@
         * Social Event on the Weekend ? (Decide based when2meet)
 
 * Items on the agenda that are not discussed 
+     * n/a, every item on agenda was discussed
 
  ### Decisions Made and Their Reasoning
 
-Changed team contact to make it easier to schedule meetinhs/ have sub team meetings. 
+Changed team contact to make it easier to schedule meetings/ have sub team meetings. 
 
-Team name will be Team22X Plus Pro Max.
-
+Decisions made on Team Branding
+Team name: Team22X Plus Pro Max.
 Team Color: pink and gray
-
 Team Mascot: bull taking a bite out of a peach 
-
 Logo: Peach with a bite (Elliot)
-
 Font: Comic Sans 
 
-Team Page: Dennis will aggregate what we already did for lab 1 into the team page. Note: Give Dennis access to google form
+For the team page:
+Dennis will aggregate what we already did for lab 1 into the team page. Note: Give Dennis access to google form
 
+For the team video:
 Start shooting the video after discussion, if someone isn't there they can record themselves and we will edit it into the video
 
  ### Ideas for Further Investigation
