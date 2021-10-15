@@ -21,9 +21,8 @@ I am a third year Computer Engineering major from Muir. I am a San Diego native 
     - Surfing
     - Hiking
     - Knitting
-    - And playing with my dogs. I actually have two dogs, Daisy and Teddy. They are both very sweet, though Daisy does like to be somewhat vocal when I’m on zoom calls and Teddy is a puppy so she is just CRAZY.
+    - And playing with my dogs
  
-
 - Elliot Chung, https://github.com/ec-2018, \
     Hey everyone, my name is Elliot Chung. I’m a CS student from San Diego studying at UCSD. My hobbies include rock climbing, building keyboards and computers, and video games. I started learning Java when I was 12 years old in school. Using that, I competed on a robotics team for 3 years where I got to learn control systems and hardware programming. Currently I’m interested in machine learning and I’ve begun learning tensoflow to start exploring ML. 
 
