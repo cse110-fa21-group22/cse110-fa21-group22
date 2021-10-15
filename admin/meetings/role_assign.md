@@ -1,9 +1,9 @@
 # Tentative Role Assign
 
 1. Project Manager: Emily, Dennis
-2. Front End: Justin(main), Fangqi(main), Joey, Dennis, Mitchell
+2. Front End: Justin(main), Fangqi(main), Joey(main), Dennis, Mitchell
 3. Back End: Samantha(main), Egor(main), Elliot(main), David 
-4. Designer: Mitchell(main), Joey(main), 
+4. Designer: Mitchell(main), Joey, Elliot,
 5. Test: David(main), Emily, 
 
 ## Notes
