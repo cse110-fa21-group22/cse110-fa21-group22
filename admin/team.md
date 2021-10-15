@@ -11,7 +11,7 @@ We ambitiously strive to make our software product deliver as good user experien
 ## Team Values: 
 - resepct, humility, responsibility. 
 - if one fails, we all fail. 
-- 
+
 
 ## Roster: 
 - Emily Ekaireb, https://github.com/eekaireb, \
