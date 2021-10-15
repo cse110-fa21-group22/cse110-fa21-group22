@@ -8,6 +8,11 @@ One of the team lead is an apple fanboy. \
 Therefore, he put all the suffixs from an iphone to buff this team. \
 We ambitiously strive to make our software product deliver as good user experience as an iphone. 
 
+## Team Values: 
+- resepct, humility, responsibility. 
+- if one fails, we all fail. 
+- 
+
 ## Roster: 
 - Emily Ekaireb, https://github.com/eekaireb, \
 I am a third year Computer Engineering major from Muir. I am a San Diego native so I love going to the beach, maybe a little too much . Some of my hobbies include:
