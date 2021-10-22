@@ -14,12 +14,14 @@
     * Lecture Attendance
 * New Business
     * Look at other cooking apps
-    * 5 Ws
     * User personas, stories, use cases
         * Need to create 4-5 personas
+    * 5 Ws and H
+    * * Features
     * Interface design documents 
         * Fat marker design
         * App's theme/mood
+    * Where are our recipes coming from? 
     * Overarching decision documents for any major decisions
     * Pitch due at next TA meeting
         * https://basecamp.com/shapeup/shape-up.pdf "Write the pitch"
