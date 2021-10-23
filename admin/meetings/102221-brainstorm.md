@@ -1,7 +1,7 @@
 # Team22X Plus Pro Max Group 22 Meeting Notes
 ## Meeting Type: Internal Meeting/Brainstorming
 ## Date: 10-22-21
-## Location/Time of Meeting: Zoom 2pm
+## Location/Time of Meeting: Zoom 1pm
 
 ### Attendance 
 * Emily 
@@ -49,6 +49,7 @@
 
 * Items on the agenda that are not discussed 
     1. project pitch will come out next week 
+    2. Systems Diagram, Roadmap
    
  ### Decisions Made and Their Reasoning
    1. we have to use an API to get receipes. 
@@ -67,5 +68,6 @@
 
 
  ### When the meeting finished 
+ 3pm
 
 
