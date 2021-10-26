@@ -57,8 +57,11 @@ Absent:
  
  **Brainstorming artifacts due by the end of the week**
 Needs to be neat and creative
+
 User persona (4-5)
+
 User stories helps get to app features (different scenarios and how the app will help)
+
  List of features 
  * Skills: add something related to cooking 
  * Favorite recipes
@@ -66,9 +69,10 @@ User stories helps get to app features (different scenarios and how the app will
  * Filter by quickness
  Project Roadmap (what are you going to do, which features are you going to do in which week)
  Wireframe (helps translate design into html)
- Problem Formalizations 
+ 
+Problem Formalizations 
  * Groceries feature
- UML diagram (identify different components in application and tell how they interact with each other, can help modularize code)
+UML diagram (identify different components in application and tell how they interact with each other, can help modularize code)
  
  **App Design/CRUD operations**
  Focus on searching for recipes first before having users enter their own recipe
@@ -80,6 +84,7 @@ User stories helps get to app features (different scenarios and how the app will
  Letting users create recipes adds complexity because recipes needs to be shared with other users
  
  Where will data be stored: Local storage best for minimum viable product
+ 
  Users will only be interested into their own favorite list, etc -> local storage make more sense in this situation 
  * Browsers have local storage 
  * Consider storing google drive 
@@ -88,6 +93,7 @@ User stories helps get to app features (different scenarios and how the app will
  
  ### Ideas for Further Investigation
  What makes our application *better* than existing applications?
+ 
  How is it beginner friendly? What features support this? 
  
  ### When the meeting finished 
