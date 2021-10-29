@@ -5,9 +5,17 @@
 
 ### Attendance 
 * Attending
-  * 
+  * Egor Pustovalov
+  * Elliot Chung
+  * Joey Dang
+  * Emily Ekaireb
+  * Mitchell Herbert
+  * Justin Lee
+  * Dennis Zhao
+  * David Em-Yinn
+  * Samantha Lin (15 mins late)
 * Not Attending
-  * 
+  * Fanqi Yuan
 
 ### Agenda
 
@@ -41,9 +49,34 @@
 
 
  ### Decisions Made and Their Reasoning
-* 
+* Our minimum viable product will be a cross-platform recipe browsing/searching app featuring...
+  * Searching and exploring recipes
+  * Cross platform support (pc/phone/tablet)
+  * Favorites list (meets CRUD requirement)
+* We decided we would stick with local storage until we built out more features to target our audience
+* If we have time (i.e. "extension"), we will...
+  * Add editing recipes and local storage
+  * Create a shopping list feature
+  * Highlight the current step by clicking on it
+    * "Go to steps" takes you to the highlighted step
+* We decided on four pages
+  * Homepage
+  * Search results
+  * Favorites
+  * Recipe
+* Our nav bar will have three buttons
+  * Home
+  * Search
+  * Favorites
+* Until next meeting we will be working on the following
+  * Wireframe - Mitchell and Elliot
+  * UML - Emily, Egor
+  * Interface - Justin, Samantha
+* Emily will send out a when2meet to find a meeting time
+  * Everyone is expected to finish their tasks by Sunday night
  ### Ideas for Further Investigation
-
+* What should we feature within each recipe?
+  * e.g. prep time
  ### When the meeting finished 
-
+* 3:00pm end time
 
