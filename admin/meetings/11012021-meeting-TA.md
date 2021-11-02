@@ -15,8 +15,8 @@
   1. assigning tasks, how should we divide labour among front/back end, how specfic each task should be? 
   2. documentation guide
      1. what are the specific app we can use for documentation? 
-     2. should that be a sperate
-     3. since no one is using our code is not interface (like java documentation), documentaton will mainly for outselves refering to our internal methods? 
+     2. what is the coding style? 
+     3. since no one is using our code is as interface (like java documentation), documentaton will mainly for outselves refering to our internal methods? 
   3. testing
      1. what are the specific testing cases? 
         > search for recipe, not finding, finding too much, hwo to show them, <p> 
