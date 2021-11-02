@@ -1,6 +1,6 @@
 # <team name> Group 22 Meeting Notes
-## Meeting Type:
-## Date: 
+## Meeting Type: Update brainstorming
+## Date: 11/01/2021
 ## Location/Time of Meeting: Zoom 5pm
 
 ### Attendance 
