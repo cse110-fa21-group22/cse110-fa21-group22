@@ -16,10 +16,10 @@
 - Items on the agenda that are not discussed 
 
   
- ### Decisions Made and Their Reasoning
+### Decisions Made and Their Reasoning
   
- ### Ideas for Further Investigation
+### Ideas for Further Investigation
   
- ### When the meeting finished 
+### When the meeting finished 
 
-
+### To Do
