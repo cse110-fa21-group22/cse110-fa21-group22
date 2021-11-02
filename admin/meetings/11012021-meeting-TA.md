@@ -1,11 +1,21 @@
 # <team name> Group 22 Meeting Notes
-## Meeting Type:
-## Date: 
-## Location/Time of Meeting:
+## Meeting Type: TA Meeting
+## Date: 11/01/2021
+## Location/Time of Meeting: Zoom 3pm
 
 ### Attendance 
-- forgot
--
+* Attending
+  * David Em-Yinn
+  * Dennis Zhao
+  * Emily Ekaireb
+  * Justin Lee
+  * Elliot Chung
+  * Mitchell Herbert 
+  * Samantha Lin
+* Not Attending
+  * Egor Pustovalov
+  * Fangqi Yuan
+  * Joey Dang
 
 ### Agenda
   
@@ -29,14 +39,15 @@
 - Items on the agenda that are not discussed 
 
  ### Decisions Made and Their Reasoning
-  1. have the mobile friendlyness during the first sprint. 
+  1. have the mobile friendliness during the first sprint. 
   2. 
  ### Ideas for Further Investigation
 1. have a priority list of features. 
-2. have an eamil recipe. 
+2. have an email recipe. 
 3. 
 
  ### When the meeting finished 
+  4 pm
 
 ### TODO
 1. dividing tasks using miro as a board
