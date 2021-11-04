@@ -18,10 +18,10 @@
 
 .recipe-image {
   border: 0;
-  object-fit: cover;
-  object-position: center;
   min-height: 280px;
   min-width: 300px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .recipe-calories {
