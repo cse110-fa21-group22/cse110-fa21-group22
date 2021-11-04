@@ -1,7 +1,7 @@
 const link = document.createElement('link');
 link.rel = 'stylesheet'; 
 link.type = 'text/css';
-link.href = 'styles/recipe-card.css'; 
+link.href = 'styles/recipeCard.css'; 
 
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
