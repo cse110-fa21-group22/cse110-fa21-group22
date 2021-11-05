@@ -10,9 +10,13 @@ navbarTemplate.innerHTML = `
       <div class="logo">Logo</div>
     </a>
     <div class="navbar-routes">
-      <a href="/search.html">
-        <p class="nav-search">Search</p>
-      </a>
+      <img src="assets/search.svg" alt="search" />
+      <div class='nav-search'>
+        <input 
+          type='text'
+          placeholder="Search"
+        />
+      </div>
       <a href="/favorite.html">
         <p class="nav-favorite">Favorite</p>
       </a>
@@ -35,6 +39,26 @@ class Navbar extends HTMLElement {
   connectedCallback() {
     this.shadow.appendChild(link);
     this.shadow.appendChild(navbarTemplate.content);
+
+    //Desktop Functionality
+    let searchTerm = '';
+    let inputList = [];
+
+    
+    const searchInput = this.shadow.querySelector('.nav-search').querySelector('input');
+
+    searchInput.addEventListener('keyup', (event) => {
+      searchTerm = event.target.value;
+      inputList['query'] = searchTerm;
+      inputList['number'] = 20;
+      inputList['offset'] = 0;
+      inputList['recipe-nutrition'] = 'true';
+
+      if (event.code == 'Enter') { 
+        const searchSubmitEvent = new CustomEvent('submit', {detail:inputList});
+        this.shadow.dispatchEvent(searchSubmitEvent);
+      }
+    })
   }
 }
 

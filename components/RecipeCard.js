@@ -8,6 +8,8 @@ recipeCardTemplate.innerHTML = `
   <article class="recipe-card">
     <img class="recipe-favorite" src="assets/favorite.svg" alt="favorite" />
     <div class="recipe-image">
+      <img><img/>
+    </div>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
       <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
@@ -16,14 +18,28 @@ recipeCardTemplate.innerHTML = `
 `
 
 class RecipeCard extends HTMLElement {
+
+  set recipe(recipeObj) { 
+    this.setAttribute('recipe-id', recipeObj['id']);
+    const recipeImg = this.shadow.querySelector('.recipe-image').querySelector('img');
+    const recipeCal = this.shadow.querySelector('.recipe-calorie-number');
+    const recipeName = this.shadow.querySelector('.recipe-name');
+
+    recipeImg.src = recipeObj['image'];
+    recipeName.innerHTML = recipeObj['title'];
+    // recipeCal.innerHTML = recipeObj['calories'];
+  }
+
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });
+    this.shadow.appendChild(recipeCardTemplate.content.cloneNode(true));
+    this.shadow.appendChild(link.cloneNode(true));
   }
 
   connectedCallback() {
-    this.shadow.appendChild(link);
-    this.shadow.appendChild(recipeCardTemplate.content);
+    
+    
   }
 }
 
