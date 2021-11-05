@@ -4,47 +4,59 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ICook"/>
   <title>Favorite Page</title>
+  <link rel="stylesheet" href="../styles/favorite.css" />
+
   <!--TODO-->
-  <link rel="food icon" type="image/jpg" href="assets/favicon.ico" />
-  <link rel="stylesheet" href="styles/favoritePage.css">
-  <script src="components/navbar.js" type="module"></script>
-  <script src="components/recipeCard.js" type="module"></script>
+  <!--<meta name="description" content="ICook"/>-->
+  <!--<link rel="food icon" type="image/jpg" href="assets/favicon.ico" />-->
+  <!--<link rel="stylesheet" href="styles/design.css">-->
+  <!--<script src="components/navbar.js" type="module"></script>-->
+  <!--<script src="components/recipeCard.js" type="module"></script>-->
 </head>
 <body>
-  <navbar-component>
-      <!--TODO-->
-      <p>It's a nav bar</p>>
-  </navbar-component>
-  <main>
-        <h1>Favorite Page</h1>
-        <div class="scroll">
-            <section class="myFavorite">
-                <!--TODO-->
-                <p>content1 ......................................................................................................................................................................................................</p>>
-            </section>
-            <section class="myCookieFavorite">
-                <!--TODO-->
-                <p>content2 ......................................................................................................................................................................................................</p>>
-            </section>
-            <section class="postGymFavorite">
-                <!--TODO-->
-                <p>content3 ......................................................................................................................................................................................................</p>>
-            </section>
+    <div class="box">
+        <div class="header">
+            This is a nav bar place.
         </div>
-        <section class="button">
-            <!--TODO-->
-            <button class="edit-list">
-                <p>Edit</p>
-            </button>
-            <button class="cancel">
-                <p>Cancel</p>
-            </button>
-            <button class="move">
-                <p>Move</p>
-            </button>
-        </section>
-  </main>
+        <div class="main">
+            <div class="scroll1">
+                <h3>My Favorites recipes</h3>
+                <button id="edit">
+                    Edit List
+                </button>
+                <button id="cancel">
+                    Cancel
+                </button>
+                <button id="move">
+                    Move
+                </button>
+                <section>
+                    Add recipes here
+                </section>
+            </div>
+            <div class="scroll2">
+                <h3>My favorite cookie recipes</h3>
+                <section>
+                    Add recipes here
+                </section>
+            </div>
+            <div class="scroll3">
+                <h3>My favorite post-gym meals</h3>
+                <section>
+                    Add recipes here
+                </section>
+            </div>          
+            <div class="new-scroll">
+                <!--
+                    For new scroll component.
+                    Can be added in js file
+                -->
+            </div>
+        </div>
+        <div class="footer">
+            Version: 0.0.1
+        </div>
+    </div> 
 </body>
 </html>
