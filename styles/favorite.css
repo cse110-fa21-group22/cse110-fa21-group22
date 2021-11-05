@@ -8,12 +8,8 @@
 .header {
     height: 80px;
     width: 100%;
-    background-color:#ddd;
-    line-height: 80px;
-    text-align: center;
-    top: 0;
-    left: 0;
-    margin: -100px 0 0;    
+    background-color:#4d96ea;
+    margin: -100px 0 0;
 }
 
 .main {
@@ -56,6 +52,12 @@ div.scroll3 {
     overflow-y: hidden;
     white-space: nowrap;
 }
+
+.recipe-section {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 
 #edit {
     line-height: 12px;
@@ -100,9 +102,13 @@ div.scroll3 {
 
 .footer{
     height: 20px;
-    background-color:#ddd;
+    background-color:#4d96ea;
+}
+
+footer {
     text-align: right;
     font-size: 14px;
     font-family: Helvetica;
     font-weight: normal;
+    margin-right: 10px;
 }

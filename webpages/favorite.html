@@ -9,15 +9,14 @@
   <link rel="stylesheet" href="../styles/design.css">
   <link rel="food icon" type="image/jpg" href="../assets/favicon.ico" />
   <link rel="stylesheet" href="../styles/favorite.css" />
-
-  <!--TODO-->
-  <!--<script src="../components/navbar.js" type="module"></script>-->
-  <!--<script src="../components/recipeCard.js" type="module"></script>-->
+  <script src="../components/navbar.js" type="module"></script>
+  <script src="../components/recipeCard.js" type="module"></script>
+  <script src="../scripts/search.js" type="module"></script>
 </head>
 <body>
     <div class="box">
         <div class="header">
-            This is a nav bar place.
+            <navbar-component></navbar-component>
         </div>
         <div class="main">
             <div class="scroll1">
@@ -31,19 +30,19 @@
                 <button id="move">
                     Move
                 </button>
-                <section>
+                <section class="recipe-section">
                     Add recipes here
                 </section>
             </div>
             <div class="scroll2">
                 <h3>My favorite cookie recipes</h3>
-                <section>
+                <section class="recipe-section">
                     Add recipes here
                 </section>
             </div>
             <div class="scroll3">
                 <h3>My favorite post-gym meals</h3>
-                <section>
+                <section class="recipe-section">
                     Add recipes here
                 </section>
             </div>          
@@ -55,7 +54,7 @@
             </div>
         </div>
         <div class="footer">
-            Version: 0.0.1
+            <footer>Version: 0.0.1</footer>
         </div>
     </div> 
 </body>
