@@ -24,12 +24,12 @@
   display: none;
 }
 
-.nav-search, .nav-search-mobile {
-  margin-right: 20px;
-}
-
 .nav-favorite-mobile, .nav-search-mobile {
   display: block;
+}
+
+.nav-search, .nav-search-mobile {
+  margin-right: 20px;
 }
 
 @media (min-width: 768px) {
