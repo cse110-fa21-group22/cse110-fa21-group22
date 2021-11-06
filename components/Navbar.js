@@ -5,7 +5,58 @@ link.href = '../styles/navbar.css';
 
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
-  <nav class="navbar">
+    <nav class="navbar">
+        <div class="navbar-routes">
+            <div class="computer">
+                <div class="logo">
+                    <a href="../webpages/home.html">
+                        <p class="nav-home">Logo</p>
+                    </a>
+                </div>
+                <div class="search">
+                    <div class="search-logo">
+                        <a href="../webpages/search.html">
+                            <img src="../assets/search.svg" alt="search" />
+                        </a>
+                    </div>
+                    <div class='nav-search'>
+                        <input 
+                          type='text'
+                          placeholder="Search"
+                        />
+                    </div>
+                </div>
+                <div class="favorite">
+                    <a href="../webpages/favorite.html">
+                        <img src="../assets/favorite.svg" alt="favorite" />
+                    </a>
+                </div>
+            </div>
+            <!-- //TODO
+            <div class="mobile">
+                <div class="logo-mobile">
+                    <a href="../webpages/home.html">
+                        <p class="nav-home">Logo</p>
+                    </a>
+                </div>
+                <div class="search-mobile">
+                    <a href="../webpages/search.html">
+                        <img class="nav-search-mobile" src="../assets/search.svg" alt="search" />
+                    </a>
+                </div>
+                <div class="favorite-mobile">
+                    <a href="../webpages/favorite.html">
+                        <img class="nav-favorite-mobile" src="../assets/favorite.svg" alt="favorite" />
+                    </a>
+                </div>
+            </div>
+            -->
+        </div>
+    </nav>
+`
+
+/**
+ *   <nav class="navbar">
     <a href="../">
       <div class="logo">Logo</div>
     </a>
@@ -28,7 +79,8 @@ navbarTemplate.innerHTML = `
       </a>
     </div>
   </nav>
-`
+ */
+
 
 class Navbar extends HTMLElement {
   constructor() {
