@@ -46,7 +46,8 @@ div.favorite {
 }
 
 #icook_icon {
-  z-index: 9999;
+  height:30px;
+  width:8vw;
 }
 
 /*
