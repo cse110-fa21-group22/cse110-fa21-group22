@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="ICook"/>
   <title>Favorite Page</title>
-  <link rel="stylesheet" href="../styles/design.css">
   <link rel="food icon" type="image/jpg" href="../assets/favicon.ico" />
   <link rel="stylesheet" href="../styles/favorite.css" />
   <script src="../components/navbar.js" type="module"></script>
@@ -19,31 +18,48 @@
             <navbar-component></navbar-component>
         </div>
         <div class="main">
+            <button id="edit">
+                Edit List
+            </button>
+            <button id="cancel">
+                Cancel
+            </button>
+            <button id="move">
+                Move
+            </button>
             <div class="scroll1">
                 <h3>My Favorites recipes</h3>
-                <button id="edit">
-                    Edit List
-                </button>
-                <button id="cancel">
-                    Cancel
-                </button>
-                <button id="move">
-                    Move
-                </button>
                 <section class="recipe-section">
-                    Add recipes here
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
                 </section>
             </div>
             <div class="scroll2">
                 <h3>My favorite cookie recipes</h3>
                 <section class="recipe-section">
-                    Add recipes here
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
                 </section>
             </div>
             <div class="scroll3">
                 <h3>My favorite post-gym meals</h3>
                 <section class="recipe-section">
-                    Add recipes here
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
+                    <recipe-card-component></recipe-card-component>
                 </section>
             </div>          
             <div class="new-scroll">
