@@ -27,11 +27,9 @@ navbarTemplate.innerHTML = `
                           id="search_box_input"
                           placeholder="Search here!"
                         />
-                        <!--
                         <button id="search_button">
                           <img src="../assets/search_icon.png" alt="search_icon" id="search_icon">
                         </button>
-                        -->
                     </div>
                 </div>
                 <div class="favorite">
