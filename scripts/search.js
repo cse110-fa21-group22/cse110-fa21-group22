@@ -22,6 +22,7 @@ function init () {
     })
 
     async function search(inputList) { 
+        clear();
         const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
         const tokenSearchInput = '&query=' + inputList['query'];
         const tokenNumResults = '&number=' + inputList['number'];
