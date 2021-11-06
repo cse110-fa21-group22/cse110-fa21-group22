@@ -14,16 +14,24 @@ navbarTemplate.innerHTML = `
                     </a>
                 </div>
                 <div class="search">
+                    <!--
                     <div class="search-logo">
                         <a href="../webpages/search.html">
                             <img src="../assets/search.svg" alt="search" />
                         </a>
                     </div>
+                    -->
                     <div class='nav-search'>
                         <input 
-                          type='text'
-                          placeholder="Search"
+                          type='search'
+                          id="search_box_input"
+                          placeholder="Search here!"
                         />
+                        <!--
+                        <button id="search_button">
+                          <img src="../assets/search_icon.png" alt="search_icon" id="search_icon">
+                        </button>
+                        -->
                     </div>
                 </div>
                 <div class="favorite">
