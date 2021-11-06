@@ -11,7 +11,6 @@ function init () {
     const recipeSection = document.querySelector('.recipe-section'); 
     
     navbar.shadowRoot.addEventListener('submit', (event) => {
-        clear();
         search(event.detail);
     })
 
@@ -60,8 +59,3 @@ function init () {
         
     }
 }
-
-
-
-
-
