@@ -1,0 +1,9 @@
+@import 'reset.css';
+
+html, body {
+    font-family: Helvetica;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
