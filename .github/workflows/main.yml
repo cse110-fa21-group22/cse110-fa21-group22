@@ -1,11 +1,17 @@
 name: first-github-action
 on: [push]
+env:
+  NODE_VERSION: '14x'
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Test
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
   write-to-console:
     runs-on: ubuntu-latest
     steps:
