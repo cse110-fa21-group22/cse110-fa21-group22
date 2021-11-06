@@ -5,88 +5,22 @@ link.href = '../styles/navbar.css';
 
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
-    <nav class="navbar">
-        <div class="navbar-routes">
-            <div class="computer">
-                <div class="logo">
-                    <a href="../webpages/home.html">
-                      <img src="../assets/logo_icon.png" alt="iCook_Icon" id="icook_icon">
-                    </a>
-                </div>
-                <div class="search">
-                    <!--
-                    <div class="search-logo">
-                        <a href="../webpages/search.html">
-                            <img src="../assets/search.svg" alt="search" />
-                        </a>
-                    </div>
-                    -->
-                    <div class='nav-search'>
-                        <input 
-                          type='search'
-                          id="search_box_input"
-                          placeholder="Search here!"
-                        />
-                        <button id="search_button">
-                          <img src="../assets/search_icon.png" alt="search_icon" id="search_icon">
-                        </button>
-                    </div>
-                </div>
-                <div class="favorite">
-                    <a href="../webpages/favorite.html">
-                        <img src="../assets/favorite.svg" alt="favorite" />
-                    </a>
-                </div>
-            </div>
-            <!-- //TODO
-            <div class="mobile">
-                <div class="logo-mobile">
-                    <a href="../webpages/home.html">
-                        <p class="nav-home">Logo</p>
-                    </a>
-                </div>
-                <div class="search-mobile">
-                    <a href="../webpages/search.html">
-                        <img class="nav-search-mobile" src="../assets/search.svg" alt="search" />
-                    </a>
-                </div>
-                <div class="favorite-mobile">
-                    <a href="../webpages/favorite.html">
-                        <img class="nav-favorite-mobile" src="../assets/favorite.svg" alt="favorite" />
-                    </a>
-                </div>
-            </div>
-            -->
-        </div>
+  <nav class="navbar">
+    <a href="/webpages/home.html">
+      <h1 class="logo">iCook</h1>
+    </a>
+    <div class="nav-search">
+      <img class="nav-search-icon" src="../assets/search.svg" alt="search" />
+      <input class="nav-search-input" type='text' placeholder="Search" />
+    </div>
+    <a class="nav-favorite" href="/webpages/favorite.html">
+      <p>Favorite</p>
+    </a>
+    <a class="nav-favorite-mobile" href="/webpages/favorite.html">
+      <img src="../assets/favorite.svg" alt="favorite" />
+    </a>
     </nav>
 `
-
-/**
- *   <nav class="navbar">
-    <a href="../">
-      <div class="logo">Logo</div>
-    </a>
-    <div class="navbar-routes">
-      <img src="../assets/search.svg" alt="search" />
-      <div class='nav-search'>
-        <input 
-          type='text'
-          placeholder="Search"
-        />
-      </div>
-      <a href="../webpages/favorite.html">
-        <p class="nav-favorite">Favorite</p>
-      </a>
-      <a href="../webpages/search.html">
-        <img class="nav-search-mobile" src="../assets/search.svg" alt="search" />
-      </a>
-      <a href="../webpages/favorite.html">
-        <img class="nav-favorite-mobile" src="../assets/favorite.svg" alt="favorite" />
-      </a>
-    </div>
-  </nav>
- */
-
 
 class Navbar extends HTMLElement {
   constructor() {
