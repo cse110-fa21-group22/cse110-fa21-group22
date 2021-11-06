@@ -40,25 +40,22 @@ div.main h3 {
     overflow-y: auto;
 }
 
-div.scroll1 {
+div.scroll {
     height: 400px;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    display: flex;
+    flex-direction: column;
 }
 
-div.scroll2 {
-    height: 400px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
+div.list-name{
+    position:absolute;
+    margin-top: 10px;
 }
 
-div.scroll3 {
-    height: 400px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
+div.recipe-section{
+    margin-top: 60px;
 }
 
 h3 {
@@ -76,7 +73,7 @@ h3 {
     width: 80px;
     font-size: 16px;
     font-family: Helvetica;
-    margin-top: 80px;
+    margin-top: 90px;
     margin-right: 10px;
     position:absolute;
     top:0;
@@ -89,7 +86,7 @@ h3 {
     width: 80px;
     font-size: 16px;
     font-family: Helvetica;
-    margin-top: 80px;
+    margin-top: 90px;
     margin-right: 100px;
     position:absolute;
     top:0;
@@ -103,7 +100,7 @@ h3 {
     width: 80px;
     font-size: 16px;
     font-family: Helvetica;
-    margin-top: 85px;
+    margin-top: 90px;
     margin-right: 10px;
     position: absolute;
     top:0;
