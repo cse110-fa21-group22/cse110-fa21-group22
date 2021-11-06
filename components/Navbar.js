@@ -10,7 +10,7 @@ navbarTemplate.innerHTML = `
             <div class="computer">
                 <div class="logo">
                     <a href="../webpages/home.html">
-                        <p class="nav-home">Logo</p>
+                      <img src="../assets/logo_icon.png" alt="iCook_Icon" id="icook_icon">
                     </a>
                 </div>
                 <div class="search">

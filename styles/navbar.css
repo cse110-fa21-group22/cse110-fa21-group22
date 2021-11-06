@@ -45,6 +45,10 @@ div.favorite {
   padding-right: 16px;
 }
 
+#icook_icon {
+  z-index: 9999;
+}
+
 /*
 a:hover {
   background-color: #fff;
