@@ -14,7 +14,7 @@ navbarTemplate.innerHTML = `
       <input class="nav-search-input" type='text' placeholder="Search" />
     </div>
     <a class="nav-favorite" href="/webpages/favorite.html">
-      <p>Favorite</p>
+      <p>Favorites</p>
     </a>
     <a class="nav-favorite-mobile" href="/webpages/favorite.html">
       <img src="../assets/favorite.svg" alt="favorite" />

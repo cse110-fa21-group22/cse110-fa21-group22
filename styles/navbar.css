@@ -22,6 +22,7 @@
 
 .nav-favorite-mobile {
   display: block;
+  filter: invert(1);
 }
 
 .nav-search {
@@ -30,10 +31,11 @@
 }
 
 .nav-search-icon {
-  height: 16px;
+  filter: invert(45%);
+  height: 14px;
   left: 12px;
   position: absolute;
-  top: calc(50% - 8px);
+  top: calc(50% - 7px);
 }
 
 .nav-search-input {
@@ -41,7 +43,7 @@
   border: 0;
   border-radius: 20px;
   height: 30px;
-  padding-left: 35px;
+  padding-left: 32px;
   padding-right: 15px;
 }
 
