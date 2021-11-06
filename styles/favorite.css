@@ -1,3 +1,13 @@
+@import 'reset.css';
+
+html, body {
+    font-family: Helvetica;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .box {
     height: 100%;
     padding: 100px 0 0;
@@ -26,28 +36,25 @@ div.main h3 {
     margin: 0;
     margin-left: 20px;
     margin-top: 10px;
-    padding: 0;
+    overflow-y: auto;
 }
 
 div.scroll1 {
-    background-color:#ff0;
-    height: 360px;
+    height: 400px;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
 
 div.scroll2 {
-    background-color:#ff10ff;
-    height: 360px;
+    height: 400px;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
 
 div.scroll3 {
-    background-color:#1fa;
-    height: 360px;
+    height: 400px;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
@@ -65,7 +72,7 @@ div.scroll3 {
     width: 80px;
     font-size: 16px;
     font-family: Helvetica;
-    margin-top: 85px;
+    margin-top: 80px;
     margin-right: 10px;
     position:absolute;
     top:0;
@@ -78,7 +85,7 @@ div.scroll3 {
     width: 80px;
     font-size: 16px;
     font-family: Helvetica;
-    margin-top: 85px;
+    margin-top: 80px;
     margin-right: 100px;
     position:absolute;
     top:0;
