@@ -1,0 +1,143 @@
+@import 'reset.css';
+
+html, body {
+    font-family: Helvetica;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    padding: 100px 0 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.header {
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background-color:#4d96ea;
+    margin: -100px 0 0;
+    z-index: 9999;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    margin-top: -30px;
+    padding: 0;
+    width: auto;
+}
+
+div.top {
+    display: flex;
+    flex-direction: row;
+    border-color:#000;
+    border-width:medium;
+    border-bottom-style:solid;
+    padding-bottom: 20px;
+}
+
+div.description {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+}
+
+div.image {
+    flex: 5;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.recipe-name{
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.recipe-time{
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.recipe-description{
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.description h4{
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.middle {
+    border-color:#000;
+    border-width:medium;
+    border-bottom-style:solid;
+}
+
+div.ingredients {
+    display: flex;
+    flex-direction: column;
+}
+
+div.ingredients-top{
+    display: flex;
+    flex-direction: row;
+}
+
+div.ingredients-middle{
+    display: flex;
+    flex-direction: row;
+}
+
+div.equipment {
+    display: flex;
+    flex-direction: column;
+}
+
+div.equipment-middle{
+    display: flex;
+    flex-direction: row;
+}
+
+div.go-left{
+    float: left;
+}
+
+div.recipe-ingredients{
+    position: relative;
+}
+
+div.go-right{
+    float: right;
+}
+
+
+div.bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+div.instruction-top{
+    display: flex;
+    flex-direction: row;
+}
+
+.footer{
+    height: 20px;
+    background-color:#4d96ea;
+}
+
+footer {
+    text-align: right;
+    font-size: 14px;
+    font-family: Helvetica;
+    font-weight: normal;
+    margin-right: 10px;
+}

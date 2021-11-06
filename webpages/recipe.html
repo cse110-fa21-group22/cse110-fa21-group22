@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ICook"/>
+  <title>Recipe Page</title>
+  <link rel="food icon" type="image/jpg" href="../assets/favicon.ico" />
+  <link rel="stylesheet" href="../styles/recipe.css" />
+  <script src="../components/navbar.js" type="module"></script>
+  <script src="../components/recipeCard.js" type="module"></script>
+  <script src="../scripts/search.js" type="module"></script>
+</head>
+<body>
+    <div class="box">
+        <div class="header">
+            <navbar-component></navbar-component>
+        </div>
+        <div class="main">
+            <div class="top">
+                <div class="description">
+                    <div class="recipe-name">
+                        <h3>recipe-name</h3>
+                    </div>
+                    <div class="recipe-time">
+                        time here
+                    </div>
+                    <h4>Description</h4>
+                    <div class="recipe-description">
+                        description here.
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="" alt="Recipe Image" />
+                </div>
+            </div>
+            <div class="middle">
+                <div class="ingredients">
+                    <div class="ingredients-top">
+                        <h3>Ingredients</h3>
+                        <button>
+                            Go to Instructions
+                        </button>
+                    </div>
+                    <div class="ingredients-middle">
+                        <button class="go-left">
+                            <img src="" alt="<" />
+                        </button>
+                        <div class="recipe-ingredients">
+                            ingredients here
+                        </div>
+                        <button class="go-right">
+                            <img src="" alt=">" />
+                        </button>
+                    </div>
+                    <div class="ingredients-top">
+                        <button class="show-all">
+                            <img src="" alt="Show All" />
+                        </button>
+                    </div>
+                </div>
+                <div class="equipment">
+                    <div class="equipment-top">
+                        <h3>Equipment</h3>
+                    </div>
+                    <div class="equipment-middle">
+                        <div class="left">
+                            <button class="go-left">
+                                <img src="" alt="<" />
+                            </button>
+                        </div>
+                        <div class="recipe-equipment">
+                            equipments here
+                        </div>
+                        <div class="right">
+                            <button class="go-right">
+                                <img src="" alt=">" />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="equipment-top">
+                        <button class="show-all">
+                            <img src="" alt="Show All" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="instruction-top">
+                    <h3>Instructions</h3>
+                    <button>
+                        Go to ingredients
+                    </button>
+                    <button>
+                        Go to step
+                    </button>
+                </div>
+                <div class="instruction-bottom">
+                    <div class="recipe-steps">
+                        recipe-steps
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <footer>Version: 0.0.1</footer>
+        </div>
+    </div> 
+</body>
+</html>
