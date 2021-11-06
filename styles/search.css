@@ -9,3 +9,16 @@
 .search-recipe {
   margin-bottom: 20px;
 }
+
+.search-page {
+  display:flex;
+  justify-content: space-between;
+  height:100%;
+}
+
+
+#button-container {
+  width:90%;
+  height:100%;
+  /* position:fixed; */
+}
