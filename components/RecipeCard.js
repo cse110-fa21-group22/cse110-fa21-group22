@@ -1,12 +1,12 @@
 const link = document.createElement('link');
 link.rel = 'stylesheet'; 
 link.type = 'text/css';
-link.href = 'styles/recipeCard.css'; 
+link.href = '../styles/recipeCard.css'; 
 
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
   <article class="recipe-card">
-    <img class="recipe-favorite" src="assets/favorite.svg" alt="favorite" />
+    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
       <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
@@ -33,11 +33,6 @@ class RecipeCard extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' });
     this.shadow.appendChild(recipeCardTemplate.content.cloneNode(true));
     this.shadow.appendChild(link.cloneNode(true));
-  }
-
-  connectedCallback() {
-    
-    
   }
 }
 
