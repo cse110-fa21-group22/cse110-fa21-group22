@@ -32,9 +32,12 @@
                     <div class="description">
                         <div class="recipe-name">
                             <h3>recipe-name</h3>
+                            <img src="../assets/favorite.svg"></img>
                         </div>
                         <div class="recipe-time">
-                            time here
+                            <p>Prep time</p>
+                            <p>Cook time</p>
+                            <p>Total time</p>
                         </div>
                         <h4>Description</h4>
                         <div class="recipe-description">
@@ -120,11 +123,11 @@
                     </div>
                     <div class="instruction-bottom">
                         <div class="recipe-steps">
-                            <!-- just a test. can be deleted-->
-                            <recipe-card-component></recipe-card-component>
-                            <recipe-card-component></recipe-card-component>
-                            <recipe-card-component></recipe-card-component>
-                            <!---->
+                            <ol>
+                                <li class="current-step"><p id="current-step">this is first step</p><button id="next-step">next step</button></li>
+                                <li>this is second step</li>
+                                <li>this is third step</li>
+                            </ol>
                         </div>
                     </div>
                 </div>

@@ -63,24 +63,28 @@ div.description {
 }
 
 div.image {
-    flex: 5;
-    margin-left: 16px;
+    margin-right: 16px;
     margin-top: 16px;
 }
 
 div.recipe-name{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     padding: 0;
     margin-left: 16px;
     margin-top: 16px;
 }
 
 div.recipe-time{
+    color: var(--color-neutrals-grey);
     padding: 0;
     margin-left: 16px;
     margin-top: 16px;
 }
 
 div.recipe-description{
+    color: var(--color-neutrals-grey);
     padding: 0;
     margin-left: 16px;
     margin-top: 16px;
@@ -111,6 +115,7 @@ div.equipment {
 div.ingredients-top{
     display: flex;
     flex-direction: row;
+    gap: 10px;
 }
 
 /*button elements button*/
@@ -155,6 +160,11 @@ div.bottom {
 div.instruction-top{
     display: flex;
     flex-direction: row;
+    gap: 10px;
+}
+
+div.instruction-bottom{
+    margin: 0px 24px;
 }
 
 .footer{
@@ -168,4 +178,34 @@ footer {
     font-family: Helvetica;
     font-weight: normal;
     margin-right: 10px;
+}
+
+/* style for recipe steps */
+.current-step{
+    background-color: #d0e4fb;
+    display: flex;
+
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#current-step{
+    flex: 1;
+    text-align: left;
+}
+
+#next-step{
+    width: 100px;
+}
+
+ol > li {
+    list-style-type: none;
+    counter-increment: item;
+    padding: 10px;
+}
+  
+ol > li:before {
+    font-weight: bold;
+    content: counter(item) ". ";
 }
