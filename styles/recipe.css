@@ -92,8 +92,8 @@ div.ingredients-top{
 }
 
 div.ingredients-middle{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 30px 1fr 30px
 }
 
 div.equipment {
@@ -102,23 +102,32 @@ div.equipment {
 }
 
 div.equipment-middle{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 30px 1fr 30px
 }
 
-/*
-div.go-left{
-    float: left;
-}
-
+/*This will make the ingredients autofit the window*/
 div.recipe-ingredients{
-    position: relative;
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 15px;
+    display: grid;
+    align-items: start;
+    grid-column-gap: 10px;
+    /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-div.go-right{
-    float: right;
+div.recipe-equipment{
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 15px;
+    display: grid;
+    align-items: start;
+    grid-column-gap: 10px;
+    /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
-*/
 
 div.bottom {
     display: flex;
