@@ -86,27 +86,29 @@ div.ingredients {
     flex-direction: column;
 }
 
-div.ingredients-top{
-    display: flex;
-    flex-direction: row;
-}
-
-div.ingredients-middle{
-    display: grid;
-    grid-template-columns: 30px 1fr 30px
-}
-
 div.equipment {
     display: flex;
     flex-direction: column;
 }
 
+div.ingredients-top{
+    display: flex;
+    flex-direction: row;
+}
+
+/*button elements button*/
+div.ingredients-middle{
+    display: grid;
+    grid-template-columns: 30px 1fr 30px
+}
+
+/*button elements button*/
 div.equipment-middle{
     display: grid;
     grid-template-columns: 30px 1fr 30px
 }
 
-/*This will make the ingredients autofit the window*/
+/*This will make the ingredients element autofit the window*/
 div.recipe-ingredients{
     margin: 10px;
     margin-left: 0px;
@@ -114,10 +116,10 @@ div.recipe-ingredients{
     display: grid;
     align-items: start;
     grid-column-gap: 10px;
-    /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+/*This will make the equipment element autofit the window*/
 div.recipe-equipment{
     margin: 10px;
     margin-left: 0px;
@@ -125,7 +127,6 @@ div.recipe-equipment{
     display: grid;
     align-items: start;
     grid-column-gap: 10px;
-    /*grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;*/
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 

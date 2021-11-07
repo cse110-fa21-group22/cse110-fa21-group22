@@ -30,18 +30,17 @@ html, body {
     width: auto;
 }
 
-div.main h3 {
-    font-size: 28px;
-    font-family: Helvetica;
+div.main h4 {
     font-weight: bold;
     margin: 0;
-    margin-left: 20px;
-    margin-top: 10px;
+    margin-left: 10px;
+    margin-top: 7px;
     overflow-y: auto;
 }
 
 div.scroll {
-    height: 400px;
+    height: 380px;
+    margin-bottom: 0px;
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
@@ -55,15 +54,11 @@ div.list-name{
 }
 
 div.recipe-section{
-    margin-top: 60px;
-}
-
-h3 {
-}
-
-.recipe-section {
+    margin-top: 50px;
+    margin-bottom: 0px;
+    height: 200px;
     display: flex;
-    gap: 30px;
+    gap: 0px;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
@@ -73,9 +68,9 @@ h3 {
     width: 80px;
     font-size: 16px;
     font-family: Helvetica;
-    margin-top: 90px;
+    margin-top: 80px;
     margin-right: 10px;
-    position:absolute;
+    position: absolute;
     top:0;
     right:0;
 }
@@ -88,7 +83,7 @@ h3 {
     font-family: Helvetica;
     margin-top: 90px;
     margin-right: 100px;
-    position:absolute;
+    position: absolute;
     top:0;
     right:0;
     display: none;
