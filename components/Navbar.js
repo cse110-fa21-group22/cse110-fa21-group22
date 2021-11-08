@@ -73,9 +73,6 @@ class Navbar extends HTMLElement {
 
       if (event.code == 'Enter') {
         window.location.href = 'search.html' + this.generateQueryString(searchTerm);
-        // Section below is old code for using an event for a single page app
-        /*const searchSubmitEvent = new CustomEvent('submit', {detail:inputList});
-        this.shadow.dispatchEvent(searchSubmitEvent);*/
       }
     })
   }
