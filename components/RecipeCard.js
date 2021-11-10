@@ -36,6 +36,7 @@ class RecipeCard extends HTMLElement {
   }
 
   connectedCallback() {
+    // Navigates to recipe page if a recipe card is clicked
     this.addEventListener('click', () => {
       window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
     })
