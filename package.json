@@ -18,7 +18,9 @@
   "homepage": "https://github.com/cse110-fa21-group22/cse110-fa21-group22#readme",
   "dependencies": {
     "ci": "^2.1.1",
-    "eslint": "^8.2.0",
     "stylelint": "^14.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0"
   }
 }
