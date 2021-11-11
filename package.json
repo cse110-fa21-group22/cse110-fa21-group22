@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cse110-fa21-group22/cse110-fa21-group22/issues"
   },
-  "homepage": "https://github.com/cse110-fa21-group22/cse110-fa21-group22#readme"
+  "homepage": "https://github.com/cse110-fa21-group22/cse110-fa21-group22#readme",
+  "dependencies": {
+    "ci": "^2.1.1"
+  }
 }
