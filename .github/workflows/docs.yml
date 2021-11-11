@@ -1,22 +1,42 @@
-name: JsDocs
+name: jsDocs
 
 on:
+  #having it generate on push to development
   push:
     branches:
-      - master
-      - test
-  pull_request:
-    branches: 
-      - main 
-      - test  
+    - main
+    - test
+  pull_request: 
+    branches:
+    - main
+    - test
+  workflow_dispatch:
+
 
 jobs:
-  deploy:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Search Page Docs
-        run: npm run searchpageDocs
+      # check out the code
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      # generate jsDocs with the source and output dir
+      - name: Build
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: scripts/
+          output_dir: out/
+          recurse: true
+          front_page: README.md
 
-
+      # push to public repo to host the docs
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'out'
+          destination-github-username: 'demyinn00'
+          destination-repository-name: 'group22xjsdocs'
+          target-branch: master
