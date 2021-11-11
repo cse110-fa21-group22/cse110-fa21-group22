@@ -1,0 +1,19 @@
+{
+  "name": "cse110-fa21-group22",
+  "version": "1.0.0",
+  "description": "Recipe Manager: iCook",
+  "main": "scripts/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse110-fa21-group22/cse110-fa21-group22.git"
+  },
+  "author": "Emily and David",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse110-fa21-group22/cse110-fa21-group22/issues"
+  },
+  "homepage": "https://github.com/cse110-fa21-group22/cse110-fa21-group22#readme"
+}
