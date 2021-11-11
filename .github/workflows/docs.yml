@@ -14,6 +14,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Search Page Docs
         run: npm run searchpageDocs
 
