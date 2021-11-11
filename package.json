@@ -5,6 +5,7 @@
   "main": "scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "npx coverage --functions 100"
   },
   "repository": {
     "type": "git",
