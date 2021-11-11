@@ -39,4 +39,4 @@ jobs:
           source-directory: 'out'
           destination-github-username: 'demyinn00'
           destination-repository-name: 'group22xjsdocs'
-          target-branch: master
+          target-branch: main
