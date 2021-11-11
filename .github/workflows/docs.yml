@@ -14,15 +14,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Search Page Docs
+      - run: npm run searchpageDocs
 
-      - name: Build
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: ./scripts
-          output_dir: ./source
-          template: minami
-          front_page: README.md
 
 
