@@ -3,10 +3,12 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/navbar.css'; 
 
+
+
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
   <nav class="navbar">
-      <button id="categories-button" onclick="yourfunction();">Expand</button>
+      <button id="categories-button">Expand</button>
 
       <a href="/webpages/home.html">
         <h1 class="logo">iCook</h1>
@@ -24,8 +26,8 @@ navbarTemplate.innerHTML = `
         <img src="../assets/favorite.svg" alt="favorite" />
       </a>
   </nav>
-    
 `
+
 
 class Navbar extends HTMLElement {
   /**
@@ -75,11 +77,10 @@ class Navbar extends HTMLElement {
 
     searchInput.addEventListener('keyup', (event) => {
       searchTerm = event.target.value;
-
       if (event.code == 'Enter') {
         window.location.href = 'search.html' + this.generateQueryString(searchTerm);
       }
-    })
+    });
   }
 }
 
