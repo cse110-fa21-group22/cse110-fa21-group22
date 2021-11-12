@@ -79,3 +79,49 @@ class Navbar extends HTMLElement {
 }
 
 customElements.define('navbar-component', Navbar);
+
+
+
+// The section of code below is responsible for creating the sidebar
+
+const sidebarTemplate = document.createElement('template');
+sidebarTemplate.innerHTML = `
+<div class="side-bar">
+  <p class="sidebar-header">Cuisine</p>
+  <form id="cuisine-form">
+      <input type="checkbox" value="american" id="sidebar-american" class="sidebar-checkbox">
+      <label for="sidebar-american" id="sidebar-american-label" class="sidebar-checkbox-label">American</label><br>
+
+      <input type="checkbox" value="chinese" id="sidebar-chinese" class="sidebar-checkbox">
+      <label for="sidebar-chinese" id="sidebar-chinese-label" class="sidebar-checkbox-label">Chinese</label><br>
+
+      <input type="checkbox" value="mexican" id="sidebar-mexican" class="sidebar-checkbox">
+      <label for="sidebar-mexican" id="sidebar-mexican-label" class="sidebar-checkbox-label">Mexican</label><br>
+  </form>
+</div>
+`
+
+class SidebarContent extends HTMLElement {
+  /**
+   * Contructor for the Sidebar class
+   */
+  constructor() {
+    console.log("constructing");
+    super();
+    this.shadow = this.attachShadow({ mode: 'open' });
+  }
+
+  connectedCallback() {
+    this.shadow.appendChild(link);
+    this.shadow.appendChild(sidebarTemplate.content);
+    console.log(this.shadow);
+    console.log("instantiated sidebar");
+
+    let cuisineForm = this.shadow.getElementById("cuisine-form");
+    for (let i = 0; i < cuisineForm.length; i++) {
+      //cuisineForm[i].onclick = refreshResults();
+    }
+  }
+}
+
+//customElements.define('sidebar-content-component', SidebarContent);
