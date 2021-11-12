@@ -1,62 +1,44 @@
-const apiKey = 'bcccf988c95c45ef9b53310545b3989a';
+const apiKey = 'c2979edc8ae84969be111be5f5cea60c';
 const tokenKey = '?apiKey=' + apiKey;
 
-window.addEventListener('DOMContentLoaded', init);
-
-
-
-function init () { 
-    const navbar = document.querySelector('navbar-component');
-    const searchKeyword = document.querySelector('.search-word'); 
-    const recipeSection = document.querySelector('.recipe-section'); 
-    
-    navbar.shadowRoot.addEventListener('submit', (event) => {
-        search(event.detail);
-    })
-
-    // This is just for testing
-    window.addEventListener('keyup', (event) => {
-        if (event.code == 'Escape') {
-            clear();
-        }
-    })
-
-    async function search(inputList) { 
+// This is just for testing
+/*window.addEventListener('keyup', (event) => {
+    if (event.code == 'Escape') {
         clear();
-        const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
-        const tokenSearchInput = '&query=' + inputList['query'];
-        const tokenNumResults = '&number=' + inputList['number'];
-        const tokenOffset = '&offset=' + inputList['offset'];
-        const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
-        const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset ;//+ tokenNutritionBool;
-
-        console.log(fetchEndpoint);
-        
-        let json;
-        try {
-            const data = await fetch(fetchEndpoint);
-            json = await data.json();
-        } catch (error) { 
-            console.error(error); 
-        }
-        const results  = json.results;
-    
-        searchKeyword.innerHTML = '\"' + inputList['query'] + '\"';
-        
-        console.log(results);
-
-        for (const recipe in results) { 
-            const recipeCard = document.createElement('recipe-card-component')
-            recipeCard.recipe = results[recipe];
-            recipeSection.appendChild(recipeCard);
-        }
-    
     }
+})*/
 
-    function clear() { 
-        while (recipeSection.firstChild) {
-            recipeSection.removeChild(recipeSection.firstChild);
-        }
-        
-    }
+/**
+ * Performs a simple text search through spoonacular
+ * @param {object} inputList an object as defined below
+ * inputList['query'] is the search phrase as a string
+ * inputList['number'] is the number of results as a number
+ * inputList['offset'] is the number of results to skip as a number
+ * inputList['recipe-nutrition'] is a boolean specifying whether to show nutrition
+ * @returns {object} json containing the results of the spoonacular query
+ */
+export async function search(inputList) {
+    // Create the fetch url
+    const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+    const tokenSearchInput = '&query=' + inputList['query'];
+    const tokenNumResults = '&number=' + inputList['number'];
+    const tokenOffset = '&offset=' + inputList['offset'];
+    const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
+    const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset ;//+ tokenNutritionBool;
+
+    //console.log(fetchEndpoint);
+    
+    // fetch the data
+
+    const fetchResults = await fetch(fetchEndpoint)
+    .then(response => response.json())
+    .catch((error) => {
+        console.error("Fetch in search function failed");
+        console.error(error);
+    });
+
+    const results = fetchResults.results;
+    //console.log(results);
+    return results;
 }
+

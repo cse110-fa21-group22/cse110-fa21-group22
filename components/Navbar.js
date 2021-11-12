@@ -14,7 +14,7 @@ navbarTemplate.innerHTML = `
       <input class="nav-search-input" type='text' placeholder="Search" />
     </div>
     <a class="nav-favorite" href="/webpages/favorite.html">
-      <p>Favorite</p>
+      <p>Favorites</p>
     </a>
     <a class="nav-favorite-mobile" href="/webpages/favorite.html">
       <img src="../assets/favorite.svg" alt="favorite" />
@@ -23,9 +23,39 @@ navbarTemplate.innerHTML = `
 `
 
 class Navbar extends HTMLElement {
+  /**
+   * Contructor for the Navbar class
+   */
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });
+  }
+
+  /**
+   * Generates a query string to pass the search to the search page
+   * @param {string} searchTerm the user's search phrase
+   * @return {string} the query string
+   */
+  generateQueryString(searchTerm) {
+    let queryString = '?search=';
+    for(let i = 0; i < searchTerm.length; i++) {
+      let currChar = searchTerm.charAt(i);
+      let currCharCode = searchTerm.charCodeAt(i);
+      console.log(currChar);
+      // Allow all letters and numbers to enter the query
+      if ((currCharCode >= 65 && currCharCode <= 90) ||
+          (currCharCode >= 97 && currCharCode <= 122) ||
+          (currCharCode >= 48 && currCharCode <= 57)) {
+        queryString += currChar;
+      // Spaces become + signs
+      } else if (currCharCode == '32') {
+        queryString += '+';
+      // All other characters become - signs
+      } else {
+        queryString += '-';
+      }
+    }
+    return queryString;
   }
 
   connectedCallback() {
@@ -36,19 +66,13 @@ class Navbar extends HTMLElement {
     let searchTerm = '';
     let inputList = [];
 
-    
     const searchInput = this.shadow.querySelector('.nav-search').querySelector('input');
 
     searchInput.addEventListener('keyup', (event) => {
       searchTerm = event.target.value;
-      inputList['query'] = searchTerm;
-      inputList['number'] = 20;
-      inputList['offset'] = 0;
-      inputList['recipe-nutrition'] = 'true';
 
-      if (event.code == 'Enter') { 
-        const searchSubmitEvent = new CustomEvent('submit', {detail:inputList});
-        this.shadow.dispatchEvent(searchSubmitEvent);
+      if (event.code == 'Enter') {
+        window.location.href = 'search.html' + this.generateQueryString(searchTerm);
       }
     })
   }

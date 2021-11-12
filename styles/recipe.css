@@ -1,0 +1,249 @@
+@import 'reset.css';
+
+html, body {
+    font-family: Helvetica;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    padding: 100px 0 0;
+    position: relative;
+    box-sizing: border-box;
+}
+
+button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border-radius: 15px;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    transition-duration: 0.4s;
+}
+
+button:hover{
+    background-color: #4d96ea;
+    color: white;
+}
+
+button[class="show-all"] {
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 40px;
+}
+
+.middle button[type="submit"]:hover {
+  background-color: #4d96ea;
+  color: white;
+}
+
+.header {
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background-color:#4d96ea;
+    margin: -100px 0 0;
+    z-index: 9999;
+}
+
+div.main{
+    display: flex;
+    flex-direction: row;
+}
+
+/* the default setting of sidebar is display:none*/
+div.side-bar{
+    flex: 1;
+    background-color: #4d96ea;
+    padding:0;
+    margin:0;
+    margin-top: -30px;
+    display: 1;
+    /*display: none;*/
+}
+
+div.information {
+    flex:9;
+    display: flex;
+    flex-direction: column;
+    margin-top: -30px;
+    padding: 0;
+    width: auto;
+}
+
+div.top {
+    display: flex;
+    flex-direction: row;
+    border-color:#000;
+    border-width:medium;
+    border-bottom-style:solid;
+    padding-bottom: 20px;
+}
+
+div.description {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+}
+
+div.image {
+    margin-right: 16px;
+    margin-top: 16px;
+}
+
+div.recipe-name{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.recipe-time{
+    color: var(--color-neutrals-grey);
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.recipe-description{
+    color: var(--color-neutrals-grey);
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.description h4{
+    padding: 0;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+div.middle {
+    border-color:#000;
+    border-width:medium;
+    border-bottom-style:solid;
+}
+
+div.ingredients {
+    display: flex;
+    flex-direction: column;
+}
+
+div.equipment {
+    display: flex;
+    flex-direction: column;
+}
+
+div.ingredients-top{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/*button elements button*/
+div.ingredients-middle{
+    display: grid;
+    grid-template-columns: 30px 1fr 30px
+}
+
+/*button elements button*/
+div.equipment-middle{
+    display: grid;
+    grid-template-columns: 30px 1fr 30px
+}
+
+/*This will make the ingredients element autofit the window*/
+div.recipe-ingredients{
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 15px;
+    display: grid;
+    align-items: start;
+    grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/*This will make the equipment element autofit the window*/
+div.recipe-equipment{
+    margin: 10px;
+    margin-left: 0px;
+    margin-right: 15px;
+    display: grid;
+    align-items: start;
+    grid-column-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+div.bottom {
+    display: flex;
+    flex-direction: column;
+}
+
+div.instruction-top{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+div.instruction-bottom{
+    margin: 0px 24px;
+}
+
+.footer{
+    height: 20px;
+    background-color:#4d96ea;
+}
+
+footer {
+    text-align: right;
+    font-size: 14px;
+    font-family: Helvetica;
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+/* style for recipe steps */
+.current-step{
+    background-color: #d0e4fb;
+    display: flex;
+
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#current-step{
+    flex: 1;
+    text-align: left;
+}
+
+#next-step{
+    width: 100px;
+}
+
+ol > li {
+    list-style-type: none;
+    counter-increment: item;
+    padding: 10px;
+}
+  
+ol > li:before {
+    font-weight: bold;
+    content: counter(item) ". ";
+}
+
+span.stretch {
+    font-size: 20px;
+    display:inline-block;
+    -webkit-transform:scale(2,8); /* Safari and Chrome */
+    -moz-transform:scale(2,8); /* Firefox */
+    -ms-transform:scale(2,8); /* IE 9 */
+    -o-transform:scale(2,8); /* Opera */
+    transform:scale(2,8); /* W3C */
+}
