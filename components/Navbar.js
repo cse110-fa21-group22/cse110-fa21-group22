@@ -6,20 +6,25 @@ link.href = '../styles/navbar.css';
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
   <nav class="navbar">
-    <a href="/webpages/home.html">
-      <h1 class="logo">iCook</h1>
-    </a>
-    <div class="nav-search">
-      <img class="nav-search-icon" src="../assets/search.svg" alt="search" />
-      <input class="nav-search-input" type='text' placeholder="Search" />
-    </div>
-    <a class="nav-favorite" href="/webpages/favorite.html">
-      <p>Favorites</p>
-    </a>
-    <a class="nav-favorite-mobile" href="/webpages/favorite.html">
-      <img src="../assets/favorite.svg" alt="favorite" />
-    </a>
-    </nav>
+      <button id="categories-button" onclick="yourfunction();">Expand</button>
+
+      <a href="/webpages/home.html">
+        <h1 class="logo">iCook</h1>
+      </a>
+
+      <div class="nav-search">
+        <img class="nav-search-icon" src="../assets/search.svg" alt="search" />
+        <input class="nav-search-input" type='text' placeholder="Search" />
+      </div>
+
+      <a class="nav-favorite" href="/webpages/favorite.html">
+        <p>Favorites</p>
+      </a>
+      <a class="nav-favorite-mobile" href="/webpages/favorite.html">
+        <img src="../assets/favorite.svg" alt="favorite" />
+      </a>
+  </nav>
+    
 `
 
 class Navbar extends HTMLElement {
