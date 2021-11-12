@@ -6,7 +6,7 @@ link.href = '../styles/recipeCard.css';
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
   <article class="recipe-card">
-    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+    <button type="submit" class="recipe-favorite"><img src="../assets/favorite.svg" alt="favorite" /></button>
       <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
