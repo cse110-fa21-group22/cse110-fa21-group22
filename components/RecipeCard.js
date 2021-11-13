@@ -34,6 +34,13 @@ class RecipeCard extends HTMLElement {
     this.shadow.appendChild(recipeCardTemplate.content.cloneNode(true));
     this.shadow.appendChild(link.cloneNode(true));
   }
+
+  connectedCallback() {
+    // Navigates to recipe page if a recipe card is clicked
+    this.addEventListener('click', () => {
+      window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
+    })
+  }
 }
 
 customElements.define('recipe-card-component', RecipeCard);
