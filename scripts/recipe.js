@@ -3,7 +3,7 @@
  * pulls up for it. 
  */
 
-const apiKey = 'c2979edc8ae84969be111be5f5cea60c';
+const apiKey = 'faf0a145aae24b609957dfe5267e9f36';
 const tokenKey = '?apiKey=' + apiKey;
 
 window.addEventListener('DOMContentLoaded', init);
@@ -42,7 +42,11 @@ async function init () {
 
   // TODO Set equipment using custom element
 
-  // TODO Set instructions 
+  // Set instructions 
+  // Possible problem, not all of them are set as a list (some are paragraphs) the data the api gives isn't consistent
+  // sometimes it has nonsense
+  const recipeInstructions = document.querySelector('.recipe-method');
+  recipeInstructions.innerHTML = recipe.instructions;
 
   // TODO Add event listeners and callback functions to all the buttons 
 }
