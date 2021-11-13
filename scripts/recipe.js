@@ -10,7 +10,6 @@ window.addEventListener('DOMContentLoaded', init);
 
 /**
  * Initializes the recipe page
- * Loads data based on passed url id
  */
 async function init () {
   const recipe = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
@@ -54,7 +53,7 @@ async function init () {
  */
 async function lookup() {
   const regex = 'id='
-  const id =  window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length);
+  const id =  window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
   const fetchEndpoint = 'https://api.spoonacular.com/recipes/' + id + '/information' + tokenKey;
 
   const fetchResults = await fetch(fetchEndpoint)
@@ -66,6 +65,11 @@ async function lookup() {
   return fetchResults;
 }
 
+/**
+ * Converts a value of minutes into a string that shows hours and minutes
+ * @param   {number} time - A time in minutes
+ * @returns {string} - A string in the form 'XX hours XX minutes'
+ */
 function formatTime(time) {
     if (time == 1) return time.toString() + ' minute';
     if (time < 70) return time.toString() + ' minutes';
