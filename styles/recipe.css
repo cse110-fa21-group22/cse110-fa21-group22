@@ -1,6 +1,6 @@
 @import 'reset.css';
 
-#cook-time {
+#serving-size {
   margin-left: 45px;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .recipe-page-description {
-  margin: 30px 20px 0  ;
+  margin-top: 30px;
 }
 
 .recipe-slang {
