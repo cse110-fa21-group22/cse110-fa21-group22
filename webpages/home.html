@@ -20,21 +20,36 @@
 </head>
 
 <body>
-    <navbar-component></navbar-component>
-    <!--
-        sections for popular recipes cards
-    -->
-    <section class="popular-recipes">
-        <h2 class="recipe-card-section-header">Popular Recipes</h2>
-        <div class="recipe-section">
-            <!-- <recipe-card-component></recipe-card-component> -->
+    <div class = box>
+        <div class = header>
+             <navbar-component></navbar-component>
+         </div>
+        <!--
+            sections for popular recipes cards
+        -->
+        <div class = main>
+            <div class="scroll">
+                <div class="list-name">
+                    <h4>Popular Recipes</h4>
+                </div>
+                <div class="recipe-section"></div>
+            </div>
+            
+                    
+            <div class="scroll">
+                <div class="list-name">
+                    <h4>Favorites</h4>
+                </div>
+                <div class="recipe-section">
+                    <recipe-card-component></recipe-card-component>
+                </div>
+            </div>
+
+           
+            
         </div>
-    </section>
-        
-    <section class="favorite-recipes">
-        <h2 class="recipe-card-section-header">Favorites</h2>
-        <div class="recipe-section">
-            <!--<recipe-card-component></recipe-card-component>-->
+        <div class="footer">
+            <footer>Version: 0.0.1</footer>
         </div>
-    </section>
+    </div>
 </body>

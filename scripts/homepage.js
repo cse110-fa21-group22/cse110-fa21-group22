@@ -5,7 +5,7 @@ const apiKey = "aca18e34058e40fab4535153c6241f7f"
 const tokenKey = '?apiKey=' + apiKey;
 
 
-const stepping_size = 4;                                        // Stepping-size number of recipes to append to end after user scrolls to bottom
+const stepping_size = 20;                                        // Stepping-size number of recipes to append to end after user scrolls to bottom
 const recipeData = {};                                           // Data in each stepping size?   
 const recipeSection = document.querySelector('.recipe-section'); // Where to place recipe cards
 
