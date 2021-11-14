@@ -22,7 +22,10 @@ async function init () {
 
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
-  recipeName.innerHTML = recipe.title;
+  recipeName.innerHTML = recipe.title + 
+    `<button class="favorite-heart">
+      <img src="../assets/favorite.svg"/>
+    </button>`;
 
   // Set prep time
   const prepTime = document.getElementById('prep-time');
@@ -35,7 +38,7 @@ async function init () {
   servingSize.innerHTML = recipe.servings;
 
   // Set description 
-  const recipeDescription = document.querySelector('.recipe-page-description + p');
+  const recipeDescription = document.querySelector('.recipe-page-description');
   recipeDescription.innerHTML = recipe.summary;
 
   // TODO Set ingredients using custom element
