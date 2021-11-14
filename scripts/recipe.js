@@ -3,7 +3,7 @@
  * pulls up for it. 
  */
 
-const apiKey = 'c2979edc8ae84969be111be5f5cea60c';
+const apiKey = '95deae1a22a548df9132856a80cf5363';
 const tokenKey = '?apiKey=' + apiKey;
 
 
@@ -52,6 +52,29 @@ async function init () {
 
 
   // TODO Set equipment using custom element
+  const equipmentListData = [];
+  const analyzedInstructions = recipe.analyzedInstructions[0].steps;
+  for(const stepNumber in analyzedInstructions){
+    for(const equipmentNum in analyzedInstructions[stepNumber].equipment){
+      equipmentListData.push(analyzedInstructions[stepNumber].equipment[equipmentNum]);
+      // console.log(equipmentNum);
+    }
+  }
+  // console.log(equipmentListData);
+
+  // Then make the custom element for equipments
+  const equipMasterList = []
+  const equipmentSection = document.querySelector('.equipment-list');
+  for(const equip in equipmentListData){
+    if(!equipMasterList.find(element => element = equipmentListData[equip]['id'])){
+      const equipmentCard = document.createElement('equipment-card-component');
+      equipmentCard.equipment = equipmentListData[equip];
+      equipmentSection.appendChild(equipmentCard);
+      equipMasterList.push(equipmentListData[equip]['id']);
+      // console.log(equipmentCard);
+    }
+  }
+  
 
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps')
