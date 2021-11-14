@@ -1,4 +1,4 @@
-const apiKey = 'c2979edc8ae84969be111be5f5cea60c';
+const apiKey = 'useUrOwn';
 const tokenKey = '?apiKey=' + apiKey;
 
 // This is just for testing
