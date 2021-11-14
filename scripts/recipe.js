@@ -25,7 +25,7 @@ async function init () {
   recipeName.innerHTML = recipe.title;
 
   // Set prep time
-  const prepTime = document.getElementById('prep-time');
+  const prepTime = document.querySelector('#prep-time');
   const time = recipe.readyInMinutes;
   const timestr = formatTime(time);
   prepTime.innerHTML = timestr;
