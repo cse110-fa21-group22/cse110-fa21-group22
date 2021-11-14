@@ -1,0 +1,78 @@
+@import 'reset.css';
+
+.equipment-card {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+    width: 250px; 
+    /* adjust width, height later */
+  }
+
+  .equipment-image {
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    width: 50px;
+  }
+
+  .equipment-list, .ingredients-list {
+    padding: 20px 50px 30px;
+    width: calc(100% - 100px);
+  }
+
+  .ingredient-card {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+    width: 250px; 
+    /* adjust width, height later */
+  }
+  
+  .ingredient-image {
+    height: 50px;
+    object-fit: cover;
+    object-position: center;
+    width: 50px;
+  }
+  
+  .ingredients-section, .equipment-section {
+    position: relative;
+  }
+
+  .left-arrow {
+    background-color: transparent;
+    border: 0;
+    border-radius: 20%;
+    left: -10px;
+    padding: 10px 20px;
+    position: absolute;
+    top: calc(50% - 30px);
+    transition-duration: 0.4s;
+  }
+  
+  .left-arrow:hover, .right-arrow:hover {
+    background-color: #4d96ea;
+    color: white;
+  }
+
+  .right-arrow {
+    background-color: transparent;
+    border: 0;
+    border-radius: 20%;
+    padding: 10px 20px;
+    position: absolute;
+    top: calc(50% - 30px);
+    transition-duration: 0.4s;
+    right: 0;
+  }
+
+  .instructions-link {
+    background-color: transparent;
+    border: 0;
+    color: var(--color-neutrals-grey);
+  }
+  

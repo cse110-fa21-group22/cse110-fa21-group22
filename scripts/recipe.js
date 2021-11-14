@@ -3,8 +3,9 @@
  * pulls up for it. 
  */
 
-const apiKey = 'faf0a145aae24b609957dfe5267e9f36';
+const apiKey = 'bcccf988c95c45ef9b53310545b3989a';
 const tokenKey = '?apiKey=' + apiKey;
+
 
 window.addEventListener('DOMContentLoaded', init);
 
@@ -12,9 +13,12 @@ window.addEventListener('DOMContentLoaded', init);
  * Initializes the recipe page
  */
 async function init () {
-  const recipe = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
-  
+  const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
+  const recipe = data[0]; 
+  const equipment = data[1];
+
   console.log(recipe);
+  console.log(equipment);
 
   // Set recipe image
   const recipeImg = document.querySelector('.recipe-image');
@@ -39,6 +43,9 @@ async function init () {
   recipeDescription.innerHTML = recipe.summary;
 
   // TODO Set ingredients using custom element
+  const recipeIngredients = document.createElement('image-card-component');
+  recipeIngredients.ingredients = {};
+  document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
 
   // TODO Set equipment using custom element
 
@@ -55,19 +62,30 @@ async function init () {
  * Performs a recipe lookup based on the id passed in to the page URL
  * @returns {object} json containing recipe information
  */
-async function lookup() {
+function lookup() {
   const regex = 'id='
   const id =  window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
-  const fetchEndpoint = 'https://api.spoonacular.com/recipes/' + id + '/information' + tokenKey;
+  const fetchEndpointR = 'https://api.spoonacular.com/recipes/' + id + '/information' + tokenKey;
+  const fetchEndpointE = 'https://api.spoonacular.com/recipes/' + id + '/equipmentWidget.json' + tokenKey;
 
-  const fetchResults = await fetch(fetchEndpoint)
+  const fetchResultsR = fetch(fetchEndpointR)
   .then(response => response.json())
   .catch((error) => {
-    console.error("Fetch in recipe lookup failed");
+    console.error("Recipe fetch in lookup failed");
     console.error(error);
   })
-  return fetchResults;
+
+  const fetchResultsE = fetch(fetchEndpointE)
+  .then(response => response.json())
+  .catch((error) => {
+    console.error("Equipment fetch in lookup failed");
+    console.error(error);
+  })
+
+  return Promise.all([fetchResultsR, fetchResultsE]);
 }
+
+
 
 /**
  * Converts a value of minutes into a string that shows hours and minutes
