@@ -11,28 +11,28 @@ const recipeSection = document.querySelector('.recipe-section'); // Where to pla
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
-    console.log("Init.. ");
-    // console.log("Fetching recipes...");
-    // try {
-    //     await fetch_random_recipes();
-    // } catch (err) {
-    //     console.log(`Error fetching recipes: ${err}`);
-    //     return;
-    // }
+    //console.log("Init.. ");
+    //console.log("Fetching recipes...");
+    try {
+        await fetch_random_recipes();
+    } catch (err) {
+        //console.log(`Error fetching recipes: ${err}`);
+        return;
+    }
 
-    // /**
-    //  * design: 
-    //  * display 10 cards each time, when user a card, display another 10 random 
-    //  */
-    // console.log(recipeData); 
-    // showResults(recipeData); 
+    /**
+    * design: 
+    * display 10 cards each time, when user a card, display another 10 random 
+    */
+    //console.log(recipeData); 
+    showResults(recipeData); 
 }
 
 async function fetch_random_recipes() {
     return new Promise((resolve, reject) => {
         // use 1 for now, save some points for querying
         const fetchResults = "https://api.spoonacular.com/recipes/random" + tokenKey + "&number=" + stepping_size;
-        console.log(fetchResults); 
+        //console.log(fetchResults); 
 
         fetch(fetchResults)
             .then(response => response.json())
@@ -59,7 +59,7 @@ async function fetch_random_recipes() {
  * @param {object} results 
  */
 function showResults(results) {
-    console.log(results);
+    //console.log(results);
 
     // Clear the results before searching
     clearResults();
@@ -80,28 +80,3 @@ function clearResults() {
         recipeSection.removeChild(recipeSection.firstChild);
     }
 }
-/**
- * Show and hide the sidebar
- */
- let hidden = false;
- let barComp = document.querySelector('navbar-component').shadowRoot.querySelector('#categories-button');
- barComp.addEventListener('click', (event) =>{
-    console.log("Button pressed");
-
-    // Add in CSS so that the code below switches the sidebar on and off
-
-    // let wrapperDiv = document.querySelector("#middle");
-    // // https://codepen.io/roopepal/pen/EPGxKQ for animations!
-    //     if(hidden) {
-    //         // Add categories
-    //         wrapperDiv.style.gridTemplateColumns = "[categories] 10% [other] auto";
-    //         document.querySelector("#middle1").style.visibility = "visible";
-    //     } else {
-    //         // Remove categories 
-    //         wrapperDiv.style.gridTemplateColumns = "[categories] 0% [other] auto";
-    //         document.querySelector("#middle1").style.visibility = "hidden";
-    //     }
-    // hidden = !hidden;
- });
-
-
