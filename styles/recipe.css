@@ -13,6 +13,34 @@ html, body {
     box-sizing: border-box;
 }
 
+button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border-radius: 15px;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    transition-duration: 0.4s;
+}
+
+button:hover{
+    background-color: #4d96ea;
+    color: white;
+}
+
+button[class="show-all"] {
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 40px;
+}
+
+.middle button[type="submit"]:hover {
+  background-color: #4d96ea;
+  color: white;
+}
+
 .header {
     position: fixed;
     height: 60px;
@@ -208,4 +236,14 @@ ol > li {
 ol > li:before {
     font-weight: bold;
     content: counter(item) ". ";
+}
+
+span.stretch {
+    font-size: 20px;
+    display:inline-block;
+    -webkit-transform:scale(2,8); /* Safari and Chrome */
+    -moz-transform:scale(2,8); /* Firefox */
+    -ms-transform:scale(2,8); /* IE 9 */
+    -o-transform:scale(2,8); /* Opera */
+    transform:scale(2,8); /* W3C */
 }

@@ -45,20 +45,22 @@
                         </div>
                     </div>
                     <div class="image">
-                        <img src="" alt="Recipe Image" />
+                        <img src="../assets/images/placeholder.jpg" alt="Recipe Image" />
                     </div>
                 </div>
                 <div class="middle">
                     <div class="ingredients">
+                        <br>
                         <div class="ingredients-top">
                             <h3>Ingredients</h3>
-                            <button>
+                            <button id="gotoInstructions" class="go-left">
                                 Go to Instructions
                             </button>
                         </div>
                         <div class="ingredients-middle">
                             <button id="ingredients-left" class="go-left" type="submit">
-                                <img src="" alt="<" />
+                                <!-- <img src="" alt="<" /> -->
+                                <span class="stretch">&#8249;</span>
                             </button>
                             <div class="recipe-ingredients">
                                 <!-- just a test. can be deleted-->
@@ -70,12 +72,14 @@
                                 <!---->
                             </div>
                             <button id="ingredients-right" class="go-right" type="submit">
-                                <img src="" alt=">" />
+                                <!-- <img src="" alt=">" /> -->
+                                <span class="stretch">&#8250;</span>
                             </button>
                         </div>
                         <div class="ingredients-bottom">
-                            <button id="ingredients-show-all" class="show-all" type="submit">
-                                <img src="" alt="Show All" />
+                            <button id="ingredients-show-all" class="show-all">
+                                <!-- <img src="" alt="Show All" /> -->
+                                &#8595; Show All
                             </button>
                         </div>
                     </div>
@@ -85,7 +89,8 @@
                         </div>
                         <div class="equipment-middle">
                             <button id="equipment-left" class="go-left" type="submit">
-                                <img src="" alt="<" />
+                                <!-- <img src="" alt="<" /> -->
+                                <span class="stretch">&#8249;</span>
                             </button>
                             <div class="recipe-equipment">
                                 <!-- just a test. can be deleted-->
@@ -101,30 +106,34 @@
                                 <!---->
                             </div>
                             <button id="equipment-right" class="go-right" type="submit">
-                                <img src="" alt=">" />
+                                <!-- <img src="" alt=">" /> -->
+                                <span class="stretch">&#8250;</span>
                             </button>
                         </div>
                         <div class="equipment-bottom">
                             <button id="equipment-show-all" class="show-all">
-                                <img src="" alt="Show All" />
+                                <!-- <img src="" alt="Show All" /> -->
+                                &#8595; Show All
                             </button>
                         </div>
+                        <br>
                     </div>
                 </div>
                 <div class="bottom">
+                    <br>
                     <div class="instruction-top">
                         <h3>Instructions</h3>
-                        <button>
-                            Go to ingredients
+                        <button class="go-to-ingredients">
+                            Go To Ingredients
                         </button>
-                        <button>
-                            Go to step
+                        <button class="go-to-steps">
+                            Go To Steps
                         </button>
                     </div>
                     <div class="instruction-bottom">
                         <div class="recipe-steps">
                             <ol>
-                                <li class="current-step"><p id="current-step">this is first step</p><button id="next-step">next step</button></li>
+                                <li class="current-step"><p id="current-step">this is first step</p><button id="next-step">Next Step</button></li>
                                 <li>this is second step</li>
                                 <li>this is third step</li>
                             </ol>
