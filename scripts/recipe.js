@@ -3,7 +3,7 @@
  * pulls up for it. 
  */
 
-const apiKey = 'faf0a145aae24b609957dfe5267e9f36';
+const apiKey = '5db4419fe89442edac46edfa465e1c35';
 const tokenKey = '?apiKey=' + apiKey;
 
 window.addEventListener('DOMContentLoaded', init);
@@ -48,7 +48,22 @@ async function init () {
   const recipeInstructions = document.querySelector('.recipe-method');
   recipeInstructions.innerHTML = recipe.instructions;
 
-  // TODO Add event listeners and callback functions to all the buttons 
+    // TODO Add event listeners and callback functions to all the buttons 
+    // Event listener for button to go to instructions from ingredients
+    const instructionsButton = document.querySelector('.instructions-link');
+    instructionsButton.addEventListener('click', function(event){
+      const instructionsLink = document.querySelector('.recipe-method');
+      console.log(instructionsLink);
+      instructionsLink.scrollIntoView();
+    });
+
+    // Event listener for button to go to ingredients from instructions
+    const ingredientsButton = document.querySelector('.ingredients-link');
+    ingredientsButton.addEventListener('click', function(event){
+        const ingredentsLink = document.querySelector('.ingredients-section');
+        ingredentsLink.scrollIntoView();
+    });
+
 }
 
 /**
