@@ -11,7 +11,6 @@
   <script src="../components/navbar.js" type="module"></script>
   <script src="../components/recipeCard.js" type="module"></script>
   <script src="../components/ImageCard.js" type="module"></script>
-  <script src="../scripts/search.js" type="module"></script>
   <script src="../scripts/recipe.js" type="module"></script>
 </head>
 <body>
@@ -28,8 +27,8 @@
         <p class="recipe-slang">Easy, quick, and delicious</p>
         <p class="recipe-time">Prep Time <span id="prep-time">10 mins</span></p>
         <p class="recipe-time">Servings <span id="serving-size">3</span></p>
-        <h3 class="recipe-page-description">Description</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fames ipsum pulvinar dictumst adipiscing et, augue phasellus id sapien.</p>
+        <h3 class="recipe-page-description-header">Description</h3>
+        <p class="recipe-page-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fames ipsum pulvinar dictumst adipiscing et, augue phasellus id sapien.</p>
       </div>
       <img class="recipe-image" src="../assets/images/placeholder.jpg" alt="Recipe Image" />
     </section>
@@ -57,18 +56,13 @@
           <p class="equipment-name">Baking Mixer</p>
         </article>
       </section>
-      <button class="show-all"><img src="../assets/downArrow.svg"/>Show All</button>
     </section>
     
     <section class="instructions-section">
-      <h3 class="recipe-instructions">Instructions <button class="instructions-link">Go to Ingredients</button><button class="instructions-link">Go to Step</button></h3>
+      <h3 class="recipe-instructions">Instructions <button class="ingredients-link">Go to Ingredients</button><button class="next-step-link">Go to Step</button></h3>
       <section class="recipe-method">
          <!-- temphere -->
-         <ol class="recipe-steps">
-            <li class="recipe-step-n" id="current-step">Wash veggies <button class="next-step">Next Step</button></li>
-            <li class="recipe-step-n" id="">Cut veggies</li>
-            <li class="recipe-step-n" id="">Stir-fry veggie</li>
-        </ol>
+         <ol class="recipe-steps"></ol>
       </section>
     </section>
   </main> 

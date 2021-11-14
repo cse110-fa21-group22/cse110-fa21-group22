@@ -1,0 +1,42 @@
+{
+  "name": "cse110-fa21-group22",
+  "version": "1.0.0",
+  "description": "Recipe Manager: iCook",
+  "main": "scripts/index.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "npx coverage scripts/index.js",
+    "searchpageDocs": "npx jsdoc scripts/searchpage.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cse110-fa21-group22/cse110-fa21-group22.git"
+  },
+  "author": "Emily and David",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cse110-fa21-group22/cse110-fa21-group22/issues"
+  },
+  "homepage": "https://github.com/cse110-fa21-group22/cse110-fa21-group22#readme",
+  "dependencies": {
+    "ci": "^2.1.1",
+    "coverage": "^0.4.1",
+    "prettier": "^2.4.1",
+    "stylelint": "^14.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-jest": "^27.3.1",
+    "eslint": "^8.2.0",
+    "jest": "^27.3.1",
+    "jest-puppeteer": "^6.0.0",
+    "jsdoc": "^3.6.7",
+    "minami": "^1.2.3",
+    "puppeteer": "^11.0.0"
+  },
+  "jest": {
+    "preset": "jest-puppeteer",
+    "verbose": true
+  }
+}

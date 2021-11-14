@@ -26,7 +26,10 @@ async function init () {
 
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
-  recipeName.innerHTML = recipe.title;
+  recipeName.innerHTML = recipe.title + 
+    `<button class="favorite-heart">
+      <img src="../assets/favorite.svg"/>
+    </button>`;
 
   // Set prep time
   const prepTime = document.querySelector('#prep-time');
@@ -39,7 +42,7 @@ async function init () {
   servingSize.innerHTML = recipe.servings;
 
   // Set description 
-  const recipeDescription = document.querySelector('.recipe-page-description + p');
+  const recipeDescription = document.querySelector('.recipe-page-description');
   recipeDescription.innerHTML = recipe.summary;
 
   // TODO Set ingredients using custom element
@@ -47,15 +50,33 @@ async function init () {
   recipeIngredients.ingredients = {};
   document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
 
+
   // TODO Set equipment using custom element
 
-  // Set instructions 
-  // Possible problem, not all of them are set as a list (some are paragraphs) the data the api gives isn't consistent
-  // sometimes it has nonsense
-  const recipeInstructions = document.querySelector('.recipe-method');
-  recipeInstructions.innerHTML = recipe.instructions;
+  // Set instructions by getting the analyzedInstructions object
+  const recipeSteps = document.querySelector('.recipe-steps')
+  const instructionsList = recipe.analyzedInstructions[0].steps;
+  for(const instructionNumber in instructionsList){
+    let currStep = document.createElement('li');
+    currStep.innerText = instructionsList[instructionNumber].step;
+    recipeSteps.appendChild(currStep);
+  }
 
-  // TODO Add event listeners and callback functions to all the buttons 
+    // TODO Add event listeners and callback functions to all the buttons 
+    // Event listener for button to go to instructions from ingredients
+    const instructionsButton = document.querySelector('.instructions-link');
+    instructionsButton.addEventListener('click', function(event){
+      const instructionsLink = document.querySelector('.recipe-method');
+      instructionsLink.scrollIntoView();
+    });
+
+    // Event listener for button to go to ingredients from instructions
+    const ingredientsButton = document.querySelector('.ingredients-link');
+    ingredientsButton.addEventListener('click', function(event){
+        const ingredentsLink = document.querySelector('.ingredients-list');
+        ingredentsLink.scrollIntoView();
+    });
+
 }
 
 /**
