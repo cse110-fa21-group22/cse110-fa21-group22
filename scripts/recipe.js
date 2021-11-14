@@ -3,7 +3,7 @@
  * pulls up for it. 
  */
 
-const apiKey = 'bcccf988c95c45ef9b53310545b3989a';
+const apiKey = '95deae1a22a548df9132856a80cf5363';
 const tokenKey = '?apiKey=' + apiKey;
 
 
@@ -46,12 +46,46 @@ async function init () {
   recipeDescription.innerHTML = recipe.summary;
 
   // TODO Set ingredients using custom element
-  const recipeIngredients = document.createElement('image-card-component');
-  recipeIngredients.ingredients = {};
-  document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
+  // const recipeIngredients = document.createElement('image-card-component');
+  // recipeIngredients.ingredients = {};
+  // document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
+  const ingredientsSection = document.querySelector('.ingredients-list');
+  const ingredientsList = recipe.extendedIngredients;
+  // console.log(ingredientsList);
+
+  for (const ingredient in ingredientsList) { 
+    const ingredientsCard = document.createElement('ingredients-card-component');
+    // console.log(ingredientsList[ingredient]);
+    ingredientsCard.ingredients = ingredientsList[ingredient];
+    ingredientsSection.appendChild(ingredientsCard);
+    // console.log(ingredientsCard);
+  }
 
 
   // TODO Set equipment using custom element
+  const equipmentListData = [];
+  const analyzedInstructions = recipe.analyzedInstructions[0].steps;
+  for(const stepNumber in analyzedInstructions){
+    for(const equipmentNum in analyzedInstructions[stepNumber].equipment){
+      equipmentListData.push(analyzedInstructions[stepNumber].equipment[equipmentNum]);
+      // console.log(equipmentNum);
+    }
+  }
+  // console.log(equipmentListData);
+
+  // Then make the custom element for equipments
+  const equipMasterList = []
+  const equipmentSection = document.querySelector('.equipment-list');
+  for(const equip in equipmentListData){
+    if(!equipMasterList.find(element => element = equipmentListData[equip]['id'])){
+      const equipmentCard = document.createElement('equipment-card-component');
+      equipmentCard.equipment = equipmentListData[equip];
+      equipmentSection.appendChild(equipmentCard);
+      equipMasterList.push(equipmentListData[equip]['id']);
+      // console.log(equipmentCard);
+    }
+  }
+  
 
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps')
