@@ -36,22 +36,40 @@ class RecipeCard extends HTMLElement {
   }
 
   connectedCallback() {
-    //Navigates to recipe page if a recipe card is clicked
+
+    let isFavorite = false;
+
+    // If the recipe card is clicked, move to the recipe page
     this.addEventListener('click', () => {
       window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
     });
 
+    // If the favorite icon is clicked, favorite the item
+    let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+    favoriteIcon.addEventListener('click', (event) => {
+        // Stop propagation to the parent so you don't go to the recipe page
+        event.stopPropagation();
+        console.log('clicked favorite icon');
+        if (!isFavorite) {
+          isFavorite = true;
+          favoriteIcon.src = '../assets/favorite-selected.svg';
+          // add item to favorites list here
+        } else {
+          isFavorite = false;
+          favoriteIcon.src = '../assets/favorite.svg';
+          // remove item from favorites list here
+        }
+    });
+
     // Experimental mouse hover for favorites icon
-    let favoriteImage = this.shadow.querySelector('.recipe-favorite');
-    favoriteImage.addEventListener('mouseover', function() {
-      favoriteImage.src = '../assets/favorite-selected.svg';
+    favoriteIcon.addEventListener('mouseover', function() {
+      favoriteIcon.src = '../assets/favorite-selected.svg';
     });
-    favoriteImage.addEventListener('mouseout', function() {
-      favoriteImage.src = '../assets/favorite.svg';
+    favoriteIcon.addEventListener('mouseout', function() {
+      if (!isFavorite) {
+        favoriteIcon.src = '../assets/favorite.svg';
+      }
     });
-
-
-    
   }
 }
 
