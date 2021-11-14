@@ -52,7 +52,7 @@
   position: relative;
 }
 
-.instructions-link {
+.ingredients-link, .instructions-link, .next-step-link {
   background-color: transparent;
   border: 0;
   color: var(--color-neutrals-grey);

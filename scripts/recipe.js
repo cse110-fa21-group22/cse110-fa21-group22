@@ -39,28 +39,46 @@ async function init () {
   recipeDescription.innerHTML = recipe.summary;
 
   // TODO Set ingredients using custom element
+//   const ingredientsSection = document.querySelector('.ingredients-list');
+//   const ingredientsList = recipe.extendedIngredients;
+//   console.log("1",ingredientsList);
+
+//   for (const ingredient in ingredientsList) { 
+// //     // console.log(ingredients);
+// //     // const ingredientsCard = document.createElement('recipe-card-component');
+// //     // console.log(ingredientsList[ingredient]);
+// //     // ingredientsCard.ingredients = ingredientsList[ingredient];
+// //     // ingredientsSection.appendChild(ingredientsCard);
+// //     console.log(ingredientsCard);
+//         ingredientsSection.innerHTML += ingredientsList[ingredient]['name'];
+//   }
+// // ingredientsSection.innerHTML = recipe.extendedIngredients;
+
+
 
   // TODO Set equipment using custom element
 
-  // Set instructions 
-  // Possible problem, not all of them are set as a list (some are paragraphs) the data the api gives isn't consistent
-  // sometimes it has nonsense
-  const recipeInstructions = document.querySelector('.recipe-method');
-  recipeInstructions.innerHTML = recipe.instructions;
+  // Set instructions by getting the analyzedInstructions object
+  const recipeSteps = document.querySelector('.recipe-steps')
+  const instructionsList = recipe.analyzedInstructions[0].steps;
+  for(const instructionNumber in instructionsList){
+    let currStep = document.createElement('li');
+    currStep.innerText = instructionsList[instructionNumber].step;
+    recipeSteps.appendChild(currStep);
+  }
 
     // TODO Add event listeners and callback functions to all the buttons 
     // Event listener for button to go to instructions from ingredients
     const instructionsButton = document.querySelector('.instructions-link');
     instructionsButton.addEventListener('click', function(event){
       const instructionsLink = document.querySelector('.recipe-method');
-      console.log(instructionsLink);
       instructionsLink.scrollIntoView();
     });
 
     // Event listener for button to go to ingredients from instructions
     const ingredientsButton = document.querySelector('.ingredients-link');
     ingredientsButton.addEventListener('click', function(event){
-        const ingredentsLink = document.querySelector('.ingredients-section');
+        const ingredentsLink = document.querySelector('.ingredients-list');
         ingredentsLink.scrollIntoView();
     });
 
