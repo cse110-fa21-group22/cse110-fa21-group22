@@ -51,6 +51,22 @@ div.scroll {
 div.list-name{
     position:absolute;
     margin-top: 10px;
+    width: 50vw; 
+}
+
+div.list-name h4{
+    width:auto; 
+    display:inline-block; 
+}
+
+.button{
+    display:inline; 
+    border:none; 
+    margin-left:10px; 
+    cursor:pointer; 
+    text-align:center; 
+    position:absolute; 
+    bottom:15px; 
 }
 
 div.recipe-section{

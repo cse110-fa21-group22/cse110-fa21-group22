@@ -25,7 +25,19 @@ async function init() {
     * display 10 cards each time, when user a card, display another 10 random 
     */
     //console.log(recipeData); 
-    showResults(recipeData); 
+    showResults(recipeData);
+
+    var button = document.querySelector(".button");
+    button.addEventListener("click", async function () {
+        clearObject();
+        try {
+            await fetch_random_recipes();
+        } catch (err) {
+            console.log(`Error fetching recipes: ${err}`);
+            return;
+        }
+        showResults(recipeData);
+    });
 }
 
 async function fetch_random_recipes() {
@@ -41,10 +53,10 @@ async function fetch_random_recipes() {
                 // need to be a for loop and put them into recipeData; 
                 // console.log(data);
                 // console.log(data.recipes[0].id); 
-                for (let i = 0; i < parseInt(stepping_size); i ++){
-                    recipeData[data.recipes[i].id] = data.recipes[i]; 
+                for (let i = 0; i < parseInt(stepping_size); i++) {
+                    recipeData[data.recipes[i].id] = data.recipes[i];
                 }
-                resolve(); 
+                resolve();
             })
             .catch(err => {
                 console.log(`Error loading the recipe`);
@@ -65,7 +77,7 @@ function showResults(results) {
     clearResults();
 
     // Add the recipes to the page
-    for (const recipe in results) { 
+    for (const recipe in results) {
         const recipeCard = document.createElement('recipe-card-component')
         recipeCard.recipe = results[recipe];
         recipeSection.appendChild(recipeCard);
@@ -79,4 +91,11 @@ function clearResults() {
     while (recipeSection.firstChild) {
         recipeSection.removeChild(recipeSection.firstChild);
     }
+}
+
+/**
+ * clear out recipeData 
+ */
+function clearObject() {
+    for (var member in recipeData) delete recipeData[member];
 }
