@@ -34,24 +34,6 @@
   margin-left: 10px;
 }
 
-.ingredient-card {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 50px;
-  justify-content: space-between;
-  width: 250px; 
-  /* adjust width, height later, move ingredient card to it's own css later*/
-}
-
-.ingredient-image {
-  border-radius: 5px;
-  height: 50px;
-  object-fit: cover;
-  object-position: center;
-  width: 50px;
-}
-
 .ingredients-section, .equipment-section {
   position: relative;
 }

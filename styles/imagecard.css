@@ -70,6 +70,10 @@
     right: 0;
   }
 
+  .hidden {
+    display: none;
+  }
+
   .instructions-link {
     background-color: transparent;
     border: 0;

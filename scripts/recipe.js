@@ -3,7 +3,7 @@
  * pulls up for it. 
  */
 
-const apiKey = 'bcccf988c95c45ef9b53310545b3989a';
+const apiKey = 'c2979edc8ae84969be111be5f5cea60c';
 const tokenKey = '?apiKey=' + apiKey;
 
 
@@ -47,7 +47,7 @@ async function init () {
 
   // TODO Set ingredients using custom element
   const recipeIngredients = document.createElement('image-card-component');
-  recipeIngredients.ingredients = {};
+  recipeIngredients.ingredients = recipe.extendedIngredients;
   document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
 
 
@@ -61,22 +61,6 @@ async function init () {
     currStep.innerText = instructionsList[instructionNumber].step;
     recipeSteps.appendChild(currStep);
   }
-
-    // TODO Add event listeners and callback functions to all the buttons 
-    // Event listener for button to go to instructions from ingredients
-    const instructionsButton = document.querySelector('.instructions-link');
-    instructionsButton.addEventListener('click', function(event){
-      const instructionsLink = document.querySelector('.recipe-method');
-      instructionsLink.scrollIntoView();
-    });
-
-    // Event listener for button to go to ingredients from instructions
-    const ingredientsButton = document.querySelector('.ingredients-link');
-    ingredientsButton.addEventListener('click', function(event){
-        const ingredentsLink = document.querySelector('.ingredients-list');
-        ingredentsLink.scrollIntoView();
-    });
-
 }
 
 /**
