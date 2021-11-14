@@ -1,9 +1,5 @@
 @import 'reset.css';
 
-#serving-size {
-  margin-left: 45px;
-}
-
 .equipment-card {
   align-items: center;
   display: flex;
@@ -22,6 +18,12 @@
 }
 
 .equipment-list, .ingredients-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 50px;
+  grid-template-rows: auto auto;
+  justify-content: flex-start;
+  overflow-x: scroll;
   padding: 20px 50px 30px;
   width: calc(100% - 100px);
 }
@@ -29,6 +31,7 @@
 .favorite-heart {
   background-color: transparent;
   border: 0;
+  margin-left: 10px;
 }
 
 .ingredient-card {
@@ -38,10 +41,11 @@
   height: 50px;
   justify-content: space-between;
   width: 250px; 
-  /* adjust width, height later */
+  /* adjust width, height later, move ingredient card to it's own css later*/
 }
 
 .ingredient-image {
+  border-radius: 5px;
   height: 50px;
   object-fit: cover;
   object-position: center;
@@ -74,24 +78,36 @@
   color: white;
 }
 
-#prep-time, #total-time {
+#prep-time {
   margin-left: 50px;
 }
 
 .recipe-image {
   border-radius: 10px;
-  height: 400px;
-  width: 400px;
+  height: min(100vw, 400px);
+  margin-bottom: 20px;
+  object-fit: cover;
+  object-position: center;
+  width: min(100%, 400px);
 }
 
 .recipe-info {
+  align-items: center;
   display: inline-flex;
-  justify-content: space-between;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
   width: 100%;
 }
 
 .recipe-page-description {
-  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.recipe-page-description-header {
+  margin-top: 25px;
 }
 
 .recipe-slang {
@@ -101,7 +117,6 @@
 
 .recipe-time {
   color: var(--color-neutrals-dark-grey);
-  /* margin: 15px 0; */
 }
 
 .recipe-steps {
@@ -119,6 +134,9 @@
   right: 0;
 }
 
+#serving-size {
+  margin-left: 60px;
+} 
 
 /* #current-step {
   background-color: #d0e4fb;
@@ -140,7 +158,22 @@ ol > li:before {
     content: counter(item) ". ";
 }
 
-/* for mobilelater */
-/* @media (min-width: 768px) {
+/* for mobile later */
+@media (min-width: 768px) {
+  .recipe-page-description {
+    margin-bottom: 0;
+    width: calc(100% - 50px);
+  }
 
-} */
+  .recipe-image {
+    height: 400px;
+    width: 400px;
+  }
+
+  .recipe-info {
+    align-items: flex-start;
+    flex-direction: inherit;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+}
