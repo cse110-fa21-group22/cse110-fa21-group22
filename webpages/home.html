@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ICook"/>
+    <meta name="description" content="ICook" />
     <title>Home Page</title>
-    <link rel="stylesheet" href="../styles/design.css">
-    <link rel="food icon" type="image/jpg" href="../assets/favicon.ico" />
+
+    <!--style sheet-->
     <link rel="stylesheet" href="../styles/home.css" />
+
+    <!---components -->
     <script src="../components/navbar.js" type="module"></script>
     <script src="../components/recipeCard.js" type="module"></script>
-    <script src="../scripts/search.js" type="module"></script>
+
+    <!--- linking with javacript-->
+    <script src="/scripts/homepage.js" type="module"></script>
 </head>
+
 <body>
-    <navbar-component></navbar-component>
-    <div>
-        <h1>This is home page.</h1>
+    <div class = box>
+        <div class = header>
+             <navbar-component></navbar-component>
+         </div>
+        <!--
+            sections for popular recipes cards
+        -->
+        <div class = main>
+            <div class="scroll">
+                <div class="list-name">
+                    <h4>Popular Recipes</h4>
+                </div>
+                <div class="recipe-section"></div>
+            </div>
+            
+                    
+            <div class="scroll">
+                <div class="list-name">
+                    <h4>Favorites</h4>
+                </div>
+                <div class="recipe-section">
+                    <recipe-card-component></recipe-card-component>
+                </div>
+            </div>
+
+            <div class="scroll"></div>
+
+           
+            
+        </div>
+        <div class="footer">
+            <footer>Version: 0.0.1</footer>
+        </div>
     </div>
 </body>
