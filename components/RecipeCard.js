@@ -53,15 +53,19 @@ class RecipeCard extends HTMLElement {
         if (!isFavorite) {
           isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
+
+
           // add item to favorites list here
         } else {
           isFavorite = false;
           favoriteIcon.src = '../assets/favorite.svg';
+
+          
           // remove item from favorites list here
         }
     });
 
-    // Experimental mouse hover for favorites icon
+    // Mouse hover for favorites icon
     favoriteIcon.addEventListener('mouseover', function() {
       favoriteIcon.src = '../assets/favorite-selected.svg';
     });
