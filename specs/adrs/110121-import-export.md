@@ -16,9 +16,9 @@ Technical Story: Deciding how a user would be able to share recipes, for example
 3. Using Google/Apple to save data
 
 ## Decision Outcome
-Choose option 3; 
-option 1 is too much work and we have limited time; 
-option 3 is too complicated; 
+Choose option 2; 
+- option 1 is too much work and we have limited time; 
+- option 3 is too complicated; 
 
 ### Positive Consequences <!-- optional -->
 importing and exporting recipes will be the fastest and do-able during for this time frame

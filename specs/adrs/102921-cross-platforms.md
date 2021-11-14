@@ -17,9 +17,9 @@ Technical Story: deciding on if users can use web app across different platforms
 2. Only making it suitable for laptop
 
 ## Decision Outcome
-Choose option 3; 
-option 2 wouldn't be user friendly because users have different preferences.
-option 1 would target a bigger range of users and wouldn't be hard to add to css
+Choose option 1; 
+- option 2 wouldn't be user friendly because users have different preferences
+- option 1 would target a bigger range of users and wouldn't be hard to add to css
 
 ### Positive Consequences <!-- optional -->
 - compatiable across different platforms
