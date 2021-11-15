@@ -11,10 +11,10 @@
 }
 
 .equipment-image {
-  height: 50px;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-  width: 50px;
+  width: auto;
 }
 
 .equipment-list, .ingredients-list {
@@ -26,6 +26,11 @@
   overflow-x: scroll;
   padding: 20px 50px 30px;
   width: calc(100% - 100px);
+}
+
+.ingredients-image{
+  height: 100%;
+  width: auto;
 }
 
 .favorite-heart {
