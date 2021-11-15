@@ -12,6 +12,7 @@
   <script src="../components/recipeCard.js" type="module"></script>
   <script src="../components/IngredientCard.js" type="module"></script>
   <script src="../components/equipmentCard.js" type="module"></script>
+  <script src="../components/ImageCard.js" type="module"></script>
   <script src="../scripts/search.js" type="module"></script>
   <script src="../scripts/recipe.js" type="module"></script>
 </head>
@@ -34,24 +35,9 @@
       </div>
       <img class="recipe-image" src="../assets/images/placeholder.jpg" alt="Recipe Image" />
     </section>
-    <section class="ingredients-section">
-      <h3>Ingredients <button class="instructions-link">Go to Instructions</button></h3>
-      <button class="left-arrow"><img src="../assets/leftArrow.svg"/></button>
-      <button class="right-arrow"><img src="../assets/rightArrow.svg"/></button>
-      <section class="ingredients-list">
-        <!-- temphere -->
-      </section>
-      <button class="show-all"><img src="../assets/downArrow.svg"/>Show All</button>
-    </section>
-    <section class="equipment-section">
-      <h3>Equipment</h3>
-      <button class="left-arrow"><img src="../assets/leftArrow.svg"/></button>
-      <button class="right-arrow"><img src="../assets/rightArrow.svg"/></button>
-      <section class="equipment-list">
-        <!-- temphere -->
-      </section>
-      <button class="show-all"><img src="../assets/downArrow.svg"/>Show All</button>
-    </section>
+    
+    <section class='ingredients-equipment'></section>
+
     
     <section class="instructions-section">
       <h3 class="recipe-instructions">Instructions <button class="ingredients-link" hidden>Go to Ingredients</button><button class="next-step-link" hidden>Go to Step</button></h3>

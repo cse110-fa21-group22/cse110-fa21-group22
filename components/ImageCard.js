@@ -61,7 +61,7 @@ class ImageCard extends HTMLElement {
     const showAllButton = this.shadow.querySelector('.show-all');
     const leftArrow = this.shadow.querySelector('.left-arrow');
     const rightArrow = this.shadow.querySelector('.right-arrow');
-
+    
     showAllButton.addEventListener('click', () => {
       const ingredientsList = this.shadow.querySelector('.ingredients-list');
       for (const entry of ingredientsList.children) {
