@@ -23,8 +23,7 @@ export async function search(inputList) {
 	const tokenSearchInput = '&query=' + inputList['query'];
 	const tokenNumResults = '&number=' + inputList['number'];
 	const tokenOffset = '&offset=' + inputList['offset'];
-	const tokenNutritionBool =
-		'&addRecipeNutrition=' + inputList['recipe-nutrition'];
+	// const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
 	const fetchEndpoint =
 		searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; //+ tokenNutritionBool;
 

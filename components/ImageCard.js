@@ -119,17 +119,17 @@ class ImageCard extends HTMLElement {
 }
 
 // TODO This function should take in a value and return it in fraction form and as a string
-function toFraction(value) {
-	return value.toString();
-}
+// function toFraction(value) {
+// 	return value.toString();
+// }
 
 /**
  * TODO This function should standardize measurements to a single way of being displayed
  * Example: If the input is 'Tablespoon' or 'Tbsp' or 'tablespoon' this function should
  * consistently return a value of 'Tbsp'
  */
-function standardizeMeasurement(str) {
-	return str;
-}
+// function standardizeMeasurement(str) {
+// 	return str;
+// }
 
 customElements.define('image-card-component', ImageCard);

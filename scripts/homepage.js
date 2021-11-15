@@ -10,8 +10,8 @@ const recipeSection = document.querySelector('.home-page-popular-recipe-list'); 
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
-	//console.log("Init.. ");
-	//console.log("Fetching recipes...");
+	//console.log('Init.. ');
+	//console.log('Fetching recipes...');
 	try {
 		await fetch_random_recipes();
 	} catch (err) {
@@ -62,7 +62,7 @@ async function fetch_random_recipes() {
 				resolve();
 			})
 			.catch((err) => {
-				console.log(`Error loading the recipe`);
+				console.log('Error loading the recipe');
 				reject(err);
 			});
 	});
