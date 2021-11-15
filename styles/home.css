@@ -1,92 +1,23 @@
 @import 'reset.css';
 
-html, body {
-    font-family: Helvetica;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+.home-page-favorite-section, .home-page-popular-recipe-list{
+	display: flex;
+	margin: 0 -10px 35px;
+	overflow-x: scroll;
 }
 
-.box {
-    padding: 100px 0 0;
-    position: relative;
-    box-sizing: border-box;
+.home-page-popular-header {
+	align-items: flex-start;
+	display: flex;
+	margin-right: -10px;
+	justify-content: space-between;
 }
 
-.header {
-    position: fixed;
-    height: 60px;
-    width: 100%;
-    background-color:#4d96ea;
-    margin: -100px 0 0;
-    z-index: 9999;
-}
-
-.main {
-    display: flex;
-    flex-direction: column;
-    margin-top: -40px;
-    padding: 0;
-    width: auto;
-}
-
-div.main h4 {
-    font-weight: bold;
-    margin: 0;
-    margin-left: 10px;
-    margin-top: 7px;
-    overflow-y: auto;
-}
-
-div.scroll {
-    height: 380px;
-    margin-bottom: 0px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    display: flex;
-    flex-direction: column;
-}
-
-div.list-name{
-    position:absolute;
-    margin-top: 10px;
-    width: 50vw; 
-}
-
-div.list-name h4{
-    width:auto; 
-    display:inline-block; 
-}
-
-.button{
-    display:inline; 
-    border:none; 
-    margin-left:10px; 
-    cursor:pointer; 
-    text-align:center; 
-    position:absolute; 
-    bottom:15px; 
-}
-
-div.recipe-section{
-    margin-top: 50px;
-    margin-bottom: 0px;
-    height: 200px;
-    display: flex;
-    gap: 0px;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-}
-
-.footer{
-    height: 20px;
-    background-color:#4d96ea;
-}
-
-footer {
-    text-align: right;
-    font-size: 14px;
-    font-family: Helvetica;
-    font-weight: normal;
-    margin-right: 10px;
+.home-page-popular-refresh {
+	background-color: var(--color-primary-blue);
+  border: 0;
+  border-radius: 5px;
+  color: var(--color-neutrals-white);
+  cursor: pointer;
+  padding: 10px 20px;
 }
