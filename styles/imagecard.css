@@ -1,0 +1,104 @@
+@import 'reset.css';
+
+.equipment-card {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: flex-start;
+  width: 250px; 
+}
+
+.equipment-image {
+  height: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+  object-position: center;
+  width: 50px;
+}
+
+.equipment-list, .ingredients-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 50px;
+  grid-template-rows: auto auto;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  padding: 20px 50px 30px;
+  width: calc(100% - 100px);
+}
+
+.equipment-name {
+  overflow: hidden;
+  padding-right: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 120px;
+}
+
+.ingredient-card {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: flex-start;
+  margin-right: 10px;
+}
+
+.ingredient-image {
+  height: 50px;
+  margin-right: 10px;
+  object-fit: cover;
+  object-position: center;
+  width: 50px;
+}
+
+.ingredient-name {
+  overflow: hidden;
+  padding-right: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 120px;
+}
+
+.ingredients-section, .equipment-section {
+  position: relative;
+}
+
+.left-arrow {
+  background-color: transparent;
+  border: 0;
+  border-radius: 20%;
+  left: -10px;
+  padding: 10px 20px;
+  position: absolute;
+  top: calc(50% - 30px);
+  transition-duration: 0.4s;
+}
+
+.left-arrow:hover, .right-arrow:hover {
+  background-color: #4d96ea;
+  color: white;
+}
+
+.right-arrow {
+  background-color: transparent;
+  border: 0;
+  border-radius: 20%;
+  padding: 10px 20px;
+  position: absolute;
+  top: calc(50% - 30px);
+  transition-duration: 0.4s;
+  right: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.instructions-link {
+  background-color: transparent;
+  border: 0;
+  color: var(--color-neutrals-grey);
+}
+  

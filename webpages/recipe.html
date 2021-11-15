@@ -10,141 +10,42 @@
   <link rel="stylesheet" href="../styles/recipe.css" />
   <script src="../components/navbar.js" type="module"></script>
   <script src="../components/recipeCard.js" type="module"></script>
+  <script src="../components/IngredientCard.js" type="module"></script>
+  <script src="../components/equipmentCard.js" type="module"></script>
+  <script src="../components/ImageCard.js" type="module"></script>
+  <script src="../scripts/search.js" type="module"></script>
   <script src="../scripts/recipe.js" type="module"></script>
 </head>
 <body>
-    <div class="box">
-        <div class="header">
-            <navbar-component></navbar-component>
-        </div>
-        <div class="main">
-            <div class="side-bar">
-                <!--Should be deleted-->
-                This is a side-bar. <br />
-                xxx; <br />
-                xxx; <br />
-                xxx; <br />
-                xxx; <br />
-                <!---->
-            </div>
-            <div class="information">
-                <div class="top">
-                    <div class="description">
-                        <div class="recipe-name">
-                            <h3>recipe-name</h3>
-                            <img class="recipe-favorite" src="../assets/favorite.svg"></img>
-                        </div>
-                        <div class="recipe-time">
-                            <p>Prep time</p>
-                            <p>Cook time</p>
-                            <p>Total time</p>
-                        </div>
-                        <h4>Description</h4>
-                        <div class="recipe-description">
-                            description here.
-                        </div>
-                    </div>
-                    <div class="image">
-                        <img src="../assets/images/placeholder.jpg" alt="Recipe Image" />
-                    </div>
-                </div>
-                <div class="middle">
-                    <div class="ingredients">
-                        <br>
-                        <div class="ingredients-top">
-                            <h3>Ingredients</h3>
-                            <button id="gotoInstructions" class="go-left">
-                                Go to Instructions
-                            </button>
-                        </div>
-                        <div class="ingredients-middle">
-                            <button id="ingredients-left" class="go-left" type="submit">
-                                <!-- <img src="" alt="<" /> -->
-                                <span class="stretch">&#8249;</span>
-                            </button>
-                            <div class="recipe-ingredients">
-                                <!-- just a test. can be deleted-->
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <!---->
-                            </div>
-                            <button id="ingredients-right" class="go-right" type="submit">
-                                <!-- <img src="" alt=">" /> -->
-                                <span class="stretch">&#8250;</span>
-                            </button>
-                        </div>
-                        <div class="ingredients-bottom">
-                            <button id="ingredients-show-all" class="show-all">
-                                <!-- <img src="" alt="Show All" /> -->
-                                &#8595; Show All
-                            </button>
-                        </div>
-                    </div>
-                    <div class="equipment">
-                        <div class="equipment-top">
-                            <h3>Equipment</h3>
-                        </div>
-                        <div class="equipment-middle">
-                            <button id="equipment-left" class="go-left" type="submit">
-                                <!-- <img src="" alt="<" /> -->
-                                <span class="stretch">&#8249;</span>
-                            </button>
-                            <div class="recipe-equipment">
-                                <!-- just a test. can be deleted-->
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <recipe-card-component></recipe-card-component>
-                                <!---->
-                            </div>
-                            <button id="equipment-right" class="go-right" type="submit">
-                                <!-- <img src="" alt=">" /> -->
-                                <span class="stretch">&#8250;</span>
-                            </button>
-                        </div>
-                        <div class="equipment-bottom">
-                            <button id="equipment-show-all" class="show-all">
-                                <!-- <img src="" alt="Show All" /> -->
-                                &#8595; Show All
-                            </button>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-                <div class="bottom">
-                    <br>
-                    <div class="instruction-top">
-                        <h3>Instructions</h3>
-                        <button class="go-to-ingredients">
-                            Go To Ingredients
-                        </button>
-                        <button class="go-to-steps">
-                            Go To Steps
-                        </button>
-                    </div>
-                    <div class="instruction-bottom">
-                        <div class="recipe-steps">
-                            <ol>
-                                <li class="current-step"><p id="current-step">this is first step</p><button id="next-step">Next Step</button></li>
-                                <li>this is second step</li>
-                                <li>this is third step</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <footer>Version: 0.0.1</footer>
-        </div>
-    </div> 
+  <navbar-component></navbar-component>
+  <main class="recipe-page">
+    <section class="recipe-info">
+      <div class="recipe-bio">
+        <h2 class="recipe-name">
+          Chicken Tikka Masala
+          <button class="favorite-heart">
+            <img src="../assets/favorite.svg"/>
+          </button>
+        </h2>
+        <p class="recipe-slang">Easy, quick, and delicious</p>
+        <p class="recipe-time">Prep Time <span id="prep-time">10 mins</span></p>
+        <p class="recipe-time">Servings <span id="serving-size">3</span></p>
+        <h5>Description</h5>
+        <p class="recipe-page-description"></p>
+      </div>
+      <img class="recipe-image" src="../assets/images/placeholder.jpg" alt="Recipe Image" />
+    </section>
+    
+    <section class='ingredients-equipment'></section>
+
+    
+    <section class="instructions-section">
+      <h3 class="recipe-instructions">Instructions <button class="ingredients-link" hidden>Go to Ingredients</button><button class="next-step-link" hidden>Go to Step</button></h3>
+      <section class="recipe-method">
+         <!-- temphere -->
+         <ol class="recipe-steps"></ol>
+      </section>
+    </section>
+  </main> 
 </body>
 </html>
