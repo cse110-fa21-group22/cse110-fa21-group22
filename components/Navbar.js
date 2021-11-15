@@ -20,7 +20,7 @@ navbarTemplate.innerHTML = `
       <img src="../assets/favorite.svg" alt="favorite" />
     </a>
     </nav>
-`
+`;
 
 class Navbar extends HTMLElement {
   /**
@@ -38,7 +38,7 @@ class Navbar extends HTMLElement {
    */
   generateQueryString(searchTerm) {
     let queryString = '?search=';
-    for(let i = 0; i < searchTerm.length; i++) {
+    for (let i = 0; i < searchTerm.length; i++) {
       let currChar = searchTerm.charAt(i);
       let currCharCode = searchTerm.charCodeAt(i);
       console.log(currChar);
@@ -50,7 +50,7 @@ class Navbar extends HTMLElement {
       // Spaces become + signs
       } else if (currCharCode == '32') {
         queryString += '+';
-      // All other characters become - signs
+        // All other characters become - signs
       } else {
         queryString += '-';
       }
