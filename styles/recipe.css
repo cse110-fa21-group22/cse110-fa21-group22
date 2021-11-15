@@ -111,8 +111,8 @@
 	color: var(--color-neutrals-dark-grey);
 }
 
-.recipe-steps {
-}
+/* .recipe-steps {
+} */
 
 .right-arrow {
 	background-color: transparent;
@@ -130,12 +130,12 @@
 }
 
 /* #current-step {
-  background-color: #d0e4fb;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: space-between;
-  text-align: left;
+	background-color: #d0e4fb;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	justify-content: space-between;
+	text-align: left;
 } */
 
 h5 {
