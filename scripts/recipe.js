@@ -47,13 +47,12 @@ async function init () {
 
   // Set ingredients using custom element
   const recipeIngredients = document.createElement('image-card-component');
-  console.log(recipeIngredients);
   recipeIngredients.ingredients = recipe.extendedIngredients;
   document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
 
   // Set equipment using custom element
   const recipeEquipment = document.createElement('image-card-component');
-  recipeIngredients.equipment = equipment;
+  recipeEquipment.equipment = equipment.equipment;
   document.querySelector('.ingredients-equipment').appendChild(recipeEquipment);
 
   // // TODO Set equipment using custom element

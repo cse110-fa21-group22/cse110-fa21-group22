@@ -3,6 +3,11 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/imagecard.css';
 
+
+/**
+ * TODO (Not a priority) The class names for each template still refer to every entry as 'ingredient'
+ * Currently works as is and reworking this will not change any functionality. It would only be for code readability. 
+ */
 const imageCardTemplate = document.createElement('template');
 imageCardTemplate.innerHTML = `
   <section class="ingredients-section">
@@ -28,25 +33,51 @@ let showingAll = false;
 
 class ImageCard extends HTMLElement {
   set ingredients(ingredientArr) {
-    if (this.equipment) throw 'Already set as equipment';
-    this.shadow.querySelector('.title').innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>'; 
+    if (this.equipment) {
+      console.err('Already set as equipment'); // Check if card has already been set
+      return;
+    }
+
+    // Set title to 'Ingredients'
+    const title = this.shadow.querySelector('.title');
+    title.innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>'; 
+
+    // Create an ingredient entry for each element of ingredientsArr
     for (let i = 0; i < ingredientArr.length; i++) { 
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
-      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden');
+      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
       entry.querySelector('.ingredient-image').src = 'https://spoonacular.com/cdn/ingredients_100x100/' + ingredientArr[i].image;
       entry.querySelector('.ingredient-name').innerHTML = ingredientArr[i].name;
       entry.querySelector('.ingredient-measurements').innerHTML = ingredientArr[i].amount + ' <span></span>';
       entry.querySelector('span').innerHTML = ingredientArr[i].unit;
+
 
       this.shadow.querySelector('.ingredients-list').appendChild(entry);
     }
 
   }
 
-  set equipment(equipmentObj) {
-    if (this.equipment) throw 'Already set as ingredients';
-    this.shadow.querySelector('.title').innerHTML = 'Equipment '; 
+  set equipment(equipmentArr) {
+    if (this.equipment) {
+      console.err('Already set as ingredients'); // Check if card has already been set
+      return;
+    }
+
+    // Set title to 'Equipment'
+    const title = this.shadow.querySelector('.title');
+    title.innerHTML = 'Equipment ';
+
+    // Create an equipment entry for each element of equipmentArr
+    for (let i = 0; i < equipmentArr.length; i++) { 
+      const entry = entryElementTemplate.content.cloneNode(true);
+      entry.querySelector('.ingredient-card').id = i;
+      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
+      entry.querySelector('.ingredient-image').src = "https://spoonacular.com/cdn/equipment_100x100/" + equipmentArr[i].image;
+      entry.querySelector('.ingredient-name').innerHTML = equipmentArr[i].name;
+
+      this.shadow.querySelector('.ingredients-list').appendChild(entry);
+    }
 
   }
 
@@ -62,6 +93,7 @@ class ImageCard extends HTMLElement {
     const leftArrow = this.shadow.querySelector('.left-arrow');
     const rightArrow = this.shadow.querySelector('.right-arrow');
     
+    // Show all button functionality (Has to be performed in connectedCallback so that 'this' contains correct value)
     showAllButton.addEventListener('click', () => {
       const ingredientsList = this.shadow.querySelector('.ingredients-list');
       for (const entry of ingredientsList.children) {
