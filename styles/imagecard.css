@@ -18,6 +18,12 @@
 }
 
 .equipment-list, .ingredients-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 50px;
+  grid-template-rows: auto auto;
+  justify-content: flex-start;
+  overflow-x: scroll;
   padding: 20px 50px 30px;
   width: calc(100% - 100px);
 }
@@ -37,8 +43,6 @@
   height: 50px;
   justify-content: flex-start;
   margin-right: 10px;
-  width: 250px;
-  /* adjust width, height later */
 }
 
 .ingredient-image {
