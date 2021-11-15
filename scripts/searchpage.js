@@ -8,23 +8,23 @@ import { search } from './search.js';
 window.addEventListener('DOMContentLoaded', init);
 
 /**
-  * This function initializes the search page
-  * and automatically extracts data from the query string and runs a search
-  * @param {none}
-  * @returns {none}
-  */
-function init () {
-	const searchKeyword = document.querySelector('.search-word'); 
-	const recipeSection = document.querySelector('.recipe-section'); 
+ * This function initializes the search page
+ * and automatically extracts data from the query string and runs a search
+ * @param {none}
+ * @returns {none}
+ */
+function init() {
+	const searchKeyword = document.querySelector('.search-word');
+	const recipeSection = document.querySelector('.recipe-section');
 
 	/**
-     * This function parses the query string to retrieve relevant information
-     * @param {none}
-     * @returns {string} the user's search term
-     */
+	 * This function parses the query string to retrieve relevant information
+	 * @param {none}
+	 * @returns {string} the user's search term
+	 */
 	function parseQueryString() {
 		let queryString = window.location.search;
-        
+
 		// Get rid of '?search='
 		let searchTerm = queryString.substring(8);
 
@@ -34,10 +34,10 @@ function init () {
 	}
 
 	/**
-     * This function clears the results on the search page
-     * @param {none}
-     * @return {none}
-     */
+	 * This function clears the results on the search page
+	 * @param {none}
+	 * @return {none}
+	 */
 	function clearResults() {
 		while (recipeSection.firstChild) {
 			recipeSection.removeChild(recipeSection.firstChild);
@@ -45,10 +45,10 @@ function init () {
 	}
 
 	/**
-     * Shows the search results on the page
-     * @param {Object} results The search results 
-     * @returns {none}
-     */
+	 * Shows the search results on the page
+	 * @param {Object} results The search results
+	 * @returns {none}
+	 */
 	function showResults(results) {
 		console.log(results);
 
@@ -57,13 +57,13 @@ function init () {
 
 		// Add the recipes to the page
 		searchKeyword.innerHTML = '"' + inputList['query'] + '"';
-		for (const recipe in results) { 
+		for (const recipe in results) {
 			const recipeCard = document.createElement('recipe-card-component');
 			recipeCard.recipe = results[recipe];
 			recipeSection.appendChild(recipeCard);
 		}
 	}
-    
+
 	// Automatically parse the query string and run a search on page load
 	let searchTerm = parseQueryString();
 	let inputList = [];
@@ -77,5 +77,3 @@ function init () {
 	inputList['recipe-nutrition'] = 'true';
 	search(inputList).then(showResults);
 }
-
- 

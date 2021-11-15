@@ -13,15 +13,15 @@
  * make sure we're resetting all spacing elements.
  *
  */
- 
+
 html,
 body {
-  border: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  margin: 0;
-  padding: 0;
-  width: 100vw;
+	border: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
 }
 
 div,
@@ -51,9 +51,9 @@ summary,
 mark,
 audio,
 video {
-  border: 0;
-  margin: 0;
-  padding: 0;
+	border: 0;
+	margin: 0;
+	padding: 0;
 }
 
 h1,
@@ -91,12 +91,12 @@ li,
 fieldset,
 legend,
 label {
-  border: 0;
-  color: var(--color-neutrals-black);
-  font-size: 100%;
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
+	border: 0;
+	color: var(--color-neutrals-black);
+	font-size: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
 }
 
 article,
@@ -112,27 +112,26 @@ nav,
 section,
 audio,
 video {
-  display: block;
+	display: block;
 }
 
 table {
-  border-collapse: separate;
-  border-spacing: 0;
+	border-collapse: separate;
+	border-spacing: 0;
 }
 
 caption,
-  th,
-  td {
-    text-align: left;
-    vertical-align: middle;
-  } */
-
-a img {
-  border: 0;
+th,
+td {
+	text-align: left;
+	vertical-align: middle;
+}
+*/ a img {
+	border: 0;
 }
 
 :focus {
-  outline: 0;
+	outline: 0;
 }
 
 a,
@@ -141,51 +140,51 @@ a:visited,
 a:focus,
 a:hover,
 a:active {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 /* established typography */
 
 h1 {
-  font-size: 36px;
-  font-weight: 600;
+	font-size: 36px;
+	font-weight: 600;
 }
 
 h2 {
-  font-size: 32px;
-  font-weight: 600;
+	font-size: 32px;
+	font-weight: 600;
 }
 
 h3 {
-  font-size: 28px;
-  font-weight: 600;
+	font-size: 28px;
+	font-weight: 600;
 }
 
 h4 {
-  font-size: 24px;
+	font-size: 24px;
 }
 
 h5 {
-  font-size: 20px;
+	font-size: 20px;
 }
 
 p {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 /* main body padding */
 
 main {
-  padding: 25px;
+	padding: 25px;
 }
 
 @media (min-width: 768px) {
-  main {
-    padding: 50px;
-  }
+	main {
+		padding: 50px;
+	}
 }
