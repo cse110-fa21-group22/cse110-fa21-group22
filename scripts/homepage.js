@@ -1,12 +1,16 @@
 /**
  * API key for connecting with Spoonatular API
  */
-import {apiKey} from './apikey.js';
+// import {apiKey} from './apikey.js';
+const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c'; 
+import {storage} from "/components/UserLocalStorage.js"; 
+
 const tokenKey = '?apiKey=' + apiKey;
 
-const stepping_size = 20; // Stepping-size number of recipes to append to end after user scrolls to bottom
+const stepping_size = 2; // Stepping-size number of recipes to append to end after user scrolls to bottom
 const recipeData = {}; // Data in each stepping size?
 const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
+const userFavoriteSection = document.querySelector('.home-page-favorite-section'); 
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
@@ -37,6 +41,17 @@ async function init() {
 		}
 		showResults(recipeData);
 	});
+
+	// populating local storage 
+	// console.log(storage); 
+	// var try_delete; 
+	// for(let a in recipeData) {
+	// 	try_delete = a; 
+	// 	break; 
+	// }
+	// storage.removeRecipe(try_delete); 
+
+	showFavoriteSection(); 
 }
 
 async function fetch_random_recipes() {
@@ -58,6 +73,8 @@ async function fetch_random_recipes() {
 				// console.log(data.recipes[0].id);
 				for (let i = 0; i < parseInt(stepping_size); i++) {
 					recipeData[data.recipes[i].id] = data.recipes[i];
+					// testign 
+					storage.addRecipe(data.recipes[i]); 
 				}
 				resolve();
 			})
@@ -100,4 +117,12 @@ function clearResults() {
  */
 function clearObject() {
 	for (var member in recipeData) delete recipeData[member];
+}
+
+function showFavoriteSection(){
+	for (const recipeid in storage['favorite-master']) {
+		const recipeCard = document.createElement('recipe-card-component');
+		recipeCard.recipe = storage['favorite-master'][recipeid];
+		userFavoriteSection.appendChild(recipeCard);
+	}
 }

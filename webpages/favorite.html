@@ -10,7 +10,10 @@
 		<link rel="stylesheet" href="../styles/favorite.css" />
 		<script src="../components/navbar.js" type="module"></script>
 		<script src="../components/recipeCard.js" type="module"></script>
+		<script src="/components/UserList.js", type="module"></script>
 		<script src="../scripts/search.js" type="module"></script>
+		<script src="/components/UserLocalStorage.js" type="module"></script>
+		<script src="/scripts/favorites.js" type="module"></script>
 	</head>
 	<body>
 		<div class="box">
@@ -52,12 +55,7 @@
 						<recipe-card-component></recipe-card-component>
 					</div>
 				</div>
-				<div class="scroll">
-					<div class="list-name">
-						<h4>Favorite Post-gym Meals</h4>
-					</div>
-					<div class="recipe-section"></div>
-				</div>
+				<user-list></user-list>
 				<div class="new-scroll">
 					<!-- For new scroll component. Can be added in js file -->
 				</div>
