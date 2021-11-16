@@ -106,10 +106,10 @@ class ImageCard extends HTMLElement {
       showingAll = !showingAll;
     });
     leftArrow.addEventListener('click', () => {
-      this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
+      // this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
     });
     rightArrow.addEventListener('click', () => {
-      this.shadow.querySelector('.ingredients-list').scrollLeft += 300;
+      // this.shadow.querySelector('.ingredients-list').scrollLeft += 300;
     });
   }
 }
