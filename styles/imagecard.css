@@ -6,7 +6,7 @@
   flex-direction: row;
   height: 50px;
   justify-content: flex-start;
-  width: 250px; 
+  width: 250px;
 }
 
 .equipment-image {
@@ -17,7 +17,8 @@
   width: 50px;
 }
 
-.equipment-list, .ingredients-list {
+.equipment-list,
+.ingredients-list {
   display: grid;
   grid-auto-flow: column;
   grid-gap: 50px;
@@ -61,7 +62,8 @@
   width: 120px;
 }
 
-.ingredients-section, .equipment-section {
+.ingredients-section,
+.equipment-section {
   position: relative;
 }
 
@@ -76,7 +78,8 @@
   transition-duration: 0.4s;
 }
 
-.left-arrow:hover, .right-arrow:hover {
+.left-arrow:hover,
+.right-arrow:hover {
   background-color: #4d96ea;
   color: white;
 }
@@ -101,4 +104,3 @@
   border: 0;
   color: var(--color-neutrals-grey);
 }
-  

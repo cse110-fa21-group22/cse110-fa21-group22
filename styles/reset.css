@@ -13,11 +13,11 @@
  * make sure we're resetting all spacing elements.
  *
  */
- 
+
 html,
 body {
   border: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.5;
   margin: 0;
   padding: 0;
@@ -121,13 +121,12 @@ table {
 }
 
 caption,
-  th,
-  td {
-    text-align: left;
-    vertical-align: middle;
-  } */
-
-a img {
+th,
+td {
+  text-align: left;
+  vertical-align: middle;
+}
+*/ a img {
   border: 0;
 }
 

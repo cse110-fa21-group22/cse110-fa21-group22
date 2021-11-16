@@ -1,10 +1,15 @@
 # <team name> Group 22 Meeting Notes
+
 ## Meeting Type: Internal and Coding meeting
+
 ## Date: 11/12/21
+
 ## Location/Time of Meeting: Zoom, 1pm
 
-### Attendance 
+### Attendance
+
 Attending
+
 - Mitchell Herbert
 - Emily Ekaireb
 - Samantha Lin
@@ -17,7 +22,7 @@ Attending
 - Joey Dang
 
 ### Agenda
-  
+
 - Unresolved business
 
 - New Business
@@ -25,18 +30,17 @@ Attending
     - Split into groups of 3 to finish
 - Items on the agenda that are not discussed
 
-  
 ### Decisions Made and Their Reasoning
 
-
-
 ### Ideas for Further Investigation
+
 - storage?
   - cookies
   - json file
 
 ### To Do
-- Submit assignments 
+
+- Submit assignments
   - ADRs 11/14
   - Retrospective 11/15
   - CI/CD Pipeline 11/15
@@ -44,9 +48,11 @@ Attending
 - favorites list functionality - creating list, deleting list, adding to list
 - home page css
 - adding things to memory
-  
-### When the meeting finished 
+
+### When the meeting finished
+
 Meeting finished at 3:10pm
 
 ### Next meeting
-  3pm on Sunday 11/14/2021
+
+3pm on Sunday 11/14/2021

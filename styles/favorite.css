@@ -1,117 +1,115 @@
 @import 'reset.css';
 
-html, body {
-    font-family: Helvetica;
-    width: 100%;
-    margin: 0;
-    padding: 0;
+html,
+body {
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .box {
-    padding: 100px 0 0;
-    position: relative;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 100px 0 0;
+  position: relative;
 }
 
 .header {
-    position: fixed;
-    height: 60px;
-    width: 100%;
-    background-color:#4d96ea;
-    margin: -100px 0 0;
-    z-index: 9999;
+  background-color: #4d96ea;
+  height: 60px;
+  margin: -100px 0 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    margin-top: -40px;
-    padding: 0;
-    width: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: -40px;
+  padding: 0;
+  width: auto;
 }
 
 div.main h4 {
-    font-weight: bold;
-    margin: 0;
-    margin-left: 10px;
-    margin-top: 7px;
-    overflow-y: auto;
+  font-weight: bold;
+  margin: 7px 0 auto 0;
+  overflow-y: auto;
 }
 
 div.scroll {
-    height: 380px;
-    margin-bottom: 0px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  margin-bottom: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
-div.list-name{
-    position:absolute;
-    margin-top: 10px;
+div.list-name {
+  margin-top: 10px;
+  position: absolute;
 }
 
-div.recipe-section{
-    margin-top: 50px;
-    margin-bottom: 0px;
-    height: 200px;
-    display: flex;
-    gap: 0px;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+div.recipe-section {
+  display: flex;
+  gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom: 0;
 }
 
 #edit {
-    line-height: 12px;
-    height: 30px;
-    width: 80px;
-    font-size: 16px;
-    font-family: Helvetica;
-    margin-top: 80px;
-    margin-right: 10px;
-    position: absolute;
-    top:0;
-    right:0;
+  line-height: 12px;
+  height: 30px;
+  font-size: 16px;
+  font-family: Helvetica;
+  margin-top: 80px;
+  margin-right: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
 }
 
 #cancel {
-    line-height: 12px;
-    height: 30px;
-    width: 80px;
-    font-size: 16px;
-    font-family: Helvetica;
-    margin-top: 90px;
-    margin-right: 100px;
-    position: absolute;
-    top:0;
-    right:0;
-    display: none;
+  display: none;
+  font-size: 16px;
+  font-family: Helvetica;
+  height: 30px;
+  line-height: 12px;
+  margin-top: 90px;
+  margin-right: 100px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
 }
 
 #move {
-    line-height: 12px;
-    height: 30px;
-    width: 80px;
-    font-size: 16px;
-    font-family: Helvetica;
-    margin-top: 90px;
-    margin-right: 10px;
-    position: absolute;
-    top:0;
-    right:0;
-    display: none;
+  display: none;
+  font-size: 16px;
+  font-family: Helvetica;
+  height: 30px;
+  line-height: 12px;
+  margin: 90px 10px auto auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
 }
 
-.footer{
-    height: 20px;
-    background-color:#4d96ea;
+.footer {
+  background-color: #4d96ea;
+  height: 20px;
 }
 
 footer {
-    text-align: right;
-    font-size: 14px;
-    font-family: Helvetica;
-    font-weight: normal;
-    margin-right: 10px;
+  font-family: Helvetica;
+  font-weight: normal;
+  margin-right: 10px;
+  text-align: right;
+  font-size: 14px;
 }
