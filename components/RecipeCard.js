@@ -6,7 +6,23 @@ link.href = '../styles/recipeCard.css';
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
-    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+	<div class="dropdown">
+    	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+		<div class="dropdown-content">
+      <label class="container">My Favorites
+      <input type="checkbox">
+      <span class="checkmark"> </span>
+      </label>
+
+    <label class="entry">Create a new list: 
+      <input type="text">
+    </label>
+    
+    <button class="submit" >Submit </button>
+    
+  </div>
+
+	</div>
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
@@ -36,38 +52,64 @@ class RecipeCard extends HTMLElement {
 
 	connectedCallback() {
 		let isFavorite = false;
-
+		let dropdown = false;
 		// If the recipe card is clicked, move to the recipe page
 		this.addEventListener('click', () => {
-			window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
+			if (!dropdown)
+				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 		});
 
 		// If the favorite icon is clicked, favorite the item
 		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
-		favoriteIcon.addEventListener('click', (event) => {
+		let submitFavorites = this.shadow.querySelector('.submit');
+		/*favoriteIcon.addEventListener('click', (event) => {
 			// Stop propagation to the parent so you don't go to the recipe page
 			event.stopPropagation();
 			console.log('clicked favorite icon');
 			if (!isFavorite) {
 				isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
+
 				// add item to favorites list here
 			} else {
 				isFavorite = false;
 				favoriteIcon.src = '../assets/favorite.svg';
 				// remove item from favorites list here
+
 			}
-		});
+		});*/
 
 		// Mouse hover for favorites icon
 		favoriteIcon.addEventListener('mouseover', () => {
+			dropdown = true;
 			favoriteIcon.src = '../assets/favorite-selected.svg';
+
 		});
 
 		favoriteIcon.addEventListener('mouseout', () => {
 			if (!isFavorite) {
 				favoriteIcon.src = '../assets/favorite.svg';
 			}
+		});
+
+		//submit button for favorites dropdown
+		submitFavorites.addEventListener('click',(event) => {
+			dropdown = false;
+
+			//TODO: need to check the values that are clicked
+			if (!isFavorite) {
+				isFavorite = true;
+				favoriteIcon.src = '../assets/favorite-selected.svg';
+
+				// add item to favorites list here
+			} else {
+				isFavorite = false;
+				favoriteIcon.src = '../assets/favorite.svg';
+				// remove item from favorites list here
+
+			}
+
+			event.stopPropagation();
 		});
 	}
 }
