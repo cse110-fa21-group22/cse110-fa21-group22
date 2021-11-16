@@ -40,7 +40,7 @@ class ImageCard extends HTMLElement {
 
     // Set title to 'Ingredients'
     const title = this.shadow.querySelector('.title');
-    title.innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>';
+    title.innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>'; 
 
     // Create an ingredient entry for each element of ingredientsArr
     for (let i = 0; i < ingredientArr.length; i++) { 
@@ -55,6 +55,7 @@ class ImageCard extends HTMLElement {
 
       this.shadow.querySelector('.ingredients-list').appendChild(entry);
     }
+
   }
 
   set equipment(equipmentArr) {
@@ -68,7 +69,7 @@ class ImageCard extends HTMLElement {
     title.innerHTML = 'Equipment ';
 
     // Create an equipment entry for each element of equipmentArr
-    for (let i = 0; i < equipmentArr.length; i++) {
+    for (let i = 0; i < equipmentArr.length; i++) { 
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
       if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
@@ -91,7 +92,7 @@ class ImageCard extends HTMLElement {
     const showAllButton = this.shadow.querySelector('.show-all');
     const leftArrow = this.shadow.querySelector('.left-arrow');
     const rightArrow = this.shadow.querySelector('.right-arrow');
-
+    
     // Show all button functionality (Has to be performed in connectedCallback so that 'this' contains correct value)
     showAllButton.addEventListener('click', () => {
       const ingredientsList = this.shadow.querySelector('.ingredients-list');
@@ -100,16 +101,14 @@ class ImageCard extends HTMLElement {
           if (entry.id >= 4) entry.classList.add('hidden');
         } else {
           entry.classList.remove('hidden');
-        }
+        }  
       }
       showingAll = !showingAll;
     });
     leftArrow.addEventListener('click', () => {
-      // TODO Rotate to the left
       this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
     });
     rightArrow.addEventListener('click', () => {
-      // TODO Rotate to the right
       this.shadow.querySelector('.ingredients-list').scrollLeft += 300;
     });
   }
