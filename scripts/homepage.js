@@ -1,7 +1,7 @@
 /**
  * API key for connecting with Spoonatular API
  */
-const apiKey = 'aca18e34058e40fab4535153c6241f7f';
+import {apiKey} from './apikey.js';
 const tokenKey = '?apiKey=' + apiKey;
 
 const stepping_size = 20; // Stepping-size number of recipes to append to end after user scrolls to bottom

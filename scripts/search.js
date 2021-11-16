@@ -1,4 +1,4 @@
-const apiKey = 'bcccf988c95c45ef9b53310545b3989a';
+import {apiKey} from './apikey.js';
 const tokenKey = '?apiKey=' + apiKey;
 
 // This is just for testing

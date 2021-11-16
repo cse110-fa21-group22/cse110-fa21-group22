@@ -2,9 +2,8 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-
-const apiKey = 'bcccf988c95c45ef9b53310545b3989a';
-const tokenKey = '?apiKey=' + apiKey;
+ import {apiKey} from './apikey.js';
+ const tokenKey = '?apiKey=' + apiKey;
 
 window.addEventListener('DOMContentLoaded', init);
 
