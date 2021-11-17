@@ -7,6 +7,8 @@ const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
     <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+	<img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
+	<img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
