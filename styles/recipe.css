@@ -1,36 +1,7 @@
 @import 'reset.css';
 
-.equipment-card {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 50px;
-  justify-content: space-between;
-  width: 250px; 
-  /* adjust width, height later */
-}
-
-.equipment-image {
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  width: auto;
-}
-
-.equipment-list, .ingredients-list {
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: 50px;
-  grid-template-rows: auto auto;
-  justify-content: flex-start;
-  overflow-x: scroll;
-  padding: 20px 50px 30px;
-  width: calc(100% - 100px);
-}
-
-.ingredients-image{
-  height: 100%;
-  width: auto;
+h3{
+  padding-top: 25px;
 }
 
 .favorite-heart {
@@ -89,7 +60,7 @@
 }
 
 .recipe-page-description {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
