@@ -1,3 +1,3 @@
 /**
- * Handles all queries related to spoonacular api. 
+ * Handles all queries related to spoonacular api.
  */

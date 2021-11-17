@@ -21,7 +21,8 @@ h3{
   width: auto;
 }
 
-.equipment-list, .ingredients-list {
+.equipment-list,
+.ingredients-list {
   display: grid;
   grid-auto-flow: column;
   grid-gap: 50px;
@@ -71,7 +72,8 @@ h3{
   width: 120px;
 }
 
-.ingredients-section, .equipment-section {
+.ingredients-section,
+.equipment-section {
   position: relative;
 }
 
@@ -86,7 +88,8 @@ h3{
   transition-duration: 0.4s;
 }
 
-.left-arrow:hover, .right-arrow:hover {
+.left-arrow:hover,
+.right-arrow:hover {
   background-color: #4d96ea;
   color: white;
 }
@@ -111,4 +114,3 @@ h3{
   border: 0;
   color: var(--color-neutrals-grey);
 }
-  

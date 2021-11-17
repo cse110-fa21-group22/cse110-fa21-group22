@@ -3,10 +3,9 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/imagecard.css';
 
-
 /**
  * TODO (Not a priority) The class names for each template still refer to every entry as 'ingredient'
- * Currently works as is and reworking this will not change any functionality. It would only be for code readability. 
+ * Currently works as is and reworking this will not change any functionality. It would only be for code readability.
  */
 const imageCardTemplate = document.createElement('template');
 imageCardTemplate.innerHTML = `
@@ -18,7 +17,7 @@ imageCardTemplate.innerHTML = `
     </section>
     <button class="show-all"><img src="../assets/downArrow.svg"/>Show All</button>
   </section>
-`
+`;
 
 const entryElementTemplate = document.createElement('template');
 entryElementTemplate.innerHTML = `
@@ -114,18 +113,18 @@ class ImageCard extends HTMLElement {
   }
 }
 
-// TODO This function should take in a value and return it in fraction form and as a string 
-function toFraction(value) {
-  return value.toString();
-}
+// TODO This function should take in a value and return it in fraction form and as a string
+// function toFraction(value) {
+// 	return value.toString();
+// }
 
-/** 
+/**
  * TODO This function should standardize measurements to a single way of being displayed
- * Example: If the input is 'Tablespoon' or 'Tbsp' or 'tablespoon' this function should 
+ * Example: If the input is 'Tablespoon' or 'Tbsp' or 'tablespoon' this function should
  * consistently return a value of 'Tbsp'
  */
-function standardizeMeasurement(str) {
-  return str;
-}
+// function standardizeMeasurement(str) {
+// 	return str;
+// }
 
 customElements.define('image-card-component', ImageCard);
