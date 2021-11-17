@@ -52,6 +52,7 @@ async function init() {
 	// let a = storage.getItem("dsf");
 	// console.log(a);
 
+	
 	showFavoriteSection(); 
 }
 
