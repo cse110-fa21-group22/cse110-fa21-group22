@@ -1,15 +1,24 @@
 /**
  * API key for connecting with Spoonatular API
  */
-import {apiKey} from './apikey.js';
-const tokenKey = '?apiKey=' + apiKey;
+// import {apiKey} from './apikey.js';
+const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
+import { addRecipe, initLocalStorage } from "../components/UserLocalStorage.js";
 
-const stepping_size = 20; // Stepping-size number of recipes to append to end after user scrolls to bottom
+const tokenKey = '?apiKey=' + apiKey;
+const storage = window.localStorage; 
+
+
+const stepping_size = 2; // Stepping-size number of recipes to append to end after user scrolls to bottom
 const recipeData = {}; // Data in each stepping size?
 const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
+const userFavoriteSection = document.querySelector('.home-page-favorite-section');
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
+
+	initLocalStorage();
+
 	//console.log('Init.. ');
 	//console.log('Fetching recipes...');
 	try {
@@ -37,6 +46,17 @@ async function init() {
 		}
 		showResults(recipeData);
 	});
+
+	// populating local storage 
+	var list = storage.getItem('favorites-master');
+	console.log(list);
+
+	// return null if not found 
+	// let a = storage.getItem("dsf");
+	// console.log(a);
+
+	
+	showFavoriteSection(); 
 }
 
 async function fetch_random_recipes() {
@@ -58,11 +78,14 @@ async function fetch_random_recipes() {
 				// console.log(data.recipes[0].id);
 				for (let i = 0; i < parseInt(stepping_size); i++) {
 					recipeData[data.recipes[i].id] = data.recipes[i];
+					// testing
+					addRecipe(data.recipes[i].id);
 				}
 				resolve();
 			})
 			.catch((err) => {
 				console.log('Error loading the recipe');
+				console.log(err);
 				reject(err);
 			});
 	});
@@ -100,4 +123,37 @@ function clearResults() {
  */
 function clearObject() {
 	for (var member in recipeData) delete recipeData[member];
+}
+
+async function showFavoriteSection() {
+    var list = storage.getItem('favorites-master'); 
+    var array = JSON.parse(list);
+	console.log(array); 
+
+	for (let i = 0; i < array.length; i ++) {
+		const recipeCard = document.createElement('recipe-card-component');
+		recipeCard.recipe = await getRecipebyID(array[i]); 
+
+		userFavoriteSection.appendChild(recipeCard);
+	}
+}
+
+async function getRecipebyID(id) {
+	const fetchEndPoint =
+		'https://api.spoonacular.com/recipes/' +
+		id + '/' + "information" + tokenKey + 
+		"&includeNutrition=false"; 
+		 
+
+	console.log("fetch_endpoint", fetchEndPoint); 
+
+	const fetchResults = await fetch(fetchEndPoint)
+		.then((response) => response.json())
+		.catch((error) => {
+			console.error('Fetch in homepage failed');
+			console.error(error);
+		});
+
+	console.log("result is: ", fetchResults);
+	return fetchResults;
 }
