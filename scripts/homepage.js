@@ -3,7 +3,7 @@
  */
 // import {apiKey} from './apikey.js';
 const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
-import { addRecipe } from "../components/UserLocalStorage.js";
+import { addRecipe, initLocalStorage } from "../components/UserLocalStorage.js";
 
 const tokenKey = '?apiKey=' + apiKey;
 const storage = window.localStorage; 
@@ -16,6 +16,9 @@ const userFavoriteSection = document.querySelector('.home-page-favorite-section'
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
+
+	initLocalStorage();
+
 	//console.log('Init.. ');
 	//console.log('Fetching recipes...');
 	try {

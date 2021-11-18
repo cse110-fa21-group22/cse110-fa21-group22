@@ -1,9 +1,11 @@
 
 // must have 'favorites-master'
 const store = window.localStorage;
-var arr_temp = [];
-store.setItem('favorites-master', JSON.stringify(arr_temp));
 
+export function initLocalStorage() {
+    var arr_temp = [];
+    store.setItem('favorites-master', JSON.stringify(arr_temp));
+}
 
 export function addRecipe(recipeID) {
     const storage = window.localStorage;
