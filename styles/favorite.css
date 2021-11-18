@@ -61,24 +61,6 @@ div.recipe-section {
   margin-bottom: 0;
 }
 
-#edit {
-  border-radius: 20px;
-  line-height: 12px;
-  height: 30px;
-  font-size: 16px;
-  font-family: Helvetica;
-  margin-top: 80px;
-  margin-right: 10px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 80px;
-}
-
-#edit:hover {
-  background-color: #4d96ea;
-}
-
 #cancel {
   border-radius: 20px;
   display: none;
@@ -96,6 +78,26 @@ div.recipe-section {
 
 #cancel:hover {
   background-color: #4d96ea;
+  color: white;
+}
+
+#edit {
+  border-radius: 20px;
+  line-height: 12px;
+  height: 30px;
+  font-size: 16px;
+  font-family: Helvetica;
+  margin-top: 80px;
+  margin-right: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
+}
+
+#edit:hover {
+  background-color: #4d96ea;
+  color: white;
 }
 
 #move {
@@ -114,6 +116,7 @@ div.recipe-section {
 
 #move:hover {
   background-color: #4d96ea;
+  color: white;
 }
 
 .footer {

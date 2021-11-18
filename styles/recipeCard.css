@@ -9,9 +9,6 @@
   position: relative;
   transition: all 0.2s ease;
   width: 300px;
-  /* Should dim when clicked and in edit mode
-  filter: brightness(50%);
-  */
 }
 
 .recipe-card:hover {
