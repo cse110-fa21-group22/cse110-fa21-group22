@@ -5,18 +5,23 @@
  import { } from "../components/UserLocalStorage.js";
  window.addEventListener('DOMContentLoaded', init);
 
-
-function init() {
-    console.log("init function"); 
-
-    const mainSection = document.querySelector(".main"); 
-    const userList = document.createElement('user-list'); 
-    
-    userList.list = storage['favorite-master']; 
-    userList.listName = 'favorite-master'; 
-    mainSection.appendChild(userList); 
-
-    
+/**
+ * A TEST FUNCTION FOR POPULATING RECIPES ON FAVORITES PAGE
+ * @return {array} of the recipe cards
+ */
+function populateRecipeSection() {
+	// Add the recipes to the page
+    let result = [];
+    // old version html use .recipe-section
+    // let recipeSection = document.querySelector('.recipe-section');
+    let recipeSection = document.querySelector('.recipe-list');
+    for (let i = 0; i < 10; i++) {
+        const recipeCard = document.createElement('recipe-card-component');
+        recipeSection.appendChild(recipeCard);
+        result.push(recipeCard);
+        recipeCard.recipeCardSelect = false;
+    }
+    return result;
 }
 
 async function getRecipebyID(id) {
@@ -54,6 +59,11 @@ editButton.addEventListener('click', function() {
         editButton.style.display = 'none';
         cancelButton.style.display = 'inline-block';
         moveButton.style.display = 'inline-block';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', true);
+        }
         for (let i = 0; i < recipeCards.length; i++) {
             recipeCards[i].enterSelectMode();
         }
@@ -69,6 +79,11 @@ cancelButton.addEventListener('click', function() {
         editButton.style.display = 'inline-block';
         cancelButton.style.display = 'none';
         moveButton.style.display = 'none';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', false);
+        }
         for (let i = 0; i < recipeCards.length; i++) {
             recipeCards[i].exitSelectMode();
         }
