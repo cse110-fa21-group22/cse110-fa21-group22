@@ -10,7 +10,9 @@
 function populateRecipeSection() {
 	// Add the recipes to the page
     let result = [];
-    let recipeSection = document.querySelector('.recipe-section');
+    // old version html use .recipe-section
+    // let recipeSection = document.querySelector('.recipe-section');
+    let recipeSection = document.querySelector('.recipe-list');
     for (let i = 0; i < 10; i++) {
         const recipeCard = document.createElement('recipe-card-component');
         recipeSection.appendChild(recipeCard);
@@ -35,6 +37,11 @@ editButton.addEventListener('click', function() {
         editButton.style.display = 'none';
         cancelButton.style.display = 'inline-block';
         moveButton.style.display = 'inline-block';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', true);
+        }
         for (let i = 0; i < recipeCards.length; i++) {
             recipeCards[i].enterSelectMode();
         }
@@ -50,6 +57,11 @@ cancelButton.addEventListener('click', function() {
         editButton.style.display = 'inline-block';
         cancelButton.style.display = 'none';
         moveButton.style.display = 'none';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', false);
+        }
         for (let i = 0; i < recipeCards.length; i++) {
             recipeCards[i].exitSelectMode();
         }
