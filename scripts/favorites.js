@@ -2,6 +2,8 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
 
+ import { } from "../components/UserLocalStorage.js";
+ window.addEventListener('DOMContentLoaded', init);
 
 /**
  * A TEST FUNCTION FOR POPULATING RECIPES ON FAVORITES PAGE
@@ -21,7 +23,27 @@ function populateRecipeSection() {
     }
     return result;
 }
-let recipeCards = populateRecipeSection();
+
+async function getRecipebyID(id) {
+	const fetchEndPoint =
+		'https://api.spoonacular.com/recipes/' +
+		id + '/' + "information" + tokenKey + 
+		"&includeNutrition=false"; 
+		 
+
+	console.log("fetch_endpoint", fetchEndPoint); 
+
+	const fetchResults = await fetch(fetchEndPoint)
+		.then((response) => response.json())
+		.catch((error) => {
+			console.error('Fetch in homepage failed');
+			console.error(error);
+		});
+
+	console.log("result is: ", fetchResults);
+	return fetchResults;
+}
+
 
 
 let editMode = false;
@@ -68,3 +90,4 @@ cancelButton.addEventListener('click', function() {
         recipeCardSelect = false;
     }
 });
+
