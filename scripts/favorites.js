@@ -38,3 +38,41 @@ async function getRecipebyID(id) {
 	console.log("result is: ", fetchResults);
 	return fetchResults;
 }
+
+
+
+let editMode = false;
+let recipeCardSelect = false;
+let editButton = document.getElementById('edit');
+let cancelButton = document.getElementById('cancel');
+let moveButton = document.getElementById('move');
+
+editButton.addEventListener('click', function() {
+    if (!editMode) {
+        editMode = true;
+        document.body.style.backgroundColor = '#EEEEEE';
+        editButton.style.display = 'none';
+        cancelButton.style.display = 'inline-block';
+        moveButton.style.display = 'inline-block';
+        for (let i = 0; i < recipeCards.length; i++) {
+            recipeCards[i].enterSelectMode();
+        }
+        recipeCardSelect = true;
+    }
+});
+
+cancelButton.addEventListener('click', function() {
+    if (editMode) {
+        // cancel the edit mode
+        editMode = false;
+        document.body.style.backgroundColor = '#FFFFFF';
+        editButton.style.display = 'inline-block';
+        cancelButton.style.display = 'none';
+        moveButton.style.display = 'none';
+        for (let i = 0; i < recipeCards.length; i++) {
+            recipeCards[i].exitSelectMode();
+        }
+        recipeCardSelect = false;
+    }
+});
+

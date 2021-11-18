@@ -15,6 +15,16 @@
   transform: scale(1.01);
 }
 
+.recipe-checkmark {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 25%;
+  top: 20%;
+}
+
 .recipe-favorite {
   cursor: pointer;
   padding: 10px;
@@ -40,6 +50,15 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+}
+
+.recipe-remove {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .recipe-subdescription {
