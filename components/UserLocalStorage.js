@@ -33,7 +33,7 @@ export function removeRecipe(recipeID) {
 export function createList(listName) {
     const storage = window.localStorage;
     // making sure that local storage does not alraedy have it 
-    if (storage.getItem(ListName) == null) {
+    if (storage.getItem(listName) == null) {
         let temp_arr = [];
         storage.setItem(listName, JSON.stringify(temp_arr));
     }
@@ -42,14 +42,14 @@ export function createList(listName) {
 export function removeList(listName){
     const storage = window.localStorage;
     // making sure that local storage does not alraedy have it 
-    if (storage.getItem(ListName) != null) {
+    if (storage.getItem(listName) != null) {
         storage.removeItem(listName); 
     }
 }
 
 export function addRecipebyList(listName, recipeID) {
     const storage = window.localStorage;
-    if (storage.getItem(ListName) != null) {
+    if (storage.getItem(listName) != null) {
         var list = storage.getItem(listName);
         var array = JSON.parse(list);
         array.push(recipeID);
@@ -59,7 +59,7 @@ export function addRecipebyList(listName, recipeID) {
 
 export function removeRecipebyList(listName, recipeID) {
     const storage = window.localStorage;
-    if (storage.getItem(ListName) != null) {
+    if (storage.getItem(listName) != null) {
         var list = storage.getItem(listName);
         var array = JSON.parse(list);
         const index = array.indexOf(recipeID);

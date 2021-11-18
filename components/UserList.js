@@ -19,17 +19,34 @@ class UserList extends HTMLElement {
     set list(listObj) {
 
         const populateRrecipe = this.shadow.querySelector('.recipe-section');
-        console.log("UserList component, ", listObj); 
+        console.log("UserList component, ", listObj);
 
-        for (recipeid in listObj) {
+        for (let recipeid in listObj) {
             const recipeCard = document.createElement('recipe-card-component');
             recipeCard.recipe = listObj[recipeid];
+
+            let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
+            console.log("userList.js, favorite icon = ", favoriteIcon);
+            if (favoriteIcon.src = '../assets/favorite.svg') {
+                console.log("userList.js, change icon for loop");
+                // favoriteIcon.click(); 
+                favoriteIcon.src = '../assets/favorite-selected.svg';
+            }
+
             populateRrecipe.appendChild(recipeCard);
         }
 
+
+        // let RecipeCard = this.shadow.querySelectorAll('recipe-card-component'); 
+        // RecipeCard.forEach(function(card) {
+        //     console.log("inside the for loop"); 
+        //     let favoriteIcon = card.shadowRoot.querySelector('.recipe-favorite');
+        //     favoriteIcon.click(); 
+        // }); 
+
         // testing
-        const recipeCard = document.createElement('recipe-card-component');
-        populateRrecipe.appendChild(recipeCard);
+        // const recipeCard = document.createElement('recipe-card-component');
+        // populateRrecipe.appendChild(recipeCard);
     }
 
     set listName(name) {
