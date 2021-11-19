@@ -15,7 +15,6 @@ imageCardTemplate.innerHTML = `
     <button class="right-arrow"><img src="../assets/rightArrow.svg"/></button>
     <section class="ingredients-list">
     </section>
-    <button class="show-all"><img src="../assets/downArrow.svg"/>Show All</button>
   </section>
 `;
 
@@ -27,8 +26,6 @@ entryElementTemplate.innerHTML = `
     <p class="ingredient-measurements"></p>
   </article>
 `;
-
-let showingAll = false;
 
 class ImageCard extends HTMLElement {
   set ingredients(ingredientArr) {
@@ -45,7 +42,6 @@ class ImageCard extends HTMLElement {
     for (let i = 0; i < ingredientArr.length; i++) {
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
-      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
       entry.querySelector('.ingredient-image').src = 'https://spoonacular.com/cdn/ingredients_100x100/' + ingredientArr[i].image;
       entry.querySelector('.ingredient-name').innerHTML = ingredientArr[i].name;
       entry.querySelector('.ingredient-measurements').innerHTML = ingredientArr[i].amount + ' <span></span>';
@@ -71,7 +67,6 @@ class ImageCard extends HTMLElement {
     for (let i = 0; i < equipmentArr.length; i++) {
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
-      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
       entry.querySelector('.ingredient-image').src = "https://spoonacular.com/cdn/equipment_100x100/" + equipmentArr[i].image;
       entry.querySelector('.ingredient-name').innerHTML = equipmentArr[i].name;
 
@@ -93,17 +88,6 @@ class ImageCard extends HTMLElement {
     const rightArrow = this.shadow.querySelector('.right-arrow');
 
     // Show all button functionality (Has to be performed in connectedCallback so that 'this' contains correct value)
-    showAllButton.addEventListener('click', () => {
-      const ingredientsList = this.shadow.querySelector('.ingredients-list');
-      for (const entry of ingredientsList.children) {
-        if (showingAll) {
-          if (entry.id >= 4) entry.classList.add('hidden');
-        } else {
-          entry.classList.remove('hidden');
-        }
-      }
-      showingAll = !showingAll;
-    });
     leftArrow.addEventListener('click', () => {
       this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
     });

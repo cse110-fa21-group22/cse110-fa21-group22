@@ -97,7 +97,7 @@ class RecipeCard extends HTMLElement {
 				}
 			} else {
 				console.log('transferring page');
-				//window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
+				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 			}
 		});
 
