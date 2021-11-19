@@ -8,14 +8,8 @@ body {
   width: 100%;
 }
 
-.box {
-  box-sizing: border-box;
-  padding: 100px 0 0;
-  position: relative;
-}
-
 .header {
-  background-color: #4d96ea;
+  background-color: var(--color-primary-blue);
   height: 60px;
   margin: -100px 0 0;
   position: fixed;
@@ -31,13 +25,7 @@ body {
   width: auto;
 }
 
-div.main h4 {
-  font-weight: bold;
-  margin: 7px 0 auto 0;
-  overflow-y: auto;
-}
-
-div.scroll {
+.favorites-list {
   display: flex;
   flex-direction: column;
   height: 380px;
@@ -47,12 +35,12 @@ div.scroll {
   white-space: nowrap;
 }
 
-div.list-name {
+.list-name {
   margin-top: 10px;
   position: absolute;
 }
 
-div.recipe-section {
+.recipe-list {
   display: flex;
   gap: 0;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -62,7 +50,10 @@ div.recipe-section {
 }
 
 #cancel {
+  background-color: transparent;
+  border: 1px solid;
   border-radius: 20px;
+  box-shadow: none;
   display: none;
   font-size: 16px;
   font-family: Helvetica;
@@ -77,12 +68,15 @@ div.recipe-section {
 }
 
 #cancel:hover {
-  background-color: #4d96ea;
-  color: white;
+  background-color: var(--color-primary-blue);
+  color: var(--color-neutrals-white);
 }
 
 #edit {
+  background-color: transparent;
+  border: 1px solid;
   border-radius: 20px;
+  box-shadow: none;
   line-height: 12px;
   height: 30px;
   font-size: 16px;
@@ -96,12 +90,15 @@ div.recipe-section {
 }
 
 #edit:hover {
-  background-color: #4d96ea;
-  color: white;
+  background-color: var(--color-primary-blue);
+  color: var(--color-neutrals-white);
 }
 
 #move {
+  background-color: transparent;
+  border: 1px solid;
   border-radius: 20px;
+  box-shadow: none;
   display: none;
   font-size: 16px;
   font-family: Helvetica;
@@ -115,19 +112,6 @@ div.recipe-section {
 }
 
 #move:hover {
-  background-color: #4d96ea;
-  color: white;
-}
-
-.footer {
-  background-color: #4d96ea;
-  height: 20px;
-}
-
-footer {
-  font-family: Helvetica;
-  font-weight: normal;
-  margin-right: 10px;
-  text-align: right;
-  font-size: 14px;
+  background-color: var(--color-primary-blue);
+  color: var(--color-neutrals-white);
 }

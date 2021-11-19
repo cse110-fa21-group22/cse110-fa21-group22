@@ -54,6 +54,11 @@ editButton.addEventListener('click', function() {
         editButton.style.display = 'none';
         cancelButton.style.display = 'inline-block';
         moveButton.style.display = 'inline-block';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', true);
+        }
         for (let i = 0; i < recipeCards.length; i++) {
             recipeCards[i].enterSelectMode();
         }
@@ -69,6 +74,11 @@ cancelButton.addEventListener('click', function() {
         editButton.style.display = 'inline-block';
         cancelButton.style.display = 'none';
         moveButton.style.display = 'none';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', false);
+        }
         for (let i = 0; i < recipeCards.length; i++) {
             recipeCards[i].exitSelectMode();
         }
