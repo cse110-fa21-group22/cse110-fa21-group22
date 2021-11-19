@@ -43,8 +43,8 @@ class ImageCard extends HTMLElement {
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
       entry.querySelector('.ingredient-image').src = 'https://spoonacular.com/cdn/ingredients_100x100/' + ingredientArr[i].image;
-      entry.querySelector('.ingredient-name').innerHTML = ingredientArr[i].name;
-      entry.querySelector('.ingredient-measurements').innerHTML = ingredientArr[i].amount + ' <span></span>';
+      entry.querySelector('.ingredient-name').innerHTML = capitalize(ingredientArr[i].name);
+      entry.querySelector('.ingredient-measurements').innerHTML = toFraction(ingredientArr[i].amount) + ' <span></span>';
       entry.querySelector('span').innerHTML = ingredientArr[i].unit;
 
 
@@ -68,7 +68,7 @@ class ImageCard extends HTMLElement {
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
       entry.querySelector('.ingredient-image').src = "https://spoonacular.com/cdn/equipment_100x100/" + equipmentArr[i].image;
-      entry.querySelector('.ingredient-name').innerHTML = equipmentArr[i].name;
+      entry.querySelector('.ingredient-name').innerHTML = capitalize(equipmentArr[i].name);
 
       this.shadow.querySelector('.ingredients-list').appendChild(entry);
     }
@@ -97,18 +97,48 @@ class ImageCard extends HTMLElement {
   }
 }
 
-// TODO This function should take in a value and return it in fraction form and as a string
-// function toFraction(value) {
-// 	return value.toString();
-// }
+// This function takes in a number and return it in fraction form and as a string
+// If it can't do this, the value is returned as a string rounded to 2 decimal places
+function toFraction(value) {
+	if ( value % 1 == 0 ) {
+		return value.toString();
+	}
+	
+  let denominators = [2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 32, 64];
+  for (const denominator of denominators) {
+    let str = '';
+    if (Math.floor(value)) str += Math.floor(value);
+    if ( value * denominator % 1 < 0.0001) {
+      let numerator = (value % 1) * denominator;
+      return `${str} ${numerator}/${denominator}`;
+    }
 
-/**
- * TODO This function should standardize measurements to a single way of being displayed
- * Example: If the input is 'Tablespoon' or 'Tbsp' or 'tablespoon' this function should
- * consistently return a value of 'Tbsp'
- */
-// function standardizeMeasurement(str) {
-// 	return str;
-// }
+    if (value * denominator % 1 > 0.9999) {
+      let numerator = ((value % 1) + 1) * denominator;
+      return `${str} ${numerator}/${denominator}`;
+    }
+  }
+  return value.toFixed(2);
+}
+
+// Taken from https://flexiple.com/javascript-capitalize-first-letter/
+function capitalize(str) {
+  //split the above string into an array of strings 
+  //whenever a blank space is encountered
+  const arr = str.split(" ");
+
+  //loop through each element of the array and capitalize the first letter.
+
+
+  for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+
+  }
+
+  //Join all the elements of the array back into a string 
+  //using a blankspace as a separator 
+  const str2 = arr.join(" ");
+  return str2; 
+}
 
 customElements.define('image-card-component', ImageCard);
