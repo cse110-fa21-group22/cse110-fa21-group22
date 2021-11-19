@@ -1,8 +1,8 @@
 /**
  * API key for connecting with Spoonatular API
  */
-// import {apiKey} from './apikey.js';
-const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
+import {apiKey} from './apikey.js';
+// const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
 import { addRecipe, initLocalStorage } from '../components/UserLocalStorage.js';
 
 const tokenKey = '?apiKey=' + apiKey;
