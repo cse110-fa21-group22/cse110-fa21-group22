@@ -1,62 +1,88 @@
 /**
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
-import {apiKey} from './apikey.js';
-const tokenKey = '?apiKey=' + apiKey;
 
-const favorites_list_id = [631823, 637876];
-
-window.addEventListener('DOMContentLoaded', init);
+ import { } from "../components/UserLocalStorage.js";
+ window.addEventListener('DOMContentLoaded', init);
 
 
-/**
- * This will work with one recipe. Needs eventually work for multiple favorite recipes.
- * This duplicates the same recipe.
- */
 function init() {
-    async function searchFavorites(favorites_list_id) {
-        //const results = [];
+    console.log("init function"); 
 
-        
-        // Create the fetch url
-        // this is hard coded and needs to be changed
-        const searchUrl = 'https://api.spoonacular.com/recipes/631823/information';
-        
-        const fetchEndpoint =
-            searchUrl + tokenKey; 
+    const mainSection = document.querySelector(".main"); 
+    const userList = document.createElement('user-list'); 
     
-        //console.log(fetchEndpoint);
+    userList.list = storage['favorite-master']; 
+    userList.listName = 'favorite-master'; 
+    mainSection.appendChild(userList); 
+
     
-        // fetch the data
-    
-        const fetchResults = await fetch(fetchEndpoint)
-            .then((response) => response.json())
-            .catch((error) => {
-                console.error('Fetch in search function failed');
-                console.error(error);
-            });
-    
-        const results = fetchResults;
-        console.log(results);
-        return results;
-    }
-    
-    function showFavorites(favorites_results) {
-        console.log(favorites_results);
-        const recipeSection = document.querySelector('.recipe-section');
-        // Clear the results before searching
-        //clearResults();
-    
-        // Add the recipes to the page
-        
-        for (const recipe in favorites_results) {
-            const recipeCard = document.createElement('recipe-card-component');
-            recipeCard.recipe = favorites_results;
-            recipeSection.appendChild(recipeCard);
-        }
-    }
-    searchFavorites(favorites_list_id).then(showFavorites);
+}
+
+async function getRecipebyID(id) {
+	const fetchEndPoint =
+		'https://api.spoonacular.com/recipes/' +
+		id + '/' + "information" + tokenKey + 
+		"&includeNutrition=false"; 
+		 
+
+	console.log("fetch_endpoint", fetchEndPoint); 
+
+	const fetchResults = await fetch(fetchEndPoint)
+		.then((response) => response.json())
+		.catch((error) => {
+			console.error('Fetch in homepage failed');
+			console.error(error);
+		});
+
+	console.log("result is: ", fetchResults);
+	return fetchResults;
 }
 
 
+
+let editMode = false;
+let recipeCardSelect = false;
+let editButton = document.getElementById('edit');
+let cancelButton = document.getElementById('cancel');
+let moveButton = document.getElementById('move');
+
+editButton.addEventListener('click', function() {
+    if (!editMode) {
+        editMode = true;
+        document.body.style.backgroundColor = '#EEEEEE';
+        editButton.style.display = 'none';
+        cancelButton.style.display = 'inline-block';
+        moveButton.style.display = 'inline-block';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', true);
+        }
+        for (let i = 0; i < recipeCards.length; i++) {
+            recipeCards[i].enterSelectMode();
+        }
+        recipeCardSelect = true;
+    }
+});
+
+cancelButton.addEventListener('click', function() {
+    if (editMode) {
+        // cancel the edit mode
+        editMode = false;
+        document.body.style.backgroundColor = '#FFFFFF';
+        editButton.style.display = 'inline-block';
+        cancelButton.style.display = 'none';
+        moveButton.style.display = 'none';
+        //edit favorites list titles
+        let listTitles = document.querySelectorAll('h4');
+        for (let t = 0; t < listTitles.length; t++) {
+            listTitles[t].setAttribute('contenteditable', false);
+        }
+        for (let i = 0; i < recipeCards.length; i++) {
+            recipeCards[i].exitSelectMode();
+        }
+        recipeCardSelect = false;
+    }
+});
 
