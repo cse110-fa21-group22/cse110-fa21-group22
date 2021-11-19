@@ -14,6 +14,11 @@ recipeCardTemplate.innerHTML = `
       		<span class="checkmark"> </span>
       		</label>
 
+			  <label class="container">My Favorite Cookies
+      		<input type="checkbox">
+      		<span class="checkmark"> </span>
+      		</label>
+
     	<label class="entry">Create a new list: 
       		<input type="text">
     	</label>
@@ -83,7 +88,7 @@ class RecipeCard extends HTMLElement {
 		let dropdown = false;
 		this.addEventListener('click', () => {
 			// Check to see if selecting is allowable (only in edit/move mode)
-			if (!dropdown && this.selectMode) {
+			if (this.selectMode) {
 				// handle toggling state for the checkmark/selected property
 				let checkmark = this.shadow.querySelector('.recipe-checkmark');
 				if (this.isSelected) {
@@ -95,7 +100,7 @@ class RecipeCard extends HTMLElement {
 					checkmark.style.display = 'block';
 					this.style.filter = 'brightness(90%)';
 				}
-			} else {
+			} else if (!dropdown) {
 				console.log('transferring page');
 				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 			}
