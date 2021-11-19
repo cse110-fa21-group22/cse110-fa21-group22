@@ -1,80 +1,77 @@
-
 // must have 'favorites-master'
 const store = window.localStorage;
 
 export function initLocalStorage() {
-    var arr_temp = [];
-    store.setItem('favorites-master', JSON.stringify(arr_temp));
+	var arr_temp = [];
+	store.setItem('favorites-master', JSON.stringify(arr_temp));
 }
 
 export function addRecipe(recipeID) {
-    const storage = window.localStorage;
-    var list = storage.getItem('favorites-master');
+	const storage = window.localStorage;
+	var list = storage.getItem('favorites-master');
 
-    var array = JSON.parse(list);
-    array.push(recipeID);
+	var array = JSON.parse(list);
+	array.push(recipeID);
 
-    storage.setItem('favorites-master', JSON.stringify(array));
+	storage.setItem('favorites-master', JSON.stringify(array));
 }
 
 export function removeRecipe(recipeID) {
-    const storage = window.localStorage;
-    var list = storage.getItem('favorites-master');
+	const storage = window.localStorage;
+	var list = storage.getItem('favorites-master');
 
-    var array = JSON.parse(list);
-    const index = array.indexOf(recipeID);
-    if (index > -1) {
-        array.splice(index, 1);
-    }
+	var array = JSON.parse(list);
+	const index = array.indexOf(recipeID);
+	if (index > -1) {
+		array.splice(index, 1);
+	}
 
-    storage.setItem('favorites-master', JSON.stringify(array));
+	storage.setItem('favorites-master', JSON.stringify(array));
 }
 
 export function createList(listName) {
-    const storage = window.localStorage;
-    // making sure that local storage does not alraedy have it 
-    if (storage.getItem(ListName) == null) {
-        let temp_arr = [];
-        storage.setItem(listName, JSON.stringify(temp_arr));
-    }
+	const storage = window.localStorage;
+	// making sure that local storage does not alraedy have it
+	if (storage.getItem(ListName) == null) {
+		let temp_arr = [];
+		storage.setItem(listName, JSON.stringify(temp_arr));
+	}
 }
 
-export function removeList(listName){
-    const storage = window.localStorage;
-    // making sure that local storage does not alraedy have it 
-    if (storage.getItem(ListName) != null) {
-        storage.removeItem(listName); 
-    }
+export function removeList(listName) {
+	const storage = window.localStorage;
+	// making sure that local storage does not alraedy have it
+	if (storage.getItem(ListName) != null) {
+		storage.removeItem(listName);
+	}
 }
 
 export function addRecipebyList(listName, recipeID) {
-    const storage = window.localStorage;
-    if (storage.getItem(ListName) != null) {
-        var list = storage.getItem(listName);
-        var array = JSON.parse(list);
-        array.push(recipeID);
-        storage.setItem(listName, JSON.stringify(array));
-    }
+	const storage = window.localStorage;
+	if (storage.getItem(ListName) != null) {
+		var list = storage.getItem(listName);
+		var array = JSON.parse(list);
+		array.push(recipeID);
+		storage.setItem(listName, JSON.stringify(array));
+	}
 }
 
 export function removeRecipebyList(listName, recipeID) {
-    const storage = window.localStorage;
-    if (storage.getItem(ListName) != null) {
-        var list = storage.getItem(listName);
-        var array = JSON.parse(list);
-        const index = array.indexOf(recipeID);
-        if (index > -1) {
-            array.splice(index, 1);
-        }
-        storage.setItem(listName, JSON.stringify(array));
-    }
+	const storage = window.localStorage;
+	if (storage.getItem(ListName) != null) {
+		var list = storage.getItem(listName);
+		var array = JSON.parse(list);
+		const index = array.indexOf(recipeID);
+		if (index > -1) {
+			array.splice(index, 1);
+		}
+		storage.setItem(listName, JSON.stringify(array));
+	}
 }
 
-
-
 // export const storage = {};
-// const functions = ["addToList", "removeFromList", "createList", "removeList", "addRecipe", "removeRecipe"]; 
-// const dataHolder = {}; 
+// const functions = ["addToList", "removeFromList", "createList", "removeList", "addRecipe", "removeRecipe"];
+// const dataHolder = {};
 
 // // holds the data, an array of ids
 // dataHolder['favorite-master'] = [];
@@ -110,7 +107,7 @@ export function removeRecipebyList(listName, recipeID) {
 // }
 
 // storage.addRecipe = function (recipeID) {
-//     // console.log(recipeOBJ); 
+//     // console.log(recipeOBJ);
 //     localStoragetoStorage();
 //     dataHolder['favorite-master'][recipeOBJ.id] = JSON.parse(recipeOBJ);
 //     StoragetoLocalStorage();

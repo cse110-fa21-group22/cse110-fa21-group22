@@ -3,20 +3,20 @@
  */
 // import {apiKey} from './apikey.js';
 const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
-import { addRecipe, initLocalStorage } from "../components/UserLocalStorage.js";
+import { addRecipe, initLocalStorage } from '../components/UserLocalStorage.js';
 
 const tokenKey = '?apiKey=' + apiKey;
-const storage = window.localStorage; 
-
+const storage = window.localStorage;
 
 const stepping_size = 2; // Stepping-size number of recipes to append to end after user scrolls to bottom
 const recipeData = {}; // Data in each stepping size?
 const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
-const userFavoriteSection = document.querySelector('.home-page-favorite-section');
+const userFavoriteSection = document.querySelector(
+	'.home-page-favorite-section'
+);
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
-
 	initLocalStorage();
 
 	//console.log('Init.. ');
@@ -47,16 +47,15 @@ async function init() {
 		showResults(recipeData);
 	});
 
-	// populating local storage 
+	// populating local storage
 	var list = storage.getItem('favorites-master');
 	console.log(list);
 
-	// return null if not found 
+	// return null if not found
 	// let a = storage.getItem("dsf");
 	// console.log(a);
 
-	
-	showFavoriteSection(); 
+	showFavoriteSection();
 }
 
 async function fetch_random_recipes() {
@@ -126,13 +125,13 @@ function clearObject() {
 }
 
 async function showFavoriteSection() {
-    var list = storage.getItem('favorites-master'); 
-    var array = JSON.parse(list);
-	console.log(array); 
+	var list = storage.getItem('favorites-master');
+	var array = JSON.parse(list);
+	console.log(array);
 
-	for (let i = 0; i < array.length; i ++) {
+	for (let i = 0; i < array.length; i++) {
 		const recipeCard = document.createElement('recipe-card-component');
-		recipeCard.recipe = await getRecipebyID(array[i]); 
+		recipeCard.recipe = await getRecipebyID(array[i]);
 
 		userFavoriteSection.appendChild(recipeCard);
 	}
@@ -141,11 +140,13 @@ async function showFavoriteSection() {
 async function getRecipebyID(id) {
 	const fetchEndPoint =
 		'https://api.spoonacular.com/recipes/' +
-		id + '/' + "information" + tokenKey + 
-		"&includeNutrition=false"; 
-		 
+		id +
+		'/' +
+		'information' +
+		tokenKey +
+		'&includeNutrition=false';
 
-	console.log("fetch_endpoint", fetchEndPoint); 
+	console.log('fetch_endpoint', fetchEndPoint);
 
 	const fetchResults = await fetch(fetchEndPoint)
 		.then((response) => response.json())
@@ -154,6 +155,6 @@ async function getRecipebyID(id) {
 			console.error(error);
 		});
 
-	console.log("result is: ", fetchResults);
+	console.log('result is: ', fetchResults);
 	return fetchResults;
 }

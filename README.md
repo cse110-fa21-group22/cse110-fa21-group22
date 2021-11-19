@@ -4,6 +4,6 @@
 
 The project will are working on is a Recipe Manager. Our application will allow users to create, read, modify, and delete their recipes.
 
-
 ## Link to Team
+
 [Team](./admin/team.md)

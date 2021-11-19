@@ -1,7 +1,7 @@
 @import 'reset.css';
 
-h3{
-  padding-top: 25px;
+h3 {
+	padding-top: 25px;
 }
 
 .favorite-heart {
@@ -64,8 +64,8 @@ h3{
 }
 
 .recipe-page-description {
-  margin-bottom: 10px;
-  width: 100%;
+	margin-bottom: 10px;
+	width: 100%;
 }
 
 .recipe-page-description-header {
@@ -107,7 +107,7 @@ h3{
 
 h5 {
 	margin-bottom: 5px;
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 ol > li {

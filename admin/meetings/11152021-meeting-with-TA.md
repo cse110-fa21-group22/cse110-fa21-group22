@@ -22,23 +22,27 @@
 
 ### Agenda
 
-- New Business 
-  - demo current product 
-  - get advice from Hema 
+- New Business
+  - demo current product
+  - get advice from Hema
 
-### Suggestions: 
-#### Recipe Page: 
-- make everything bigger 
-- cards have horizontal line and vertical lines, we do not want to confuse the user 
-- we could have a share button on the page 
-- mobile sharing can be clunky 
-- 
-#### Favorite Page: 
-- could have import and exports for user syncing. 
-  
+### Suggestions:
 
-### Clarfication for future design 
-  - tags for filtering 
-    - when tags are clicked, it will modify the current displaying result, if there is no searching result currently being diplayed, it will filter user's search query. 
+#### Recipe Page:
 
-## MVP due Friday 
+- make everything bigger
+- cards have horizontal line and vertical lines, we do not want to confuse the user
+- we could have a share button on the page
+- mobile sharing can be clunky
+-
+
+#### Favorite Page:
+
+- could have import and exports for user syncing.
+
+### Clarfication for future design
+
+- tags for filtering
+  - when tags are clicked, it will modify the current displaying result, if there is no searching result currently being diplayed, it will filter user's search query.
+
+## MVP due Friday

@@ -15,36 +15,34 @@ UserListTemplate.innerHTML = `
         </div>`;
 
 class UserList extends HTMLElement {
+	set list(listObj) {
+		const populateRrecipe = this.shadow.querySelector('.recipe-section');
+		console.log('UserList component, ', listObj);
 
-    set list(listObj) {
+		for (recipeid in listObj) {
+			const recipeCard = document.createElement('recipe-card-component');
+			recipeCard.recipe = listObj[recipeid];
+			populateRrecipe.appendChild(recipeCard);
+		}
 
-        const populateRrecipe = this.shadow.querySelector('.recipe-section');
-        console.log("UserList component, ", listObj); 
+		// testing
+		const recipeCard = document.createElement('recipe-card-component');
+		populateRrecipe.appendChild(recipeCard);
+	}
 
-        for (recipeid in listObj) {
-            const recipeCard = document.createElement('recipe-card-component');
-            recipeCard.recipe = listObj[recipeid];
-            populateRrecipe.appendChild(recipeCard);
-        }
+	set listName(name) {
+		const listTitle = this.shadow.querySelector('.list-name h4');
+		listTitle.textContent = name;
+	}
 
-        // testing
-        const recipeCard = document.createElement('recipe-card-component');
-        populateRrecipe.appendChild(recipeCard);
-    }
+	constructor() {
+		super();
+		this.shadow = this.attachShadow({ mode: 'open' });
+		this.shadow.appendChild(UserListTemplate.content.cloneNode(true));
+		this.shadow.appendChild(link.cloneNode(true));
+	}
 
-    set listName(name) {
-        const listTitle = this.shadow.querySelector('.list-name h4');
-        listTitle.textContent = name;
-    }
-
-    constructor() {
-        super();
-        this.shadow = this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(UserListTemplate.content.cloneNode(true));
-        this.shadow.appendChild(link.cloneNode(true));
-    }
-
-    connectedCallback() { }
+	connectedCallback() {}
 }
 
 customElements.define('user-list', UserList);
