@@ -6,7 +6,21 @@ link.href = '../styles/recipeCard.css';
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
-    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+    <div class="dropdown">
+    	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+		<div class="dropdown-content">
+      		<label class="container">My Favorites
+      		<input type="checkbox">
+      		<span class="checkmark"> </span>
+      		</label>
+
+    	<label class="entry">Create a new list: 
+      		<input type="text">
+    	</label>
+    
+    	<button class="submit" >Submit </button>
+  		</div>
+	</div>
 	<img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
 	<img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
@@ -104,7 +118,7 @@ class RecipeCard extends HTMLElement {
 				favoriteIcon.src = '../assets/favorite.svg';
 				// remove item from favorites list here
 			}
-		});*/
+		});
     
 		// Mouse hover for favorites icon
 		favoriteIcon.addEventListener('mouseover', () => {
