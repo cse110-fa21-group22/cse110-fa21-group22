@@ -80,9 +80,10 @@ class RecipeCard extends HTMLElement {
 	connectedCallback() {
 		let isFavorite = false;
 		// If the recipe card is clicked, move to the recipe page
+		let dropdown = false;
 		this.addEventListener('click', () => {
 			// Check to see if selecting is allowable (only in edit/move mode)
-			if (this.selectMode) {
+			if (!dropdown && this.selectMode) {
 				// handle toggling state for the checkmark/selected property
 				let checkmark = this.shadow.querySelector('.recipe-checkmark');
 				if (this.isSelected) {
@@ -103,8 +104,9 @@ class RecipeCard extends HTMLElement {
 		// If the favorite icon is clicked, favorite the item
 		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
+		let submitFavorites = this.shadow.querySelector('.submit');
 
-		favoriteIcon.addEventListener('click', (event) => {
+		/*favoriteIcon.addEventListener('click', (event) => {
 			// Stop propagation to the parent so you don't go to the recipe page
 			event.stopPropagation();
 			if (!isFavorite) {
@@ -118,7 +120,7 @@ class RecipeCard extends HTMLElement {
 				favoriteIcon.src = '../assets/favorite.svg';
 				// remove item from favorites list here
 			}
-		});
+		});*/
     
 		// Mouse hover for favorites icon
 		favoriteIcon.addEventListener('mouseover', () => {
@@ -139,6 +141,25 @@ class RecipeCard extends HTMLElement {
 			// Remove recipe from favorites list
 		});
 
+		//submit button for favorites dropdown
+		submitFavorites.addEventListener('click',(event) => {
+			dropdown = false;
+
+			//TODO: need to check the values that are clicked
+			if (!isFavorite) {
+				isFavorite = true;
+				favoriteIcon.src = '../assets/favorite-selected.svg';
+
+				// add item to favorites list here
+			} else {
+				isFavorite = false;
+				favoriteIcon.src = '../assets/favorite.svg';
+				// remove item from favorites list here
+
+			}
+
+			event.stopPropagation();
+		});
 	}
 }
 
