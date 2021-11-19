@@ -83,13 +83,13 @@ async function fetch_random_recipes() {
 				for (let i = 0; i < parseInt(stepping_size); i++) {
 					recipeData[data.recipes[i].id] = data.recipes[i];
 
-					// testing for local storage 
-					addRecipe(data.recipes[i].id);
-					if(i % 2 == 0){addRecipebyList("list%2", data.recipes[i].id);}
-					if(i % 3 == 0){addRecipebyList("list%3", data.recipes[i].id);}
-					if(i % 4 == 0){addRecipebyList("list%4", data.recipes[i].id);}
-					if(i % 5 == 0){addRecipebyList("list%5", data.recipes[i].id);}
-					if(i % 10 == 0){addRecipebyList("list%10", data.recipes[i].id);}
+					// // testing for local storage 
+					// addRecipe(data.recipes[i].id);
+					// if(i % 2 == 0){addRecipebyList("list%2", data.recipes[i].id);}
+					// if(i % 3 == 0){addRecipebyList("list%3", data.recipes[i].id);}
+					// if(i % 4 == 0){addRecipebyList("list%4", data.recipes[i].id);}
+					// if(i % 5 == 0){addRecipebyList("list%5", data.recipes[i].id);}
+					// if(i % 10 == 0){addRecipebyList("list%10", data.recipes[i].id);}
 
 				}
 				resolve();

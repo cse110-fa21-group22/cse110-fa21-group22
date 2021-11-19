@@ -14,7 +14,7 @@ recipeCardTemplate.innerHTML = `
       		<span class="checkmark"> </span>
       		</label>
 
-			  <label class="container">My Favorite Cookies
+			<label class="container">My Favorite Cookies
       		<input type="checkbox">
       		<span class="checkmark"> </span>
       		</label>
@@ -86,7 +86,7 @@ class RecipeCard extends HTMLElement {
 		let isFavorite = false;
 		// If the recipe card is clicked, move to the recipe page
 		let dropdown = false;
-		this.addEventListener('click', () => {
+		this.addEventListener('hoover', () => {
 			// Check to see if selecting is allowable (only in edit/move mode)
 			if (this.selectMode) {
 				// handle toggling state for the checkmark/selected property
@@ -110,6 +110,7 @@ class RecipeCard extends HTMLElement {
 		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		let submitFavorites = this.shadow.querySelector('.submit');
+		let containers = this.shadow.querySelectorAll('.container');
 
 		/*favoriteIcon.addEventListener('click', (event) => {
 			// Stop propagation to the parent so you don't go to the recipe page
@@ -152,6 +153,21 @@ class RecipeCard extends HTMLElement {
 
 			//TODO: need to check the values that are clicked
 			if (!isFavorite) {
+				// let containers = this.shadow.querySelector('.container');
+
+				console.log(containers);
+				for(let i = 0; i < containers.length; i++){
+
+					let checkmark = this.shadow.querySelector('input');
+					console.log(checkmark);
+					console.log(checkmark.getAttribute('checked'));
+					if(checkmark.getAttribute('checked')) {
+						console.log(containers[i].textContent);
+					}
+
+					// console.log(containers[i].textContent);
+
+				}
 				isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
 
