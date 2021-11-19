@@ -1,72 +1,72 @@
 @import 'reset.css';
 
 .logo {
-  color: var(--color-neutrals-white);
-  font-size: 15px;
+	color: var(--color-neutrals-white);
+	font-size: 15px;
 }
 
 .navbar {
-  align-items: center;
-  background-color: var(--color-primary-blue);
-  box-shadow: 0 1px 0 rgb(0 0 0 / 8%);
-  display: flex;
-  height: 60px;
-  padding: 0 25px;
-  justify-content: space-between;
-  width: calc(100vw - 50px);
+	align-items: center;
+	background-color: var(--color-primary-blue);
+	box-shadow: 0 1px 0 rgb(0 0 0 / 8%);
+	display: flex;
+	height: 60px;
+	padding: 0 25px;
+	justify-content: space-between;
+	width: calc(100vw - 50px);
 }
 
 .nav-favorite {
-  display: none;
+	display: none;
 }
 
 .nav-favorite-mobile {
-  display: block;
-  filter: invert(1);
+	display: block;
+	filter: invert(1);
 }
 
 .nav-search {
-  position: relative;
-  margin: 0 10px;
+	position: relative;
+	margin: 0 10px;
 }
 
 .nav-search-icon {
-  filter: invert(45%);
-  height: 14px;
-  left: 12px;
-  position: absolute;
-  top: calc(50% - 7px);
+	filter: invert(45%);
+	height: 14px;
+	left: 12px;
+	position: absolute;
+	top: calc(50% - 7px);
 }
 
 .nav-search-input {
-  background-color: var(--color-neutrals-slight-grey);
-  border: 0;
-  border-radius: 20px;
-  height: 30px;
-  padding-left: 32px;
-  padding-right: 15px;
+	background-color: var(--color-neutrals-slight-grey);
+	border: 0;
+	border-radius: 20px;
+	height: 30px;
+	padding-left: 32px;
+	padding-right: 15px;
 }
 
 @media (min-width: 768px) {
-  .logo {
-    font-size: 36px;
-  }
+	.logo {
+		font-size: 36px;
+	}
 
-  .navbar {
-    height: 70px;
-    padding: 0 50px;
-    width: calc(100vw - 100px);
-  }
+	.navbar {
+		height: 70px;
+		padding: 0 50px;
+		width: calc(100vw - 100px);
+	}
 
-  .nav-favorite {
-    display: block;
-  }
+	.nav-favorite {
+		display: block;
+	}
 
-  .nav-favorite > p {
-    color: var(--color-neutrals-white);
-  }
+	.nav-favorite > p {
+		color: var(--color-neutrals-white);
+	}
 
-  .nav-favorite-mobile {
-    display: none;
-  }
+	.nav-favorite-mobile {
+		display: none;
+	}
 }
