@@ -6,7 +6,21 @@ link.href = '../styles/recipeCard.css';
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
-    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+    <div class="dropdown">
+    	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+		<div class="dropdown-content">
+      		<label class="container">My Favorites
+      		<input type="checkbox">
+      		<span class="checkmark"> </span>
+      		</label>
+
+    	<label class="entry">Create a new list: 
+      		<input type="text">
+    	</label>
+    
+    	<button class="submit" >Submit </button>
+  		</div>
+	</div>
 	<img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
 	<img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
@@ -66,9 +80,10 @@ class RecipeCard extends HTMLElement {
 	connectedCallback() {
 		let isFavorite = false;
 		// If the recipe card is clicked, move to the recipe page
+		let dropdown = false;
 		this.addEventListener('click', () => {
 			// Check to see if selecting is allowable (only in edit/move mode)
-			if (this.selectMode) {
+			if (!dropdown && this.selectMode) {
 				// handle toggling state for the checkmark/selected property
 				let checkmark = this.shadow.querySelector('.recipe-checkmark');
 				if (this.isSelected) {
@@ -89,26 +104,29 @@ class RecipeCard extends HTMLElement {
 		// If the favorite icon is clicked, favorite the item
 		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
+		let submitFavorites = this.shadow.querySelector('.submit');
 
-		favoriteIcon.addEventListener('click', (event) => {
+		/*favoriteIcon.addEventListener('click', (event) => {
 			// Stop propagation to the parent so you don't go to the recipe page
 			event.stopPropagation();
 			if (!isFavorite) {
 				isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
+
 				// add item to favorites list here
 				console.log('Prompting user to add to favorites lists');
 			} else {
 				isFavorite = false;
 				favoriteIcon.src = '../assets/favorite.svg';
 				// remove item from favorites list here
-				console.log('Removing item from ALL lists');
 			}
-		});
-
+		});*/
+    
 		// Mouse hover for favorites icon
 		favoriteIcon.addEventListener('mouseover', () => {
+			dropdown = true;
 			favoriteIcon.src = '../assets/favorite-selected.svg';
+
 		});
 
 		favoriteIcon.addEventListener('mouseout', () => {
@@ -123,7 +141,25 @@ class RecipeCard extends HTMLElement {
 			// Remove recipe from favorites list
 		});
 
-		
+		//submit button for favorites dropdown
+		submitFavorites.addEventListener('click',(event) => {
+			dropdown = false;
+
+			//TODO: need to check the values that are clicked
+			if (!isFavorite) {
+				isFavorite = true;
+				favoriteIcon.src = '../assets/favorite-selected.svg';
+
+				// add item to favorites list here
+			} else {
+				isFavorite = false;
+				favoriteIcon.src = '../assets/favorite.svg';
+				// remove item from favorites list here
+
+			}
+
+			event.stopPropagation();
+		});
 	}
 }
 
