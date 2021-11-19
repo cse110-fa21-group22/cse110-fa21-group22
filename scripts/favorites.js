@@ -64,8 +64,6 @@ async function getRecipebyID(id) {
     return fetchResults;
 }
 
-
-
 let editMode = false;
 let recipeCardSelect = false;
 let editButton = document.getElementById('edit');
@@ -73,31 +71,40 @@ let cancelButton = document.getElementById('cancel');
 let moveButton = document.getElementById('move');
 
 editButton.addEventListener('click', function () {
-    if (!editMode) {
-        editMode = true;
-        document.body.style.backgroundColor = '#EEEEEE';
-        editButton.style.display = 'none';
-        cancelButton.style.display = 'inline-block';
-        moveButton.style.display = 'inline-block';
-        for (let i = 0; i < recipeCards.length; i++) {
-            recipeCards[i].enterSelectMode();
-        }
-        recipeCardSelect = true;
-    }
+	if (!editMode) {
+		editMode = true;
+		document.body.style.backgroundColor = '#EEEEEE';
+		editButton.style.display = 'none';
+		cancelButton.style.display = 'inline-block';
+		moveButton.style.display = 'inline-block';
+		//edit favorites list titles
+		let listTitles = document.querySelectorAll('h4');
+		for (let t = 0; t < listTitles.length; t++) {
+			listTitles[t].setAttribute('contenteditable', true);
+		}
+		for (let i = 0; i < recipeCards.length; i++) {
+			recipeCards[i].enterSelectMode();
+		}
+		recipeCardSelect = true;
+	}
 });
 
 cancelButton.addEventListener('click', function () {
-    if (editMode) {
-        // cancel the edit mode
-        editMode = false;
-        document.body.style.backgroundColor = '#FFFFFF';
-        editButton.style.display = 'inline-block';
-        cancelButton.style.display = 'none';
-        moveButton.style.display = 'none';
-        for (let i = 0; i < recipeCards.length; i++) {
-            recipeCards[i].exitSelectMode();
-        }
-        recipeCardSelect = false;
-    }
+	if (editMode) {
+		// cancel the edit mode
+		editMode = false;
+		document.body.style.backgroundColor = '#FFFFFF';
+		editButton.style.display = 'inline-block';
+		cancelButton.style.display = 'none';
+		moveButton.style.display = 'none';
+		//edit favorites list titles
+		let listTitles = document.querySelectorAll('h4');
+		for (let t = 0; t < listTitles.length; t++) {
+			listTitles[t].setAttribute('contenteditable', false);
+		}
+		for (let i = 0; i < recipeCards.length; i++) {
+			recipeCards[i].exitSelectMode();
+		}
+		recipeCardSelect = false;
+	}
 });
-

@@ -15,7 +15,6 @@ imageCardTemplate.innerHTML = `
     <button class="right-arrow"><img src="../assets/rightArrow.svg"/></button>
     <section class="ingredients-list">
     </section>
-    <button class="show-all"><img src="../assets/downArrow.svg"/>Show All</button>
   </section>
 `;
 
@@ -27,8 +26,6 @@ entryElementTemplate.innerHTML = `
     <p class="ingredient-measurements"></p>
   </article>
 `;
-
-let showingAll = false;
 
 class ImageCard extends HTMLElement {
   set ingredients(ingredientArr) {
@@ -45,10 +42,9 @@ class ImageCard extends HTMLElement {
     for (let i = 0; i < ingredientArr.length; i++) {
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
-      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
       entry.querySelector('.ingredient-image').src = 'https://spoonacular.com/cdn/ingredients_100x100/' + ingredientArr[i].image;
-      entry.querySelector('.ingredient-name').innerHTML = ingredientArr[i].name;
-      entry.querySelector('.ingredient-measurements').innerHTML = ingredientArr[i].amount + ' <span></span>';
+      entry.querySelector('.ingredient-name').innerHTML = capitalize(ingredientArr[i].name);
+      entry.querySelector('.ingredient-measurements').innerHTML = toFraction(ingredientArr[i].amount) + ' <span></span>';
       entry.querySelector('span').innerHTML = ingredientArr[i].unit;
 
 
@@ -71,9 +67,8 @@ class ImageCard extends HTMLElement {
     for (let i = 0; i < equipmentArr.length; i++) {
       const entry = entryElementTemplate.content.cloneNode(true);
       entry.querySelector('.ingredient-card').id = i;
-      if (i > 3) entry.querySelector('.ingredient-card').classList.add('hidden'); // Hide if there's more than 4 entries
       entry.querySelector('.ingredient-image').src = "https://spoonacular.com/cdn/equipment_100x100/" + equipmentArr[i].image;
-      entry.querySelector('.ingredient-name').innerHTML = equipmentArr[i].name;
+      entry.querySelector('.ingredient-name').innerHTML = capitalize(equipmentArr[i].name);
 
       this.shadow.querySelector('.ingredients-list').appendChild(entry);
     }
@@ -93,17 +88,6 @@ class ImageCard extends HTMLElement {
     const rightArrow = this.shadow.querySelector('.right-arrow');
 
     // Show all button functionality (Has to be performed in connectedCallback so that 'this' contains correct value)
-    showAllButton.addEventListener('click', () => {
-      const ingredientsList = this.shadow.querySelector('.ingredients-list');
-      for (const entry of ingredientsList.children) {
-        if (showingAll) {
-          if (entry.id >= 4) entry.classList.add('hidden');
-        } else {
-          entry.classList.remove('hidden');
-        }
-      }
-      showingAll = !showingAll;
-    });
     leftArrow.addEventListener('click', () => {
       this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
     });
@@ -113,18 +97,48 @@ class ImageCard extends HTMLElement {
   }
 }
 
-// TODO This function should take in a value and return it in fraction form and as a string
-// function toFraction(value) {
-// 	return value.toString();
-// }
+// This function takes in a number and return it in fraction form and as a string
+// If it can't do this, the value is returned as a string rounded to 2 decimal places
+function toFraction(value) {
+	if ( value % 1 == 0 ) {
+		return value.toString();
+	}
+	
+  let denominators = [2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 32, 64];
+  for (const denominator of denominators) {
+    let str = '';
+    if (Math.floor(value)) str += Math.floor(value);
+    if ( value * denominator % 1 < 0.0001) {
+      let numerator = (value % 1) * denominator;
+      return `${str} ${numerator}/${denominator}`;
+    }
 
-/**
- * TODO This function should standardize measurements to a single way of being displayed
- * Example: If the input is 'Tablespoon' or 'Tbsp' or 'tablespoon' this function should
- * consistently return a value of 'Tbsp'
- */
-// function standardizeMeasurement(str) {
-// 	return str;
-// }
+    if (value * denominator % 1 > 0.9999) {
+      let numerator = ((value % 1) + 1) * denominator;
+      return `${str} ${numerator}/${denominator}`;
+    }
+  }
+  return value.toFixed(2);
+}
+
+// Taken from https://flexiple.com/javascript-capitalize-first-letter/
+function capitalize(str) {
+  //split the above string into an array of strings 
+  //whenever a blank space is encountered
+  const arr = str.split(" ");
+
+  //loop through each element of the array and capitalize the first letter.
+
+
+  for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+
+  }
+
+  //Join all the elements of the array back into a string 
+  //using a blankspace as a separator 
+  const str2 = arr.join(" ");
+  return str2; 
+}
 
 customElements.define('image-card-component', ImageCard);

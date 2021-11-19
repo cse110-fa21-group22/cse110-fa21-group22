@@ -12,11 +12,12 @@ const storage = window.localStorage;
 const stepping_size = 10; // Stepping-size number of recipes to append to end after user scrolls to bottom
 const recipeData = {}; // Data in each stepping size?
 const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
-const userFavoriteSection = document.querySelector('.home-page-favorite-section');
+const userFavoriteSection = document.querySelector(
+	'.home-page-favorite-section'
+);
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
-
 	initLocalStorage();
 
 	//console.log('Init.. ');
@@ -55,10 +56,9 @@ async function init() {
 	createList("list%5"); 
 	createList("list%10"); 
 
-	// return null if not found 
+	// return null if not found
 	// let a = storage.getItem("dsf");
 	// console.log(a);
-
 
 	showFavoriteSection();
 }
@@ -165,6 +165,6 @@ async function getRecipebyID(id) {
 			console.error(error);
 		});
 
-	console.log("result is: ", fetchResults);
+	console.log('result is: ', fetchResults);
 	return fetchResults;
 }
