@@ -3,7 +3,7 @@
  */
 
  import { } from "../components/UserLocalStorage.js";
- window.addEventListener('DOMContentLoaded', init);
+//  window.addEventListener('DOMContentLoaded', init);
 
 /**
  * A TEST FUNCTION FOR POPULATING RECIPES ON FAVORITES PAGE
@@ -90,4 +90,3 @@ cancelButton.addEventListener('click', function() {
         recipeCardSelect = false;
     }
 });
-
