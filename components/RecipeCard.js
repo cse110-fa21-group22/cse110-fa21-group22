@@ -96,19 +96,21 @@ class RecipeCard extends HTMLElement {
 			if (!isFavorite) {
 				isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
+
 				// add item to favorites list here
 				console.log('Prompting user to add to favorites lists');
 			} else {
 				isFavorite = false;
 				favoriteIcon.src = '../assets/favorite.svg';
 				// remove item from favorites list here
-				console.log('Removing item from ALL lists');
 			}
-		});
-
+		});*/
+    
 		// Mouse hover for favorites icon
 		favoriteIcon.addEventListener('mouseover', () => {
+			dropdown = true;
 			favoriteIcon.src = '../assets/favorite-selected.svg';
+
 		});
 
 		favoriteIcon.addEventListener('mouseout', () => {
@@ -123,7 +125,6 @@ class RecipeCard extends HTMLElement {
 			// Remove recipe from favorites list
 		});
 
-		
 	}
 }
 
