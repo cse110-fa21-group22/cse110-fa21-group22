@@ -8,8 +8,14 @@ body {
   width: 100%;
 }
 
+.box {
+  box-sizing: border-box;
+  padding: 100px 0 0;
+  position: relative;
+}
+
 .header {
-  background-color: var(--color-primary-blue);
+  background-color: #4d96ea;
   height: 60px;
   margin: -100px 0 0;
   position: fixed;
@@ -25,7 +31,13 @@ body {
   width: auto;
 }
 
-.favorites-list {
+div.main h4 {
+  font-weight: bold;
+  margin: 7px 0 auto 0;
+  overflow-y: auto;
+}
+
+div.scroll {
   display: flex;
   flex-direction: column;
   height: 380px;
@@ -35,12 +47,12 @@ body {
   white-space: nowrap;
 }
 
-.list-name {
+div.list-name {
   margin-top: 10px;
   position: absolute;
 }
 
-.recipe-list {
+div.recipe-section {
   display: flex;
   gap: 0;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -50,10 +62,7 @@ body {
 }
 
 #cancel {
-  background-color: transparent;
-  border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
   display: none;
   font-size: 16px;
   font-family: Helvetica;
@@ -68,15 +77,12 @@ body {
 }
 
 #cancel:hover {
-  background-color: var(--color-primary-blue);
-  color: var(--color-neutrals-white);
+  background-color: #4d96ea;
+  color: white;
 }
 
 #edit {
-  background-color: transparent;
-  border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
   line-height: 12px;
   height: 30px;
   font-size: 16px;
@@ -90,15 +96,12 @@ body {
 }
 
 #edit:hover {
-  background-color: var(--color-primary-blue);
-  color: var(--color-neutrals-white);
+  background-color: #4d96ea;
+  color: white;
 }
 
 #move {
-  background-color: transparent;
-  border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
   display: none;
   font-size: 16px;
   font-family: Helvetica;
@@ -112,6 +115,19 @@ body {
 }
 
 #move:hover {
-  background-color: var(--color-primary-blue);
-  color: var(--color-neutrals-white);
+  background-color: #4d96ea;
+  color: white;
+}
+
+.footer {
+  background-color: #4d96ea;
+  height: 20px;
+}
+
+footer {
+  font-family: Helvetica;
+  font-weight: normal;
+  margin-right: 10px;
+  text-align: right;
+  font-size: 14px;
 }
