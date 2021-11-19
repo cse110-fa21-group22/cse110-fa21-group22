@@ -1,6 +1,6 @@
 # Team 22x Group 22 Meeting Notes
 
-## Meeting Type: Retrium 
+## Meeting Type: Sprint Retrospective 
 
 ## Date: 11-14-2021
 
