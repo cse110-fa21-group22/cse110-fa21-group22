@@ -30,43 +30,43 @@ export function removeRecipe(recipeID) {
 }
 
 export function createList(listName) {
-	const storage = window.localStorage;
-	// making sure that local storage does not alraedy have it
-	if (storage.getItem(ListName) == null) {
-		let temp_arr = [];
-		storage.setItem(listName, JSON.stringify(temp_arr));
-	}
+    const storage = window.localStorage;
+    // making sure that local storage does not alraedy have it 
+    if (storage.getItem(listName) == null) {
+        let temp_arr = [];
+        storage.setItem(listName, JSON.stringify(temp_arr));
+    }
 }
 
-export function removeList(listName) {
-	const storage = window.localStorage;
-	// making sure that local storage does not alraedy have it
-	if (storage.getItem(ListName) != null) {
-		storage.removeItem(listName);
-	}
+export function removeList(listName){
+    const storage = window.localStorage;
+    // making sure that local storage does not alraedy have it 
+    if (storage.getItem(listName) != null) {
+        storage.removeItem(listName); 
+    }
 }
 
 export function addRecipebyList(listName, recipeID) {
-	const storage = window.localStorage;
-	if (storage.getItem(ListName) != null) {
-		var list = storage.getItem(listName);
-		var array = JSON.parse(list);
-		array.push(recipeID);
-		storage.setItem(listName, JSON.stringify(array));
-	}
+    const storage = window.localStorage;
+    if (storage.getItem(listName) != null) {
+        var list = storage.getItem(listName);
+        var array = JSON.parse(list);
+        array.push(recipeID);
+        storage.setItem(listName, JSON.stringify(array));
+    }
 }
 
 export function removeRecipebyList(listName, recipeID) {
-	const storage = window.localStorage;
-	if (storage.getItem(ListName) != null) {
-		var list = storage.getItem(listName);
-		var array = JSON.parse(list);
-		const index = array.indexOf(recipeID);
-		if (index > -1) {
-			array.splice(index, 1);
-		}
-		storage.setItem(listName, JSON.stringify(array));
-	}
+    const storage = window.localStorage;
+    if (storage.getItem(listName) != null) {
+        var list = storage.getItem(listName);
+        var array = JSON.parse(list);
+        const index = array.indexOf(recipeID);
+        if (index > -1) {
+            array.splice(index, 1);
+        }
+        storage.setItem(listName, JSON.stringify(array));
+    }
 }
 
 // export const storage = {};
