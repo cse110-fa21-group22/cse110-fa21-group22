@@ -143,7 +143,7 @@ cancelButton.addEventListener('click', () => {
 });
 
 moveButton.addEventListener('click', () => {
-    if (!editMode) return;
+    if (!editMode || selectedRecipes) return;
     const modal = document.querySelector('.modal');
     for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) === 'favorites-master' || localStorage.key(i) === 'My Favorites ') continue;
