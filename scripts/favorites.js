@@ -8,6 +8,7 @@ import {apiKey} from './apikey.js';
 const tokenKey = '?apiKey=' + apiKey;
 
 const storage = window.localStorage;
+let recipeLists = [];
 window.addEventListener('DOMContentLoaded', init);
 
 
@@ -29,6 +30,7 @@ async function init() {
         userList.list = recipe_arr;
         userList.listName = localStorage.key(i);
         mainSection.appendChild(userList);
+        recipeLists.push(userList);
     }
 
 
@@ -82,9 +84,11 @@ editButton.addEventListener('click', function () {
 		for (let t = 0; t < listTitles.length; t++) {
 			listTitles[t].setAttribute('contenteditable', true);
 		}
-		for (let i = 0; i < recipeCards.length; i++) {
-			recipeCards[i].enterSelectMode();
-		}
+        for (const list of recipeLists) {
+            for (let i = 0; i < list.list.length; i++) {
+                list.list[i].enterSelectMode();
+            }
+        }
 		recipeCardSelect = true;
 	}
 });
@@ -102,9 +106,11 @@ cancelButton.addEventListener('click', function () {
 		for (let t = 0; t < listTitles.length; t++) {
 			listTitles[t].setAttribute('contenteditable', false);
 		}
-		for (let i = 0; i < recipeCards.length; i++) {
-			recipeCards[i].exitSelectMode();
-		}
+        for (const list of recipeLists) {
+            for (let i = 0; i < list.list.length; i++) {
+                list.list[i].exitSelectMode();
+            }
+        }
 		recipeCardSelect = false;
 	}
 });

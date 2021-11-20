@@ -3,6 +3,8 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/UserList.css';
 
+
+
 const UserListTemplate = document.createElement('template');
 UserListTemplate.innerHTML = `
         <div class="scroll">
@@ -15,9 +17,8 @@ UserListTemplate.innerHTML = `
         </div>`;
 
 class UserList extends HTMLElement {
-
+    
     set list(listObj) {
-
         const populateRrecipe = this.shadow.querySelector('.recipe-section');
         console.log("UserList component, ", listObj);
 
@@ -34,6 +35,7 @@ class UserList extends HTMLElement {
             }
 
             populateRrecipe.appendChild(recipeCard);
+            this.cardList.push(recipeCard);
         }
 
 
@@ -49,6 +51,10 @@ class UserList extends HTMLElement {
         // populateRrecipe.appendChild(recipeCard);
     }
 
+    get list() {
+        return this.cardList;
+    }
+
     set listName(name) {
         const listTitle = this.shadow.querySelector('.list-name h4');
         listTitle.textContent = name;
@@ -56,6 +62,7 @@ class UserList extends HTMLElement {
 
     constructor() {
         super();
+        this.cardList = [];
         this.shadow = this.attachShadow({ mode: 'open' });
         this.shadow.appendChild(UserListTemplate.content.cloneNode(true));
         this.shadow.appendChild(link.cloneNode(true));
