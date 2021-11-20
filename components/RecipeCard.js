@@ -33,7 +33,7 @@ recipeCardTemplate.innerHTML = `
 const listEntryTemplate = document.createElement('template');
 listEntryTemplate.innerHTML = `
 <label class="container">
-	<p>My Favorites</p>
+	<span>My Favorites</span>
 	<input type="checkbox">
 	<span class="checkmark"> </span>
 </label>
@@ -166,7 +166,7 @@ class RecipeCard extends HTMLElement {
 		for(let i = 0; i < containers.length; i++){
 			let checkmark = containers[i].querySelector('input');
 			if(checkmark.checked) {
-				addRecipebyList(containers[i].querySelector('p').innerHTML, this.getAttribute('recipe-id'));
+				addRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
 			}
 		}
 	}
