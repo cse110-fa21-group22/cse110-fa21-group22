@@ -73,16 +73,6 @@ class RecipeCard extends HTMLElement {
 		}
 	}
 
-	constructor() {
-		super();
-		this.shadow = this.attachShadow({ mode: 'open' });
-		this.shadow.appendChild(recipeCardTemplate.content.cloneNode(true));
-		this.shadow.appendChild(link.cloneNode(true));
-		this.selectMode = false;
-		this.selected = false;
-		this.isFavorite = false;
-	}
-
 	/**
 	 * Sets up the recipe card to enter selection mode
 	 * Must be called when entering selection mode
