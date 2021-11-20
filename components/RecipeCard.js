@@ -1,4 +1,11 @@
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList, createList} from "./UserLocalStorage.js";
+import {
+	addRecipe,
+	addRecipebyList,
+	checkFavorite,
+	removeRecipe,
+	removeRecipebyList,
+	createList,
+} from './UserLocalStorage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -67,7 +74,6 @@ class RecipeCard extends HTMLElement {
 		this.dropdown = false;
 		this.initializeHearts();
 		this.initializeDropdown();
-		
 	}
 
 	initializeDropdown() {
@@ -75,7 +81,9 @@ class RecipeCard extends HTMLElement {
 		for (let i = 0; i < localStorage.length; i++) {
 			if (localStorage.key(i) === 'favorites-master') continue;
 			const entry = listEntryTemplate.content.cloneNode(true);
-			entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));	
+			entry.querySelector('.container').innerHTML = entry
+				.querySelector('.container')
+				.innerHTML.replace('My Favorites', localStorage.key(i));
 			dropdownElem.insertBefore(entry, dropdownElem.firstChild);
 		}
 	}
@@ -120,7 +128,9 @@ class RecipeCard extends HTMLElement {
 		this.isSelected = true;
 		checkmark.style.display = 'block';
 		this.style.filter = 'brightness(90%)';
-		const event = new CustomEvent('selected', {detail: this.getAttribute('recipe-id')});
+		const event = new CustomEvent('selected', {
+			detail: this.getAttribute('recipe-id'),
+		});
 		this.dispatchEvent(event);
 	}
 
@@ -132,14 +142,18 @@ class RecipeCard extends HTMLElement {
 		this.isSelected = false;
 		checkmark.style.display = 'none';
 		this.style.filter = 'brightness(100%)';
-		const event = new CustomEvent('deselected', {detail: this.getAttribute('recipe-id')});
+		const event = new CustomEvent('deselected', {
+			detail: this.getAttribute('recipe-id'),
+		});
 		this.dispatchEvent(event);
 	}
 	/**
 	 * Dispatches an event to remove this recipe
 	 */
 	delete() {
-		const event = new CustomEvent('removed', {detail: this.getAttribute('recipe-id')});
+		const event = new CustomEvent('removed', {
+			detail: this.getAttribute('recipe-id'),
+		});
 		this.dispatchEvent(event);
 	}
 
@@ -168,16 +182,19 @@ class RecipeCard extends HTMLElement {
 	 */
 	addToCheckedLists() {
 		let containers = this.shadow.querySelectorAll('.container');
-		for(let i = 0; i < containers.length; i++){
+		for (let i = 0; i < containers.length; i++) {
 			let checkmark = containers[i].querySelector('input');
-			if(checkmark.checked) {
-				addRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
+			if (checkmark.checked) {
+				addRecipebyList(
+					containers[i].querySelector('span').innerHTML,
+					this.getAttribute('recipe-id')
+				);
 			}
 		}
 	}
 
 	/**
-	 * Adds the recipe to a custom list 
+	 * Adds the recipe to a custom list
 	 */
 	addToCustomList() {
 		let userInput = this.shadow.querySelector('.user-input');
@@ -208,7 +225,8 @@ class RecipeCard extends HTMLElement {
 				}
 			} else if (!this.dropdown) {
 				console.log('transferring page');
-				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
+				window.location.href =
+					'recipe.html?id=' + this.getAttribute('recipe-id');
 			}
 		});
 
@@ -224,19 +242,21 @@ class RecipeCard extends HTMLElement {
 				this.isFavorite = false;
 				removeRecipe(this.getAttribute('recipe-id'));
 				console.log(containers.length);
-				for(let i = 0; i < containers.length; i++){
-					console.log(containers[i].textContent)
-					removeRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'));
+				for (let i = 0; i < containers.length; i++) {
+					console.log(containers[i].textContent);
+					removeRecipebyList(
+						containers[i].textContent,
+						this.getAttribute('recipe-id')
+					);
 				}
 				favoriteIcon.src = '../assets/favorite.svg';
 				console.log('Remove item from ALL favorites lists here');
 			}
 		});
-    
+
 		/* Mouse hover for favorite icon */
 		favoriteIcon.addEventListener('mouseover', () => {
 			favoriteIcon.src = '../assets/favorite-selected.svg';
-
 		});
 
 		favoriteIcon.addEventListener('mouseout', () => {
@@ -254,12 +274,12 @@ class RecipeCard extends HTMLElement {
 
 		/* stops propagation of clicks on dropdown content box to the recipe card
 		This prevents changing page when the dropdown menu is clicked.  */
-		dropdownContent.addEventListener('click', function(e) {
+		dropdownContent.addEventListener('click', function (e) {
 			e.stopPropagation();
 		});
 
 		/* handle hovering off of the dropdown so it hides */
-		dropdownContent.addEventListener('mouseleave', function() {
+		dropdownContent.addEventListener('mouseleave', function () {
 			recipeCard.hideDropdown();
 		});
 

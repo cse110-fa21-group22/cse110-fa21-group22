@@ -5,15 +5,7 @@
 // console.log(process.env.API_KEY);
 // import {apiKey} from './apikey.js';?
 // const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
-import {
-	addRecipe,
-	initLocalStorage,
-	removeRecipe,
-	createList,
-	removeList,
-	addRecipebyList,
-	removeRecipebyList,
-} from '../components/UserLocalStorage.js';
+import { initLocalStorage } from '../components/UserLocalStorage.js';
 
 import apiKey from './apikey.js';
 
@@ -70,7 +62,7 @@ async function init() {
 	});
 
 	// populating local storage testing
-	var list = storage.getItem('favorites-master');
+	// var list = storage.getItem('favorites-master');
 	// createList("list%2");
 	// createList("list%3");
 	// createList("list%4");

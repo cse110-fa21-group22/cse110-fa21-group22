@@ -28,117 +28,122 @@ entryElementTemplate.innerHTML = `
 `;
 
 class ImageCard extends HTMLElement {
-  set ingredients(ingredientArr) {
-    if (this.equipment) {
-      console.err('Already set as equipment'); // Check if card has already been set
-      return;
-    }
+	set ingredients(ingredientArr) {
+		if (this.equipment) {
+			console.err('Already set as equipment'); // Check if card has already been set
+			return;
+		}
 
-    // Set title to 'Ingredients'
-    const title = this.shadow.querySelector('.title');
-    title.innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>';
+		// Set title to 'Ingredients'
+		const title = this.shadow.querySelector('.title');
+		title.innerHTML =
+			'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>';
 
-    // Create an ingredient entry for each element of ingredientsArr
-    for (let i = 0; i < ingredientArr.length; i++) {
-      const entry = entryElementTemplate.content.cloneNode(true);
-      entry.querySelector('.ingredient-card').id = i;
-      entry.querySelector('.ingredient-image').src = 'https://spoonacular.com/cdn/ingredients_100x100/' + ingredientArr[i].image;
-      entry.querySelector('.ingredient-name').innerHTML = capitalize(ingredientArr[i].name);
-      entry.querySelector('.ingredient-measurements').innerHTML = toFraction(ingredientArr[i].amount) + ' <span></span>';
-      entry.querySelector('span').innerHTML = ingredientArr[i].unit;
+		// Create an ingredient entry for each element of ingredientsArr
+		for (let i = 0; i < ingredientArr.length; i++) {
+			const entry = entryElementTemplate.content.cloneNode(true);
+			entry.querySelector('.ingredient-card').id = i;
+			entry.querySelector('.ingredient-image').src =
+				'https://spoonacular.com/cdn/ingredients_100x100/' +
+				ingredientArr[i].image;
+			entry.querySelector('.ingredient-name').innerHTML = capitalize(
+				ingredientArr[i].name
+			);
+			entry.querySelector('.ingredient-measurements').innerHTML =
+				toFraction(ingredientArr[i].amount) + ' <span></span>';
+			entry.querySelector('span').innerHTML = ingredientArr[i].unit;
 
+			this.shadow.querySelector('.ingredients-list').appendChild(entry);
+		}
+	}
 
-      this.shadow.querySelector('.ingredients-list').appendChild(entry);
-    }
+	set equipment(equipmentArr) {
+		if (this.equipment) {
+			console.err('Already set as ingredients'); // Check if card has already been set
+			return;
+		}
 
-  }
+		// Set title to 'Equipment'
+		const title = this.shadow.querySelector('.title');
+		title.innerHTML = 'Equipment ';
 
-  set equipment(equipmentArr) {
-    if (this.equipment) {
-      console.err('Already set as ingredients'); // Check if card has already been set
-      return;
-    }
+		// Create an equipment entry for each element of equipmentArr
+		for (let i = 0; i < equipmentArr.length; i++) {
+			const entry = entryElementTemplate.content.cloneNode(true);
+			entry.querySelector('.ingredient-card').id = i;
+			entry.querySelector('.ingredient-image').src =
+				'https://spoonacular.com/cdn/equipment_100x100/' +
+				equipmentArr[i].image;
+			entry.querySelector('.ingredient-name').innerHTML = capitalize(
+				equipmentArr[i].name
+			);
 
-    // Set title to 'Equipment'
-    const title = this.shadow.querySelector('.title');
-    title.innerHTML = 'Equipment ';
+			this.shadow.querySelector('.ingredients-list').appendChild(entry);
+		}
+	}
 
-    // Create an equipment entry for each element of equipmentArr
-    for (let i = 0; i < equipmentArr.length; i++) {
-      const entry = entryElementTemplate.content.cloneNode(true);
-      entry.querySelector('.ingredient-card').id = i;
-      entry.querySelector('.ingredient-image').src = "https://spoonacular.com/cdn/equipment_100x100/" + equipmentArr[i].image;
-      entry.querySelector('.ingredient-name').innerHTML = capitalize(equipmentArr[i].name);
+	constructor() {
+		super();
+		this.shadow = this.attachShadow({ mode: 'open' });
+		this.shadow.appendChild(imageCardTemplate.content.cloneNode(true));
+		this.shadow.appendChild(link.cloneNode(true));
+	}
 
-      this.shadow.querySelector('.ingredients-list').appendChild(entry);
-    }
+	connectedCallback() {
+		const showAllButton = this.shadow.querySelector('.show-all');
+		const leftArrow = this.shadow.querySelector('.left-arrow');
+		const rightArrow = this.shadow.querySelector('.right-arrow');
 
-  }
-
-  constructor() {
-    super();
-    this.shadow = this.attachShadow({ mode: 'open' });
-    this.shadow.appendChild(imageCardTemplate.content.cloneNode(true));
-    this.shadow.appendChild(link.cloneNode(true));
-  }
-
-  connectedCallback() {
-    const showAllButton = this.shadow.querySelector('.show-all');
-    const leftArrow = this.shadow.querySelector('.left-arrow');
-    const rightArrow = this.shadow.querySelector('.right-arrow');
-
-    // Show all button functionality (Has to be performed in connectedCallback so that 'this' contains correct value)
-    leftArrow.addEventListener('click', () => {
-      this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
-    });
-    rightArrow.addEventListener('click', () => {
-      this.shadow.querySelector('.ingredients-list').scrollLeft += 300;
-    });
-  }
+		// Show all button functionality (Has to be performed in connectedCallback so that 'this' contains correct value)
+		leftArrow.addEventListener('click', () => {
+			this.shadow.querySelector('.ingredients-list').scrollLeft -= 300;
+		});
+		rightArrow.addEventListener('click', () => {
+			this.shadow.querySelector('.ingredients-list').scrollLeft += 300;
+		});
+	}
 }
 
 // This function takes in a number and return it in fraction form and as a string
 // If it can't do this, the value is returned as a string rounded to 2 decimal places
 function toFraction(value) {
-	if ( value % 1 == 0 ) {
+	if (value % 1 == 0) {
 		return value.toString();
 	}
-	
-  let denominators = [2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 32, 64];
-  for (const denominator of denominators) {
-    let str = '';
-    if (Math.floor(value)) str += Math.floor(value);
-    if ( value * denominator % 1 < 0.0001) {
-      let numerator = (value % 1) * denominator;
-      return `${str} ${numerator}/${denominator}`;
-    }
 
-    if (value * denominator % 1 > 0.9999) {
-      let numerator = ((value % 1) + 1) * denominator;
-      return `${str} ${numerator}/${denominator}`;
-    }
-  }
-  return value.toFixed(2);
+	let denominators = [2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 32, 64];
+	for (const denominator of denominators) {
+		let str = '';
+		if (Math.floor(value)) str += Math.floor(value);
+		if ((value * denominator) % 1 < 0.0001) {
+			let numerator = (value % 1) * denominator;
+			return `${str} ${numerator}/${denominator}`;
+		}
+
+		if ((value * denominator) % 1 > 0.9999) {
+			let numerator = ((value % 1) + 1) * denominator;
+			return `${str} ${numerator}/${denominator}`;
+		}
+	}
+	return value.toFixed(2);
 }
 
 // Taken from https://flexiple.com/javascript-capitalize-first-letter/
 function capitalize(str) {
-  //split the above string into an array of strings 
-  //whenever a blank space is encountered
-  const arr = str.split(" ");
+	//split the above string into an array of strings
+	//whenever a blank space is encountered
+	const arr = str.split(' ');
 
-  //loop through each element of the array and capitalize the first letter.
+	//loop through each element of the array and capitalize the first letter.
 
+	for (var i = 0; i < arr.length; i++) {
+		arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+	}
 
-  for (var i = 0; i < arr.length; i++) {
-      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
-
-  }
-
-  //Join all the elements of the array back into a string 
-  //using a blankspace as a separator 
-  const str2 = arr.join(" ");
-  return str2; 
+	//Join all the elements of the array back into a string
+	//using a blankspace as a separator
+	const str2 = arr.join(' ');
+	return str2;
 }
 
 customElements.define('image-card-component', ImageCard);

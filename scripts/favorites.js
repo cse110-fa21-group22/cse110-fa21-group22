@@ -84,27 +84,27 @@ async function getRecipeArr(id_arr) {
 	return fetchResults;
 }
 
-async function getRecipebyID(id) {
-	const fetchEndPoint =
-		'https://api.spoonacular.com/recipes/' +
-		id +
-		'/' +
-		'information' +
-		tokenKey +
-		'&includeNutrition=false';
+// async function getRecipebyID(id) {
+// 	const fetchEndPoint =
+// 		'https://api.spoonacular.com/recipes/' +
+// 		id +
+// 		'/' +
+// 		'information' +
+// 		tokenKey +
+// 		'&includeNutrition=false';
 
-	// console.log("fetch_endpoint", fetchEndPoint);
+// 	// console.log("fetch_endpoint", fetchEndPoint);
 
-	const fetchResults = await fetch(fetchEndPoint)
-		.then((response) => response.json())
-		.catch((error) => {
-			console.error('Fetch in favorite page failed');
-			console.error(error);
-		});
+// 	const fetchResults = await fetch(fetchEndPoint)
+// 		.then((response) => response.json())
+// 		.catch((error) => {
+// 			console.error('Fetch in favorite page failed');
+// 			console.error(error);
+// 		});
 
-	// console.log("result is: ", fetchResults);
-	return fetchResults;
-}
+// 	// console.log("result is: ", fetchResults);
+// 	return fetchResults;
+// }
 
 let editMode = false;
 let editButton = document.getElementById('edit');
