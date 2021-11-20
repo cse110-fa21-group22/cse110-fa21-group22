@@ -6,8 +6,8 @@ const store = window.localStorage;
  * this function should only be called once
  */
 export function initLocalStorage() {
-	var arr_temp = [];
-	store.setItem('favorites-master', JSON.stringify(arr_temp));
+  const arrTemp = [];
+  store.setItem('favorites-master', JSON.stringify(arrTemp));
 }
 
 /*
@@ -15,16 +15,16 @@ export function initLocalStorage() {
  * @return {boolean} whether the recipe is already favorited
  */
 export function checkFavorite(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
+  const storage = window.localStorage;
+  const list = storage.getItem('favorites-master');
 
-	var array = JSON.parse(list);
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] == recipeID) {
-			return true;
-		}
-	}
-	return false;
+  const array = JSON.parse(list);
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i] === recipeID) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -33,18 +33,18 @@ export function checkFavorite(recipeID) {
  * @param {string} recipeID ID property of the recipe
  */
 export function addRecipe(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
+  const storage = window.localStorage;
+  const list = storage.getItem('favorites-master');
 
-	var array = JSON.parse(list);
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] == recipeID) {
-			return;
-		}
-	}
-	array.push(recipeID);
+  const array = JSON.parse(list);
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i] === recipeID) {
+      return;
+    }
+  }
+  array.push(recipeID);
 
-	storage.setItem('favorites-master', JSON.stringify(array));
+  storage.setItem('favorites-master', JSON.stringify(array));
 }
 
 /**
@@ -52,16 +52,16 @@ export function addRecipe(recipeID) {
  * @param {*} recipeID ID property of the recipe
  */
 export function removeRecipe(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
+  const storage = window.localStorage;
+  const list = storage.getItem('favorites-master');
 
-	var array = JSON.parse(list);
-	const index = array.indexOf(recipeID);
-	if (index > -1) {
-		array.splice(index, 1);
-	}
+  const array = JSON.parse(list);
+  const index = array.indexOf(recipeID);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
 
-	storage.setItem('favorites-master', JSON.stringify(array));
+  storage.setItem('favorites-master', JSON.stringify(array));
 }
 
 /**
@@ -70,12 +70,12 @@ export function removeRecipe(recipeID) {
  * @param {*} listName name of the list
  */
 export function createList(listName) {
-	// making sure that local storage does not alraedy have it
-	if (localStorage.getItem(listName)) return;
+  // making sure that local storage does not alraedy have it
+  if (localStorage.getItem(listName)) return;
 
-	console.log('creating new list: ' + listName);
-	let temp_arr = [];
-	localStorage.setItem(listName, JSON.stringify(temp_arr));
+  console.log(`creating new list: ${listName}`);
+  const tempArr = [];
+  localStorage.setItem(listName, JSON.stringify(tempArr));
 }
 
 /**
@@ -84,11 +84,11 @@ export function createList(listName) {
  * @param {*} listName name of the list
  */
 export function removeList(listName) {
-	const storage = window.localStorage;
-	// making sure that local storage does not alraedy have it
-	if (storage.getItem(listName) != null) {
-		storage.removeItem(listName);
-	}
+  const storage = window.localStorage;
+  // making sure that local storage does not alraedy have it
+  if (storage.getItem(listName) !== null) {
+    storage.removeItem(listName);
+  }
 }
 
 /**
@@ -98,19 +98,19 @@ export function removeList(listName) {
  * @param {*} recipeID id property of the recipe
  */
 export function addRecipebyList(listName, recipeID) {
-	const storage = window.localStorage;
+  const storage = window.localStorage;
 
-	createList(listName);
-	console.log(storage.getItem(listName));
-	let list = storage.getItem(listName);
-	let array = JSON.parse(list);
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] == recipeID) {
-			return;
-		}
-	}
-	array.push(recipeID);
-	storage.setItem(listName, JSON.stringify(array));
+  createList(listName);
+  console.log(storage.getItem(listName));
+  const list = storage.getItem(listName);
+  const array = JSON.parse(list);
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i] === recipeID) {
+      return;
+    }
+  }
+  array.push(recipeID);
+  storage.setItem(listName, JSON.stringify(array));
 }
 
 /**
@@ -120,16 +120,16 @@ export function addRecipebyList(listName, recipeID) {
  * @param {*} recipeID id property of the recipe
  */
 export function removeRecipebyList(listName, recipeID) {
-	const storage = window.localStorage;
-	if (storage.getItem(listName) != null) {
-		var list = storage.getItem(listName);
-		var array = JSON.parse(list);
-		const index = array.indexOf(recipeID);
-		if (index > -1) {
-			array.splice(index, 1);
-		}
-		storage.setItem(listName, JSON.stringify(array));
-	}
+  const storage = window.localStorage;
+  if (storage.getItem(listName) !== null) {
+    const list = storage.getItem(listName);
+    const array = JSON.parse(list);
+    const index = array.indexOf(recipeID);
+    if (index > -1) {
+      array.splice(index, 1);
+    }
+    storage.setItem(listName, JSON.stringify(array));
+  }
 }
 
 // export const storage = {};
@@ -147,7 +147,7 @@ export function removeRecipebyList(listName, recipeID) {
 
 // storage.removeFromList = function (ListName, recipeID) {
 //     localStoragetoStorage();
-//     if (dataHolder[ListName] != undefined) {
+//     if (dataHolder[ListName] !== undefined) {
 //         delete dataHolder[ListName][recipeID];
 //     }
 //     StoragetoLocalStorage();
@@ -155,7 +155,7 @@ export function removeRecipebyList(listName, recipeID) {
 
 // storage.createList = function (ListName) {
 //     localStoragetoStorage();
-//     if (dataHolder[ListName] == undefined) {
+//     if (dataHolder[ListName]  === undefined) {
 //         dataHolder[ListName] = {};
 //     }
 //     StoragetoLocalStorage();
@@ -163,7 +163,7 @@ export function removeRecipebyList(listName, recipeID) {
 
 // storage.removeList = function (ListName) {
 //     localStoragetoStorage();
-//     if (dataHolder[ListName] != undefined) {
+//     if (dataHolder[ListName] !== undefined) {
 //         delete dataHolder[ListName];
 //     }
 //     StoragetoLocalStorage();
@@ -189,8 +189,8 @@ export function removeRecipebyList(listName, recipeID) {
 // }
 
 // function localStoragetoStorage() {
-//     for (let i = 0; i < localStorage.length; i++) {
-//         if(functions.includes(localStorage.key(i)) == false){
+//     for (let i = 0; i < localStorage.length; i += 1) {
+//         if(functions.includes(localStorage.key(i)) === false){
 //             dataHolder[localStorage.key(i)] = JSON.parse(localStorage.getItem(localStorage.key(i)));
 //         }
 //     }

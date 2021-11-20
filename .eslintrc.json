@@ -1,20 +1,28 @@
 {
-	"env": {
-		"browser": true,
-		"commonjs": true,
-		"es2021": true
-	},
-	"extends": "eslint:recommended",
-	"parserOptions": {
-		"ecmaVersion": 13
-	},
-	"rules": {
-		"indent": ["error", "tab"],
-		"linebreak-style": ["error", "unix"],
-		"quotes": ["error", "single"],
-		"semi": ["error", "always"]
-	},
-	"parserOptions": {
-		"sourceType": "module"
-	}
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier", "plugin:cypress/recommended", "plugin:chai-friendly/recommended"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "import/extensions": 0,
+    "no-console": "off",
+    "max-len": [
+      "warn",
+      {
+        "code": 200,
+        "tabWidth": 2,
+        "comments": 200,
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ]
+  }
 }

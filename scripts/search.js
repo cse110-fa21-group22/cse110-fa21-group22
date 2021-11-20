@@ -1,12 +1,13 @@
 import apiKey from './apikey.js';
-const tokenKey = '?apiKey=' + apiKey;
+
+const tokenKey = `?apiKey=${apiKey}`;
 
 // This is just for testing
-/*window.addEventListener('keyup', (event) => {
-    if (event.code == 'Escape') {
+/* window.addEventListener('keyup', (event) => {
+    if (event.code === 'Escape') {
         clear();
     }
-})*/
+}) */
 
 /**
  * Performs a simple text search through spoonacular
@@ -18,27 +19,26 @@ const tokenKey = '?apiKey=' + apiKey;
  * @returns {object} json containing the results of the spoonacular query
  */
 export async function search(inputList) {
-	// Create the fetch url
-	const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
-	const tokenSearchInput = '&query=' + inputList['query'];
-	const tokenNumResults = '&number=' + inputList['number'];
-	const tokenOffset = '&offset=' + inputList['offset'];
-	// const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
-	const fetchEndpoint =
-		searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; //+ tokenNutritionBool;
+  // Create the fetch url
+  const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+  const tokenSearchInput = `&query=${inputList.query}`;
+  const tokenNumResults = `&number=${inputList.number}`;
+  const tokenOffset = `&offset=${inputList.offset}`;
+  // const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
+  const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; // + tokenNutritionBool;
 
-	//console.log(fetchEndpoint);
+  // console.log(fetchEndpoint);
 
-	// fetch the data
+  // fetch the data
 
-	const fetchResults = await fetch(fetchEndpoint)
-		.then((response) => response.json())
-		.catch((error) => {
-			console.error('Fetch in search function failed');
-			console.error(error);
-		});
+  const fetchResults = await fetch(fetchEndpoint)
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Fetch in search function failed');
+      console.error(error);
+    });
 
-	const results = fetchResults.results;
-	//console.log(results);
-	return results;
+  const { results } = fetchResults;
+  // console.log(results);
+  return results;
 }

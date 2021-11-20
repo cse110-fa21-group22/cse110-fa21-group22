@@ -5,7 +5,7 @@
 
 import { search } from './search.js';
 
-window.addEventListener('DOMContentLoaded', init);
+window.addEventListener('DOMContentLoaded');
 
 /**
  * This function initializes the search page
@@ -14,96 +14,96 @@ window.addEventListener('DOMContentLoaded', init);
  * @returns {none}
  */
 function init() {
-	if ('serviceWorker' in navigator) {
-		window.addEventListener('load', function () {
-			navigator.serviceWorker.register('../sw.js').then(
-				() => {},
-				(err) => {
-					console.error(err);
-				}
-			);
-		});
-	}
-	const searchKeyword = document.querySelector('.search-word');
-	const recipeSection = document.querySelector('.recipe-section');
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('../sw.js').then(
+        () => {},
+        (err) => {
+          console.error(err);
+        }
+      );
+    });
+  }
+  const searchKeyword = document.querySelector('.search-word');
+  const recipeSection = document.querySelector('.recipe-section');
 
-	/**
-	 * This function parses the query string to retrieve relevant information
-	 * @param {none}
-	 * @returns {string} the user's search term
-	 */
-	function parseQueryString() {
-		let queryString = window.location.search;
+  /**
+   * This function parses the query string to retrieve relevant information
+   * @param {none}
+   * @returns {string} the user's search term
+   */
+  function parseQueryString() {
+    const queryString = window.location.search;
 
-		// Get rid of '?search='
-		let searchTerm = queryString.substring(8);
+    // Get rid of '?search='
+    let searchTerm = queryString.substring(8);
 
-		// Convert string back to original formatting, with disallowed characters gone
-		searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', '');
-		return searchTerm;
-	}
+    // Convert string back to original formatting, with disallowed characters gone
+    searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', '');
+    return searchTerm;
+  }
 
-	/**
-	 * This function clears the results on the search page
-	 * @param {none}
-	 * @return {none}
-	 */
-	function clearResults() {
-		while (recipeSection.firstChild) {
-			recipeSection.removeChild(recipeSection.firstChild);
-		}
-	}
+  /**
+   * This function clears the results on the search page
+   * @param {none}
+   * @return {none}
+   */
+  function clearResults() {
+    while (recipeSection.firstChild) {
+      recipeSection.removeChild(recipeSection.firstChild);
+    }
+  }
 
-	/**
-	 * Shows the search results on the page
-	 * @param {Object} results The search results
-	 * @returns {none}
-	 */
-	function showResults(results) {
-		console.log(results);
+  /**
+   * Shows the search results on the page
+   * @param {Object} results The search results
+   * @returns {none}
+   */
+  function showResults(results) {
+    console.log(results);
 
-		// Clear the results before searching
-		clearResults();
+    // Clear the results before searching
+    clearResults();
 
-		// Add the recipes to the page
-		searchKeyword.innerHTML = '"' + inputList['query'] + '"';
-		for (const recipe in results) {
-			const recipeCard = document.createElement('recipe-card-component');
-			recipeCard.recipe = results[recipe];
-			recipeSection.appendChild(recipeCard);
-		}
-	}
+    // Add the recipes to the page
+    searchKeyword.innerHTML = `"${inputList.query}"`;
+    for (const recipe in results) {
+      const recipeCard = document.createElement('recipe-card-component');
+      recipeCard.recipe = results[recipe];
+      recipeSection.appendChild(recipeCard);
+    }
+  }
 
-	// Automatically parse the query string and run a search on page load
-	let searchTerm = parseQueryString();
-	let inputList = [];
+  // Automatically parse the query string and run a search on page load
+  const searchTerm = parseQueryString();
+  let inputList = [];
 
-	console.log(searchTerm);
+  console.log(searchTerm);
 
-	// Send a query to spoonacular
-	inputList['query'] = searchTerm;
-	inputList['number'] = 10;
-	inputList['offset'] = 0;
-	inputList['recipe-nutrition'] = 'true';
-	search(inputList).then(showResults);
+  // Send a query to spoonacular
+  inputList.query = searchTerm;
+  inputList.number = 10;
+  inputList.offset = 0;
+  inputList['recipe-nutrition'] = 'true';
+  search(inputList).then(showResults);
 
-	// Section is for next and previous buttons
-	const previousButton = document.querySelector('.previous-button');
-	const nextButton = document.querySelector('.next-button');
+  // Section is for next and previous buttons
+  const previousButton = document.querySelector('.previous-button');
+  const nextButton = document.querySelector('.next-button');
 
-	previousButton.disabled = true;
+  previousButton.disabled = true;
 
-	previousButton.addEventListener('click', () => {
-		inputList['offset'] -= 10;
-		search(inputList).then(showResults);
-		if (inputList['offset'] == 0) {
-			previousButton.disabled = true;
-		}
-	});
+  previousButton.addEventListener('click', () => {
+    inputList.offset -= 10;
+    search(inputList).then(showResults);
+    if (inputList.offset === 0) {
+      previousButton.disabled = true;
+    }
+  });
 
-	nextButton.addEventListener('click', () => {
-		inputList['offset'] += 10;
-		search(inputList).then(showResults);
-		previousButton.disabled = false;
-	});
+  nextButton.addEventListener('click', () => {
+    inputList.offset += 10;
+    search(inputList).then(showResults);
+    previousButton.disabled = false;
+  });
 }
