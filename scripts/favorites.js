@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', init);
 async function init() {
     console.log("init function");
 
-    const mainSection = document.querySelector(".main");
+    const mainSection = document.querySelector(".favorites-page");
 
     for (let i = 0; i < localStorage.length; i++) {
         // get one list
