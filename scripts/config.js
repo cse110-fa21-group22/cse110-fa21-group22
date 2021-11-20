@@ -1,5 +1,5 @@
 require('dotenv').config();
 
-const apiKey = process.env.API_KEY || '';
-
-export { apiKey };
+module.exports = {
+  api_key: process.env.API_KEY || ''
+}
