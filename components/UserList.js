@@ -1,7 +1,11 @@
+import { removeRecipebyList } from "./UserLocalStorage.js";
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/UserList.css';
+
+
 
 const UserListTemplate = document.createElement('template');
 UserListTemplate.innerHTML = `
@@ -15,21 +19,33 @@ UserListTemplate.innerHTML = `
         </div>`;
 
 class UserList extends HTMLElement {
-
+    
     set list(listObj) {
-
         const populateRrecipe = this.shadow.querySelector('.recipe-section');
-        console.log("UserList component, ", listObj);
+        // console.log("UserList component, ", listObj);
 
         for (let recipeid in listObj) {
             const recipeCard = document.createElement('recipe-card-component');
             recipeCard.recipe = listObj[recipeid];
 
-            let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
-            console.log("userList.js, favorite icon = ", favoriteIcon);
+            // let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
+            // console.log("userList.js, favorite icon = ", favoriteIcon);
             
 
             populateRrecipe.appendChild(recipeCard);
+            recipeCard.addEventListener('selected', (event) => {
+                const innerEvent = new CustomEvent('selected', {detail: event.detail});
+		        this.dispatchEvent(innerEvent);
+            });
+            recipeCard.addEventListener('deselected', (event) => {
+                const innerEvent = new CustomEvent('deselected', {detail: event.detail});
+		        this.dispatchEvent(innerEvent);
+            });
+            recipeCard.addEventListener('removed', (event) => {
+                removeRecipebyList(this.name, event.detail);
+                recipeCard.remove();
+            });
+            this.cardList.push(recipeCard);
         }
 
 
@@ -45,13 +61,24 @@ class UserList extends HTMLElement {
         // populateRrecipe.appendChild(recipeCard);
     }
 
+    get list() {
+        return this.cardList;
+    }
+
     set listName(name) {
+        this.name = name;
         const listTitle = this.shadow.querySelector('.list-name h4');
         listTitle.textContent = name;
     }
 
+    get listName() {
+        return this.name;
+    }
+
     constructor() {
         super();
+        this.cardList = [];
+        this.name = '';
         this.shadow = this.attachShadow({ mode: 'open' });
         this.shadow.appendChild(UserListTemplate.content.cloneNode(true));
         this.shadow.appendChild(link.cloneNode(true));
