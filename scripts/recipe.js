@@ -3,6 +3,7 @@
  * pulls up for it.
  */
 import { apiKey } from './apikey.js';
+// const apiKey = '9311cd98c1aa422fa4acba526d943064';
 const tokenKey = '?apiKey=' + apiKey;
 
 window.addEventListener('DOMContentLoaded', init);
@@ -27,8 +28,40 @@ async function init() {
 	recipeName.innerHTML =
 		recipe.title +
 		`<button class="favorite-heart">
-	   <img src="../assets/favorite.svg"/>
-	 </button>`;
+	   		<img src="../assets/favorite.svg"/>
+	 	</button>
+		 <div class="dropdown-content">
+			<label class="container">My Favorites
+			<input type="checkbox">
+			<span class="checkmark"> </span>
+			</label>
+
+    	<label class="entry">Create a new list: 
+      		<input type="text">
+    	</label>
+    
+    	<button class="submit">Submit </button>
+  	</div>`;
+
+	//show the drop-down box and change the heart color
+	let isFavorite = false; //TODO: Need to search if the recipe is favorite
+	let favoriteIcon = document.querySelector('.favorite-heart');
+	favoriteIcon.addEventListener('click', ()=>{
+		console.log("favoriteIcon clicked");
+		if(!isFavorite) {
+			console.log("show dropdown")
+			isFavorite = true;
+			favoriteIcon.src = '../assets/favorite-selected.svg';
+			let dropdownContent = document.querySelector('.dropdown-content');
+			dropdownContent.style.display = 'block';
+		} else {
+			console.log("hide dropdown")
+			isFavorite = false;
+			favoriteIcon.src = '../assets/favorite.svg';
+			let dropdownContent = document.querySelector('.dropdown-content');
+			dropdownContent.style.display = 'none';
+		}
+	});
 
 	// Set prep time
 	const prepTime = document.querySelector('#prep-time');

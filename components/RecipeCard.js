@@ -19,7 +19,7 @@ recipeCardTemplate.innerHTML = `
     	</label>
     
     	<button class="submit">Submit </button>
-  	</div>
+  		</div>
 	</div>
 	<img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
 	<img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
