@@ -71,6 +71,10 @@ class UserList extends HTMLElement {
         listTitle.textContent = name;
     }
 
+    get listName() {
+        return this.name;
+    }
+
     constructor() {
         super();
         this.cardList = [];

@@ -36,7 +36,13 @@ async function init() {
             selectedRecipes.pop(event.detail);
             console.log(selectedRecipes);
         });
-        mainSection.appendChild(userList);
+        if (userList.listName === 'favorites-master') {
+            userList.listName = 'Favorites';
+            mainSection.insertBefore(userList, mainSection.firstChild);
+
+        } else {
+            mainSection.appendChild(userList);
+        }
         recipeLists.push(userList);
     }
 
