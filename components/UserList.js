@@ -27,11 +27,7 @@ class UserList extends HTMLElement {
 
             let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
             console.log("userList.js, favorite icon = ", favoriteIcon);
-            if (favoriteIcon.src == '../assets/favorite.svg') {
-                console.log("userList.js, change icon for loop");
-                // favoriteIcon.click(); 
-                favoriteIcon.src = '../assets/favorite-selected.svg';
-            }
+            
 
             populateRrecipe.appendChild(recipeCard);
         }
