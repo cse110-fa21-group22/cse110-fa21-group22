@@ -90,7 +90,6 @@ class ImageCard extends HTMLElement {
 	}
 
 	connectedCallback() {
-		const showAllButton = this.shadow.querySelector('.show-all');
 		const leftArrow = this.shadow.querySelector('.left-arrow');
 		const rightArrow = this.shadow.querySelector('.right-arrow');
 
