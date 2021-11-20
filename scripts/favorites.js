@@ -2,7 +2,7 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
 
-import { } from "../components/UserLocalStorage.js";
+import { addRecipebyList } from "../components/UserLocalStorage.js";
 import { apiKey } from './apikey.js';
 
 const tokenKey = '&apiKey=' + apiKey;
