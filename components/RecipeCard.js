@@ -1,4 +1,4 @@
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from "./UserLocalStorage.js";
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList, createList} from "./UserLocalStorage.js";
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -11,18 +11,10 @@ recipeCardTemplate.innerHTML = `
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
 		<div class="dropdown-content">
-			<label class="container">My Favorites
-			<input type="checkbox">
-			<span class="checkmark"> </span>
-			</label>
-
-			<label class="container">My Favorite Cookies
-      		<input type="checkbox">
-      		<span class="checkmark"> </span>
-      		</label>
+			
 
     	<label class="entry">Create a new list: 
-      		<input type="text">
+      		<input type="text" class="user-input">
     	</label>
     
     	<button class="submit">Submit </button>
@@ -36,6 +28,15 @@ recipeCardTemplate.innerHTML = `
       <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
     </div>
   </article>
+`;
+
+const listEntryTemplate = document.createElement('template');
+listEntryTemplate.innerHTML = `
+<label class="container">
+	<span>My Favorites</span>
+	<input type="checkbox">
+	<span class="checkmark"> </span>
+</label>
 `;
 
 class RecipeCard extends HTMLElement {
@@ -65,6 +66,18 @@ class RecipeCard extends HTMLElement {
 		this.isFavorite = false;
 		this.dropdown = false;
 		this.initializeHearts();
+		this.initializeDropdown();
+		
+	}
+
+	initializeDropdown() {
+		const dropdownElem = this.shadow.querySelector('.dropdown-content');
+		for (let i = 0; i < localStorage.length; i++) {
+			if (localStorage.key(i) === 'favorites-master') continue;
+			const entry = listEntryTemplate.content.cloneNode(true);
+			entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));	
+			dropdownElem.insertBefore(entry, dropdownElem.firstChild);
+		}
 	}
 
 	initializeHearts() {
@@ -150,6 +163,31 @@ class RecipeCard extends HTMLElement {
 		dropdownContent.style.display = 'none';
 	}
 
+	/**
+	 * Add the recipe to all checked lists in the dropdown
+	 */
+	addToCheckedLists() {
+		let containers = this.shadow.querySelectorAll('.container');
+		for(let i = 0; i < containers.length; i++){
+			let checkmark = containers[i].querySelector('input');
+			if(checkmark.checked) {
+				addRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
+			}
+		}
+	}
+
+	/**
+	 * Adds the recipe to a custom list 
+	 */
+	addToCustomList() {
+		let userInput = this.shadow.querySelector('.user-input');
+		userInput = userInput.value;
+		if (userInput != '') {
+			console.log(userInput);
+			addRecipebyList(userInput, this.getAttribute('recipe-id'));
+		}
+	}
+
 	connectedCallback() {
 		// If the favorite icon is clicked, favorite the item
 		let recipeCard = this;
@@ -157,7 +195,6 @@ class RecipeCard extends HTMLElement {
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		let submitFavorites = this.shadow.querySelector('.submit');
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
-		let containers = this.shadow.querySelectorAll('.container');
 
 		/* Click on recipe card changes page or selects card */
 		this.addEventListener('click', () => {
@@ -230,25 +267,13 @@ class RecipeCard extends HTMLElement {
 		submitFavorites.addEventListener('click', (event) => {
 			//TODO: need to check the values that are clicked
 			if (!this.isFavorite) {
-				// let containers = this.shadow.querySelector('.container');
-				console.log("cookie");
-				console.log(containers);
-				for(let i = 0; i < containers.length; i++){
+				// add to // must have 'favorites-master' no matter what
+				addRecipe(this.getAttribute('recipe-id'));
+				this.addToCheckedLists();
+				this.addToCustomList();
+				/* Reload the page as a shortcut for showing new lists */
 
-					let checkmark = containers[i].querySelector('input');
-
-					console.log(checkmark.checked);
-					if(checkmark.checked) {
-						console.log(this.getAttribute('recipe-id'));
-						addRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'))
-						
-					}
-					// add to // must have 'favorites-master' no matter what
-					addRecipe(this.getAttribute('recipe-id'));	
-				}
-				this.isFavorite = true;
-				favoriteIcon.src = '../assets/favorite-selected.svg';
-				// add item to favorites list here
+				location.reload();
 			}
 			event.stopPropagation();
 		});
