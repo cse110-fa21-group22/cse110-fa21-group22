@@ -13,7 +13,7 @@ export function initLocalStorage() {
 export function checkFavorite(recipeID) {
 	const storage = window.localStorage;
 	var list = storage.getItem('favorites-master');
-
+    
 	var array = JSON.parse(list);
     for (let i = 0; i < array.length; i++) {
         if (array[i] == recipeID) {

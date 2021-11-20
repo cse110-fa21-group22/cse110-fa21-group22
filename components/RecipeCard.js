@@ -48,6 +48,7 @@ class RecipeCard extends HTMLElement {
 		recipeImg.src = recipeObj['image'];
 		recipeName.innerHTML = recipeObj['title'];
 		// recipeCal.innerHTML = recipeObj['calories'];
+		this.initializeHearts();
 	}
 
 	initializeHearts() {
@@ -69,7 +70,6 @@ class RecipeCard extends HTMLElement {
 		this.selectMode = false;
 		this.selected = false;
 		this.isFavorite = false;
-		this.initializeHearts();
 	}
 
 	/**
