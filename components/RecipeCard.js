@@ -1,3 +1,5 @@
+import { addRecipe, addRecipebyList } from "./UserLocalStorage.js";
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
@@ -13,6 +15,11 @@ recipeCardTemplate.innerHTML = `
 			<input type="checkbox">
 			<span class="checkmark"> </span>
 			</label>
+
+			<label class="container">My Favorite Cookies
+      		<input type="checkbox">
+      		<span class="checkmark"> </span>
+      		</label>
 
     	<label class="entry">Create a new list: 
       		<input type="text">
@@ -149,7 +156,7 @@ class RecipeCard extends HTMLElement {
 				} else {
 					this.select();
 				}
-			} else {
+			} else if (!dropdown) {
 				console.log('transferring page');
 				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 			}
@@ -204,6 +211,21 @@ class RecipeCard extends HTMLElement {
 		submitFavorites.addEventListener('click', (event) => {
 			//TODO: need to check the values that are clicked
 			if (!isFavorite) {
+				// let containers = this.shadow.querySelector('.container');
+
+				console.log(containers);
+				for(let i = 0; i < containers.length; i++){
+
+					let checkmark = containers[i].querySelector('input');
+
+					if(checkmark.checked) {
+						console.log(this.getAttribute('recipe-id'));
+						addRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'))
+						
+					}
+					// add to // must have 'favorites-master' no matter what
+					addRecipe(this.getAttribute('recipe-id'));	
+				}
 				isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
 				// add item to favorites list here
