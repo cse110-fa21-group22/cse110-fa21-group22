@@ -7,9 +7,9 @@
 // const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
 import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
 
-import {apiKey} from './config.js';
+const config = require('./config');
 
-const tokenKey = '?apiKey=' + apiKey;
+const tokenKey = '?apiKey=' + config.apiKey;
 const storage = window.localStorage;
 
 
