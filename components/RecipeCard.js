@@ -145,6 +145,7 @@ class RecipeCard extends HTMLElement {
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		let submitFavorites = this.shadow.querySelector('.submit');
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
+		let containers = this.shadow.querySelectorAll('.container');
 
 		/* Click on recipe card changes page or selects card */
 		this.addEventListener('click', () => {
@@ -210,14 +211,15 @@ class RecipeCard extends HTMLElement {
 		//submit button for favorites dropdown
 		submitFavorites.addEventListener('click', (event) => {
 			//TODO: need to check the values that are clicked
-			if (!isFavorite) {
+			if (!this.isFavorite) {
 				// let containers = this.shadow.querySelector('.container');
-
+				console.log("cookie");
 				console.log(containers);
 				for(let i = 0; i < containers.length; i++){
 
 					let checkmark = containers[i].querySelector('input');
 
+					console.log(checkmark.checked);
 					if(checkmark.checked) {
 						console.log(this.getAttribute('recipe-id'));
 						addRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'))
@@ -226,11 +228,11 @@ class RecipeCard extends HTMLElement {
 					// add to // must have 'favorites-master' no matter what
 					addRecipe(this.getAttribute('recipe-id'));	
 				}
-				isFavorite = true;
+				this.isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
 				// add item to favorites list here
 			} else {
-				isFavorite = false;
+				this.isFavorite = false;
 				favoriteIcon.src = '../assets/favorite.svg';
 				// remove item from favorites list here
 			}
