@@ -5,7 +5,7 @@
 import { } from "../components/UserLocalStorage.js";
 import {apiKey} from './apikey.js';
 
-const tokenKey = '?apiKey=' + apiKey;
+const tokenKey = '&apiKey=' + apiKey;
 
 const storage = window.localStorage;
 let recipeLists = [];
@@ -22,11 +22,9 @@ async function init() {
         const userList = document.createElement('user-list');
         let arr_recipeid = JSON.parse(storage.getItem(localStorage.key(i)));
         console.log("arr_recipeid = ", arr_recipeid);
-        let recipe_arr = [];
-        // iterate over the list, fetching all recipes 
-        for (let recipeid of arr_recipeid) {
-            recipe_arr.push(await getRecipebyID(recipeid));
-        }
+
+        
+        let recipe_arr = await getRecipeArr(arr_recipeid);
         userList.list = recipe_arr;
         userList.listName = localStorage.key(i);
         mainSection.appendChild(userList);
@@ -44,6 +42,25 @@ async function init() {
     //     result.push(recipeCard);
     //     recipeCard.recipeCardSelect = false;
     // }
+}
+
+async function getRecipeArr(id_arr) {
+    const fetchEndPoint =
+        'https://api.spoonacular.com/recipes/informationBulk?ids=' +
+        id_arr.join(',') + tokenKey;
+
+
+    console.log("fetch_endpoint", fetchEndPoint);
+
+    const fetchResults = await fetch(fetchEndPoint)
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error('Fetch in favorite page failed');
+            console.error(error);
+        });
+
+    console.log("result is: ", fetchResults);
+    return fetchResults;
 }
 
 async function getRecipebyID(id) {
