@@ -1,14 +1,15 @@
 /**
  * API key for connecting with Spoonatular API
  */
- require('dotenv').config();
 
 // console.log(process.env.API_KEY);
 // import {apiKey} from './apikey.js';?
 // const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
 import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
 
-const tokenKey = '?apiKey=' + process.env.API_KEY;
+import {apiKey} from './config.js';
+
+const tokenKey = '?apiKey=' + apiKey;
 const storage = window.localStorage;
 
 
