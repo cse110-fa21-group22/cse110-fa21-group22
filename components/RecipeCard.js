@@ -1,4 +1,4 @@
-import { addRecipe, addRecipebyList, removeRecipe, removeRecipebyList } from "./UserLocalStorage.js";
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from "./UserLocalStorage.js";
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -48,6 +48,18 @@ class RecipeCard extends HTMLElement {
 		recipeImg.src = recipeObj['image'];
 		recipeName.innerHTML = recipeObj['title'];
 		// recipeCal.innerHTML = recipeObj['calories'];
+		this.initializeHearts();
+	}
+
+	initializeHearts() {
+		console.log("Checking favorites");
+		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+		this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
+		if (this.isFavorite) {
+			favoriteIcon.src = '../assets/favorite-selected.svg';
+		} else {
+			favoriteIcon.src = '../assets/favorite.svg';
+		}
 	}
 
 	constructor() {
@@ -58,24 +70,6 @@ class RecipeCard extends HTMLElement {
 		this.selectMode = false;
 		this.selected = false;
 		this.isFavorite = false;
-		this.initializeHearts();
-	}
-
-	initializeHearts() {
-		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
-		if (this.isFavorite) {
-			favoriteIcon.src = '../assets/favorite-selected.svg';
-		} else {
-			favoriteIcon.src = '../assets/favorite.svg';
-		}
-	}
-
-	/**
-	 * Fetches from localstorage whether the recipe is already favorited or not
-	 * @return {boolean} whether the recipe is already favorited
-	 */
-	getIsFavorite() {
-		return false;
 	}
 
 	/**
@@ -157,7 +151,7 @@ class RecipeCard extends HTMLElement {
 				} else {
 					this.select();
 				}
-			} else if (!dropdown) {
+			} else {
 				console.log('transferring page');
 				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 			}

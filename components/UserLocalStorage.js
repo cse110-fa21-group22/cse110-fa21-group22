@@ -6,6 +6,23 @@ export function initLocalStorage() {
 	store.setItem('favorites-master', JSON.stringify(arr_temp));
 }
 
+/*
+* Fetches from localstorage whether the recipe is already favorited or not
+* @return {boolean} whether the recipe is already favorited
+*/
+export function checkFavorite(recipeID) {
+	const storage = window.localStorage;
+	var list = storage.getItem('favorites-master');
+    
+	var array = JSON.parse(list);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == recipeID) {
+            return true;
+        }
+    }
+ 	return false;
+}
+
 export function addRecipe(recipeID) {
 	const storage = window.localStorage;
 	var list = storage.getItem('favorites-master');
