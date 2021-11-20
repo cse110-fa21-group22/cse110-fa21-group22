@@ -9,6 +9,7 @@ const tokenKey = '&apiKey=' + apiKey;
 
 const storage = window.localStorage;
 let recipeLists = [];
+let selectedRecipes = [];
 window.addEventListener('DOMContentLoaded', init);
 
 
@@ -27,6 +28,14 @@ async function init() {
         let recipe_arr = await getRecipeArr(arr_recipeid);
         userList.list = recipe_arr;
         userList.listName = localStorage.key(i);
+        userList.addEventListener('selected', (event) => {
+            selectedRecipes.push(event.detail);
+            console.log(selectedRecipes);
+        });
+        userList.addEventListener('deselected', (event) => {
+            selectedRecipes.pop(event.detail);
+            console.log(selectedRecipes);
+        });
         mainSection.appendChild(userList);
         recipeLists.push(userList);
     }
@@ -88,43 +97,46 @@ let editButton = document.getElementById('edit');
 let cancelButton = document.getElementById('cancel');
 let moveButton = document.getElementById('move');
 
-editButton.addEventListener('click', function () {
-	if (!editMode) {
-		editMode = true;
-		document.body.style.backgroundColor = '#EEEEEE';
-		editButton.style.display = 'none';
-		cancelButton.style.display = 'inline-block';
-		moveButton.style.display = 'inline-block';
-		//edit favorites list titles
-		let listTitles = document.querySelectorAll('h4');
-		for (let t = 0; t < listTitles.length; t++) {
-			listTitles[t].setAttribute('contenteditable', true);
-		}
-        for (const list of recipeLists) {
-            for (let i = 0; i < list.list.length; i++) {
-                list.list[i].enterSelectMode();
-            }
+editButton.addEventListener('click', () => {
+	if (editMode) return;
+    editMode = true;
+    document.body.style.backgroundColor = '#EEEEEE';
+    editButton.style.display = 'none';
+    cancelButton.style.display = 'inline-block';
+    moveButton.style.display = 'inline-block';
+    //edit favorites list titles
+    let listTitles = document.querySelectorAll('h4');
+    for (let t = 0; t < listTitles.length; t++) {
+        listTitles[t].setAttribute('contenteditable', true);
+    }
+    for (const list of recipeLists) {
+        for (let i = 0; i < list.list.length; i++) {
+            list.list[i].enterSelectMode();
         }
-	}
+    }
 });
 
-cancelButton.addEventListener('click', function () {
-	if (editMode) {
-		// cancel the edit mode
-		editMode = false;
-		document.body.style.backgroundColor = '#FFFFFF';
-		editButton.style.display = 'inline-block';
-		cancelButton.style.display = 'none';
-		moveButton.style.display = 'none';
-		//edit favorites list titles
-		let listTitles = document.querySelectorAll('h4');
-		for (let t = 0; t < listTitles.length; t++) {
-			listTitles[t].setAttribute('contenteditable', false);
-		}
-        for (const list of recipeLists) {
-            for (let i = 0; i < list.list.length; i++) {
-                list.list[i].exitSelectMode();
-            }
+cancelButton.addEventListener('click', () => {
+	if (!editMode) return; 
+    // cancel the edit mode
+    editMode = false;
+    document.body.style.backgroundColor = '#FFFFFF';
+    editButton.style.display = 'inline-block';
+    cancelButton.style.display = 'none';
+    moveButton.style.display = 'none';
+    //edit favorites list titles
+    let listTitles = document.querySelectorAll('h4');
+    for (let t = 0; t < listTitles.length; t++) {
+        listTitles[t].setAttribute('contenteditable', false);
+    }
+    for (const list of recipeLists) {
+        for (let i = 0; i < list.list.length; i++) {
+            list.list[i].exitSelectMode();
         }
-	}
+    }
+});
+
+moveButton.addEventListener('click', () => {
+    if (!editMode) return;
+
 });

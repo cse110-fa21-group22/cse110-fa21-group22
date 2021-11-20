@@ -35,6 +35,14 @@ class UserList extends HTMLElement {
             }
 
             populateRrecipe.appendChild(recipeCard);
+            recipeCard.addEventListener('selected', (event) => {
+                const innerEvent = new CustomEvent('selected', {detail: event.detail});
+		        this.dispatchEvent(innerEvent);
+            });
+            recipeCard.addEventListener('deselected', (event) => {
+                const innerEvent = new CustomEvent('deselected', {detail: event.detail});
+		        this.dispatchEvent(innerEvent);
+            });
             this.cardList.push(recipeCard);
         }
 

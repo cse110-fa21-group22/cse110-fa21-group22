@@ -56,7 +56,7 @@ class RecipeCard extends HTMLElement {
 		this.shadow.appendChild(recipeCardTemplate.content.cloneNode(true));
 		this.shadow.appendChild(link.cloneNode(true));
 		this.selectMode = false;
-		this.selected = false;
+		this.isSelected = false;
 		this.isFavorite = false;
 		this.dropdown = false;
 		this.initializeHearts();
@@ -85,7 +85,6 @@ class RecipeCard extends HTMLElement {
 	 */
 	enterSelectMode() {
 		this.selectMode = true;
-		this.selected = true;
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		favoriteRemove.style.display = 'block';
 	}
@@ -96,7 +95,6 @@ class RecipeCard extends HTMLElement {
 	 */
 	exitSelectMode() {
 		this.selectMode = false;
-		this.selected = false;
 		this.deselect();
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		favoriteRemove.style.display = 'none';
@@ -105,11 +103,13 @@ class RecipeCard extends HTMLElement {
 	/**
 	 * Selects the recipe with a checkmark
 	 */
-	 select() {
+	select() {
 		let checkmark = this.shadow.querySelector('.recipe-checkmark');
 		this.isSelected = true;
 		checkmark.style.display = 'block';
 		this.style.filter = 'brightness(90%)';
+		const event = new CustomEvent('selected', {detail: this.getAttribute('recipe-id')});
+		this.dispatchEvent(event);
 	}
 
 	/**
@@ -120,7 +120,10 @@ class RecipeCard extends HTMLElement {
 		this.isSelected = false;
 		checkmark.style.display = 'none';
 		this.style.filter = 'brightness(100%)';
+		const event = new CustomEvent('deselected', {detail: this.getAttribute('recipe-id')});
+		this.dispatchEvent(event);
 	}
+	
 
 	/**
 	 * Shows the favorites dropdown on the recipe card
