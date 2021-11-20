@@ -50,7 +50,7 @@ async function init() {
 
 	// populating local storage testing 
 	var list = storage.getItem('favorites-master');
-	createList("list%2"); 
+	// createList("list%2"); 
 	createList("list%3"); 
 	createList("list%4"); 
 	createList("list%5"); 
