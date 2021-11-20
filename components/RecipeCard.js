@@ -48,6 +48,11 @@ class RecipeCard extends HTMLElement {
 		recipeImg.src = recipeObj['image'];
 		recipeName.innerHTML = recipeObj['title'];
 		// recipeCal.innerHTML = recipeObj['calories'];
+
+		if (checkFavorite(recipeObj['id'])) {
+			this.isFavorite = true;
+			this.initializeHearts();
+		}
 	}
 
 	constructor() {
