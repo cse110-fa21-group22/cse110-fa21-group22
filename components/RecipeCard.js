@@ -1,4 +1,4 @@
-import { addRecipe, addRecipebyList, checkFavorite } from "./UserLocalStorage.js";
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from "./UserLocalStorage.js";
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -167,6 +167,12 @@ class RecipeCard extends HTMLElement {
 				console.log('Prompting user to add to favorites lists');
 			} else {
 				this.isFavorite = false;
+				removeRecipe(this.getAttribute('recipe-id'));
+				console.log(containers.length);
+				for(let i = 0; i < containers.length; i++){
+					console.log(containers[i].textContent)
+					removeRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'));
+				}
 				favoriteIcon.src = '../assets/favorite.svg';
 				console.log('Remove item from ALL favorites lists here');
 			}
@@ -188,7 +194,6 @@ class RecipeCard extends HTMLElement {
 		favoriteRemove.addEventListener('click', (event) => {
 			event.stopPropagation();
 			console.log('Removing recipe from THIS list...');
-			// Remove recipe from favorites list
 		});
 
 		/* stops propagation of clicks on dropdown content box to the recipe card
@@ -225,10 +230,6 @@ class RecipeCard extends HTMLElement {
 				this.isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';
 				// add item to favorites list here
-			} else {
-				this.isFavorite = false;
-				favoriteIcon.src = '../assets/favorite.svg';
-				// remove item from favorites list here
 			}
 			event.stopPropagation();
 		});
