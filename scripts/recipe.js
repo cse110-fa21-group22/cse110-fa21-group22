@@ -12,6 +12,14 @@ window.addEventListener('DOMContentLoaded', init);
  * Initializes the recipe page
  */
 async function init() {
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function() {
+		  navigator.serviceWorker.register('../sw.js').then(() => {},
+		    err => {
+			console.error(err);
+		  	});
+		});
+	}
 	const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
 	const recipe = data[0];
 	const equipment = data[1];

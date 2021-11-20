@@ -15,6 +15,14 @@ window.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     console.log("init function");
+    if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function() {
+		  navigator.serviceWorker.register('../sw.js').then(() => {},
+		    err => {
+			console.error(err);
+		  	});
+		});
+	}
 
     const mainSection = document.querySelector(".favorites-page");
 
