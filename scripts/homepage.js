@@ -19,6 +19,14 @@ const userFavoriteSection = document.querySelector(
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
 	initLocalStorageDoubt();
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function() {
+		  navigator.serviceWorker.register('../sw.js').then(() => {},
+		    err => {
+			console.error(err);
+		  	});
+		});
+	}
 
 	//console.log('Init.. ');
 	//console.log('Fetching recipes...');
