@@ -52,7 +52,7 @@ class RecipeCard extends HTMLElement {
 	}
 
 	initializeHearts() {
-		console.log("Checking favorites");
+		// console.log("Checking favorites");
 		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
 		this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
 		if (this.isFavorite) {
@@ -109,6 +109,7 @@ class RecipeCard extends HTMLElement {
 	 * Deselects the recipe by removing the checkmark
 	 */
 	deselect() {
+		let checkmark = this.shadow.querySelector('.recipe-checkmark');
 		this.isSelected = false;
 		checkmark.style.display = 'none';
 		this.style.filter = 'brightness(100%)';

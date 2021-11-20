@@ -18,7 +18,7 @@ const userFavoriteSection = document.querySelector(
 
 window.addEventListener('DOMContentLoaded', init);
 async function init() {
-	initLocalStorage();
+	initLocalStorageDoubt();
 
 	//console.log('Init.. ');
 	//console.log('Fetching recipes...');
@@ -135,6 +135,18 @@ function clearResults() {
 function clearObject() {
 	for (var member in recipeData) delete recipeData[member];
 }
+
+/**
+ * it is possible that the user click the icon and coming back to the main page
+ * therefore, only initilize the favorite-master local storage when it does not even exist 
+ */
+function initLocalStorageDoubt(){
+	// meaning that favorites-master does not exist 
+	if (storage.getItem('favorites-master') == null){
+		initLocalStorage(); 
+	}
+}
+
 
 async function showFavoriteSection() {
 	var list = storage.getItem('favorites-master');
