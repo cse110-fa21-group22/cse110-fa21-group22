@@ -84,7 +84,6 @@ async function getRecipebyID(id) {
 }
 
 let editMode = false;
-let recipeCardSelect = false;
 let editButton = document.getElementById('edit');
 let cancelButton = document.getElementById('cancel');
 let moveButton = document.getElementById('move');
@@ -106,7 +105,6 @@ editButton.addEventListener('click', function () {
                 list.list[i].enterSelectMode();
             }
         }
-		recipeCardSelect = true;
 	}
 });
 
@@ -128,6 +126,5 @@ cancelButton.addEventListener('click', function () {
                 list.list[i].exitSelectMode();
             }
         }
-		recipeCardSelect = false;
 	}
 });
