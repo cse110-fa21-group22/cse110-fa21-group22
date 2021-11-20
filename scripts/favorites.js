@@ -23,9 +23,9 @@ async function init() {
         const userList = document.createElement('user-list');
         let arr_recipeid = JSON.parse(storage.getItem(localStorage.key(i)));
         console.log("arr_recipeid = ", arr_recipeid);
-
+        let recipe_arr = [];
         
-        let recipe_arr = await getRecipeArr(arr_recipeid);
+        if (arr_recipeid.length) recipe_arr = await getRecipeArr(arr_recipeid);
         userList.list = recipe_arr;
         userList.listName = localStorage.key(i);
         userList.addEventListener('selected', (event) => {
