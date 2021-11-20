@@ -2,8 +2,8 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
 
-import { addRecipebyList } from "../components/UserLocalStorage.js";
-import {apiKey} from './apikey.js';
+import { } from "../components/UserLocalStorage.js";
+import { apiKey } from './apikey.js';
 
 const tokenKey = '&apiKey=' + apiKey;
 
@@ -79,7 +79,7 @@ async function getRecipebyID(id) {
         "&includeNutrition=false";
 
 
-    console.log("fetch_endpoint", fetchEndPoint);
+    // console.log("fetch_endpoint", fetchEndPoint);
 
     const fetchResults = await fetch(fetchEndPoint)
         .then((response) => response.json())
@@ -88,7 +88,7 @@ async function getRecipebyID(id) {
             console.error(error);
         });
 
-    console.log("result is: ", fetchResults);
+    // console.log("result is: ", fetchResults);
     return fetchResults;
 }
 
