@@ -1,3 +1,5 @@
+import { removeRecipebyList } from "./UserLocalStorage.js";
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
@@ -39,6 +41,10 @@ class UserList extends HTMLElement {
                 const innerEvent = new CustomEvent('deselected', {detail: event.detail});
 		        this.dispatchEvent(innerEvent);
             });
+            recipeCard.addEventListener('removed', (event) => {
+                removeRecipebyList(this.name, event.detail);
+                recipeCard.remove();
+            });
             this.cardList.push(recipeCard);
         }
 
@@ -60,6 +66,7 @@ class UserList extends HTMLElement {
     }
 
     set listName(name) {
+        this.name = name;
         const listTitle = this.shadow.querySelector('.list-name h4');
         listTitle.textContent = name;
     }
@@ -67,6 +74,7 @@ class UserList extends HTMLElement {
     constructor() {
         super();
         this.cardList = [];
+        this.name = '';
         this.shadow = this.attachShadow({ mode: 'open' });
         this.shadow.appendChild(UserListTemplate.content.cloneNode(true));
         this.shadow.appendChild(link.cloneNode(true));

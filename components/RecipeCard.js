@@ -89,7 +89,7 @@ class RecipeCard extends HTMLElement {
 	 */
 	exitSelectMode() {
 		this.selectMode = false;
-		this.deselect();
+		if (this.isSelected) this.deselect();
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		favoriteRemove.style.display = 'none';
 	}
@@ -117,7 +117,13 @@ class RecipeCard extends HTMLElement {
 		const event = new CustomEvent('deselected', {detail: this.getAttribute('recipe-id')});
 		this.dispatchEvent(event);
 	}
-	
+	/**
+	 * Dispatches an event to remove this recipe
+	 */
+	delete() {
+		const event = new CustomEvent('removed', {detail: this.getAttribute('recipe-id')});
+		this.dispatchEvent(event);
+	}
 
 	/**
 	 * Shows the favorites dropdown on the recipe card
@@ -201,6 +207,7 @@ class RecipeCard extends HTMLElement {
 		favoriteRemove.addEventListener('click', (event) => {
 			event.stopPropagation();
 			console.log('Removing recipe from THIS list...');
+			this.delete();
 		});
 
 		/* stops propagation of clicks on dropdown content box to the recipe card
