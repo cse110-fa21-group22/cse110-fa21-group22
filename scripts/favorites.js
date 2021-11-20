@@ -2,7 +2,7 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
 
-import { } from "../components/UserLocalStorage.js";
+import { addRecipebyList } from "../components/UserLocalStorage.js";
 import {apiKey} from './apikey.js';
 
 const tokenKey = '&apiKey=' + apiKey;
@@ -138,5 +138,19 @@ cancelButton.addEventListener('click', () => {
 
 moveButton.addEventListener('click', () => {
     if (!editMode) return;
+    const modal = document.querySelector('.modal');
+    for (let i = 0; i < localStorage.length; i++) {
+        if (localStorage.key(i) === 'favorites-master' || localStorage.key(i) === 'My Favorites ') continue;
+        const button = document.createElement('button');
+        button.innerHTML = localStorage.key(i);
+        button.addEventListener('click', () => {
+            for (const id of selectedRecipes) {
+                addRecipebyList(localStorage.key(i), id);
+            }
+            document.location.reload(true);
+        })
+        modal.appendChild(button);
+    }
+    modal.style.display = "block";
 
 });
