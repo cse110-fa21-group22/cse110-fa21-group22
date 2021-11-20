@@ -1,3 +1,5 @@
+import { addRecipe, addRecipebyList } from "./UserLocalStorage.js";
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
@@ -158,15 +160,15 @@ class RecipeCard extends HTMLElement {
 				console.log(containers);
 				for(let i = 0; i < containers.length; i++){
 
-					let checkmark = this.shadow.querySelector('input');
-					console.log(checkmark);
-					console.log(checkmark.getAttribute('checked'));
-					if(checkmark.getAttribute('checked')) {
-						console.log(containers[i].textContent);
+					let checkmark = containers[i].querySelector('input');
+
+					if(checkmark.checked) {
+						console.log(this.getAttribute('recipe-id'));
+						addRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'))
+						
 					}
-
-					// console.log(containers[i].textContent);
-
+					// add to // must have 'favorites-master' no matter what
+					addRecipe(this.getAttribute('recipe-id'));	
 				}
 				isFavorite = true;
 				favoriteIcon.src = '../assets/favorite-selected.svg';

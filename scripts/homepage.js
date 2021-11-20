@@ -50,11 +50,11 @@ async function init() {
 
 	// populating local storage testing 
 	var list = storage.getItem('favorites-master');
-	createList("list%2"); 
-	createList("list%3"); 
-	createList("list%4"); 
-	createList("list%5"); 
-	createList("list%10"); 
+	// createList("list%2"); 
+	// createList("list%3"); 
+	// createList("list%4"); 
+	// createList("list%5"); 
+	// createList("list%10"); 
 
 	// return null if not found
 	// let a = storage.getItem("dsf");

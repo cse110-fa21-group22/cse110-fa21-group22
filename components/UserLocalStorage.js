@@ -11,7 +11,12 @@ export function addRecipe(recipeID) {
 	var list = storage.getItem('favorites-master');
 
 	var array = JSON.parse(list);
-	array.push(recipeID);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == recipeID) {
+            return;
+        }
+    }
+ 	array.push(recipeID);
 
 	storage.setItem('favorites-master', JSON.stringify(array));
 }
@@ -48,9 +53,18 @@ export function removeList(listName){
 
 export function addRecipebyList(listName, recipeID) {
     const storage = window.localStorage;
+    if (storage.getItem(listName) == null) {
+        createList(listName);
+    }
     if (storage.getItem(listName) != null) {
         var list = storage.getItem(listName);
         var array = JSON.parse(list);
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] == recipeID) {
+                return;
+            }
+        }
+    
         array.push(recipeID);
         storage.setItem(listName, JSON.stringify(array));
     }
