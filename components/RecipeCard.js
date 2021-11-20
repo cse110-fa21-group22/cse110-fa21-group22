@@ -11,15 +11,9 @@ recipeCardTemplate.innerHTML = `
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
 		<div class="dropdown-content">
-			<label class="container">My Favorites
-			<input type="checkbox">
-			<span class="checkmark"> </span>
-			</label>
+			<div class="checkbox-container">
 
-			<label class="container">My Favorite Cookies
-      		<input type="checkbox">
-      		<span class="checkmark"> </span>
-      		</label>
+			</div>
 
     	<label class="entry">Create a new list: 
       		<input type="text" class="user-input">
@@ -170,6 +164,33 @@ class RecipeCard extends HTMLElement {
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		let submitFavorites = this.shadow.querySelector('.submit');
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
+
+		/* automatically populate the checkbox section */
+		/* HTML generated appears as follows
+
+		<label class="container">
+		<input type="checkbox">
+		<span class="checkmark"></span>
+		</label>
+
+		*/
+		let checkboxContainer = this.shadow.querySelector('.checkbox-container');
+		for (let i = 0; i < window.localStorage.length; i++) {
+			let listName = window.localStorage.key(i)//JSON.parse(window.localStorage.getItem());
+			if (listName == 'favorites-master') {
+				continue;
+			}
+			let labelElem = document.createElement('label');
+			let inputElem = document.createElement('input');
+			let spanElem = document.createElement('span');
+			labelElem.innerText = listName;
+			inputElem.setAttribute('type', 'checkbox');
+			labelElem.classList.add('container');
+			spanElem.classList.add('checkmark');
+			labelElem.appendChild(inputElem);
+			labelElem.appendChild(spanElem);
+			checkboxContainer.appendChild(labelElem);
+		}
 
 		/* Click on recipe card changes page or selects card */
 		this.addEventListener('click', () => {
