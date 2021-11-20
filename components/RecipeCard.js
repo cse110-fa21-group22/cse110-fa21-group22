@@ -58,6 +58,7 @@ class RecipeCard extends HTMLElement {
 		this.selectMode = false;
 		this.selected = false;
 		this.isFavorite = false;
+		this.dropdown = false;
 		this.initializeHearts();
 	}
 
@@ -115,6 +116,7 @@ class RecipeCard extends HTMLElement {
 	 * Deselects the recipe by removing the checkmark
 	 */
 	deselect() {
+		let checkmark = this.shadow.querySelector('.recipe-checkmark');
 		this.isSelected = false;
 		checkmark.style.display = 'none';
 		this.style.filter = 'brightness(100%)';
@@ -125,6 +127,7 @@ class RecipeCard extends HTMLElement {
 	 */
 	showDropdown() {
 		console.log('showing dropdown');
+		this.dropdown = true;
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
 		dropdownContent.style.display = 'block';
 	}
@@ -134,6 +137,7 @@ class RecipeCard extends HTMLElement {
 	 */
 	hideDropdown() {
 		console.log('hiding dropdown');
+		this.dropdown = false;
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
 		dropdownContent.style.display = 'none';
 	}
@@ -157,7 +161,7 @@ class RecipeCard extends HTMLElement {
 				} else {
 					this.select();
 				}
-			} else if (!dropdown) {
+			} else if (!this.dropdown) {
 				console.log('transferring page');
 				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 			}
