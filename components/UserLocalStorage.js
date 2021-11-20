@@ -6,8 +6,8 @@ const store = window.localStorage;
  * this function should only be called once 
  */
 export function initLocalStorage() {
-	var arr_temp = [];
-	store.setItem('favorites-master', JSON.stringify(arr_temp));
+    var arr_temp = [];
+    store.setItem('favorites-master', JSON.stringify(arr_temp));
 }
 
 /*
@@ -15,16 +15,16 @@ export function initLocalStorage() {
 * @return {boolean} whether the recipe is already favorited
 */
 export function checkFavorite(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
-    
-	var array = JSON.parse(list);
+    const storage = window.localStorage;
+    var list = storage.getItem('favorites-master');
+
+    var array = JSON.parse(list);
     for (let i = 0; i < array.length; i++) {
         if (array[i] == recipeID) {
             return true;
         }
     }
- 	return false;
+    return false;
 }
 
 /**
@@ -33,18 +33,18 @@ export function checkFavorite(recipeID) {
  * @param {string} recipeID ID property of the recipe 
  */
 export function addRecipe(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
+    const storage = window.localStorage;
+    var list = storage.getItem('favorites-master');
 
-	var array = JSON.parse(list);
+    var array = JSON.parse(list);
     for (let i = 0; i < array.length; i++) {
         if (array[i] == recipeID) {
             return;
         }
     }
- 	array.push(recipeID);
+    array.push(recipeID);
 
-	storage.setItem('favorites-master', JSON.stringify(array));
+    storage.setItem('favorites-master', JSON.stringify(array));
 }
 
 /**
@@ -52,16 +52,16 @@ export function addRecipe(recipeID) {
  * @param {*} recipeID ID property of the recipe 
  */
 export function removeRecipe(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
+    const storage = window.localStorage;
+    var list = storage.getItem('favorites-master');
 
-	var array = JSON.parse(list);
-	const index = array.indexOf(recipeID);
-	if (index > -1) {
-		array.splice(index, 1);
-	}
+    var array = JSON.parse(list);
+    const index = array.indexOf(recipeID);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
 
-	storage.setItem('favorites-master', JSON.stringify(array));
+    storage.setItem('favorites-master', JSON.stringify(array));
 }
 
 /**
@@ -83,11 +83,11 @@ export function createList(listName) {
  * do nothing when listName is not in the storage 
  * @param {*} listName name of the list 
  */
-export function removeList(listName){
+export function removeList(listName) {
     const storage = window.localStorage;
     // making sure that local storage does not alraedy have it 
     if (storage.getItem(listName) != null) {
-        storage.removeItem(listName); 
+        storage.removeItem(listName);
     }
 }
 
@@ -110,7 +110,7 @@ export function addRecipebyList(listName, recipeID) {
                 return;
             }
         }
-    
+
         array.push(recipeID);
         storage.setItem(listName, JSON.stringify(array));
     }
