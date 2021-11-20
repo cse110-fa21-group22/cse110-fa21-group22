@@ -5,13 +5,20 @@
 // console.log(process.env.API_KEY);
 // import {apiKey} from './apikey.js';?
 // const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
-import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
+import {
+	addRecipe,
+	initLocalStorage,
+	removeRecipe,
+	createList,
+	removeList,
+	addRecipebyList,
+	removeRecipebyList,
+} from '../components/UserLocalStorage.js';
 
 import apiKey from './apikey.js';
 
 const tokenKey = '?apiKey=' + apiKey;
 const storage = window.localStorage;
-
 
 const stepping_size = 10; // Stepping-size number of recipes to append to end after user scrolls to bottom
 const recipeData = {}; // Data in each stepping size?
@@ -24,11 +31,13 @@ window.addEventListener('DOMContentLoaded', init);
 async function init() {
 	initLocalStorageDoubt();
 	if ('serviceWorker' in navigator) {
-		window.addEventListener('load', function() {
-		  navigator.serviceWorker.register('../sw.js').then(() => {},
-		    err => {
-			console.error(err);
-		  	});
+		window.addEventListener('load', function () {
+			navigator.serviceWorker.register('../sw.js').then(
+				() => {},
+				(err) => {
+					console.error(err);
+				}
+			);
 		});
 	}
 
@@ -60,13 +69,13 @@ async function init() {
 		showResults(recipeData);
 	});
 
-	// populating local storage testing 
+	// populating local storage testing
 	var list = storage.getItem('favorites-master');
-	// createList("list%2"); 
-	// createList("list%3"); 
-	// createList("list%4"); 
-	// createList("list%5"); 
-	// createList("list%10"); 
+	// createList("list%2");
+	// createList("list%3");
+	// createList("list%4");
+	// createList("list%5");
+	// createList("list%10");
 
 	// return null if not found
 	// let a = storage.getItem("dsf");
@@ -95,14 +104,13 @@ async function fetch_random_recipes() {
 				for (let i = 0; i < parseInt(stepping_size); i++) {
 					recipeData[data.recipes[i].id] = data.recipes[i];
 
-					// // testing for local storage 
+					// // testing for local storage
 					// addRecipe(data.recipes[i].id);
 					// if(i % 2 == 0){addRecipebyList("list%2", data.recipes[i].id);}
 					// if(i % 3 == 0){addRecipebyList("list%3", data.recipes[i].id);}
 					// if(i % 4 == 0){addRecipebyList("list%4", data.recipes[i].id);}
 					// if(i % 5 == 0){addRecipebyList("list%5", data.recipes[i].id);}
 					// if(i % 10 == 0){addRecipebyList("list%10", data.recipes[i].id);}
-
 				}
 				resolve();
 			})
@@ -150,15 +158,14 @@ function clearObject() {
 
 /**
  * it is possible that the user click the icon and coming back to the main page
- * therefore, only initilize the favorite-master local storage when it does not even exist 
+ * therefore, only initilize the favorite-master local storage when it does not even exist
  */
-function initLocalStorageDoubt(){
-	// meaning that favorites-master does not exist 
-	if (storage.getItem('favorites-master') == null){
-		initLocalStorage(); 
+function initLocalStorageDoubt() {
+	// meaning that favorites-master does not exist
+	if (storage.getItem('favorites-master') == null) {
+		initLocalStorage();
 	}
 }
-
 
 async function showFavoriteSection() {
 	var list = storage.getItem('favorites-master');
@@ -176,11 +183,13 @@ async function showFavoriteSection() {
 async function getRecipebyID(id) {
 	const fetchEndPoint =
 		'https://api.spoonacular.com/recipes/' +
-		id + '/' + "information" + tokenKey +
-		"&includeNutrition=false";
+		id +
+		'/' +
+		'information' +
+		tokenKey +
+		'&includeNutrition=false';
 
-
-	console.log("fetch_endpoint", fetchEndPoint);
+	console.log('fetch_endpoint', fetchEndPoint);
 
 	const fetchResults = await fetch(fetchEndPoint)
 		.then((response) => response.json())

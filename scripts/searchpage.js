@@ -15,11 +15,13 @@ window.addEventListener('DOMContentLoaded', init);
  */
 function init() {
 	if ('serviceWorker' in navigator) {
-		window.addEventListener('load', function() {
-		  navigator.serviceWorker.register('../sw.js').then(() => {},
-		    err => {
-			console.error(err);
-		  	});
+		window.addEventListener('load', function () {
+			navigator.serviceWorker.register('../sw.js').then(
+				() => {},
+				(err) => {
+					console.error(err);
+				}
+			);
 		});
 	}
 	const searchKeyword = document.querySelector('.search-word');
@@ -86,7 +88,7 @@ function init() {
 	search(inputList).then(showResults);
 
 	// Section is for next and previous buttons
-	const previousButton = document.querySelector('.previous-button')
+	const previousButton = document.querySelector('.previous-button');
 	const nextButton = document.querySelector('.next-button');
 
 	previousButton.disabled = true;
@@ -94,7 +96,7 @@ function init() {
 	previousButton.addEventListener('click', () => {
 		inputList['offset'] -= 10;
 		search(inputList).then(showResults);
-		if(inputList['offset'] == 0){
+		if (inputList['offset'] == 0) {
 			previousButton.disabled = true;
 		}
 	});
