@@ -19,14 +19,14 @@ class UserList extends HTMLElement {
     set list(listObj) {
 
         const populateRrecipe = this.shadow.querySelector('.recipe-section');
-        console.log("UserList component, ", listObj);
+        // console.log("UserList component, ", listObj);
 
         for (let recipeid in listObj) {
             const recipeCard = document.createElement('recipe-card-component');
             recipeCard.recipe = listObj[recipeid];
 
-            let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
-            console.log("userList.js, favorite icon = ", favoriteIcon);
+            // let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
+            // console.log("userList.js, favorite icon = ", favoriteIcon);
             
 
             populateRrecipe.appendChild(recipeCard);
