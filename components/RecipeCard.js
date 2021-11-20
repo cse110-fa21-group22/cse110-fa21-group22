@@ -11,15 +11,7 @@ recipeCardTemplate.innerHTML = `
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
 		<div class="dropdown-content">
-			<label class="container">My Favorites
-			<input type="checkbox">
-			<span class="checkmark"> </span>
-			</label>
-
-			<label class="container">My Favorite Cookies
-      		<input type="checkbox">
-      		<span class="checkmark"> </span>
-      		</label>
+			
 
     	<label class="entry">Create a new list: 
       		<input type="text" class="user-input">
@@ -36,6 +28,15 @@ recipeCardTemplate.innerHTML = `
       <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
     </div>
   </article>
+`;
+
+const listEntryTemplate = document.createElement('template');
+listEntryTemplate.innerHTML = `
+<label class="container">
+	<p>My Favorites</p>
+	<input type="checkbox">
+	<span class="checkmark"> </span>
+</label>
 `;
 
 class RecipeCard extends HTMLElement {
@@ -60,6 +61,18 @@ class RecipeCard extends HTMLElement {
 		this.isFavorite = false;
 		this.dropdown = false;
 		this.initializeHearts();
+		this.initializeDropdown();
+		
+	}
+
+	initializeDropdown() {
+		const dropdownElem = this.shadow.querySelector('.dropdown-content');
+		for (let i = 0; i < localStorage.length; i++) {
+			if (localStorage.key(i) === 'favorites-master') continue;
+			const entry = listEntryTemplate.content.cloneNode(true);
+			entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));	
+			dropdownElem.insertBefore(entry, dropdownElem.firstChild);
+		}
 	}
 
 	initializeHearts() {
@@ -153,7 +166,7 @@ class RecipeCard extends HTMLElement {
 		for(let i = 0; i < containers.length; i++){
 			let checkmark = containers[i].querySelector('input');
 			if(checkmark.checked) {
-				addRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'))
+				addRecipebyList(containers[i].querySelector('p').innerHTML, this.getAttribute('recipe-id'));
 			}
 		}
 	}
@@ -165,7 +178,7 @@ class RecipeCard extends HTMLElement {
 		let userInput = this.shadow.querySelector('.user-input');
 		userInput = userInput.value;
 		if (userInput != '') {
-			createList(userInput);
+			console.log(userInput);
 			addRecipebyList(userInput, this.getAttribute('recipe-id'));
 		}
 	}
@@ -254,6 +267,7 @@ class RecipeCard extends HTMLElement {
 				this.addToCheckedLists();
 				this.addToCustomList();
 				/* Reload the page as a shortcut for showing new lists */
+
 				location.reload();
 			}
 			event.stopPropagation();
