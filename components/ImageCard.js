@@ -28,19 +28,25 @@ function toFraction(value) {
   }
 
   const denominators = [2, 3, 4, 5, 6, 8, 10, 12, 14, 16, 32, 64];
-  for (const denominator in denominators) {
+
+  denominators.forEach((denominator) => {
     let str = '';
-    if (Math.floor(value)) str += Math.floor(value);
+    if (Math.floor(value)) {
+      str += Math.floor(value);
+    }
+
     if ((value * denominator) % 1 < 0.0001) {
       const numerator = (value % 1) * denominator;
       return `${str} ${numerator}/${denominator}`;
     }
-
     if ((value * denominator) % 1 > 0.9999) {
       const numerator = ((value % 1) + 1) * denominator;
       return `${str} ${numerator}/${denominator}`;
     }
-  }
+
+    return null;
+  });
+
   return value.toFixed(2);
 }
 

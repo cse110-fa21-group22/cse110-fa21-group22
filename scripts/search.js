@@ -2,13 +2,6 @@ import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
 
-// This is just for testing
-/* window.addEventListener('keyup', (event) => {
-    if (event.code === 'Escape') {
-        clear();
-    }
-}) */
-
 /**
  * Performs a simple text search through spoonacular
  * @param {object} inputList an object as defined below
@@ -18,7 +11,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * inputList['recipe-nutrition'] is a boolean specifying whether to show nutrition
  * @returns {object} json containing the results of the spoonacular query
  */
-export async function search(inputList) {
+export default async function search(inputList) {
   // Create the fetch url
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
   const tokenSearchInput = `&query=${inputList.query}`;
@@ -26,8 +19,6 @@ export async function search(inputList) {
   const tokenOffset = `&offset=${inputList.offset}`;
   // const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
   const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; // + tokenNutritionBool;
-
-  // console.log(fetchEndpoint);
 
   // fetch the data
 
@@ -38,7 +29,5 @@ export async function search(inputList) {
       console.error(error);
     });
 
-  const { results } = fetchResults;
-  // console.log(results);
-  return results;
+  return fetchResults;
 }

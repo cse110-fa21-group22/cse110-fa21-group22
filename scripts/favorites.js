@@ -10,12 +10,27 @@ const tokenKey = `&apiKey=${apiKey}`;
 const storage = window.localStorage;
 const recipeLists = [];
 const selectedRecipes = [];
-window.addEventListener('DOMContentLoaded', init);
+
+async function getRecipeArr(idArr) {
+  const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${idArr.join(',')}${tokenKey}`;
+
+  console.log('fetch_endpoint', fetchEndPoint);
+
+  const fetchResults = await fetch(fetchEndPoint)
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Fetch in favorite page failed');
+      console.error(error);
+    });
+
+  console.log('result is: ', fetchResults);
+  return fetchResults;
+}
 
 async function init() {
   console.log('init function');
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
+    window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
         () => {},
         (err) => {
@@ -34,7 +49,7 @@ async function init() {
     console.log('arrRecipeId = ', arrRecipeId);
     let recipeArr = [];
 
-    if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
+    if (arrRecipeId.length) recipeArr = getRecipeArr(arrRecipeId);
     userList.list = recipeArr;
     userList.listName = localStorage.key(i);
     userList.addEventListener('selected', (event) => {
@@ -63,22 +78,6 @@ async function init() {
   //     result.push(recipeCard);
   //     recipeCard.recipeCardSelect = false;
   // }
-}
-
-async function getRecipeArr(id_arr) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${id_arr.join(',')}${tokenKey}`;
-
-  console.log('fetch_endpoint', fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in favorite page failed');
-      console.error(error);
-    });
-
-  console.log('result is: ', fetchResults);
-  return fetchResults;
 }
 
 // async function getRecipebyID(id) {
@@ -117,14 +116,16 @@ editButton.addEventListener('click', () => {
   moveButton.style.display = 'inline-block';
   // edit favorites list titles
   const listTitles = document.querySelectorAll('h4');
-  for (let t = 0; t < listTitles.length; t += 1) {
-    listTitles[t].setAttribute('contenteditable', true);
-  }
-  for (const list of recipeLists) {
-    for (let i = 0; i < list.list.length; i += 1) {
-      list.list[i].enterSelectMode();
-    }
-  }
+
+  listTitles.forEach((values) => {
+    values.setAttribute('contenteditable', true);
+  });
+
+  recipeLists.forEach((list) => {
+    list.list.array.forEach((values) => {
+      values.enterSelectMode();
+    });
+  });
 });
 
 cancelButton.addEventListener('click', () => {
@@ -137,30 +138,35 @@ cancelButton.addEventListener('click', () => {
   moveButton.style.display = 'none';
   // edit favorites list titles
   const listTitles = document.querySelectorAll('h4');
-  for (let t = 0; t < listTitles.length; t += 1) {
-    listTitles[t].setAttribute('contenteditable', false);
-  }
-  for (const list of recipeLists) {
-    for (let i = 0; i < list.list.length; i += 1) {
-      list.list[i].exitSelectMode();
-    }
-  }
+
+  listTitles.forEach((values) => {
+    values.setAttribute('contenteditable', false);
+  });
+
+  recipeLists.forEach((list) => {
+    list.list.array.forEach((values) => {
+      values.exitSelectMode();
+    });
+  });
 });
 
 moveButton.addEventListener('click', () => {
   if (!editMode || selectedRecipes) return;
   const modal = document.querySelector('.modal');
   for (let i = 0; i < localStorage.length; i += 1) {
-    if (localStorage.key(i) === 'favorites-master' || localStorage.key(i) === 'My Favorites ') continue;
-    const button = document.createElement('button');
-    button.innerHTML = localStorage.key(i);
-    button.addEventListener('click', () => {
-      for (const id of selectedRecipes) {
-        addRecipebyList(localStorage.key(i), id);
-      }
-      document.location.reload(true);
-    });
-    modal.appendChild(button);
+    if (localStorage.key(i) !== 'favorites-master' && localStorage.key(i) !== 'My Favorites ') {
+      const button = document.createElement('button');
+      button.innerHTML = localStorage.key(i);
+      button.addEventListener('click', () => {
+        selectedRecipes.forEach((id) => {
+          addRecipebyList(localStorage.key(i), id);
+        });
+        document.location.reload(true);
+      });
+      modal.appendChild(button);
+    }
+    modal.style.display = 'block';
   }
-  modal.style.display = 'block';
 });
+
+window.addEventListener('DOMContentLoaded', init);

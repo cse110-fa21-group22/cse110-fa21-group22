@@ -3,17 +3,65 @@
  * pulls up for it.
  */
 import apiKey from './apikey.js';
-// const apiKey = '9311cd98c1aa422fa4acba526d943064';
+
 const tokenKey = `?apiKey=${apiKey}`;
 
-window.addEventListener('DOMContentLoaded', init);
+/**
+ * Performs a recipe lookup based on the id passed in to the page URL
+ * @returns {object} json containing recipe information
+ */
+function lookup() {
+  const regex = 'id=';
+  const id = window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
+  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}`;
+  const fetchEndpointE = `https://api.spoonacular.com/recipes/${id}/equipmentWidget.json${tokenKey}`;
+
+  const fetchResultsR = fetch(fetchEndpointR)
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Recipe fetch in lookup failed');
+      console.error(error);
+    });
+
+  const fetchResultsE = fetch(fetchEndpointE)
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error('Equipment fetch in lookup failed');
+      console.error(error);
+    });
+
+  return Promise.all([fetchResultsR, fetchResultsE]);
+}
+
+/**
+ * Converts a value of minutes into a string that shows hours and minutes
+ * @param   {number} time - A time in minutes
+ * @returns {string} - A string in the form 'XX hours XX minutes'
+ */
+function formatTime(time) {
+  if (time === 1) return `${time.toString()} minute`;
+  if (time < 70) return `${time.toString()} minutes`;
+  const hour = Math.floor(time / 60);
+  let hrstr = `${hour}`;
+  const min = time % 60;
+  let minstr = `${min}`;
+
+  if (hour === 1) hrstr += ' hour';
+  else hrstr += ' hours';
+
+  if (min === 0) minstr = '';
+  else if (min === 1) minstr += ' minute';
+  else minstr += ' minutes';
+
+  return `${hrstr} ${minstr}`;
+}
 
 /**
  * Initializes the recipe page
  */
 async function init() {
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
+    window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
         () => {},
         (err) => {
@@ -98,59 +146,11 @@ async function init() {
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps');
   const instructionsList = recipe.analyzedInstructions[0].steps;
-  for (const instructionNumber in instructionsList) {
+  Object.keys(instructionsList).forEach((instructionNumber) => {
     const currStep = document.createElement('li');
     currStep.innerText = instructionsList[instructionNumber].step;
     recipeSteps.appendChild(currStep);
-  }
+  });
 }
 
-/**
- * Performs a recipe lookup based on the id passed in to the page URL
- * @returns {object} json containing recipe information
- */
-function lookup() {
-  const regex = 'id=';
-  const id = window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
-  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}`;
-  const fetchEndpointE = `https://api.spoonacular.com/recipes/${id}/equipmentWidget.json${tokenKey}`;
-
-  const fetchResultsR = fetch(fetchEndpointR)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Recipe fetch in lookup failed');
-      console.error(error);
-    });
-
-  const fetchResultsE = fetch(fetchEndpointE)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Equipment fetch in lookup failed');
-      console.error(error);
-    });
-
-  return Promise.all([fetchResultsR, fetchResultsE]);
-}
-
-/**
- * Converts a value of minutes into a string that shows hours and minutes
- * @param   {number} time - A time in minutes
- * @returns {string} - A string in the form 'XX hours XX minutes'
- */
-function formatTime(time) {
-  if (time === 1) return `${time.toString()} minute`;
-  if (time < 70) return `${time.toString()} minutes`;
-  const hour = Math.floor(time / 60);
-  let hrstr = `${hour}`;
-  const min = time % 60;
-  let minstr = `${min}`;
-
-  if (hour === 1) hrstr += ' hour';
-  else hrstr += ' hours';
-
-  if (min === 0) minstr = '';
-  else if (min === 1) minstr += ' minute';
-  else minstr += ' minutes';
-
-  return `${hrstr} ${minstr}`;
-}
+window.addEventListener('DOMContentLoaded', init);

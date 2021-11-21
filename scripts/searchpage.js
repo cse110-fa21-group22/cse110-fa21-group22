@@ -3,9 +3,7 @@
  *  Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
-import { search } from './search.js';
-
-window.addEventListener('DOMContentLoaded');
+import search from './search.js';
 
 /**
  * This function initializes the search page
@@ -59,24 +57,24 @@ function init() {
    * @param {Object} results The search results
    * @returns {none}
    */
-  function showResults(results) {
+  function showResults(results, input) {
     console.log(results);
 
     // Clear the results before searching
     clearResults();
 
     // Add the recipes to the page
-    searchKeyword.innerHTML = `"${inputList.query}"`;
-    for (const recipe in results) {
+    searchKeyword.innerHTML = `"${input.query}"`;
+    Object.values(results).forEach((recipe) => {
       const recipeCard = document.createElement('recipe-card-component');
-      recipeCard.recipe = results[recipe];
+      recipeCard.recipe = recipe;
       recipeSection.appendChild(recipeCard);
-    }
+    });
   }
 
   // Automatically parse the query string and run a search on page load
   const searchTerm = parseQueryString();
-  let inputList = [];
+  const inputList = [];
 
   console.log(searchTerm);
 
@@ -85,7 +83,7 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
-  search(inputList).then(showResults);
+  search(inputList).then(showResults, inputList);
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');
@@ -107,3 +105,5 @@ function init() {
     previousButton.disabled = false;
   });
 }
+
+window.addEventListener('DOMContentLoaded', init);

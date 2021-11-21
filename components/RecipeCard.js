@@ -78,10 +78,11 @@ class RecipeCard extends HTMLElement {
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
-      if (localStorage.key(i) === 'favorites-master') continue;
-      const entry = listEntryTemplate.content.cloneNode(true);
-      entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
-      dropdownElem.insertBefore(entry, dropdownElem.firstChild);
+      if (localStorage.key(i) !== 'favorites-master') {
+        const entry = listEntryTemplate.content.cloneNode(true);
+        entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+        dropdownElem.insertBefore(entry, dropdownElem.firstChild);
+      }
     }
   }
 
@@ -268,12 +269,12 @@ class RecipeCard extends HTMLElement {
 
     /* stops propagation of clicks on dropdown content box to the recipe card
 		This prevents changing page when the dropdown menu is clicked.  */
-    dropdownContent.addEventListener('click', function (e) {
+    dropdownContent.addEventListener('click', (e) => {
       e.stopPropagation();
     });
 
     /* handle hovering off of the dropdown so it hides */
-    dropdownContent.addEventListener('mouseleave', function () {
+    dropdownContent.addEventListener('mouseleave', () => {
       recipeCard.hideDropdown();
     });
 
@@ -287,7 +288,7 @@ class RecipeCard extends HTMLElement {
         this.addToCustomList();
         /* Reload the page as a shortcut for showing new lists */
 
-        location.reload();
+        document.location.reload();
       }
       event.stopPropagation();
     });
