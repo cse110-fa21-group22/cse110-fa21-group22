@@ -110,8 +110,8 @@ async function init() {
       favoriteIcon.src = '../assets/favorite-selected.svg';
       const dropdownContent = document.querySelector('.dropdown-content');
       dropdownContent.style.display = 'block';
-      let pos = recipe.title.length * 17;
-      dropdownContent.style.marginLeft = pos + 'px';
+      const pos = recipe.title.length * 17;
+      dropdownContent.style.marginLeft = pos + "px";
     } else {
       console.log('hide dropdown');
       isFavorite = false;
