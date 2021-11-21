@@ -3,7 +3,7 @@
  * pulls up for it.
  */
 import apiKey from './apikey.js';
-
+// const apiKey = '2a33d379f5084ff39f84ce1383072f1c';
 const tokenKey = `?apiKey=${apiKey}`;
 
 /**
@@ -110,6 +110,8 @@ async function init() {
       favoriteIcon.src = '../assets/favorite-selected.svg';
       const dropdownContent = document.querySelector('.dropdown-content');
       dropdownContent.style.display = 'block';
+      let pos = recipe.title.length * 17;
+      dropdownContent.style.marginLeft = pos + 'px';
     } else {
       console.log('hide dropdown');
       isFavorite = false;
