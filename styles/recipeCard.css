@@ -1,16 +1,16 @@
 @import 'reset.css';
 
 .container {
-	display: block;
-	position: relative;
-	padding-left: 35px;
-	margin-bottom: 12px;
-	cursor: pointer;
-	font-size: 22px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Hide the browser's default checkbox 
@@ -33,116 +33,116 @@
 }*/
 
 .dropdown {
-	position: relative;
-	/*display: inline-block;*/
+  position: relative;
+  /*display: inline-block;*/
 }
 
 .dropdown-content {
-	display: none;
-	position: absolute;
-	background-color: #f1f1f1;
-	opacity: 90%;
-	min-width: 160px;
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-	z-index: 1;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  opacity: 90%;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 .dropdown-content a {
-	color: black;
-	padding: 12px 16px;
-	text-decoration: none;
-	display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 .entry {
-	display: block;
-	position: relative;
-	margin-bottom: 12px;
-	cursor: pointer;
-	/*font-size: 22px;*/
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+  /*font-size: 22px;*/
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .recipe-card {
-	border-radius: 10px;
-	box-shadow: 0 4px 4px rgba(0 0 0 / 25%);
-	background: var(--color-neutrals-light-grey);
-	flex-shrink: 0;
-	margin: 10px;
-	position: relative;
-	transition: all 0.2s ease;
-	width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0 0 0 / 25%);
+  background: var(--color-neutrals-light-grey);
+  flex-shrink: 0;
+  margin: 10px;
+  position: relative;
+  transition: all 0.2s ease;
+  width: 300px;
 }
 
 .recipe-card:hover {
-	transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 .recipe-checkmark {
-	display: none;
-	cursor: pointer;
-	position: absolute;
-	width: 50%;
-	height: 50%;
-	left: 25%;
-	top: 20%;
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 25%;
+  top: 20%;
 }
 
 .recipe-favorite {
-	cursor: pointer;
-	padding: 10px;
-	position: absolute;
-	right: 0;
-	top: 0;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .recipe-image {
-	border-radius: 10px 10px 0 0;
-	object-fit: cover;
-	object-position: center;
-	min-height: 280px;
-	width: 100%;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  object-position: center;
+  min-height: 280px;
+  width: 100%;
 }
 
 .recipe-calories {
-	color: var(--color-neutrals-grey);
+  color: var(--color-neutrals-grey);
 }
 
 .recipe-name {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 .recipe-remove {
-	display: none;
-	cursor: pointer;
-	padding: 10px;
-	position: absolute;
-	left: 0;
-	top: 0;
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .recipe-subdescription {
-	background-color: var(--color-neutrals-white);
-	border-radius: 0 0 10px 10px;
-	bottom: 0;
-	height: 48px;
-	padding: 10px 20px;
-	position: absolute;
-	width: calc(100% - 40px);
+  background-color: var(--color-neutrals-white);
+  border-radius: 0 0 10px 10px;
+  bottom: 0;
+  height: 48px;
+  padding: 10px 20px;
+  position: absolute;
+  width: calc(100% - 40px);
 }
 
 .submit {
-	background-color: var(--color-primary-blue);
-	border: 0;
-	border-radius: 5px;
-	color: var(--color-neutrals-white);
-	padding: 10px 20px;
-	position: relative;
-	left: 37%;
+  background-color: var(--color-primary-blue);
+  border: 0;
+  border-radius: 5px;
+  color: var(--color-neutrals-white);
+  padding: 10px 20px;
+  position: relative;
+  left: 37%;
 }
