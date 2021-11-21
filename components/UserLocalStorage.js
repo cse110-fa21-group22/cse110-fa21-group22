@@ -1,61 +1,126 @@
 // must have 'favorites-master'
 const store = window.localStorage;
 
+/**
+ * initlize an local storage. 
+ * this function should only be called once 
+ */
 export function initLocalStorage() {
-	var arr_temp = [];
-	store.setItem('favorites-master', JSON.stringify(arr_temp));
+    var arr_temp = [];
+    store.setItem('favorites-master', JSON.stringify(arr_temp));
 }
 
-export function addRecipe(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
-
-	var array = JSON.parse(list);
-	array.push(recipeID);
-
-	storage.setItem('favorites-master', JSON.stringify(array));
-}
-
-export function removeRecipe(recipeID) {
-	const storage = window.localStorage;
-	var list = storage.getItem('favorites-master');
-
-	var array = JSON.parse(list);
-	const index = array.indexOf(recipeID);
-	if (index > -1) {
-		array.splice(index, 1);
-	}
-
-	storage.setItem('favorites-master', JSON.stringify(array));
-}
-
-export function createList(listName) {
+/*
+* Fetches from localstorage whether the recipe is already favorited or not
+* @return {boolean} whether the recipe is already favorited
+*/
+export function checkFavorite(recipeID) {
     const storage = window.localStorage;
-    // making sure that local storage does not alraedy have it 
-    if (storage.getItem(listName) == null) {
-        let temp_arr = [];
-        storage.setItem(listName, JSON.stringify(temp_arr));
+    var list = storage.getItem('favorites-master');
+
+    var array = JSON.parse(list);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == recipeID) {
+            return true;
+        }
     }
+    return false;
 }
 
-export function removeList(listName){
+/**
+ * add one recipeID into the favorite-master list, 
+ * favorite-master list is the default list 
+ * @param {string} recipeID ID property of the recipe 
+ */
+export function addRecipe(recipeID) {
+    const storage = window.localStorage;
+    var list = storage.getItem('favorites-master');
+
+    var array = JSON.parse(list);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == recipeID) {
+            return;
+        }
+    }
+    array.push(recipeID);
+
+    storage.setItem('favorites-master', JSON.stringify(array));
+}
+
+/**
+ * Remove a recipe from favorite-master list 
+ * @param {*} recipeID ID property of the recipe 
+ */
+export function removeRecipe(recipeID) {
+    const storage = window.localStorage;
+    var list = storage.getItem('favorites-master');
+
+    var array = JSON.parse(list);
+    const index = array.indexOf(recipeID);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+
+    storage.setItem('favorites-master', JSON.stringify(array));
+}
+
+/**
+ * create another list whose naem is listName. 
+ * when the listName is already a valid list, it will do nothing. 
+ * @param {*} listName name of the list 
+ */
+export function createList(listName) {
+    // making sure that local storage does not alraedy have it 
+    if (localStorage.getItem(listName)) return;
+
+    console.log('creating new list: ' + listName);
+    let temp_arr = [];
+    localStorage.setItem(listName, JSON.stringify(temp_arr));
+    
+}
+
+/**
+ * remove a list whose name is listName. 
+ * do nothing when listName is not in the storage 
+ * @param {*} listName name of the list 
+ */
+export function removeList(listName) {
     const storage = window.localStorage;
     // making sure that local storage does not alraedy have it 
     if (storage.getItem(listName) != null) {
-        storage.removeItem(listName); 
+        storage.removeItem(listName);
     }
 }
 
+/**
+ * add a recipe ID to a specific listName. 
+ * if listName is not already in the storage, it will do nothing 
+ * @param {*} listName name of the list, must be in storage for it to function 
+ * @param {*} recipeID id property of the recipe 
+ */
 export function addRecipebyList(listName, recipeID) {
     const storage = window.localStorage;
-    if (storage.getItem(listName) != null) {
-        var list = storage.getItem(listName);
-        var array = JSON.parse(list);
-        array.push(recipeID);
-        storage.setItem(listName, JSON.stringify(array));
+
+    createList(listName);
+    console.log(storage.getItem(listName));
+    let list = storage.getItem(listName);
+    let array = JSON.parse(list);
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] == recipeID) {
+            return;
+        }
     }
+    array.push(recipeID);
+    storage.setItem(listName, JSON.stringify(array));
+    
 }
 
+/**
+ * remove an recipe id from the list. 
+ * if the list is not found, do nothing 
+ * @param {*} listName name of the list 
+ * @param {*} recipeID id property of the recipe
+ */
 export function removeRecipebyList(listName, recipeID) {
     const storage = window.localStorage;
     if (storage.getItem(listName) != null) {

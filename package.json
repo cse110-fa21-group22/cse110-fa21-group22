@@ -4,6 +4,7 @@
   "description": "Recipe Manager: iCook",
   "main": "scripts/index.js",
   "scripts": {
+    "build": "browserify main.js -o bundle.js",
     "test": "jest",
     "coverage": "npx coverage scripts/index.js",
     "searchpageDocs": "npx jsdoc scripts/searchpage.js"
@@ -28,6 +29,7 @@
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "babel-jest": "^27.3.1",
+    "browserify": "^17.0.0",
     "eslint": "^8.2.0",
     "jest": "^27.3.1",
     "jest-puppeteer": "^6.0.0",

@@ -1,5 +1,14 @@
 @import 'reset.css';
 
+.next-button, .previous-button {
+	background-color: var(--color-primary-blue);
+	border: 0;
+	border-radius: 5px;
+	color: var(--color-neutrals-white);
+	cursor: pointer;
+	padding: 10px 20px;
+}
+
 .recipe-section {
 	display: grid;
 	gap: 30px;

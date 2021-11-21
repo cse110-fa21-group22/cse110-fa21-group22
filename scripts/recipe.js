@@ -2,7 +2,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { apiKey } from './apikey.js';
+import apiKey from './apikey.js';
 // const apiKey = '9311cd98c1aa422fa4acba526d943064';
 const tokenKey = '?apiKey=' + apiKey;
 
@@ -12,6 +12,16 @@ window.addEventListener('DOMContentLoaded', init);
  * Initializes the recipe page
  */
 async function init() {
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function () {
+			navigator.serviceWorker.register('../sw.js').then(
+				() => {},
+				(err) => {
+					console.error(err);
+				}
+			);
+		});
+	}
 	const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
 	const recipe = data[0];
 	const equipment = data[1];
@@ -46,16 +56,16 @@ async function init() {
 	//show the drop-down box and change the heart color
 	let isFavorite = false; //TODO: Need to search if the recipe is favorite
 	let favoriteIcon = document.querySelector('.favorite-heart');
-	favoriteIcon.addEventListener('click', ()=>{
-		console.log("favoriteIcon clicked");
-		if(!isFavorite) {
-			console.log("show dropdown")
+	favoriteIcon.addEventListener('click', () => {
+		console.log('favoriteIcon clicked');
+		if (!isFavorite) {
+			console.log('show dropdown');
 			isFavorite = true;
 			favoriteIcon.src = '../assets/favorite-selected.svg';
 			let dropdownContent = document.querySelector('.dropdown-content');
 			dropdownContent.style.display = 'block';
 		} else {
-			console.log("hide dropdown")
+			console.log('hide dropdown');
 			isFavorite = false;
 			favoriteIcon.src = '../assets/favorite.svg';
 			let dropdownContent = document.querySelector('.dropdown-content');

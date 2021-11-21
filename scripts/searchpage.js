@@ -14,6 +14,16 @@ window.addEventListener('DOMContentLoaded', init);
  * @returns {none}
  */
 function init() {
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', function () {
+			navigator.serviceWorker.register('../sw.js').then(
+				() => {},
+				(err) => {
+					console.error(err);
+				}
+			);
+		});
+	}
 	const searchKeyword = document.querySelector('.search-word');
 	const recipeSection = document.querySelector('.recipe-section');
 
@@ -76,4 +86,24 @@ function init() {
 	inputList['offset'] = 0;
 	inputList['recipe-nutrition'] = 'true';
 	search(inputList).then(showResults);
+
+	// Section is for next and previous buttons
+	const previousButton = document.querySelector('.previous-button');
+	const nextButton = document.querySelector('.next-button');
+
+	previousButton.disabled = true;
+
+	previousButton.addEventListener('click', () => {
+		inputList['offset'] -= 10;
+		search(inputList).then(showResults);
+		if (inputList['offset'] == 0) {
+			previousButton.disabled = true;
+		}
+	});
+
+	nextButton.addEventListener('click', () => {
+		inputList['offset'] += 10;
+		search(inputList).then(showResults);
+		previousButton.disabled = false;
+	});
 }

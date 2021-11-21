@@ -1,4 +1,4 @@
-import { apiKey } from './apikey.js';
+import apiKey from './apikey.js';
 const tokenKey = '?apiKey=' + apiKey;
 
 // This is just for testing

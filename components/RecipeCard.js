@@ -1,3 +1,5 @@
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList, createList} from "./UserLocalStorage.js";
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
@@ -9,13 +11,10 @@ recipeCardTemplate.innerHTML = `
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
 		<div class="dropdown-content">
-			<label class="container">My Favorites
-			<input type="checkbox">
-			<span class="checkmark"> </span>
-			</label>
+			
 
     	<label class="entry">Create a new list: 
-      		<input type="text">
+      		<input type="text" class="user-input">
     	</label>
     
     	<button class="submit">Submit </button>
@@ -31,6 +30,15 @@ recipeCardTemplate.innerHTML = `
   </article>
 `;
 
+const listEntryTemplate = document.createElement('template');
+listEntryTemplate.innerHTML = `
+<label class="container">
+	<span>My Favorites</span>
+	<input type="checkbox">
+	<span class="checkmark"> </span>
+</label>
+`;
+
 class RecipeCard extends HTMLElement {
 	set recipe(recipeObj) {
 		this.setAttribute('recipe-id', recipeObj['id']);
@@ -41,6 +49,11 @@ class RecipeCard extends HTMLElement {
 		recipeImg.src = recipeObj['image'];
 		recipeName.innerHTML = recipeObj['title'];
 		// recipeCal.innerHTML = recipeObj['calories'];
+
+		if (checkFavorite(recipeObj['id'])) {
+			this.isFavorite = true;
+			this.initializeHearts();
+		}
 	}
 
 	constructor() {
@@ -49,13 +62,28 @@ class RecipeCard extends HTMLElement {
 		this.shadow.appendChild(recipeCardTemplate.content.cloneNode(true));
 		this.shadow.appendChild(link.cloneNode(true));
 		this.selectMode = false;
-		this.selected = false;
+		this.isSelected = false;
 		this.isFavorite = false;
+		this.dropdown = false;
 		this.initializeHearts();
+		this.initializeDropdown();
+		
+	}
+
+	initializeDropdown() {
+		const dropdownElem = this.shadow.querySelector('.dropdown-content');
+		for (let i = 0; i < localStorage.length; i++) {
+			if (localStorage.key(i) === 'favorites-master') continue;
+			const entry = listEntryTemplate.content.cloneNode(true);
+			entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));	
+			dropdownElem.insertBefore(entry, dropdownElem.firstChild);
+		}
 	}
 
 	initializeHearts() {
+		// console.log("Checking favorites");
 		let favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+		this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
 		if (this.isFavorite) {
 			favoriteIcon.src = '../assets/favorite-selected.svg';
 		} else {
@@ -64,20 +92,11 @@ class RecipeCard extends HTMLElement {
 	}
 
 	/**
-	 * Fetches from localstorage whether the recipe is already favorited or not
-	 * @return {boolean} whether the recipe is already favorited
-	 */
-	getIsFavorite() {
-		return false;
-	}
-
-	/**
 	 * Sets up the recipe card to enter selection mode
 	 * Must be called when entering selection mode
 	 */
 	enterSelectMode() {
 		this.selectMode = true;
-		this.selected = true;
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		favoriteRemove.style.display = 'block';
 	}
@@ -88,8 +107,7 @@ class RecipeCard extends HTMLElement {
 	 */
 	exitSelectMode() {
 		this.selectMode = false;
-		this.selected = false;
-		this.deselect();
+		if (this.isSelected) this.deselect();
 		let favoriteRemove = this.shadow.querySelector('.recipe-remove');
 		favoriteRemove.style.display = 'none';
 	}
@@ -97,20 +115,32 @@ class RecipeCard extends HTMLElement {
 	/**
 	 * Selects the recipe with a checkmark
 	 */
-	 select() {
+	select() {
 		let checkmark = this.shadow.querySelector('.recipe-checkmark');
 		this.isSelected = true;
 		checkmark.style.display = 'block';
 		this.style.filter = 'brightness(90%)';
+		const event = new CustomEvent('selected', {detail: this.getAttribute('recipe-id')});
+		this.dispatchEvent(event);
 	}
 
 	/**
 	 * Deselects the recipe by removing the checkmark
 	 */
 	deselect() {
+		let checkmark = this.shadow.querySelector('.recipe-checkmark');
 		this.isSelected = false;
 		checkmark.style.display = 'none';
 		this.style.filter = 'brightness(100%)';
+		const event = new CustomEvent('deselected', {detail: this.getAttribute('recipe-id')});
+		this.dispatchEvent(event);
+	}
+	/**
+	 * Dispatches an event to remove this recipe
+	 */
+	delete() {
+		const event = new CustomEvent('removed', {detail: this.getAttribute('recipe-id')});
+		this.dispatchEvent(event);
 	}
 
 	/**
@@ -118,6 +148,7 @@ class RecipeCard extends HTMLElement {
 	 */
 	showDropdown() {
 		console.log('showing dropdown');
+		this.dropdown = true;
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
 		dropdownContent.style.display = 'block';
 	}
@@ -127,8 +158,34 @@ class RecipeCard extends HTMLElement {
 	 */
 	hideDropdown() {
 		console.log('hiding dropdown');
+		this.dropdown = false;
 		let dropdownContent = this.shadow.querySelector('.dropdown-content');
 		dropdownContent.style.display = 'none';
+	}
+
+	/**
+	 * Add the recipe to all checked lists in the dropdown
+	 */
+	addToCheckedLists() {
+		let containers = this.shadow.querySelectorAll('.container');
+		for(let i = 0; i < containers.length; i++){
+			let checkmark = containers[i].querySelector('input');
+			if(checkmark.checked) {
+				addRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
+			}
+		}
+	}
+
+	/**
+	 * Adds the recipe to a custom list 
+	 */
+	addToCustomList() {
+		let userInput = this.shadow.querySelector('.user-input');
+		userInput = userInput.value;
+		if (userInput != '') {
+			console.log(userInput);
+			addRecipebyList(userInput, this.getAttribute('recipe-id'));
+		}
 	}
 
 	connectedCallback() {
@@ -149,7 +206,7 @@ class RecipeCard extends HTMLElement {
 				} else {
 					this.select();
 				}
-			} else {
+			} else if (!this.dropdown) {
 				console.log('transferring page');
 				window.location.href = 'recipe.html?id=' + this.getAttribute('recipe-id');
 			}
@@ -165,6 +222,12 @@ class RecipeCard extends HTMLElement {
 				console.log('Prompting user to add to favorites lists');
 			} else {
 				this.isFavorite = false;
+				removeRecipe(this.getAttribute('recipe-id'));
+				console.log(containers.length);
+				for(let i = 0; i < containers.length; i++){
+					console.log(containers[i].textContent)
+					removeRecipebyList(containers[i].textContent,this.getAttribute('recipe-id'));
+				}
 				favoriteIcon.src = '../assets/favorite.svg';
 				console.log('Remove item from ALL favorites lists here');
 			}
@@ -186,7 +249,7 @@ class RecipeCard extends HTMLElement {
 		favoriteRemove.addEventListener('click', (event) => {
 			event.stopPropagation();
 			console.log('Removing recipe from THIS list...');
-			// Remove recipe from favorites list
+			this.delete();
 		});
 
 		/* stops propagation of clicks on dropdown content box to the recipe card
@@ -203,14 +266,14 @@ class RecipeCard extends HTMLElement {
 		//submit button for favorites dropdown
 		submitFavorites.addEventListener('click', (event) => {
 			//TODO: need to check the values that are clicked
-			if (!isFavorite) {
-				isFavorite = true;
-				favoriteIcon.src = '../assets/favorite-selected.svg';
-				// add item to favorites list here
-			} else {
-				isFavorite = false;
-				favoriteIcon.src = '../assets/favorite.svg';
-				// remove item from favorites list here
+			if (!this.isFavorite) {
+				// add to // must have 'favorites-master' no matter what
+				addRecipe(this.getAttribute('recipe-id'));
+				this.addToCheckedLists();
+				this.addToCustomList();
+				/* Reload the page as a shortcut for showing new lists */
+
+				location.reload();
 			}
 			event.stopPropagation();
 		});
