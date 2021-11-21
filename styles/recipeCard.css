@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 .container {
   display: block;
@@ -7,13 +7,10 @@
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-/* Hide the browser's default checkbox 
+/* Hide the browser's default checkbox
 .container input {
 	position: absolute;
 	opacity: 0;
@@ -22,7 +19,7 @@
 	width: 0;
 }
 
-/* Create a custom checkbox 
+/* Create a custom checkbox
 .checkmark {
   background-color: var(--color-primary-blue);
 	position: absolute;
@@ -30,20 +27,21 @@
 	left: 0;
 	height: 25px;
 	width: 25px;
-}*/
+} */
 
 .dropdown {
   position: relative;
-  /*display: inline-block;*/
+
+  /* display: inline-block; */
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  opacity: 90%;
+  opacity: 0.9;
   min-width: 160px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
   z-index: 1;
 }
 
@@ -59,10 +57,8 @@
   position: relative;
   margin-bottom: 12px;
   cursor: pointer;
-  /*font-size: 22px;*/
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+
+  /* font-size: 22px; */
   user-select: none;
 }
 

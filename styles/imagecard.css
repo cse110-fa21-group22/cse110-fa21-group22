@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 h3 {
   padding-top: 25px;
@@ -28,8 +28,10 @@ h3 {
   grid-gap: 50px;
   grid-template-rows: auto auto;
   justify-content: flex-start;
+
   /* overflow-x: scroll; */
   overflow-x: hidden;
+
   /* overflow-x: auto; */
   overflow-y: hidden;
   padding: 20px 50px 30px;
@@ -88,8 +90,7 @@ h3 {
   transition-duration: 0.4s;
 }
 
-.left-arrow:hover,
-.right-arrow:hover {
+.left-arrow:hover {
   background-color: #4d96ea;
   color: white;
 }
@@ -103,6 +104,11 @@ h3 {
   top: calc(50% - 30px);
   transition-duration: 0.4s;
   right: 0;
+}
+
+.right-arrow:hover {
+  background-color: #4d96ea;
+  color: white;
 }
 
 .hidden {
