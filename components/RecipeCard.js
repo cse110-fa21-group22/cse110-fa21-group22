@@ -1,17 +1,12 @@
-import {
-  addRecipe,
-  addRecipebyList,
-  checkFavorite,
-  // removeRecipe,
-  // removeRecipebyList,
-} from './UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/recipeCard.css';
-
+const containers = document.shadow.querySelectorAll('.container');
 const recipeCardTemplate = document.createElement('template');
+
 recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
     <div class="dropdown">
@@ -180,7 +175,6 @@ class RecipeCard extends HTMLElement {
    * Add the recipe to all checked lists in the dropdown
    */
   addToCheckedLists() {
-    const containers = this.shadow.querySelectorAll('.container');
     for (let i = 0; i < containers.length; i += 1) {
       const checkmark = containers[i].querySelector('input');
       if (checkmark.checked) {
@@ -226,28 +220,25 @@ class RecipeCard extends HTMLElement {
     });
 
     // /* Click favorite icon prompts with dropdown */
-    // favoriteIcon.addEventListener('click', (event) => {
-    // 	// Stop propagation to the parent so you don't go to the recipe page
-    // 	event.stopPropagation();
-    // 	if (!this.isFavorite) {
-    // 		favoriteIcon.src = '../assets/favorite-selected.svg';
-    // 		this.showDropdown();
-    // 		console.log('Prompting user to add to favorites lists');
-    // 	} else {
-    // 		this.isFavorite = false;
-    // 		removeRecipe(this.getAttribute('recipe-id'));
-    // 		console.log(containers.length);
-    // 		for (let i = 0; i < containers.length; i += 1) {
-    // 			console.log(containers[i].textContent);
-    // 			removeRecipebyList(
-    // 				containers[i].textContent,
-    // 				this.getAttribute('recipe-id')
-    // 			);
-    // 		}
-    // 		favoriteIcon.src = '../assets/favorite.svg';
-    // 		console.log('Remove item from ALL favorites lists here');
-    // 	}
-    // });
+    favoriteIcon.addEventListener('click', (event) => {
+      // Stop propagation to the parent so you don't go to the recipe page
+      event.stopPropagation();
+      if (!this.isFavorite) {
+        favoriteIcon.src = '../assets/favorite-selected.svg';
+        this.showDropdown();
+        console.log('Prompting user to add to favorites lists');
+      } else {
+        this.isFavorite = false;
+        removeRecipe(this.getAttribute('recipe-id'));
+        console.log(containers.length);
+        for (let i = 0; i < containers.length; i += 1) {
+          console.log(containers[i].textContent);
+          removeRecipebyList(containers[i].textContent, this.getAttribute('recipe-id'));
+        }
+        favoriteIcon.src = '../assets/favorite.svg';
+        console.log('Remove item from ALL favorites lists here');
+      }
+    });
 
     /* Mouse hover for favorite icon */
     favoriteIcon.addEventListener('mouseover', () => {
