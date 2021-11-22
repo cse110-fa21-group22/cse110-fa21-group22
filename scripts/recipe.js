@@ -2,8 +2,8 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import apiKey from './apikey.js';
-// const apiKey = '2a33d379f5084ff39f84ce1383072f1c';
+// import apiKey from './apikey.js';
+const apiKey = '2a33d379f5084ff39f84ce1383072f1c';
 const tokenKey = `?apiKey=${apiKey}`;
 
 /**
@@ -111,7 +111,7 @@ async function init() {
       const dropdownContent = document.querySelector('.dropdown-content');
       dropdownContent.style.display = 'block';
       const pos = recipe.title.length * 17;
-      dropdownContent.style.marginLeft = pos + "px";
+      dropdownContent.style.marginLeft = `${pos}px`;
     } else {
       console.log('hide dropdown');
       isFavorite = false;

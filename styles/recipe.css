@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 h3 {
   padding-top: 25px;
@@ -86,6 +86,7 @@ label {
   align-items: center;
   display: flex;
   flex-direction: row;
+
   /* flex-flow: row-reverse;
   flex-wrap: wrap; */
   justify-content: center;
@@ -172,7 +173,7 @@ ol > li {
 
 ol > li::before {
   font-weight: bold;
-  content: counter(item) '. ';
+  content: counter(item) ". ";
 }
 
 /* for mobile later */
