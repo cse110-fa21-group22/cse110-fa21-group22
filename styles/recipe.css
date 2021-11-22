@@ -36,8 +36,6 @@ label {
   position: relative;
   margin-bottom: 12px;
   cursor: pointer;
-
-  /* font-size: 22px; */
   user-select: none;
 }
 
@@ -50,7 +48,6 @@ label {
   position: relative;
   left: 37%;
 }
-
 
 .ingredients-section,
 .equipment-section {
@@ -85,6 +82,27 @@ label {
   margin-left: 50px;
 }
 
+.recipe-info {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  /* flex-flow: row-reverse;
+  flex-wrap: wrap; */
+  justify-content: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.recipe-bio {
+  float: left;
+  width: 60%;
+}
+
+.recipe-pic {
+  float: right;
+  width: 25%;
+}
+
 .recipe-image {
   border-radius: 10px;
   height: min(100vw, 400px);
@@ -92,16 +110,6 @@ label {
   object-fit: cover;
   object-position: center;
   width: min(100%, 400px);
-}
-
-.recipe-info {
-  align-items: center;
-  display: inline-flex;
-  flex-flow: column-reverse;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 15px;
-  width: 100%;
 }
 
 .recipe-page-description {
