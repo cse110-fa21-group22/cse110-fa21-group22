@@ -5,7 +5,8 @@ const CACHE_NAME = 'recipe-storage';
 // });
 
 // Store fetches to reduce api calls
-window.addEventListener('fetch', (event) => {
+// eslint-disable-next-line no-restricted-globals
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       // Found in cache

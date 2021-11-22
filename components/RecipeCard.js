@@ -4,7 +4,7 @@ const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/recipeCard.css';
-const containers = document.shadow.querySelectorAll('.container');
+const containers = document && document.shadow ? document.shadow.querySelectorAll('.container') : null;
 const recipeCardTemplate = document.createElement('template');
 
 recipeCardTemplate.innerHTML = `
