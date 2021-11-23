@@ -2,6 +2,8 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
+
+// eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -91,7 +93,6 @@ async function init() {
 			<input type="checkbox">
 			<span class="checkmark"> </span>
 			</label>
-
     	<label class="entry">Create a new list: 
       		<input type="text">
     	</label>
@@ -146,11 +147,11 @@ async function init() {
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps');
   const instructionsList = recipe.analyzedInstructions[0].steps;
-  Object.keys(instructionsList).forEach((instructionNumber) => {
+  for (const instructionNumber in instructionsList) {
     const currStep = document.createElement('li');
     currStep.innerText = instructionsList[instructionNumber].step;
     recipeSteps.appendChild(currStep);
-  });
+  }
 }
 
 window.addEventListener('DOMContentLoaded', init);

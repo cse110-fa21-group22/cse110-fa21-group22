@@ -4,16 +4,14 @@ const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/recipeCard.css';
-const containers = document && document.shadow ? document.shadow.querySelectorAll('.container') : null;
-const recipeCardTemplate = document.createElement('template');
 
+const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
 		<div class="dropdown-content">
 			
-
     	<label class="entry">Create a new list: 
       		<input type="text" class="user-input">
     	</label>
@@ -73,11 +71,10 @@ class RecipeCard extends HTMLElement {
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
-      if (localStorage.key(i) !== 'favorites-master') {
-        const entry = listEntryTemplate.content.cloneNode(true);
-        entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
-        dropdownElem.insertBefore(entry, dropdownElem.firstChild);
-      }
+      if (localStorage.key(i) === 'favorites-master') continue;
+      const entry = listEntryTemplate.content.cloneNode(true);
+      entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+      dropdownElem.insertBefore(entry, dropdownElem.firstChild);
     }
   }
 
@@ -121,9 +118,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = true;
     checkmark.style.display = 'block';
     this.style.filter = 'brightness(90%)';
-    const event = new CustomEvent('selected', {
-      detail: this.getAttribute('recipe-id'),
-    });
+    const event = new CustomEvent('selected', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
 
@@ -135,19 +130,15 @@ class RecipeCard extends HTMLElement {
     this.isSelected = false;
     checkmark.style.display = 'none';
     this.style.filter = 'brightness(100%)';
-    const event = new CustomEvent('deselected', {
-      detail: this.getAttribute('recipe-id'),
-    });
+    const event = new CustomEvent('deselected', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
-
   /**
    * Dispatches an event to remove this recipe
    */
+
   delete() {
-    const event = new CustomEvent('removed', {
-      detail: this.getAttribute('recipe-id'),
-    });
+    const event = new CustomEvent('removed', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
 
@@ -175,6 +166,7 @@ class RecipeCard extends HTMLElement {
    * Add the recipe to all checked lists in the dropdown
    */
   addToCheckedLists() {
+    const containers = this.shadow.querySelectorAll('.container');
     for (let i = 0; i < containers.length; i += 1) {
       const checkmark = containers[i].querySelector('input');
       if (checkmark.checked) {
@@ -219,7 +211,7 @@ class RecipeCard extends HTMLElement {
       }
     });
 
-    // /* Click favorite icon prompts with dropdown */
+    /* Click favorite icon prompts with dropdown */
     favoriteIcon.addEventListener('click', (event) => {
       // Stop propagation to the parent so you don't go to the recipe page
       event.stopPropagation();
@@ -279,7 +271,7 @@ class RecipeCard extends HTMLElement {
         this.addToCustomList();
         /* Reload the page as a shortcut for showing new lists */
 
-        document.location.reload();
+        location.reload();
       }
       event.stopPropagation();
     });

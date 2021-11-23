@@ -1,8 +1,9 @@
 const CACHE_NAME = 'recipe-storage';
 
-// self.addEventListener('activate', (event) => {
-// 	event.waitUntil(clients.claim());
-// });
+self.addEventListener('activate', (event) => {
+  // eslint-disable-next-line no-undef
+  event.waitUntil(clients.claim());
+});
 
 // Store fetches to reduce api calls
 // eslint-disable-next-line no-restricted-globals
@@ -13,18 +14,19 @@ self.addEventListener('fetch', (event) => {
       if (response) {
         return response;
       }
-      return fetch(event.request).then((res) => {
-        if (!res || res.status !== 200 || res.type !== 'basic') {
+      // eslint-disable-next-line no-shadow
+      return fetch(event.request).then((response) => {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
           // Error check
-          return res;
+          return response;
         }
-        const responseToCache = res.clone();
+        const responseToCache = response.clone();
 
         caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, responseToCache);
         });
 
-        return res;
+        return response;
       });
     })
   );

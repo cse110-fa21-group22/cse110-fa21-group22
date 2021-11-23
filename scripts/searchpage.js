@@ -13,7 +13,7 @@ import search from './search.js';
  */
 function init() {
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    window.addEventListener('load', function () {
       navigator.serviceWorker.register('../sw.js').then(
         () => {},
         (err) => {
@@ -57,24 +57,25 @@ function init() {
    * @param {Object} results The search results
    * @returns {none}
    */
-  function showResults(results, input) {
+  function showResults(results) {
     console.log(results);
 
     // Clear the results before searching
     clearResults();
 
     // Add the recipes to the page
-    searchKeyword.innerHTML = `"${input.query}"`;
-    Object.values(results).forEach((recipe) => {
+    // eslint-disable-next-line no-use-before-define
+    searchKeyword.innerHTML = `"${inputList.query}"`;
+    for (const recipe in results) {
       const recipeCard = document.createElement('recipe-card-component');
-      recipeCard.recipe = recipe;
+      recipeCard.recipe = results[recipe];
       recipeSection.appendChild(recipeCard);
-    });
+    }
   }
 
   // Automatically parse the query string and run a search on page load
   const searchTerm = parseQueryString();
-  const inputList = [];
+  let inputList = [];
 
   console.log(searchTerm);
 
@@ -83,27 +84,7 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
-  search(inputList).then(showResults, inputList);
-
-  // Section is for next and previous buttons
-  const previousButton = document.querySelector('.previous-button');
-  const nextButton = document.querySelector('.next-button');
-
-  previousButton.disabled = true;
-
-  previousButton.addEventListener('click', () => {
-    inputList.offset -= 10;
-    search(inputList).then(showResults);
-    if (inputList.offset === 0) {
-      previousButton.disabled = true;
-    }
-  });
-
-  nextButton.addEventListener('click', () => {
-    inputList.offset += 10;
-    search(inputList).then(showResults);
-    previousButton.disabled = false;
-  });
+  search(inputList).then(showResults);
 }
 
 window.addEventListener('DOMContentLoaded', init);

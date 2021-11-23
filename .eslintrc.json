@@ -8,8 +8,11 @@
     "node": true
   },
   "rules": {
+    "guard-for-in": "off",
     "import/extensions": 0,
     "no-console": "off",
+    "no-restricted-globals": "off",
+    "no-restricted-syntax": ["error", "LabeledStatement", "WithStatement"],
     "max-len": [
       "warn",
       {
@@ -23,6 +26,7 @@
         "ignoreTemplateLiterals": true,
         "ignoreRegExpLiterals": true
       }
-    ]
+    ],
+    "no-continue": "off"
   }
 }
