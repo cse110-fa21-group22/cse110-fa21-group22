@@ -63,7 +63,7 @@ function formatTime(time) {
  */
 async function init() {
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+    window.addEventListener('load', function () {
       navigator.serviceWorker.register('../sw.js').then(
         () => {},
         (err) => {
@@ -93,7 +93,6 @@ async function init() {
 			<input type="checkbox">
 			<span class="checkmark"> </span>
 			</label>
-
     	<label class="entry">Create a new list: 
       		<input type="text">
     	</label>
