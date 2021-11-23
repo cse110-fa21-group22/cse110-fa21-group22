@@ -28,14 +28,15 @@
   - none
 
 ### Decisions Made and Their Reasoning
+
 - Second Sprint overview
   - Fix what is on main right now
     - Clean up favorites functionality
   - Explore sidebar
   - Highlight current step
 
-
 ### Ideas for Further Investigation
+
 - Move button didn't work in Demo
 - Hema's review of our app
   - She liked our apps appearance and basic functionality
@@ -55,10 +56,13 @@
   - Type of meal (dessert, lunch, breakfast)
 - User category filters but no search text?
 - Highlight current step keybinds
+
 ### When the meeting finished
+
 - 3:50pm
 
 ### To Do
+
 - CI/CD pipeline is due
 - Add test cases related to the MVP
 - Sprint review for second sprint is due next Monday

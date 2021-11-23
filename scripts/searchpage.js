@@ -65,11 +65,11 @@ function init() {
 
     // Add the recipes to the page
     searchKeyword.innerHTML = `"${input.query}"`;
-    Object.values(results).forEach((recipe) => {
+    for (const recipe in results) {
       const recipeCard = document.createElement('recipe-card-component');
-      recipeCard.recipe = recipe;
+      recipeCard.recipe = results[recipe];
       recipeSection.appendChild(recipeCard);
-    });
+    }
   }
 
   // Automatically parse the query string and run a search on page load

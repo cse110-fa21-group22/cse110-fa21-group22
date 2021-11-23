@@ -2,12 +2,9 @@
  * API key for connecting with Spoonatular API
  */
 
-// console.log(process.env.API_KEY);
-// import {apiKey} from './apikey.js';?
-// const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
-import { initLocalStorage } from '../components/UserLocalStorage.js';
-
+// eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
+import { initLocalStorage } from '../components/UserLocalStorage.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
 const storage = window.localStorage;
@@ -37,11 +34,11 @@ function showResults(results) {
   clearResults();
 
   // Add the recipes to the page
-  Object.values(results).forEach((recipe) => {
+  for (const recipe in results) {
     const recipeCard = document.createElement('recipe-card-component');
-    recipeCard.recipe = recipe;
+    recipeCard.recipe = results[recipe];
     recipeSection.appendChild(recipeCard);
-  });
+  }
 }
 /**
  * it is possible that the user click the icon and coming back to the main page
@@ -75,11 +72,11 @@ async function showFavoriteSection() {
   const array = JSON.parse(list);
   console.log(array);
 
-  array.forEach((values) => {
+  for (let i = 0; i < array.length; i += 1) {
     const recipeCard = document.createElement('recipe-card-component');
-    recipeCard.recipe = getRecipebyID(values);
+    recipeCard.recipe = getRecipebyID(array[i]);
     userFavoriteSection.appendChild(recipeCard);
-  });
+  }
 }
 
 async function fetchRandomRecipes() {
