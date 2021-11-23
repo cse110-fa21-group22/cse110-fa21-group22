@@ -36,7 +36,8 @@ class Navbar extends HTMLElement {
    * @param {string} searchTerm the user's search phrase
    * @return {string} the query string
    */
-  static generateQueryString(searchTerm) {
+  // eslint-disable-next-line class-methods-use-this
+  generateQueryString(searchTerm) {
     let queryString = '?search=';
     for (let i = 0; i < searchTerm.length; i += 1) {
       const currChar = searchTerm.charAt(i);
@@ -62,6 +63,8 @@ class Navbar extends HTMLElement {
 
     // Desktop Functionality
     let searchTerm = '';
+    // let inputList = [];
+
     const searchInput = this.shadow.querySelector('.nav-search').querySelector('input');
 
     searchInput.addEventListener('keyup', (event) => {
