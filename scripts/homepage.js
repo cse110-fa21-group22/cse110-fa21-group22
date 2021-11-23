@@ -123,7 +123,7 @@ async function showFavoriteSection() {
 async function init() {
   initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
+    window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
         () => {},
         (err) => {
@@ -150,7 +150,7 @@ async function init() {
   showResults(recipeData);
 
   const button = document.querySelector('.home-page-popular-refresh');
-  button.addEventListener('click', async function () {
+  button.addEventListener('click', async () => {
     clearObject();
     try {
       await fetchRandomRecipes();

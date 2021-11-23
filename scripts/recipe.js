@@ -63,7 +63,7 @@ function formatTime(time) {
  */
 async function init() {
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
+    window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
         () => {},
         (err) => {
