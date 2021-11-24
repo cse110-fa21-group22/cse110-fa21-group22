@@ -100,7 +100,7 @@ export function removeList(listName) {
 export function addRecipebyList(listName, recipeID) {
   const storage = window.localStorage;
 
-  createList('test', listName);
+  createList(listName);
   console.log(storage.getItem(listName));
   const list = storage.getItem(listName);
   const array = JSON.parse(list);
