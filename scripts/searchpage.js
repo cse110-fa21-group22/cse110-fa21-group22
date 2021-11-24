@@ -4,7 +4,6 @@
  */
 
 import search from './search.js';
-
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
@@ -85,6 +84,26 @@ function init() {
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
   search(inputList).then(showResults);
+
+  // Section is for next and previous buttons
+  const previousButton = document.querySelector('.previous-button');
+  const nextButton = document.querySelector('.next-button');
+
+  previousButton.disabled = true;
+
+  previousButton.addEventListener('click', () => {
+    inputList.offset -= 10;
+    search(inputList).then(showResults);
+    if (inputList.offset === 0) {
+      previousButton.disabled = true;
+    }
+  });
+
+  nextButton.addEventListener('click', () => {
+    inputList.offset += 10;
+    search(inputList).then(showResults);
+    previousButton.disabled = false;
+  });
 }
 
 window.addEventListener('DOMContentLoaded', init);
