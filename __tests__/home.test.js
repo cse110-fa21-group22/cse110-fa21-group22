@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
 
@@ -33,11 +34,11 @@ describe('Home Page User Flow', () => {
     expect(exploreCards).toBe(10);
   });
 
-  //Next, check that the same recipes displayed as in local storage
+  // Next, check that the same recipes displayed as in local storage
   it('Check recipes from local storage loaded', async () => {
     console.log('Check for recipe cards from local storage...');
     // Query select all of the sections and then select all of the recipe cards
-    //await page.waitForTimeout('500');
+    // await page.waitForTimeout('500');
     const favoritesLoaded = await page.$$eval('section', (sections) => {
       const favoriteCards = sections[1].querySelectorAll('recipe-card-component');
       const list = localStorage.getItem('favorites-master');
@@ -56,7 +57,7 @@ describe('Home Page User Flow', () => {
     expect(favoritesLoaded).toBe(true);
   });
 
-  //Now, favorite a recipe and make it appears on a page reload
+  // Now, favorite a recipe and make it appears on a page reload
   it('Add a new recipe to custom list', async () => {
     console.log('Check for new recipe card in custom list...');
     // Query select all of the sections and then select all of the recipe cards
@@ -65,7 +66,7 @@ describe('Home Page User Flow', () => {
     const root = await exploreCards[0].getProperty('shadowRoot');
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
-    let button = await root.$('button');
+    const button = await root.$('button');
     await button.click();
 
     await page.goto('https://icookfood.netlify.app/webpages/home.html');
