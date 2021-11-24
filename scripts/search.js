@@ -29,5 +29,5 @@ export default async function search(inputList) {
       console.error(error);
     });
 
-  return fetchResults;
+  return fetchResults.results;
 }
