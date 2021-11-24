@@ -20,7 +20,7 @@ export function checkFavorite(recipeID) {
 
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === recipeID) {
+    if (parseInt(array[i], 10) === parseInt(recipeID, 10)) {
       return true;
     }
   }
@@ -38,11 +38,11 @@ export function addRecipe(recipeID) {
 
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === recipeID) {
+    if (parseInt(array[i], 10) === parseInt(recipeID, 10)) {
       return;
     }
   }
-  array.push(recipeID);
+  array.push(parseInt(recipeID, 10));
 
   storage.setItem('favorites-master', JSON.stringify(array));
 }
@@ -56,7 +56,7 @@ export function removeRecipe(recipeID) {
   const list = storage.getItem('favorites-master');
 
   const array = JSON.parse(list);
-  const index = array.indexOf(recipeID);
+  const index = array.indexOf(parseInt(recipeID, 10));
   if (index > -1) {
     array.splice(index, 1);
   }
@@ -100,12 +100,12 @@ export function removeList(listName) {
 export function addRecipebyList(listName, recipeID) {
   const storage = window.localStorage;
 
-  createList(listName);
+  createList('test', listName);
   console.log(storage.getItem(listName));
   const list = storage.getItem(listName);
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === recipeID) {
+    if (parseInt(array[i], 10) === parseInt(recipeID, 10)) {
       return;
     }
   }
@@ -124,7 +124,7 @@ export function removeRecipebyList(listName, recipeID) {
   if (storage.getItem(listName) != null) {
     const list = storage.getItem(listName);
     const array = JSON.parse(list);
-    const index = array.indexOf(recipeID);
+    const index = array.indexOf(parseInt(recipeID, 10));
     if (index > -1) {
       array.splice(index, 1);
     }

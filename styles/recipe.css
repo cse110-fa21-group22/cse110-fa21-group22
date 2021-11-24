@@ -44,11 +44,6 @@ h3 {
   transition-duration: 0.4s;
 }
 
-.left-arrow:hover {
-  background-color: #4d96ea;
-  color: white;
-}
-
 #prep-time {
   margin-left: 50px;
 }
@@ -65,8 +60,7 @@ h3 {
 .recipe-info {
   align-items: center;
   display: inline-flex;
-  flex-flow: column-reverse;
-  flex-wrap: wrap;
+  flex-flow: column-reverse wrap;
   justify-content: center;
   margin-bottom: 15px;
   width: 100%;
@@ -101,6 +95,7 @@ h3 {
   right: 0;
 }
 
+.left-arrow:hover,
 .right-arrow:hover {
   background-color: #4d96ea;
   color: white;
