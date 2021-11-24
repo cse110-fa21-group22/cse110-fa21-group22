@@ -144,7 +144,7 @@ ol > li::before {
 
   .recipe-info {
     align-items: flex-start;
-    flex-flow: inherit nowrap;
+    flex-flow: nowrap;
     justify-content: space-between;
   }
 }
