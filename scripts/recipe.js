@@ -251,10 +251,10 @@ async function init() {
   firstStep.className = 'current-step';
 
   // When the button is pressed, highlight the next step and normalize the current step
-  for (let currStepNum = 1; currStepNum < parseInt(stepNum) - 1; currStepNum += 1) {
+  for (let currStepNum = 1; currStepNum < parseInt(stepNum, 10) - 1; currStepNum += 1) {
     const currButton = document.querySelector(`#button${currStepNum}`);
     currButton.addEventListener('click', () => {
-      const nextStepNum = parseInt(currStepNum) + 1;
+      const nextStepNum = parseInt(currStepNum, 10) + 1;
       console.log(nextStepNum);
       const currStep = document.querySelector(`#step${currStepNum}`);
       const nextStep = document.querySelector(`#step${nextStepNum}`);
