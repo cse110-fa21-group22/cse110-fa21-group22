@@ -3,7 +3,7 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/navbar.css';
 
-//Add a new button for the sidebar
+// Add a new button for the sidebar
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
 	<nav class="navbar">

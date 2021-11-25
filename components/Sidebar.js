@@ -1,4 +1,4 @@
-//A skeleton for the sidebar component
+// A skeleton for the sidebar component
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
@@ -23,8 +23,8 @@ class Sidebar extends HTMLElement {
     this.shadow.appendChild(link);
     this.shadow.appendChild(sidebarTemplate.content);
 
-    //TODO
-    //Need some important functions and checkmarks for the filter functions
+    // TODO
+    // Need some important functions and checkmarks for the filter functions
   }
 }
 
