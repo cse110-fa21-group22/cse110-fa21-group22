@@ -29,7 +29,7 @@ navbarTemplate.innerHTML = `
     </div>
 	</nav>
   <section class="sidebar-content">
-        <button class="sidebar-filter">Temporary Button</button>
+        <button class="sidebar-filter">Search this</button>
 	</section>`;
 
 class Navbar extends HTMLElement {
