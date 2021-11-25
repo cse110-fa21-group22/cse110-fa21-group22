@@ -21,6 +21,14 @@
   width: min(100vh, 200px);
   z-index: 9999;
   position: absolute;
+  animation-name: animateleft;
+  animation-duration: 0.5s
+}
+
+/* Add Animation */
+@keyframes animateleft {
+  from {left: -300px; opacity: 0}
+  to {left: 0; opacity: 1}
 }
 
 .sidebar-filter {
