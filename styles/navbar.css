@@ -9,7 +9,7 @@
   display: none;
   background-color: var(--color-primary-blue);
   padding: 0 25px;
-  height: calc(100vh);
+  height: calc(100vh - 70px);
   width: min(100vh, 200px);
   z-index: 9999;
   position: absolute;
