@@ -11,11 +11,9 @@ recipeCardTemplate.innerHTML = `
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
 		<div class="dropdown-content">
-			
     	<label class="entry">Create a new list: 
       		<input type="text" class="user-input">
     	</label>
-    
     	<button class="submit">Submit </button>
   		</div>
 	</div>
@@ -243,6 +241,11 @@ class RecipeCard extends HTMLElement {
       if (!this.isFavorite) {
         favoriteIcon.src = '../assets/favorite.svg';
       }
+    });
+
+    // TODO: Should I add this function?
+    favoriteIcon.addEventListener('click', () => {
+      this.showDropdown();
     });
 
     /* Remove button event listener */
