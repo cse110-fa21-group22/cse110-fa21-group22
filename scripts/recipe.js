@@ -187,7 +187,7 @@ async function init() {
 
   submitFavorites.addEventListener('click', () => {
     // TODO: need to check the values that are clicked
-    if(!isFavorite) {
+    if (!isFavorite) {
       // TODO: add to custom list
       location.reload();
     }
