@@ -10,7 +10,8 @@ describe('Basic user flow for Search Page', () => {
     // Check the search page without a search
     it('Check for 10 default recipes on empty search', async () => {
         console.log('Check for 10 default recipe');
-        
+        await page.waitForTimeout('500');
+
         const recipeCards = await page.$$eval('section', (sections) => {
           return sections[0].querySelectorAll('recipe-card-component').length;
         });
@@ -25,7 +26,13 @@ describe('Basic user flow for Search Page', () => {
         //const navBarSearchInput = await root.$('.nav-search-input');
         //await root.type('.nav-search-input', 'chicken');
         
-        //root.querySelector('.navbar').querySelector('.nav-search').querySelector('input').value = 'chicken';
+        const navBar = await root.$('.navbar');//.$('.nav-search').$('input').value = 'chicken';
+        const navSearch = await navBar.$('.nav-search');
+        let input = await navSearch.$('input');
+        input.value = 'chicken';
+
+        await page.reload();
+        await page.waitForTimeout('500');
 
         // Checks search result to be 10 recipes 
         const recipeCards = await page.$$eval('section', (sections) => {
