@@ -135,7 +135,6 @@ ol > li::before {
   content: counter(item) ". ";
 }
 
-/* for mobile later */
 @media (min-width: 768px) {
   .recipe-page-description {
     margin-bottom: 0;
