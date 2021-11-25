@@ -110,14 +110,17 @@ label {
   margin-left: 60px;
 }
 
-/* #current-step {
+.normal-step {
+  list-style-type: none;
+  counter-increment: item;
+  padding: 10px;
+}
+
+.current-step {
 	background-color: #d0e4fb;
-	display: flex;
-	flex-direction: row;
 	gap: 10px;
-	justify-content: space-between;
 	text-align: left;
-} */
+}
 
 h5 {
   margin-bottom: 5px;
