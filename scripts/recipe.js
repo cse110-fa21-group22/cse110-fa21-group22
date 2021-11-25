@@ -4,8 +4,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-// import apiKey from './apikey.js';
-const apiKey = '2a33d379f5084ff39f84ce1383072f1c';
+import apiKey from './apikey.js';
 const tokenKey = `?apiKey=${apiKey}`;
 
 /**
@@ -31,7 +30,7 @@ function lookup() {
       console.error('Equipment fetch in lookup failed');
       console.error(error);
     });
-
+  
   return Promise.all([fetchResultsR, fetchResultsE]);
 }
 
