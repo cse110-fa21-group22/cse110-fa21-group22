@@ -1,16 +1,10 @@
 @import "reset.css";
 
-.siderbar-section {
-  background-color: var(--color-primary-blue);
-  cursor: pointer;
-  margin-top: 30px;
-}
-
 .sidebar-button {
   background-color: transparent;
   align-items: center;
   margin-left: -10px;
-  margin-top: 20px;
+  margin-top: 7px;
   cursor: pointer;
 }
 

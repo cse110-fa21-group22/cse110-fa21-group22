@@ -7,11 +7,9 @@ link.href = '../styles/navbar.css';
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
 	<nav class="navbar">
-    <div class="sidebar-section">
-      <a class="sidebar-button">
-        <img class="sidebar-icon" src="../assets/sidebar.svg" alt="sidebar"></img>
-      </a>
-    </div>
+    <a class="sidebar-button">
+      <img class="sidebar-icon" src="../assets/sidebar.svg" alt="sidebar"></img>
+    </a>
     <div class="navbar-section">
 		  <a href="/webpages/home.html">
 			  <h1 class="logo">iCook</h1>
