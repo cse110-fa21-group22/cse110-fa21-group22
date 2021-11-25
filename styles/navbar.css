@@ -27,8 +27,14 @@
 
 /* Add Animation */
 @keyframes animateleft {
-  from { left: -300px; opacity: 0; }
-  to { left: 0; opacity: 1; }
+  from { 
+    left: -300px; 
+    opacity: 0;
+  }
+  to { 
+    left: 0; 
+    opacity: 1; 
+  }
 }
 
 .sidebar-filter {
