@@ -8,9 +8,9 @@ const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
 	<nav class="navbar">
     <div class="sidebar-section">
-      <button class="sidebar-button">
-        <img class="sidebar-icon" src="../assets/home.svg" alt="siderbar"></img>
-      </button>
+      <a class="sidebar-button">
+        <img class="sidebar-icon" src="../assets/sidebar.svg" alt="sidebar"></img>
+      </a>
     </div>
     <div class="navbar-section">
 		  <a href="/webpages/home.html">
