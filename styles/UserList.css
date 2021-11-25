@@ -1,0 +1,31 @@
+@import "reset.css";
+
+div.scroll {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  margin-bottom: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+div.list-name {
+  margin-top: 10px;
+  position: absolute;
+}
+
+.list-name h4 {
+  font-weight: bold;
+  margin: 7px 0 auto;
+  overflow-y: auto;
+}
+
+div.recipe-section {
+  display: flex;
+  gap: 0;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom: 0;
+}

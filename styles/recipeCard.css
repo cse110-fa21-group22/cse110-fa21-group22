@@ -1,13 +1,74 @@
 @import 'reset.css';
 
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox
+.container input {
+	position: absolute;
+  opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+/* Create a custom checkbox
+.checkmark {
+  background-color: var(--color-primary-blue);
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+} */
+
+.dropdown {
+  position: relative;
+
+  /* display: inline-block; */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  opacity: 0.9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.entry {
+  display: block;
+  position: relative;
+  margin-bottom: 12px;
+  cursor: pointer;
+
+  /* font-size: 22px; */
+  user-select: none;
+}
+
 .recipe-card {
   border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0 0 0 / 25%);
+  box-shadow: 0 4px 4px rgba(0 0 0 / 25%);
   background: var(--color-neutrals-light-grey);
   flex-shrink: 0;
   margin: 10px;
   position: relative;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   width: 300px;
 }
 
@@ -15,12 +76,22 @@
   transform: scale(1.01);
 }
 
+.recipe-checkmark {
+  display: none;
+  cursor: pointer;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 25%;
+  top: 20%;
+}
+
 .recipe-favorite {
   cursor: pointer;
   padding: 10px;
   position: absolute;
-  right: 0px;
-  top: 0px;
+  right: 0;
+  top: 0;
 }
 
 .recipe-image {
@@ -42,6 +113,15 @@
   width: 100%;
 }
 
+.recipe-remove {
+  display: none;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 .recipe-subdescription {
   background-color: var(--color-neutrals-white);
   border-radius: 0 0 10px 10px;
@@ -50,4 +130,14 @@
   padding: 10px 20px;
   position: absolute;
   width: calc(100% - 40px);
+}
+
+.submit {
+  background-color: var(--color-primary-blue);
+  border: 0;
+  border-radius: 5px;
+  color: var(--color-neutrals-white);
+  padding: 10px 20px;
+  position: relative;
+  left: 37%;
 }

@@ -1,4 +1,4 @@
-@import 'vars.css';
+@import "vars.css";
 
 /**
  * Global Reset of all HTML Elements
@@ -13,7 +13,7 @@
  * make sure we're resetting all spacing elements.
  *
  */
- 
+
 html,
 body {
   border: 0;
@@ -121,11 +121,11 @@ table {
 }
 
 caption,
-  th,
-  td {
-    text-align: left;
-    vertical-align: middle;
-  } */
+th,
+td {
+  text-align: left;
+  vertical-align: middle;
+}
 
 a img {
   border: 0;
@@ -143,6 +143,10 @@ a:hover,
 a:active {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* established typography */

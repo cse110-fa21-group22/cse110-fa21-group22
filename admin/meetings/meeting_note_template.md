@@ -1,25 +1,28 @@
 # <team name> Group 22 Meeting Notes
+
 ## Meeting Type:
-## Date: 
+
+## Date:
+
 ## Location/Time of Meeting:
 
-### Attendance 
+### Attendance
+
 -
 -
 
 ### Agenda
-  
+
 - Unresolved business
 
 - New Business
 
-- Items on the agenda that are not discussed 
+- Items on the agenda that are not discussed
 
-  
 ### Decisions Made and Their Reasoning
-  
+
 ### Ideas for Further Investigation
-  
-### When the meeting finished 
+
+### When the meeting finished
 
 ### To Do

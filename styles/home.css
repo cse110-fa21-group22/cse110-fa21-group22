@@ -1,1 +1,26 @@
-@import 'reset.css';
+@import "reset.css";
+
+.home-page-favorite-section,
+.home-page-popular-recipe-list {
+  display: flex;
+  margin: 0 -10px 35px;
+  overflow-x: scroll;
+  height: 330px;
+  overflow-y: visible;
+}
+
+.home-page-popular-header {
+  align-items: flex-start;
+  display: flex;
+  margin-right: -10px;
+  justify-content: space-between;
+}
+
+.home-page-popular-refresh {
+  background-color: var(--color-primary-blue);
+  border: 0;
+  border-radius: 5px;
+  color: var(--color-neutrals-white);
+  cursor: pointer;
+  padding: 10px 20px;
+}

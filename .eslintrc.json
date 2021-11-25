@@ -1,0 +1,32 @@
+{
+  "extends": ["airbnb", "plugin:prettier/recommended", "prettier", "plugin:cypress/recommended", "plugin:chai-friendly/recommended"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "guard-for-in": "off",
+    "import/extensions": 0,
+    "no-console": "off",
+    "no-restricted-globals": "off",
+    "no-restricted-syntax": ["error", "LabeledStatement", "WithStatement"],
+    "max-len": [
+      "warn",
+      {
+        "code": 200,
+        "tabWidth": 2,
+        "comments": 200,
+        "ignoreComments": false,
+        "ignoreTrailingComments": true,
+        "ignoreUrls": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "no-continue": "off"
+  }
+}

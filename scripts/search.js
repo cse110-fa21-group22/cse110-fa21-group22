@@ -1,12 +1,6 @@
-const apiKey = 'c2979edc8ae84969be111be5f5cea60c';
-const tokenKey = '?apiKey=' + apiKey;
+import apiKey from './apikey.js';
 
-// This is just for testing
-/*window.addEventListener('keyup', (event) => {
-    if (event.code == 'Escape') {
-        clear();
-    }
-})*/
+const tokenKey = `?apiKey=${apiKey}`;
 
 /**
  * Performs a simple text search through spoonacular
@@ -17,28 +11,23 @@ const tokenKey = '?apiKey=' + apiKey;
  * inputList['recipe-nutrition'] is a boolean specifying whether to show nutrition
  * @returns {object} json containing the results of the spoonacular query
  */
-export async function search(inputList) {
-    // Create the fetch url
-    const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
-    const tokenSearchInput = '&query=' + inputList['query'];
-    const tokenNumResults = '&number=' + inputList['number'];
-    const tokenOffset = '&offset=' + inputList['offset'];
-    const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
-    const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset ;//+ tokenNutritionBool;
+export default async function search(inputList) {
+  // Create the fetch url
+  const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+  const tokenSearchInput = `&query=${inputList.query}`;
+  const tokenNumResults = `&number=${inputList.number}`;
+  const tokenOffset = `&offset=${inputList.offset}`;
+  // const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
+  const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; // + tokenNutritionBool;
 
-    //console.log(fetchEndpoint);
-    
-    // fetch the data
+  // fetch the data
 
-    const fetchResults = await fetch(fetchEndpoint)
-    .then(response => response.json())
+  const fetchResults = await fetch(fetchEndpoint)
+    .then((response) => response.json())
     .catch((error) => {
-        console.error("Fetch in search function failed");
-        console.error(error);
+      console.error('Fetch in search function failed');
+      console.error(error);
     });
 
-    const results = fetchResults.results;
-    //console.log(results);
-    return results;
+  return fetchResults.results;
 }
-
