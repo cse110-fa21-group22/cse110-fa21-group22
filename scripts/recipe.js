@@ -1,3 +1,5 @@
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
+
 /**
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
@@ -57,6 +59,26 @@ function formatTime(time) {
 }
 
 /**
+ * Shows the favorites dropdown on the recipe card
+ */
+function showDropdown(recipe) {
+  // this.dropdown = true;
+  const dropdownContent = document.querySelector('.dropdown-content');
+  dropdownContent.style.display = 'block';
+  const pos = recipe.title.length * 17;
+  dropdownContent.style.marginLeft = `${pos}px`;
+}
+
+/**
+ * Hides the favorites dropdown on the recipe card
+ */
+function hideDropdown() {
+  // this.dropdown = false;
+  const dropdownContent = document.querySelector('.dropdown-content');
+  dropdownContent.style.display = 'none';
+}
+
+/**
  * Initializes the recipe page
  */
 async function init() {
@@ -74,9 +96,6 @@ async function init() {
   const recipe = data[0];
   const equipment = data[1];
 
-  console.log(recipe);
-  console.log(equipment);
-
   // Set recipe image
   const recipeImg = document.querySelector('.recipe-image');
   recipeImg.src = recipe.image;
@@ -84,38 +103,56 @@ async function init() {
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
   recipeName.innerHTML = `${recipe.title}
-      <button class="favorite-heart">
-          <img src="../assets/favorite.svg"/>
-      </button>
+      <img class="favorite-heart" src="../assets/favorite.svg"/ alt="favorite">
       <div class="dropdown-content">
         <label class="container">My Favorites
           <input type="checkbox">
           <span class="checkmark"> </span>
         </label>
         <label class="entry">Create a new list: 
-          <input type="text">
+           <input type="text">
         </label>
         <button class="submit">Submit </button>
      </div>`;
 
-  // show the drop-down box and change the heart color
+  /* 
+   * show the drop-down box and change the heart color
+   */
   let isFavorite = false; // TODO: Need to search if the recipe is favorite
   const favoriteIcon = document.querySelector('.favorite-heart');
+  const submitFavorites = document.querySelector('.submit');
+  const dropdownContent = document.querySelector('.dropdown-content');
   favoriteIcon.addEventListener('click', () => {
     console.log('favoriteIcon clicked');
     if (!isFavorite) {
       isFavorite = true;
-      favoriteIcon.src = '../assets/favorite-selected.svg';
-      const dropdownContent = document.querySelector('.dropdown-content');
-      dropdownContent.style.display = 'block';
-      const pos = recipe.title.length * 17;
-      dropdownContent.style.marginLeft = `${pos}px`;
+      // favoriteIcon.src = '../assets/favorite-selected.svg';
+      showDropdown(recipe);
     } else {
       isFavorite = false;
-      favoriteIcon.src = '../assets/favorite.svg';
-      const dropdownContent = document.querySelector('.dropdown-content');
-      dropdownContent.style.display = 'none';
+      // favoriteIcon.src = '../assets/favorite.svg';
+      hideDropdown();
     }
+  });
+
+  /* Mouse hover for favorite icon */
+  favoriteIcon.addEventListener('mouseover', () => {
+    favoriteIcon.src = '../assets/favorite-selected.svg';
+  });
+
+  favoriteIcon.addEventListener('mouseout', () => {
+    if (!isFavorite) {
+      favoriteIcon.src = '../assets/favorite.svg';
+    }
+  });
+
+  /* handle hovering off of the dropdown so it hides */
+  dropdownContent.addEventListener('mouseleave', () => {
+    hideDropdown();
+  });
+
+  submitFavorites.addEventListener('click', (event) => {
+    // TODO: need to check the values that are clicked
   });
 
   // Set prep time

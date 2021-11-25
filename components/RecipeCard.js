@@ -10,15 +10,15 @@ recipeCardTemplate.innerHTML = `
 	<article class="recipe-card">
     <div class="dropdown">
     	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
-		<div class="dropdown-content">
-    	<label class="entry">Create a new list: 
-      		<input type="text" class="user-input">
-    	</label>
-    	<button class="submit">Submit </button>
-  		</div>
-	</div>
-	<img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
-	<img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
+		  <div class="dropdown-content">
+    	  <label class="entry">Create a new list: 
+      		  <input type="text" class="user-input">
+    	  </label>
+    	  <button class="submit">Submit </button>
+  	  </div>
+	  </div>
+	  <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
+	  <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
@@ -193,7 +193,9 @@ class RecipeCard extends HTMLElement {
     const submitFavorites = this.shadow.querySelector('.submit');
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
 
-    /* Click on recipe card changes page or selects card */
+    /* 
+     * Click on recipe card changes page or selects card 
+     */
     this.addEventListener('click', () => {
       // Check to see if selecting is allowable (only in edit/move mode)
       if (this.selectMode) {
@@ -243,7 +245,7 @@ class RecipeCard extends HTMLElement {
       }
     });
 
-    // TODO: Should I add this function?
+    /* When click the favorite icon, dropdown content showup */
     favoriteIcon.addEventListener('click', () => {
       this.showDropdown();
     });
