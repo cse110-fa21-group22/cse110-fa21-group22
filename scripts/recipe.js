@@ -74,16 +74,14 @@ async function init() {
   const recipe = data[0];
   const equipment = data[1];
 
-  console.log(recipe);
-  console.log(equipment);
-
   // Set recipe image
   const recipeImg = document.querySelector('.recipe-image');
   recipeImg.src = recipe.image;
 
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
-  recipeName.innerHTML = `${recipe.title}<button class="favorite-heart">
+  recipeName.innerHTML = `${recipe.title}
+      <button class="favorite-heart">
           <img src="../assets/favorite.svg"/>
       </button>
       <div class="dropdown-content">
