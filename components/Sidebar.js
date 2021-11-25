@@ -24,7 +24,11 @@ class Sidebar extends HTMLElement {
     this.shadow.appendChild(sidebarTemplate.content);
 
     // TODO
-    // Need some important functions and checkmarks for the filter functions
+    // Initialize the sidebar with checkmarks
+    initializeSidebar() {
+    }
+
+    
   }
 }
 
