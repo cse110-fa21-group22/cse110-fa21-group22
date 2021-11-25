@@ -31,7 +31,6 @@ function lookup() {
       console.error('Equipment fetch in lookup failed');
       console.error(error);
     });
-  
   return Promise.all([fetchResultsR, fetchResultsE]);
 }
 
