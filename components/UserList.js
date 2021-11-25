@@ -11,7 +11,7 @@ UserListTemplate.innerHTML = `
     <div class="list-name">
       <h4>Favorites Recipes</h4>
     </div>
-    <div class="recipe-section">  
+    <div class="recipe-section">
     </div>
   </div>`;
 
@@ -20,9 +20,7 @@ class UserList extends HTMLElement {
     const populateRrecipe = this.shadow.querySelector('.recipe-section');
     console.log('UserList component, ', listObj);
 
-    // eslint-disable-next-line no-restricted-syntax, guard-for-in
     for (const recipeid in listObj) {
-      console.log('test', recipeid, listObj[recipeid]);
       const recipeCard = document.createElement('recipe-card-component');
       recipeCard.recipe = listObj[recipeid];
 
@@ -31,15 +29,11 @@ class UserList extends HTMLElement {
 
       populateRrecipe.appendChild(recipeCard);
       recipeCard.addEventListener('selected', (event) => {
-        const innerEvent = new CustomEvent('selected', {
-          detail: event.detail,
-        });
+        const innerEvent = new CustomEvent('selected', { detail: event.detail });
         this.dispatchEvent(innerEvent);
       });
       recipeCard.addEventListener('deselected', (event) => {
-        const innerEvent = new CustomEvent('deselected', {
-          detail: event.detail,
-        });
+        const innerEvent = new CustomEvent('deselected', { detail: event.detail });
         this.dispatchEvent(innerEvent);
       });
       recipeCard.addEventListener('removed', (event) => {
@@ -83,6 +77,8 @@ class UserList extends HTMLElement {
     this.shadow.appendChild(UserListTemplate.content.cloneNode(true));
     this.shadow.appendChild(link.cloneNode(true));
   }
+
+  // connectedCallback() {}
 }
 
 customElements.define('user-list', UserList);

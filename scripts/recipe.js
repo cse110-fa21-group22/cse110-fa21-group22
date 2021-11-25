@@ -2,8 +2,6 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-
-// eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -41,8 +39,8 @@ function lookup() {
  * @returns {string} - A string in the form 'XX hours XX minutes'
  */
 function formatTime(time) {
-  if (time === 1) return `${time.toString()} minute`;
-  if (time < 70) return `${time.toString()} minutes`;
+  if (parseInt(time, 10) === 1) return `${time.toString()} minute`;
+  if (parseInt(time, 10) < 70) return `${time.toString()} minutes`;
   const hour = Math.floor(time / 60);
   let hrstr = `${hour}`;
   const min = time % 60;
@@ -86,19 +84,19 @@ async function init() {
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
   recipeName.innerHTML = `${recipe.title}<button class="favorite-heart">
-	   		<img src="../assets/favorite.svg"/>
-	 	</button>
-		 <div class="dropdown-content">
-			<label class="container">My Favorites
-			<input type="checkbox">
-			<span class="checkmark"> </span>
-			</label>
-    	<label class="entry">Create a new list: 
-      		<input type="text">
-    	</label>
-    
-    	<button class="submit">Submit </button>
-  	</div>`;
+          <img src="../assets/favorite.svg"/>
+      </button>
+      <div class="dropdown-content">
+       <label class="container">My Favorites
+       <input type="checkbox">
+       <span class="checkmark"> </span>
+       </label>
+       <label class="entry">Create a new list: 
+           <input type="text">
+       </label>
+     
+       <button class="submit">Submit </button>
+     </div>`;
 
   // show the drop-down box and change the heart color
   let isFavorite = false; // TODO: Need to search if the recipe is favorite

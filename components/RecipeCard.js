@@ -79,7 +79,7 @@ class RecipeCard extends HTMLElement {
   }
 
   initializeHearts() {
-    // console.log("Checking favorites");
+    // console.log('Checking favorites');
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
     this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
     if (this.isFavorite) {
@@ -133,10 +133,10 @@ class RecipeCard extends HTMLElement {
     const event = new CustomEvent('deselected', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
+
   /**
    * Dispatches an event to remove this recipe
    */
-
   delete() {
     const event = new CustomEvent('removed', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
@@ -222,9 +222,11 @@ class RecipeCard extends HTMLElement {
       } else {
         this.isFavorite = false;
         removeRecipe(this.getAttribute('recipe-id'));
-        console.log(containers.length);
+        // eslint-disable-next-line no-undef
         for (let i = 0; i < containers.length; i += 1) {
+          // eslint-disable-next-line no-undef
           console.log(containers[i].textContent);
+          // eslint-disable-next-line no-undef
           removeRecipebyList(containers[i].textContent, this.getAttribute('recipe-id'));
         }
         favoriteIcon.src = '../assets/favorite.svg';
