@@ -8,7 +8,7 @@ const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
 	<nav class="navbar">
     <div class="sidebar-section">
-      <button class="sidebar">
+      <button class="sidebar-button">
         <img class="sidebar-icon" src="../assets/home.svg" alt="siderbar"></img>
       </button>
     </div>
@@ -27,7 +27,10 @@ navbarTemplate.innerHTML = `
   			<img src="../assets/favorite.svg" alt="favorite" />
 		  </a>
     </div>
-	</nav>`;
+	</nav>
+  <section class="sidebar-content">
+        <button class="sidebar-filter">Temporary Button</button>
+	</section>`;
 
 class Navbar extends HTMLElement {
   /**
@@ -79,6 +82,20 @@ class Navbar extends HTMLElement {
 
       if (event.code === 'Enter') {
         window.location.href = `search.html${this.generateQueryString(searchTerm)}`;
+      }
+    });
+
+    let isShow = false;
+    const sidebarButton = this.shadow.querySelector('.sidebar-button');
+    sidebarButton.addEventListener('click', () => {
+      const sidebarContent = this.shadow.querySelector('.sidebar-content');
+      if (!isShow) {
+        sidebarContent.style.display = 'flex';
+        sidebarContent.style.flexDirection = 'column';
+        isShow = true;
+      } else {
+        sidebarContent.style.display = 'none';
+        isShow = false;
       }
     });
   }
