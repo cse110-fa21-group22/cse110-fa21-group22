@@ -3,9 +3,13 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/navbar.css';
 
+//Add a new button for the sidebar
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
 	<nav class="navbar">
+    <button class="sidebar">
+      <img class="sidebar-icon" src="../assets/home.svg" alt="siderbar"></img>
+    </button>
 		<a href="/webpages/home.html">
 			<h1 class="logo">iCook</h1>
 		</a>
