@@ -230,8 +230,17 @@ async function init() {
     recipeSteps.appendChild(currStep);
     if(instructionsList[(parseInt(instructionNumber) + parseInt(1)).toString()] != null) {
       const nextButton = document.createElement('button');
+      nextButton.innerHTML = `Next`;
       nextButton.className = "nextStep";
       nextButton.id = "button" + stepNum;
+      let stepHeight = parseInt(parseInt(currStep.innerText.length) / parseInt(120));
+      if (stepHeight == 0) {
+        stepHeight = 1;
+      }
+      console.log(stepHeight);
+      let margin = parseInt(stepHeight) * (-1) / 2 * 50;
+      nextButton.style.marginTop = margin + "px";
+      nextButton.style.marginLeft = 90 + "vw";
       recipeSteps.appendChild(nextButton);
     }
     stepNum++;
