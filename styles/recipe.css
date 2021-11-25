@@ -69,18 +69,14 @@ label {
   width: 100%;
 }
 
-.recipe-bio {
-  float: left;
-  width: 60%;
-}
-
 .recipe-image {
   border-radius: 10px;
-  height: min(100vw, 400px);
+  height: min(90vw, 400px);
   margin-bottom: 20px;
+  top: 50%;
   object-fit: cover;
   object-position: center;
-  width: min(100vw, 400px);
+  width: min(90vw, 400px);
 }
 
 .recipe-info {
@@ -108,34 +104,6 @@ label {
 
 .recipe-time {
   color: var(--color-neutrals-dark-grey);
-}
-
-.left-arrow {
-  background-color: transparent;
-  border: 0;
-  border-radius: 20%;
-  left: -10px;
-  padding: 10px 20px;
-  position: absolute;
-  margin-top: calc(50vw - 30px);
-  transition-duration: 0.4s;
-}
-
-.right-arrow {
-  background-color: transparent;
-  border: 0;
-  border-radius: 20%;
-  padding: 10px 20px;
-  position: absolute;
-  top: calc(50% - 30px);
-  transition-duration: 0.4s;
-  right: 0;
-}
-
-.left-arrow:hover,
-.right-arrow:hover {
-  background-color: #4d96ea;
-  color: white;
 }
 
 #serving-size {
