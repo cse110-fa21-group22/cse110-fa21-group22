@@ -83,19 +83,19 @@ async function init() {
 
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
-  recipeName.innerHTML = `${recipe.title}<button class="favorite-heart">
+  recipeName.innerHTML = `${recipe.title}
+      <button class="favorite-heart">
           <img src="../assets/favorite.svg"/>
       </button>
       <div class="dropdown-content">
-       <label class="container">My Favorites
-       <input type="checkbox">
-       <span class="checkmark"> </span>
-       </label>
-       <label class="entry">Create a new list: 
-           <input type="text">
-       </label>
-     
-       <button class="submit">Submit </button>
+        <label class="container">My Favorites
+          <input type="checkbox">
+          <span class="checkmark"> </span>
+        </label>
+        <label class="entry">Create a new list: 
+          <input type="text">
+        </label>
+        <button class="submit">Submit </button>
      </div>`;
 
   // show the drop-down box and change the heart color
