@@ -225,22 +225,22 @@ async function init() {
   for (const instructionNumber in instructionsList) {
     const currStep = document.createElement('li');
     currStep.innerText = instructionsList[instructionNumber].step;
-    currStep.className = "normal-step";
-    currStep.id = "step" + stepNum;
+    currStep.className = 'normal-step';
+    currStep.id = `step${stepNum}`;
     recipeSteps.appendChild(currStep);
-    if(instructionsList[(parseInt(instructionNumber) + parseInt(1)).toString()] != null) {
+    if (instructionsList[(parseInt(instructionNumber) + parseInt(1)).toString()] != null) {
       const nextButton = document.createElement('button');
       nextButton.innerHTML = `Next`;
-      nextButton.className = "nextStep";
-      nextButton.id = "button" + stepNum;
+      nextButton.className = 'nextStep';
+      nextButton.id = `button${stepNum}`;
       let stepHeight = parseInt(parseInt(currStep.innerText.length) / parseInt(120));
       if (stepHeight == 0) {
         stepHeight = 1;
       }
       console.log(stepHeight);
-      let margin = parseInt(stepHeight) * (-1) / 2 * 50;
-      nextButton.style.marginTop = margin + "px";
-      nextButton.style.marginLeft = 90 + "vw";
+      const margin = ((parseInt(stepHeight) * -1) / 2) * 50;
+      nextButton.style.marginTop = `${margin}px`;
+      nextButton.style.marginLeft = `${90}vw`;
       recipeSteps.appendChild(nextButton);
     }
     stepNum++;
@@ -248,18 +248,18 @@ async function init() {
 
   // Initialize the first step to current step
   const firstStep = document.querySelector('#step1');
-  firstStep.className = "current-step";
+  firstStep.className = 'current-step';
 
   // When the button is pressed, highlight the next step and normalize the current step
   for (let currStepNum = 1; currStepNum < parseInt(stepNum) - parseInt(1); currStepNum++) {
-    const currButton = document.querySelector('#button' + currStepNum);
-    currButton.addEventListener('click', ()=>{
-      let nextStepNum = parseInt(currStepNum) + parseInt(1);
+    const currButton = document.querySelector(`#button${currStepNum}`);
+    currButton.addEventListener('click', () => {
+      const nextStepNum = parseInt(currStepNum) + parseInt(1);
       console.log(nextStepNum);
-      const currStep = document.querySelector('#step' + currStepNum);
-      const nextStep = document.querySelector('#step' + nextStepNum);
-      currStep.className = "normal-step";
-      nextStep.className = "current-step";
+      const currStep = document.querySelector(`#step${currStepNum}`);
+      const nextStep = document.querySelector(`#step${nextStepNum}`);
+      currStep.className = 'normal-step';
+      nextStep.className = 'current-step';
     });
   }
 }
