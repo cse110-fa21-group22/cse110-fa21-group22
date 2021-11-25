@@ -1,14 +1,42 @@
 @import "reset.css";
 
-.logo {
-  color: var(--color-neutrals-white);
-  font-size: 15px;
+.sidebar-button {
+  background-color: transparent;
+  align-items: center;
+}
+
+.sidebar-content {
+  display: none;
+  background-color: var(--color-primary-blue);
+  padding: 0 25px;
+  height: calc(100vh);
+  width: min(100vh, 200px);
+  z-index: 9999;
+  position: absolute;
+}
+
+.sidebar-filter {
+  padding: 0 25px;
 }
 
 .navbar {
   align-items: center;
   background-color: var(--color-primary-blue);
   box-shadow: 0 1px 0 rgb(0 0 0 / 8%);
+  display: flex;
+  height: 60px;
+  padding: 0 25px;
+  width: calc(100vw - 50px);
+}
+
+.logo {
+  color: var(--color-neutrals-white);
+  font-size: 15px;
+}
+
+.navbar-section {
+  align-items: center;
+  background-color: var(--color-primary-blue);
   display: flex;
   height: 60px;
   padding: 0 25px;
