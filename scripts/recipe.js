@@ -1,4 +1,5 @@
 // import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
+// import { checkFavorite } from './UserLocalStorage.js';
 
 /**
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
@@ -59,7 +60,23 @@ function formatTime(time) {
 }
 
 /**
+ * Initialize the heart color
+ * @param {boolean} isFavorite - check if in local storage
+ */
+function initializeHearts(isFavorite) {
+  // console.log('Checking favorites');
+  const favoriteIcon = document.querySelector('.favorite-heart');
+  if (isFavorite) {
+    favoriteIcon.src = '../assets/favorite-selected.svg';
+  } else {
+    favoriteIcon.src = '../assets/favorite.svg';
+  }
+}
+
+/**
  * Shows the favorites dropdown on the recipe card
+ * The position will be the title length
+ * @param {Object} recipe - recipe card
  */
 function showDropdown(recipe) {
   // this.dropdown = true;
@@ -76,6 +93,24 @@ function hideDropdown() {
   // this.dropdown = false;
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'none';
+}
+
+/**
+ * Fetches from localstorage whether the recipe is already favorited or not
+ * @param {Object} recipeID 
+ * @returns - check recipe-id if in the favorite-master list
+ */
+function checkFavorite(recipeID) {
+  const storage = window.localStorage;
+  const list = storage.getItem('favorites-master');
+
+  const array = JSON.parse(list);
+  for (let i = 0; i < array.length; i += 1) {
+    if (parseInt(array[i], 10) === parseInt(recipeID, 10)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
@@ -114,16 +149,16 @@ async function init() {
         </label>
         <button class="submit">Submit </button>
      </div>`;
-
+  
   /* 
    * show the drop-down box and change the heart color
    */
-  let isFavorite = false; // TODO: Need to search if the recipe is favorite
+  let isFavorite = checkFavorite(recipe.id);
+  initializeHearts(isFavorite);
   const favoriteIcon = document.querySelector('.favorite-heart');
   const submitFavorites = document.querySelector('.submit');
   const dropdownContent = document.querySelector('.dropdown-content');
   favoriteIcon.addEventListener('click', () => {
-    console.log('favoriteIcon clicked');
     if (!isFavorite) {
       isFavorite = true;
       // favoriteIcon.src = '../assets/favorite-selected.svg';
@@ -153,6 +188,10 @@ async function init() {
 
   submitFavorites.addEventListener('click', (event) => {
     // TODO: need to check the values that are clicked
+    if(!isFavorite) {
+      // TODO: add to custom list
+      location.reload();
+    }
   });
 
   // Set prep time
