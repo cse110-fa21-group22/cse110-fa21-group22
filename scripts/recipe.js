@@ -230,6 +230,7 @@ async function init() {
     recipeSteps.appendChild(currStep);
     if(instructionsList[(parseInt(instructionNumber) + parseInt(1)).toString()] != null) {
       const nextButton = document.createElement('button');
+      nextButton.className = "nextStep";
       nextButton.id = "button" + stepNum;
       recipeSteps.appendChild(nextButton);
     }
