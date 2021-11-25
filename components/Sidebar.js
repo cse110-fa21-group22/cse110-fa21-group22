@@ -31,13 +31,14 @@ class Sidebar extends HTMLElement {
     isShow = false;
     let sidebarButton = this.shadow.querySelector(".sidebar");
     sidebarButton.addEventListener('click', () => {
+      console.log(isShow);
       let sidebarContent = this.shadow.querySelector(".siderbar-content");
-      if(isShow) {
-        sidebarContent.style.display = "none";
-        isShow = false;
-      } else {
+      if(!isShow) {
         sidebarContent.style.display = "block";
         isShow = true;
+      } else {
+        sidebarContent.style.display = "none";
+        isShow = false;
       }
     });
   }
