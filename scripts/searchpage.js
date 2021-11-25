@@ -4,7 +4,6 @@
  */
 
 import search from './search.js';
-
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
@@ -57,24 +56,25 @@ function init() {
    * @param {Object} results The search results
    * @returns {none}
    */
-  function showResults(results, input) {
+  function showResults(results) {
     console.log(results);
 
     // Clear the results before searching
     clearResults();
 
     // Add the recipes to the page
-    searchKeyword.innerHTML = `"${input.query}"`;
-    Object.values(results).forEach((recipe) => {
+    // eslint-disable-next-line no-use-before-define
+    searchKeyword.innerHTML = `"${inputList.query}"`;
+    for (const recipe in results) {
       const recipeCard = document.createElement('recipe-card-component');
-      recipeCard.recipe = recipe;
+      recipeCard.recipe = results[recipe];
       recipeSection.appendChild(recipeCard);
-    });
+    }
   }
 
   // Automatically parse the query string and run a search on page load
   const searchTerm = parseQueryString();
-  const inputList = [];
+  let inputList = [];
 
   console.log(searchTerm);
 
@@ -83,7 +83,7 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
-  search(inputList).then(showResults, inputList);
+  search(inputList).then(showResults);
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');

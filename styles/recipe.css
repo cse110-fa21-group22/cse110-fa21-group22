@@ -73,11 +73,6 @@ label {
   transition-duration: 0.4s;
 }
 
-.left-arrow:hover {
-  background-color: #4d96ea;
-  color: white;
-}
-
 #prep-time {
   margin-left: 50px;
 }
@@ -113,6 +108,15 @@ label {
   width: min(100%, 400px);
 }
 
+.recipe-info {
+  align-items: center;
+  display: inline-flex;
+  flex-flow: column-reverse wrap;
+  justify-content: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
 .recipe-page-description {
   margin-bottom: 10px;
   width: 100%;
@@ -142,6 +146,7 @@ label {
   right: 0;
 }
 
+.left-arrow:hover,
 .right-arrow:hover {
   background-color: #4d96ea;
   color: white;
@@ -190,7 +195,7 @@ ol > li::before {
 
   .recipe-info {
     align-items: flex-start;
-    flex-flow: inherit nowrap;
+    flex-flow: nowrap;
     justify-content: space-between;
   }
 }

@@ -1,10 +1,4 @@
-import {
-  addRecipe,
-  addRecipebyList,
-  checkFavorite,
-  // removeRecipe,
-  // removeRecipebyList,
-} from './UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -75,16 +69,15 @@ class RecipeCard extends HTMLElement {
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
-      if (localStorage.key(i) !== 'favorites-master') {
-        const entry = listEntryTemplate.content.cloneNode(true);
-        entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
-        dropdownElem.insertBefore(entry, dropdownElem.firstChild);
-      }
+      if (localStorage.key(i) === 'favorites-master') continue;
+      const entry = listEntryTemplate.content.cloneNode(true);
+      entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+      dropdownElem.insertBefore(entry, dropdownElem.firstChild);
     }
   }
 
   initializeHearts() {
-    // console.log("Checking favorites");
+    // console.log('Checking favorites');
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
     this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
     if (this.isFavorite) {
@@ -123,9 +116,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = true;
     checkmark.style.display = 'block';
     this.style.filter = 'brightness(90%)';
-    const event = new CustomEvent('selected', {
-      detail: this.getAttribute('recipe-id'),
-    });
+    const event = new CustomEvent('selected', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
 
@@ -137,9 +128,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = false;
     checkmark.style.display = 'none';
     this.style.filter = 'brightness(100%)';
-    const event = new CustomEvent('deselected', {
-      detail: this.getAttribute('recipe-id'),
-    });
+    const event = new CustomEvent('deselected', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
 
@@ -147,9 +136,7 @@ class RecipeCard extends HTMLElement {
    * Dispatches an event to remove this recipe
    */
   delete() {
-    const event = new CustomEvent('removed', {
-      detail: this.getAttribute('recipe-id'),
-    });
+    const event = new CustomEvent('removed', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
 
@@ -222,29 +209,28 @@ class RecipeCard extends HTMLElement {
       }
     });
 
-    // /* Click favorite icon prompts with dropdown */
-    // favoriteIcon.addEventListener('click', (event) => {
-    // 	// Stop propagation to the parent so you don't go to the recipe page
-    // 	event.stopPropagation();
-    // 	if (!this.isFavorite) {
-    // 		favoriteIcon.src = '../assets/favorite-selected.svg';
-    // 		this.showDropdown();
-    // 		console.log('Prompting user to add to favorites lists');
-    // 	} else {
-    // 		this.isFavorite = false;
-    // 		removeRecipe(this.getAttribute('recipe-id'));
-    // 		console.log(containers.length);
-    // 		for (let i = 0; i < containers.length; i += 1) {
-    // 			console.log(containers[i].textContent);
-    // 			removeRecipebyList(
-    // 				containers[i].textContent,
-    // 				this.getAttribute('recipe-id')
-    // 			);
-    // 		}
-    // 		favoriteIcon.src = '../assets/favorite.svg';
-    // 		console.log('Remove item from ALL favorites lists here');
-    // 	}
-    // });
+    /* Click favorite icon prompts with dropdown */
+    favoriteIcon.addEventListener('click', (event) => {
+      // Stop propagation to the parent so you don't go to the recipe page
+      event.stopPropagation();
+      if (!this.isFavorite) {
+        favoriteIcon.src = '../assets/favorite-selected.svg';
+        this.showDropdown();
+        console.log('Prompting user to add to favorites lists');
+      } else {
+        this.isFavorite = false;
+        removeRecipe(this.getAttribute('recipe-id'));
+        // eslint-disable-next-line no-undef
+        for (let i = 0; i < containers.length; i += 1) {
+          // eslint-disable-next-line no-undef
+          console.log(containers[i].textContent);
+          // eslint-disable-next-line no-undef
+          removeRecipebyList(containers[i].textContent, this.getAttribute('recipe-id'));
+        }
+        favoriteIcon.src = '../assets/favorite.svg';
+        console.log('Remove item from ALL favorites lists here');
+      }
+    });
 
     /* Mouse hover for favorite icon */
     favoriteIcon.addEventListener('mouseover', () => {
@@ -290,7 +276,7 @@ class RecipeCard extends HTMLElement {
         this.addToCustomList();
         /* Reload the page as a shortcut for showing new lists */
 
-        document.location.reload();
+        location.reload();
       }
       event.stopPropagation();
     });

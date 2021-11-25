@@ -2,10 +2,8 @@
  * API key for connecting with Spoonatular API
  */
 
-// console.log(process.env.API_KEY);
-// import {apiKey} from './apikey.js';?
-// const apiKey = '8581385ca4af4148b1a78b5ef23e5b8c';
-import { initLocalStorage } from '../components/UserLocalStorage.js';
+// eslint-disable-next-line no-unused-vars
+import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
 
 import apiKey from './apikey.js';
 
@@ -13,9 +11,54 @@ const tokenKey = `?apiKey=${apiKey}`;
 const storage = window.localStorage;
 
 const steppingSize = 10; // Stepping-size number of recipes to append to end after user scrolls to bottom
-let recipeData = {}; // Data in each stepping size?
+const recipeData = {}; // Data in each stepping size?
 const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
 const userFavoriteSection = document.querySelector('.home-page-favorite-section');
+
+/**
+ * it is possible that the user click the icon and coming back to the main page
+ * therefore, only initilize the favorite-master local storage when it does not even exist
+ */
+function initLocalStorageDoubt() {
+  // meaning that favorites-master does not exist
+  if (storage.getItem('favorites-master') == null) {
+    initLocalStorage();
+  }
+}
+
+async function fetchRandomRecipes() {
+  return new Promise((resolve, reject) => {
+    // use 1 for now, save some points for querying
+    const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
+    // console.log(fetchResults);
+
+    fetch(fetchResults)
+      .then((response) => response.json())
+      .then((data) => {
+        // change the 0
+        // need to be a for loop and put them into recipeData;
+        // console.log(data);
+        // console.log(data.recipes[0].id);
+        for (let i = 0; i < parseInt(steppingSize, 10); i += 1) {
+          recipeData[data.recipes[i].id] = data.recipes[i];
+
+          // // testing for local storage
+          // addRecipe(data.recipes[i].id);
+          // if(i % 2 == 0){addRecipebyList("list%2", data.recipes[i].id);}
+          // if(i % 3 == 0){addRecipebyList("list%3", data.recipes[i].id);}
+          // if(i % 4 == 0){addRecipebyList("list%4", data.recipes[i].id);}
+          // if(i % 5 == 0){addRecipebyList("list%5", data.recipes[i].id);}
+          // if(i % 10 == 0){addRecipebyList("list%10", data.recipes[i].id);}
+        }
+        resolve();
+      })
+      .catch((err) => {
+        console.log('Error loading the recipe');
+        console.log(err);
+        reject(err);
+      });
+  });
+}
 
 /**
  * Clear the recipe cards from the recipe section element
@@ -37,20 +80,10 @@ function showResults(results) {
   clearResults();
 
   // Add the recipes to the page
-  Object.values(results).forEach((recipe) => {
+  for (const recipe in results) {
     const recipeCard = document.createElement('recipe-card-component');
-    recipeCard.recipe = recipe;
+    recipeCard.recipe = results[recipe];
     recipeSection.appendChild(recipeCard);
-  });
-}
-/**
- * it is possible that the user click the icon and coming back to the main page
- * therefore, only initilize the favorite-master local storage when it does not even exist
- */
-function initLocalStorageDoubt() {
-  // meaning that favorites-master does not exist
-  if (storage.getItem('favorites-master') === null) {
-    initLocalStorage();
   }
 }
 
@@ -70,50 +103,23 @@ async function getRecipebyID(id) {
   return fetchResults;
 }
 
+/**
+ * clear out recipeData
+ */
+function clearObject() {
+  for (const member in recipeData) delete recipeData[member];
+}
+
 async function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-  console.log(array);
 
-  array.forEach((values) => {
+  for (let i = 0; i < array.length; i += 1) {
     const recipeCard = document.createElement('recipe-card-component');
-    recipeCard.recipe = getRecipebyID(values);
+    // eslint-disable-next-line no-await-in-loop
+    recipeCard.recipe = await getRecipebyID(array[i]);
     userFavoriteSection.appendChild(recipeCard);
-  });
-}
-
-async function fetchRandomRecipes() {
-  return new Promise((resolve, reject) => {
-    // use 1 for now, save some points for querying
-    const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
-    // console.log(fetchResults);
-
-    fetch(fetchResults)
-      .then((response) => response.json())
-      .then((data) => {
-        // change the 0
-        // need to be a for loop and put them into recipeData;
-        // console.log(data);
-        // console.log(data.recipes[0].id);
-        for (let i = 0; i < parseInt(steppingSize, 10); i += 1) {
-          recipeData[data.recipes[i].id] = data.recipes[i];
-
-          // // testing for local storage
-          // addRecipe(data.recipes[i].id);
-          // if(i % 2 === 0){addRecipebyList("list%2", data.recipes[i].id);}
-          // if(i % 3 === 0){addRecipebyList("list%3", data.recipes[i].id);}
-          // if(i % 4 === 0){addRecipebyList("list%4", data.recipes[i].id);}
-          // if(i % 5 === 0){addRecipebyList("list%5", data.recipes[i].id);}
-          // if(i % 10 === 0){addRecipebyList("list%10", data.recipes[i].id);}
-        }
-        resolve();
-      })
-      .catch((err) => {
-        console.log('Error loading the recipe');
-        console.log(err);
-        reject(err);
-      });
-  });
+  }
 }
 
 async function init() {
@@ -146,8 +152,8 @@ async function init() {
   showResults(recipeData);
 
   const button = document.querySelector('.home-page-popular-refresh');
-  button.addEventListener('click', async () => {
-    recipeData = {};
+  button.addEventListener('click', async function () {
+    clearObject();
     try {
       await fetchRandomRecipes();
     } catch (err) {
@@ -158,7 +164,8 @@ async function init() {
   });
 
   // populating local storage testing
-  // var list = storage.getItem('favorites-master');
+  // eslint-disable-next-line no-unused-vars
+  const list = storage.getItem('favorites-master');
   // createList("list%2");
   // createList("list%3");
   // createList("list%4");
@@ -171,5 +178,4 @@ async function init() {
 
   showFavoriteSection();
 }
-
 window.addEventListener('DOMContentLoaded', init);
