@@ -2,7 +2,7 @@
 
 .sidebar {
   background-color: var(--color-primary-blue);
-  display: flex; 
+  display: flex;
   flex-direction: column;
   padding: 0 25px;
   height: 100%;
