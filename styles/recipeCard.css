@@ -55,9 +55,6 @@
   display: block;
   position: relative;
   margin-bottom: 12px;
-  cursor: pointer;
-
-  /* font-size: 22px; */
   user-select: none;
 }
 
