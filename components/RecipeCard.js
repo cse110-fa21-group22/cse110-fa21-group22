@@ -245,7 +245,7 @@ class RecipeCard extends HTMLElement {
       }
     });
 
-    // TODO: Should I add this function?
+    /* When click the favorite icon, dropdown content showup */
     favoriteIcon.addEventListener('click', () => {
       this.showDropdown();
     });

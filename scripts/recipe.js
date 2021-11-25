@@ -1,3 +1,5 @@
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
+
 /**
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
@@ -119,6 +121,7 @@ async function init() {
   let isFavorite = false; // TODO: Need to search if the recipe is favorite
   const favoriteIcon = document.querySelector('.favorite-heart');
   const submitFavorites = document.querySelector('.submit');
+  const dropdownContent = document.querySelector('.dropdown-content');
   favoriteIcon.addEventListener('click', () => {
     console.log('favoriteIcon clicked');
     if (!isFavorite) {
@@ -138,9 +141,14 @@ async function init() {
   });
 
   favoriteIcon.addEventListener('mouseout', () => {
-    if (!this.isFavorite) {
+    if (!isFavorite) {
       favoriteIcon.src = '../assets/favorite.svg';
     }
+  });
+
+  /* handle hovering off of the dropdown so it hides */
+  dropdownContent.addEventListener('mouseleave', () => {
+    hideDropdown();
   });
 
   submitFavorites.addEventListener('click', (event) => {
