@@ -122,9 +122,9 @@ label {
 }
 
 .current-step {
-	background-color: #d0e4fb;
-	gap: 10px;
-	text-align: left;
+  background-color: #d0e4fb;
+  gap: 10px;
+  text-align: left;
   width: 86vw;
 }
 

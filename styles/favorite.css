@@ -131,6 +131,7 @@ body {
   border: 1px solid;
   border-radius: 20px;
   box-shadow: none; */
+  display: none;
   font-size: 16px;
   height: 30px;
   line-height: 12px;
@@ -152,6 +153,7 @@ body {
   border: 1px solid;
   border-radius: 20px;
   box-shadow: none; */
+  display: none;
   font-size: 16px;
   height: 30px;
   line-height: 12px;
@@ -167,5 +169,13 @@ body {
   /* background-color: var(--color-primary-blue);
   color: var(--color-neutrals-white); */
 }
-/* @media (min-width: 768px) {
-} */
+
+@media (min-width: 768px) {
+  #export {
+    display: block;
+  }
+
+  #import {
+    display: block;
+  }
+}
