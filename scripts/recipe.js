@@ -97,7 +97,7 @@ function hideDropdown() {
 
 /**
  * Fetches from localstorage whether the recipe is already favorited or not
- * @param {Object} recipeID 
+ * @param {Object} recipeID
  * @returns - check recipe-id if in the favorite-master list
  */
 function checkFavorite(recipeID) {
@@ -185,7 +185,7 @@ async function init() {
     hideDropdown();
   });
 
-  submitFavorites.addEventListener('click', (event) => {
+  submitFavorites.addEventListener('click', () => {
     // TODO: need to check the values that are clicked
     if(!isFavorite) {
       // TODO: add to custom list

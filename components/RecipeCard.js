@@ -193,8 +193,8 @@ class RecipeCard extends HTMLElement {
     const submitFavorites = this.shadow.querySelector('.submit');
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
 
-    /* 
-     * Click on recipe card changes page or selects card 
+    /*
+     * Click on recipe card changes page or selects card
      */
     this.addEventListener('click', () => {
       // Check to see if selecting is allowable (only in edit/move mode)
