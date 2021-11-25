@@ -104,7 +104,6 @@ async function init() {
   favoriteIcon.addEventListener('click', () => {
     console.log('favoriteIcon clicked');
     if (!isFavorite) {
-      console.log('show dropdown');
       isFavorite = true;
       favoriteIcon.src = '../assets/favorite-selected.svg';
       const dropdownContent = document.querySelector('.dropdown-content');
@@ -112,7 +111,6 @@ async function init() {
       const pos = recipe.title.length * 17;
       dropdownContent.style.marginLeft = `${pos}px`;
     } else {
-      console.log('hide dropdown');
       isFavorite = false;
       favoriteIcon.src = '../assets/favorite.svg';
       const dropdownContent = document.querySelector('.dropdown-content');
