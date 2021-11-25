@@ -1,14 +1,23 @@
 @import "reset.css";
 
+.navbar {
+  align-items: center;
+  background-color: var(--color-primary-blue);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 8%);
+  display: flex;
+  height: 60px;
+  padding: 0 25px;
+  width: calc(100vw - 50px);
+}
+
 .logo {
   color: var(--color-neutrals-white);
   font-size: 15px;
 }
 
-.navbar {
+.navbar-section {
   align-items: center;
   background-color: var(--color-primary-blue);
-  box-shadow: 0 1px 0 rgb(0 0 0 / 8%);
   display: flex;
   height: 60px;
   padding: 0 25px;
