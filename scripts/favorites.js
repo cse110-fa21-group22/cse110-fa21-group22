@@ -102,8 +102,11 @@ async function getRecipebyID(id) {
 
 let editMode = false;
 const editButton = document.getElementById('edit');
+console.log("edit button get");
 const cancelButton = document.getElementById('cancel');
+console.log("cancel button get");
 const moveButton = document.getElementById('move');
+console.log("move button get");
 
 editButton.addEventListener('click', () => {
   if (editMode) return;
