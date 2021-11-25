@@ -149,7 +149,6 @@ async function init() {
         </label>
         <button class="submit">Submit </button>
      </div>`;
-  
   /* 
    * show the drop-down box and change the heart color
    */
