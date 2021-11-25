@@ -129,6 +129,9 @@ async function init() {
   const recipe = data[0];
   const equipment = data[1];
 
+  console.log(recipe);
+  console.log(equipment);
+
   // Set recipe image
   const recipeImg = document.querySelector('.recipe-image');
   recipeImg.src = recipe.image;
