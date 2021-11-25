@@ -6,7 +6,7 @@ link.href = '../styles/sidebar.css';
 
 const sidebarTemplate = document.createElement('template');
 sidebarTemplate.innerHTML = `
-	<nav class="sidebar">
+	<nav class="sidebar-content">
         <button>Temporary Button</button>
 	</nav>`;
 
@@ -28,7 +28,18 @@ class Sidebar extends HTMLElement {
     initializeSidebar() {
     }
 
-    
+    isShow = false;
+    let sidebarButton = this.shadow.querySelector(".sidebar");
+    sidebarButton.addEventListener('click', () => {
+      let sidebarContent = this.shadow.querySelector(".siderbar-content");
+      if(isShow) {
+        sidebarContent.style.display = "none";
+        isShow = false;
+      } else {
+        sidebarContent.style.display = "block";
+        isShow = true;
+      }
+    });
   }
 }
 
