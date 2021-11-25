@@ -39,6 +39,7 @@ class Navbar extends HTMLElement {
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });
+    this.isSidebarShow = false;
   }
 
   /**
@@ -85,17 +86,16 @@ class Navbar extends HTMLElement {
       }
     });
 
-    let isShow = false;
     const sidebarButton = this.shadow.querySelector('.sidebar-button');
     sidebarButton.addEventListener('click', () => {
       const sidebarContent = this.shadow.querySelector('.sidebar-content');
-      if (!isShow) {
+      if (!this.isSidebarShow) {
         sidebarContent.style.display = 'flex';
         sidebarContent.style.flexDirection = 'column';
-        isShow = true;
+        this.isSidebarShow = true;
       } else {
         sidebarContent.style.display = 'none';
-        isShow = false;
+        this.isSidebarShow = false;
       }
     });
   }
