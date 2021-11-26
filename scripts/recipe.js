@@ -239,10 +239,19 @@ async function init() {
       }
       // eslint-disable-next-line camelcase
       const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 34;
+      console.log(margin_top);
       // eslint-disable-next-line camelcase
       nextButton.style.marginTop = `${margin_top}px`;
       nextButton.style.marginLeft = `${90}vw`;
       recipeSteps.appendChild(nextButton);
+    } else {
+      const backButton = document.createElement('button');
+      backButton.innerHTML = `Back to first step`;
+      backButton.className = 'backButton';
+      backButton.id = `backButton`;
+      backButton.style.display = 'none';
+      backButton.style.marginLeft = `${90}vw`;
+      recipeSteps.appendChild(backButton);
     }
     stepNum += 1;
   }
@@ -256,17 +265,40 @@ async function init() {
   // When the button is pressed, highlight the next step and normalize the current step
   for (let currStepNum = 1; currStepNum < parseInt(stepNum, 10) - 1; currStepNum += 1) {
     const currButton = document.querySelector(`#button${currStepNum}`);
-    currButton.addEventListener('click', () => {
-      const nextStepNum = parseInt(currStepNum, 10) + 1;
-      const currStep = document.querySelector(`#step${currStepNum}`);
-      const nextStep = document.querySelector(`#step${nextStepNum}`);
-      const nextButton = document.querySelector(`#button${nextStepNum}`);
-      currStep.className = 'normal-step';
-      nextStep.className = 'current-step';
-      currButton.style.display = 'none';
-      nextButton.style.display = 'block';
-    });
+    if (currStepNum !== parseInt(stepNum, 10) - 2) {
+      currButton.addEventListener('click', () => {
+        const nextStepNum = parseInt(currStepNum, 10) + 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const nextStep = document.querySelector(`#step${nextStepNum}`);
+        const nextButton = document.querySelector(`#button${nextStepNum}`);
+        currStep.className = 'normal-step';
+        nextStep.className = 'current-step';
+        currButton.style.display = 'none';
+        nextButton.style.display = 'block';
+      });
+    } else {
+      currButton.addEventListener('click', () => {
+        const nextStepNum = parseInt(currStepNum, 10) + 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const nextStep = document.querySelector(`#step${nextStepNum}`);
+        const nextButton = document.querySelector(`#backButton`);
+        currStep.className = 'normal-step';
+        nextStep.className = 'current-step';
+        currButton.style.display = 'none';
+        nextButton.style.display = 'block';
+      });
+    }
   }
+
+  // The event listener for the last back button
+  const backButton = document.querySelector(`#backButton`);
+  backButton.addEventListener('click', () => {
+    const currStep = document.querySelector(`#step${parseInt(stepNum, 10) - 1}`);
+    currStep.className = 'normal-step';
+    firstStep.className = 'current-step';
+    firstButton.style.display = 'block';
+    backButton.style.display = 'none';
+  });
 }
 
 window.addEventListener('DOMContentLoaded', init);
