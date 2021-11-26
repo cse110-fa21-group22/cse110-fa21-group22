@@ -233,12 +233,11 @@ async function init() {
       nextButton.innerHTML = `Next`;
       nextButton.className = 'nextStep';
       nextButton.id = `button${stepNum}`;
-      let stepHeight = parseInt(currStep.innerText.length, 10) / 120;
-      if (stepHeight < 2) {
-        stepHeight = 1.5;
-      }
+      const style = window.getComputedStyle(currStep, null);
+      const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
+      console.log(stepHeight);
       // eslint-disable-next-line camelcase
-      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 34;
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
       console.log(margin_top);
       // eslint-disable-next-line camelcase
       nextButton.style.marginTop = `${margin_top}px`;

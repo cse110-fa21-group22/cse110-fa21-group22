@@ -112,6 +112,7 @@ label {
 
 .nextStep {
   position: absolute;
+  margin: 0;
   display: none;
 }
 
