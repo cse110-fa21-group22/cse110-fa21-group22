@@ -29,11 +29,11 @@ recipeCardTemplate.innerHTML = `
 
 const listEntryTemplate = document.createElement('template');
 listEntryTemplate.innerHTML = `
-<label class="container">
-	<span>My Favorites</span>
-	<input type="checkbox">
-	<span class="checkmark"> </span>
-</label>
+  <label class="container">
+	  <span>My Favorites</span>
+	  <input type="checkbox">
+	  <span class="checkmark"> </span>
+  </label>
 `;
 
 class RecipeCard extends HTMLElement {
