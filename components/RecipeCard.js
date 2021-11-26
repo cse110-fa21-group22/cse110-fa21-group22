@@ -9,12 +9,6 @@ const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
   <article class="recipe-card">
     <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
-    <div class="dropdown-content">
-      <label class="entry">Create a new list: 
-        <input type="text" class="user-input">
-      </label>
-      <button class="submit">Submit </button>
-    </div>
     <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
     <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
@@ -23,6 +17,12 @@ recipeCardTemplate.innerHTML = `
       <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
     </div>
   </article>
+  <div class="dropdown-content">
+    <label class="entry">Create a new list: 
+      <input type="text" class="user-input">
+    </label>
+    <button class="submit">Submit </button>
+  </div>
 `;
 
 const listEntryTemplate = document.createElement('template');
