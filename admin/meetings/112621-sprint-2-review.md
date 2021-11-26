@@ -54,8 +54,8 @@
   - Change up the local storage code (very slow when loading favorites page)
   
   
-### When the meeting finished: 
-  
+### When the meeting finished
+  2:31 pm
 
 ### To Do
   - Check github for tasks
