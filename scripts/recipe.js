@@ -124,7 +124,7 @@ function addToCheckedLists(recipe) {
     if (checkmark.checked) {
       addRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
     }
-  } 
+  }
 }
 
 /**
