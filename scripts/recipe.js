@@ -98,7 +98,6 @@ function initializeDropdown() {
  * @param {Object} recipe - recipe card
  */
 function showDropdown(recipe) {
-  // this.dropdown = true;
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'block';
   const pos = recipe.title.length * 17;
@@ -109,7 +108,6 @@ function showDropdown(recipe) {
  * Hides the favorites dropdown on the recipe card
  */
 function hideDropdown() {
-  // this.dropdown = false;
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'none';
 }
@@ -189,8 +187,13 @@ async function init() {
       showDropdown(recipe);
     } else {
       isFavorite = false;
-      // favoriteIcon.src = '../assets/favorite.svg';
-      hideDropdown();
+      removeRecipe(recipe.id);
+      const containers = document.querySelectorAll('.container');
+      for (let i = 0; i < containers.length; i += 1) {
+        console.log(containers[i].textContent);
+        removeRecipebyList(containers[i].textContent, recipe.id);
+      }
+      favoriteIcon.src = '../assets/favorite.svg';
     }
   });
 
