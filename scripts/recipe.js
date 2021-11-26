@@ -1,9 +1,8 @@
-// import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
-
 /**
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from '../components/UserLocalStorage.js';
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -91,24 +90,6 @@ function hideDropdown() {
   // this.dropdown = false;
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'none';
-}
-
-/**
- * Fetches from localstorage whether the recipe is already favorited or not
- * @param {Object} recipeID
- * @returns - check recipe-id if in the favorite-master list
- */
-function checkFavorite(recipeID) {
-  const storage = window.localStorage;
-  const list = storage.getItem('favorites-master');
-
-  const array = JSON.parse(list);
-  for (let i = 0; i < array.length; i += 1) {
-    if (parseInt(array[i], 10) === parseInt(recipeID, 10)) {
-      return true;
-    }
-  }
-  return false;
 }
 
 /**
