@@ -21,7 +21,7 @@ recipeCardTemplate.innerHTML = `
     <label class="entry">Create a new list: 
       <input type="text" class="user-input">
     </label>
-    <button class="submit">Submit </button>
+    <button class="submit">Submit</button>
   </div>
 `;
 
@@ -275,7 +275,6 @@ class RecipeCard extends HTMLElement {
         this.addToCheckedLists();
         this.addToCustomList();
         /* Reload the page as a shortcut for showing new lists */
-
         location.reload();
       }
       event.stopPropagation();

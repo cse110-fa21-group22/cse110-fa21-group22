@@ -70,6 +70,28 @@ function initializeHearts(isFavorite) {
   }
 }
 
+const listEntryTemplate = document.createElement('template');
+listEntryTemplate.innerHTML = `
+  <label class="container">
+	  <span>My Favorites</span>
+	  <input type="checkbox">
+	  <span class="checkmark"> </span>
+  </label>
+`;
+
+/**
+ * Initialize the dropdown content
+ */
+function initializeDropdown() {
+  const dropdownElem = document.querySelector('.dropdown-content');
+  for (let i = 0; i < localStorage.length; i += 1) {
+    if (localStorage.key(i) === 'favorites-master') continue;
+    const entry = listEntryTemplate.content.cloneNode(true);
+    entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+    dropdownElem.insertBefore(entry, dropdownElem.firstChild);
+  }
+}
+
 /**
  * Shows the favorites dropdown on the recipe card
  * The position will be the title length
@@ -90,6 +112,31 @@ function hideDropdown() {
   // this.dropdown = false;
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'none';
+}
+
+/**
+ * Add the recipe to all checked lists in the dropdown
+ */
+function addToCheckedLists(recipe) {
+  const containers = document.querySelectorAll('.container');
+  for (let i = 0; i < containers.length; i += 1) {
+    const checkmark = containers[i].querySelector('input');
+    if (checkmark.checked) {
+      addRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+    }
+  } 
+}
+
+/**
+ * Adds the recipe to a custom list
+ */
+function addToCustomList(recipe) {
+  let userInput = document.querySelector('.user-input');
+  userInput = userInput.value;
+  if (userInput !== '') {
+    console.log(userInput);
+    addRecipebyList(userInput, recipe.id);
+  }
 }
 
 /**
@@ -121,28 +168,24 @@ async function init() {
   const recipeName = document.querySelector('.recipe-name');
   recipeName.innerHTML = `${recipe.title}
       <img class="favorite-heart" src="../assets/favorite.svg"/ alt="favorite">
-      <div class="dropdown-content">
-        <label class="container">My Favorites
-          <input type="checkbox">
-          <span class="checkmark"> </span>
-        </label>
+      <div class="dropdown-content">s
         <label class="entry">Create a new list: 
-           <input type="text">
+           <input type="text" class="user-input">
         </label>
-        <button class="submit">Submit </button>
+        <button class="submit">Submit</button>
      </div>`;
   /*
    * show the drop-down box and change the heart color
    */
   let isFavorite = checkFavorite(recipe.id);
   initializeHearts(isFavorite);
+  initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
   const submitFavorites = document.querySelector('.submit');
   const dropdownContent = document.querySelector('.dropdown-content');
   favoriteIcon.addEventListener('click', () => {
     if (!isFavorite) {
-      isFavorite = true;
-      // favoriteIcon.src = '../assets/favorite-selected.svg';
+      favoriteIcon.src = '../assets/favorite-selected.svg';
       showDropdown(recipe);
     } else {
       isFavorite = false;
@@ -171,6 +214,10 @@ async function init() {
     // TODO: need to check the values that are clicked
     if (!isFavorite) {
       // TODO: add to custom list
+      addRecipe(recipe.id);
+      addToCheckedLists(recipe);
+      addToCustomList(recipe);
+      /* Reload the page as a shortcut for showing new lists */
       location.reload();
     }
   });
