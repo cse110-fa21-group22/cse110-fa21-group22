@@ -112,6 +112,7 @@ label {
 
 .nextStep {
   position: absolute;
+  display: none;
 }
 
 .normal-step {

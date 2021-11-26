@@ -233,13 +233,14 @@ async function init() {
       nextButton.innerHTML = `Next`;
       nextButton.className = 'nextStep';
       nextButton.id = `button${stepNum}`;
-      let stepHeight = parseInt(parseInt(currStep.innerText.length, 10) / 120, 10);
-      if (stepHeight === 0) {
-        stepHeight = 1;
+      let stepHeight = parseInt(currStep.innerText.length, 10) / 120;
+      if (stepHeight < 2) {
+        stepHeight = 1.5;
       }
-      console.log(stepHeight);
-      const margin = ((parseInt(stepHeight, 10) * -1) / 2) * 50;
-      nextButton.style.marginTop = `${margin}px`;
+      // eslint-disable-next-line camelcase
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 34;
+      // eslint-disable-next-line camelcase
+      nextButton.style.marginTop = `${margin_top}px`;
       nextButton.style.marginLeft = `${90}vw`;
       recipeSteps.appendChild(nextButton);
     }
@@ -248,18 +249,22 @@ async function init() {
 
   // Initialize the first step to current step
   const firstStep = document.querySelector('#step1');
+  const firstButton = document.querySelector('#button1');
   firstStep.className = 'current-step';
+  firstButton.style.display = 'block';
 
   // When the button is pressed, highlight the next step and normalize the current step
   for (let currStepNum = 1; currStepNum < parseInt(stepNum, 10) - 1; currStepNum += 1) {
     const currButton = document.querySelector(`#button${currStepNum}`);
     currButton.addEventListener('click', () => {
       const nextStepNum = parseInt(currStepNum, 10) + 1;
-      console.log(nextStepNum);
       const currStep = document.querySelector(`#step${currStepNum}`);
       const nextStep = document.querySelector(`#step${nextStepNum}`);
+      const nextButton = document.querySelector(`#button${nextStepNum}`);
       currStep.className = 'normal-step';
       nextStep.className = 'current-step';
+      currButton.style.display = 'none';
+      nextButton.style.display = 'block';
     });
   }
 }
