@@ -168,7 +168,7 @@ async function init() {
   const recipeName = document.querySelector('.recipe-name');
   recipeName.innerHTML = `${recipe.title}
       <img class="favorite-heart" src="../assets/favorite.svg"/ alt="favorite">
-      <div class="dropdown-content">s
+      <div class="dropdown-content">
         <label class="entry">Create a new list: 
            <input type="text" class="user-input">
         </label>
