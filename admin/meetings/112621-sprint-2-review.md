@@ -37,6 +37,13 @@
     - cuisine
     - dietary restrictions
     - filter by time (15 min, 30 min, etc)
+  - Need to make an ADR for local storage 
+  - Add other catagories on home page
+  - Refresh button -> Load more recipes
+  - Don't load recipes with no pictures 
+  - Fix ingredient names, alignment, etc 
+  - Drop down menu for favorites (style check boxes)
+  
   
 
 ### Ideas for Further Investigation
@@ -44,7 +51,15 @@
   - Potentially copy link 
   - Backend:
     - transferring data from the sidebar to different pages
+  - Change up the local storage code (very slow when loading favorites page)
   
-### When the meeting finished
+  
+### When the meeting finished: 
+  
 
 ### To Do
+  - Check github for tasks
+  - Redesign the favorites page
+  - Add functionality to side bar
+  - Fix how local storage will work
+  - Homepage and Searchpage E2E tests
