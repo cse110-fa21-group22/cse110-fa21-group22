@@ -235,21 +235,25 @@ async function init() {
       nextButton.id = `button${stepNum}`;
       const style = window.getComputedStyle(currStep, null);
       const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
-      console.log(stepHeight);
       // eslint-disable-next-line camelcase
       const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
-      console.log(margin_top);
       // eslint-disable-next-line camelcase
       nextButton.style.marginTop = `${margin_top}px`;
       nextButton.style.marginLeft = `${90}vw`;
       recipeSteps.appendChild(nextButton);
     } else {
+      const style = window.getComputedStyle(currStep, null);
+      const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
+      // eslint-disable-next-line camelcase
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
       const backButton = document.createElement('button');
       backButton.innerHTML = `Back to first step`;
       backButton.className = 'backButton';
       backButton.id = `backButton`;
       backButton.style.display = 'none';
       backButton.style.marginLeft = `${90}vw`;
+      // eslint-disable-next-line camelcase
+      backButton.style.marginTop = `${margin_top}px`;
       recipeSteps.appendChild(backButton);
     }
     stepNum += 1;
