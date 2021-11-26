@@ -11,6 +11,16 @@ h3 {
   cursor: pointer;
 }
 
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  user-select: none;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
