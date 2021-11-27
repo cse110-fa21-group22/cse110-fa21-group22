@@ -67,9 +67,9 @@ class RecipeCard extends HTMLElement {
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
-      // if (localStorage.key(i) === 'favorites-master') continue;
       const entry = listEntryTemplate.content.cloneNode(true);
       entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+      if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
       dropdownElem.insertBefore(entry, dropdownElem.firstChild);
     }
   }
