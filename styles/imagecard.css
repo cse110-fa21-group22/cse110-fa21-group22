@@ -27,6 +27,7 @@ h3 {
   grid-auto-flow: column;
   grid-gap: 50px;
   grid-template-rows: auto auto;
+
   /* grid-auto-columns: auto; */
   justify-content: flex-start;
   overflow-x: hidden;
