@@ -1,7 +1,6 @@
 /**
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
-
 import { addRecipebyList } from '../components/UserLocalStorage.js';
 import apiKey from './apikey.js';
 
@@ -69,16 +68,6 @@ async function init() {
     }
     recipeLists.push(userList);
   }
-
-  // testing
-  // let result = [];
-  // let recipeSection = document.querySelector('.recipe-section');
-  // for (let i = 0; i < 10; i++) {
-  //     const recipeCard = document.createElement('recipe-card-component');
-  //     recipeSection.appendChild(recipeCard);
-  //     result.push(recipeCard);
-  //     recipeCard.recipeCardSelect = false;
-  // }
 }
 
 window.addEventListener('DOMContentLoaded', init);

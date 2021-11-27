@@ -3,24 +3,32 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/navbar.css';
 
+// Add a new button for the sidebar
 const navbarTemplate = document.createElement('template');
 navbarTemplate.innerHTML = `
 	<nav class="navbar">
-		<a href="/webpages/home.html">
-			<h1 class="logo">iCook</h1>
-		</a>
-		<div class="nav-search">
-			<img class="nav-search-icon" src="../assets/search.svg" alt="search" />
-			<input class="nav-search-input" type='text' placeholder="Search" />
-		</div>
-		<a class="nav-favorite" href="/webpages/favorite.html">
-			<p>Favorites</p>
-		</a>
-		<a class="nav-favorite-mobile" href="/webpages/favorite.html">
-			<img src="../assets/favorite.svg" alt="favorite" />
-		</a>
+    <a class="sidebar-button">
+      <img class="sidebar-icon" src="../assets/sidebar.svg" alt="sidebar"></img>
+    </a>
+    <div class="navbar-section">
+		  <a href="/webpages/home.html">
+			  <h1 class="logo">iCook</h1>
+		  </a>
+		  <div class="nav-search">
+			  <img class="nav-search-icon" src="../assets/search.svg" alt="search" />
+			  <input class="nav-search-input" type='text' placeholder="Search" />
+		  </div>
+		  <a class="nav-favorite" href="/webpages/favorite.html">
+  			<p>Favorites</p>
+		  </a>
+		  <a class="nav-favorite-mobile" href="/webpages/favorite.html">
+  			<img src="../assets/favorite.svg" alt="favorite" />
+		  </a>
+    </div>
 	</nav>
-`;
+  <section class="sidebar-content">
+        <button class="sidebar-filter">Search this</button>
+	</section>`;
 
 class Navbar extends HTMLElement {
   /**
@@ -29,6 +37,7 @@ class Navbar extends HTMLElement {
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });
+    this.isSidebarShow = false;
   }
 
   /**
@@ -72,6 +81,19 @@ class Navbar extends HTMLElement {
 
       if (event.code === 'Enter') {
         window.location.href = `search.html${this.generateQueryString(searchTerm)}`;
+      }
+    });
+
+    const sidebarButton = this.shadow.querySelector('.sidebar-button');
+    sidebarButton.addEventListener('click', () => {
+      const sidebarContent = this.shadow.querySelector('.sidebar-content');
+      if (!this.isSidebarShow) {
+        sidebarContent.style.display = 'flex';
+        sidebarContent.style.flexDirection = 'column';
+        this.isSidebarShow = true;
+      } else {
+        sidebarContent.style.display = 'none';
+        this.isSidebarShow = false;
       }
     });
   }

@@ -86,7 +86,7 @@ h3 {
   left: -10px;
   padding: 10px 20px;
   position: absolute;
-  top: calc(50% - 30px);
+  top: 50%;
   transition-duration: 0.4s;
 }
 
@@ -96,7 +96,7 @@ h3 {
   border-radius: 20%;
   padding: 10px 20px;
   position: absolute;
-  top: calc(50% - 30px);
+  top: 50%;
   transition-duration: 0.4s;
   right: 0;
 }

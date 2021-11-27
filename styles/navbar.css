@@ -1,8 +1,40 @@
 @import "reset.css";
 
-.logo {
-  color: var(--color-neutrals-white);
-  font-size: 15px;
+.sidebar-button {
+  background-color: transparent;
+  align-items: center;
+  margin-left: -10px;
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.sidebar-content {
+  display: none;
+  background-color: var(--color-primary-blue);
+  padding: 0 25px;
+  height: calc(100vh - 70px);
+  width: min(100vh, 200px);
+  z-index: 9999;
+  position: absolute;
+  animation-name: animateleft;
+  animation-duration: 0.5s;
+}
+
+/* Add Animation */
+@keyframes animateleft {
+  from {
+    left: -300px;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.sidebar-filter {
+  padding: 0 25px;
 }
 
 .navbar {
@@ -12,6 +44,22 @@
   display: flex;
   height: 60px;
   padding: 0 25px;
+  width: calc(100vw - 50px);
+}
+
+.logo {
+  color: var(--color-neutrals-white);
+  font-size: 22px;
+  margin-left: -20px;
+}
+
+.navbar-section {
+  align-items: center;
+  background-color: var(--color-primary-blue);
+  display: flex;
+  height: 60px;
+  padding: 0 0 0 25px;
+  margin: 0;
   justify-content: space-between;
   width: calc(100vw - 50px);
 }
@@ -23,6 +71,8 @@
 .nav-favorite-mobile {
   display: block;
   filter: invert(1);
+  align-items: center;
+  margin-top: 5px;
 }
 
 .nav-search {
@@ -45,11 +95,17 @@
   height: 30px;
   padding-left: 32px;
   padding-right: 15px;
+  width: 150px;
 }
 
 @media (min-width: 768px) {
+  .sidebar-button {
+    margin-left: -20px;
+  }
+
   .logo {
-    font-size: 36px;
+    font-size: 30px;
+    margin: 0;
   }
 
   .navbar {
@@ -58,15 +114,25 @@
     width: calc(100vw - 100px);
   }
 
+  .navbar-section {
+    padding: 0 25px;
+  }
+
   .nav-favorite {
     display: block;
   }
 
   .nav-favorite > p {
     color: var(--color-neutrals-white);
+    font-size: 22px;
+    margin-right: -20px;
   }
 
   .nav-favorite-mobile {
     display: none;
+  }
+
+  .nav-search-input {
+    width: 250px;
   }
 }
