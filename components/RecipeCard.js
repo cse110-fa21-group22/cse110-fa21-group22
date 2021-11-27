@@ -9,7 +9,6 @@ const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
   <article class="recipe-card">
     <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
-    <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
     <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
@@ -91,8 +90,8 @@ class RecipeCard extends HTMLElement {
    */
   enterSelectMode() {
     this.selectMode = true;
-    const favoriteRemove = this.shadow.querySelector('.recipe-remove');
-    favoriteRemove.style.display = 'block';
+    const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+    favoriteIcon.style.display = 'none';
   }
 
   /**
@@ -102,8 +101,8 @@ class RecipeCard extends HTMLElement {
   exitSelectMode() {
     this.selectMode = false;
     if (this.isSelected) this.deselect();
-    const favoriteRemove = this.shadow.querySelector('.recipe-remove');
-    favoriteRemove.style.display = 'none';
+    const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+    favoriteIcon.style.display = 'block';
   }
 
   /**
@@ -187,7 +186,6 @@ class RecipeCard extends HTMLElement {
     // If the favorite icon is clicked, favorite the item
     const recipeCard = this;
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
-    const favoriteRemove = this.shadow.querySelector('.recipe-remove');
     const submitFavorites = this.shadow.querySelector('.submit');
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
 
@@ -246,13 +244,6 @@ class RecipeCard extends HTMLElement {
     /* When click the favorite icon, dropdown content showup */
     favoriteIcon.addEventListener('click', () => {
       this.showDropdown();
-    });
-
-    /* Remove button event listener */
-    favoriteRemove.addEventListener('click', (event) => {
-      event.stopPropagation();
-      console.log('Removing recipe from THIS list...');
-      this.delete();
     });
 
     /* stops propagation of clicks on dropdown content box to the recipe card
