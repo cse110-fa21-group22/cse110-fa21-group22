@@ -8,17 +8,18 @@ describe('Basic user flow for Search Page', () => {
     });
 
     let firstSet = [];
+
+    // in javascript you can't do myarray = oldarray???
     // Check the search page without a search
     it('Check for 10 default recipes on empty search', async () => {
         console.log('Check for 10 default recipe');
         await page.waitForTimeout('500');
 
-        const numRecipeCards = await page.$$eval('recipe-card-component', (recipeCards) => {
-          firstSet = recipeCards;
-          return recipeCards.length;//sections[0].querySelectorAll('recipe-card-component').length;
-        });
-        
-        expect(numRecipeCards).toBe(10);
+        const recipeCards = await page.$$('recipe-card-component');
+        firstSet = recipeCards;
+        // console.log('first set: ' + firstSet[0]);
+        // console.log('recipeCard: ' + recipeCards[0]);
+        expect(recipeCards.length).toBe(10);
       }, 10000);
 
       /*
@@ -71,6 +72,32 @@ describe('Basic user flow for Search Page', () => {
         
         expect(recipeCards.length).toBe(10);
     });
+  
+    // User clicks the previous button, make sure the recipes are populated
+    it('Check previous results button', async () => {
+      console.log('Check previous button');
+      let prevButton = await page.$('.previous-button');
 
+      await prevButton.click();
+      await page.waitForTimeout('500');
+
+      const currentRecipes = await page.$$('recipe-card-component');
+      expect(currentRecipes.length).toBe(10);
+    });
     
+    // After previous button is clicked, make sure the recipes are the same
+    it('Check to the recipes are the same after previous button', async () => {
+      const currentRecipes = await page.$$('recipe-card-component');
+      let isSame = true;
+      for (let i = 0; i < currentRecipes.length; i++) {
+        if (currentRecipes[i] != firstSet[i]) {
+          isSame = false;
+          break;
+        }
+        // console.log('Current: ' + currentRecipes[i]);
+        // console.log('First Set: ' + firstSet[i]);
+      }
+
+      expect(isSame).toBe(true);
+    });
 });
