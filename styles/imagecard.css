@@ -55,11 +55,10 @@ h3 {
 }
 
 .ingredient-image {
-  height: 100%;
   margin-right: 10px;
   object-fit: cover;
   object-position: center;
-  width: auto;
+  max-width: 100px;
 }
 
 .ingredient-name {
@@ -67,7 +66,7 @@ h3 {
   padding-left: 5px;
   padding-right: 10px;
   white-space: nowrap;
-  width: auto;
+  width: 200px;
 }
 
 .ingredient-measurements {

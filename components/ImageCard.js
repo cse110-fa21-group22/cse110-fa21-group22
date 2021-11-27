@@ -78,8 +78,6 @@ class ImageCard extends HTMLElement {
     // Set title to 'Ingredients'
     const title = this.shadow.querySelector('.title');
     title.innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>';
-    let maxNameWidth = 0;
-    let maxUnitWidth = 0;
     // Create an ingredient entry for each element of ingredientsArr
     for (let i = 0; i < ingredientArr.length; i += 1) {
       const entry = entryElementTemplate.content.cloneNode(true);
@@ -89,10 +87,6 @@ class ImageCard extends HTMLElement {
       entry.querySelector('.ingredient-measurements').innerHTML = `${toFraction(ingredientArr[i].amount)} <span></span>`;
       entry.querySelector('span').innerHTML = ingredientArr[i].unit;
 
-      maxNameWidth = Math.max(maxNameWidth, capitalize(ingredientArr[i].name).length);
-      maxUnitWidth = Math.max(maxUnitWidth, ingredientArr[i].unit.length);
-      console.log(maxNameWidth);
-      console.log(maxUnitWidth);
       const ingredientList = this.shadow.querySelector('.ingredients-list');
       ingredientList.appendChild(entry);
     }
@@ -138,18 +132,6 @@ class ImageCard extends HTMLElement {
     rightArrow.addEventListener('click', () => {
       this.shadow.querySelector('.ingredients-list').scrollLeft += 300;
     });
-
-    // for (let i = 0; i < ingredientArr.length; i += 1) {
-    //   const ingredientCard = this.shadow.querySelectorAll('.ingredient-card')[i];
-    //   const ingredientImage = this.shadow.querySelectorAll('.ingredient-image')[i];
-    //   const ingredientName = this.shadow.querySelectorAll('.ingredient-name')[i];
-    //   const ingredientMeasurements = this.shadow.querySelectorAll('.ingredient-measurements')[i];
-
-    //   console.log(ingredientCard.width);
-    //   console.log(ingredientImage.width);
-    //   console.log(ingredientName.width);
-    //   console.log(ingredientMeasurements.width);
-    // }
   }
 }
 

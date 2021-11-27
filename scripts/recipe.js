@@ -244,11 +244,6 @@ async function init() {
   recipeIngredients.ingredients = recipe.extendedIngredients;
   document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
 
-  // Make the ingredients show the complete name
-  // const ingredientName = document.querySelector('.ingredient-name');
-  // const textWidth = ingredientName.length;
-  // console.log(textWidth);
-
   // Set equipment using custom element
   const recipeEquipment = document.createElement('image-card-component');
   recipeEquipment.equipment = equipment.equipment;
