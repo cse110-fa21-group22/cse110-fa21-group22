@@ -151,6 +151,12 @@ async function init() {
       );
     });
   }
+
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
+
   const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
   const recipe = data[0];
   const equipment = data[1];

@@ -134,8 +134,11 @@ async function init() {
     });
   }
 
-  // console.log('Init.. ');
-  // console.log('Fetching recipes...');
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
+
   try {
     await fetchRandomRecipes();
   } catch (err) {

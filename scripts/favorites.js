@@ -39,8 +39,12 @@ async function init() {
     });
   }
 
-  const mainSection = document.querySelector('.favorites-page');
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
 
+  const mainSection = document.querySelector('.favorites-page');
   for (let i = 0; i < localStorage.length; i += 1) {
     // get one list
     const userList = document.createElement('user-list');
