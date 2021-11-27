@@ -92,7 +92,8 @@ async function getRecipebyID(id) {
 let editMode = false;
 const editButton = document.getElementById('edit');
 const cancelButton = document.getElementById('cancel');
-const moveButton = document.getElementById('move');
+const deleteButton = document.getElementById('delete');
+const copyButton = document.getElementById('copy');
 
 editButton.addEventListener('click', () => {
   if (editMode) return;
@@ -100,7 +101,8 @@ editButton.addEventListener('click', () => {
   document.body.style.backgroundColor = '#EEEEEE';
   editButton.style.display = 'none';
   cancelButton.style.display = 'inline-block';
-  moveButton.style.display = 'inline-block';
+  deleteButton.style.display = 'inline-block';
+  copyButton.style.display = 'inline-block';
   // edit favorites list titles
   const listTitles = document.querySelectorAll('h4');
   for (let i = 0; i < listTitles.length; i += 1) {
@@ -120,7 +122,8 @@ cancelButton.addEventListener('click', () => {
   document.body.style.backgroundColor = '#FFFFFF';
   editButton.style.display = 'inline-block';
   cancelButton.style.display = 'none';
-  moveButton.style.display = 'none';
+  deleteButton.style.display = 'none';
+  copyButton.style.display = 'none';
   // edit favorites list titles
   const listTitles = document.querySelectorAll('h4');
   for (let i = 0; i < listTitles.length; i += 1) {
@@ -133,7 +136,7 @@ cancelButton.addEventListener('click', () => {
   }
 });
 
-moveButton.addEventListener('click', () => {
+/*moveButton.addEventListener('click', () => {
   if (!editMode || selectedRecipes) return;
   const modal = document.querySelector('.modal');
   for (let i = 0; i < localStorage.length; i += 1) {
@@ -149,4 +152,4 @@ moveButton.addEventListener('click', () => {
     modal.appendChild(button);
   }
   modal.style.display = 'block';
-});
+});*/
