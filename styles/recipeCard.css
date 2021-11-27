@@ -57,7 +57,7 @@
   height: 10px;
   border: solid white;
   border-width: 0 3px 3px 0;
-  transform: rotate(135deg);
+  transform: rotate(45deg);
 }
 
 /* Show the checkmark when checked */
