@@ -50,8 +50,10 @@ h3 {
   flex-direction: row;
   height: 50px;
   justify-content: space-evenly;
-  margin-right: 10px;
   width: auto;
+  border-right: var(--color-neutrals-grey);
+  border-style: dotted;
+  border-width: 0 2px 0 0;
 }
 
 .ingredient-image {
