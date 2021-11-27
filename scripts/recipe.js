@@ -245,7 +245,7 @@ async function init() {
       const style = window.getComputedStyle(currStep, null);
       const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
       // eslint-disable-next-line camelcase
-      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 40;
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 27;
       const backButton = document.createElement('button');
       backButton.innerHTML = `Back to first step`;
       backButton.className = 'backButton';
