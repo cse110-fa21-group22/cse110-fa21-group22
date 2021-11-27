@@ -113,7 +113,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = true;
     checkmark.style.display = 'block';
     this.style.filter = 'brightness(90%)';
-    const event = new CustomEvent('selected', { detail: this.getAttribute('recipe-id') });
+    const event = new CustomEvent('selected', { detail: this });
     this.dispatchEvent(event);
   }
 
@@ -125,7 +125,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = false;
     checkmark.style.display = 'none';
     this.style.filter = 'brightness(100%)';
-    const event = new CustomEvent('deselected', { detail: this.getAttribute('recipe-id') });
+    const event = new CustomEvent('deselected', { detail: this });
     this.dispatchEvent(event);
   }
 
@@ -165,7 +165,7 @@ class RecipeCard extends HTMLElement {
     for (let i = 0; i < containers.length; i += 1) {
       const checkmark = containers[i].querySelector('input');
       if (checkmark.checked) {
-        addRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
+        addRecipebyList(containers[i].querySelector('span').innerHTML, parseInt(this.getAttribute('recipe-id')));
       }
     }
   }
@@ -178,7 +178,7 @@ class RecipeCard extends HTMLElement {
     userInput = userInput.value;
     if (userInput !== '') {
       console.log(userInput);
-      addRecipebyList(userInput, this.getAttribute('recipe-id'));
+      addRecipebyList(userInput, parseInt(this.getAttribute('recipe-id')));
     }
   }
 

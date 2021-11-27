@@ -36,6 +36,8 @@ class UserList extends HTMLElement {
         const innerEvent = new CustomEvent('deselected', { detail: event.detail });
         this.dispatchEvent(innerEvent);
       });
+
+      // Remove a recipe from localStorage and the userList when it is deleted
       recipeCard.addEventListener('removed', (event) => {
         removeRecipebyList(this.name, event.detail);
         recipeCard.remove();
