@@ -65,9 +65,16 @@ h3 {
   overflow: hidden;
   padding-left: 5px;
   padding-right: 10px;
-  text-overflow: ellipsis;
   white-space: nowrap;
   width: 120px;
+}
+
+.ingredient-measurements {
+  overflow: hidden;
+  padding-left: 5px;
+  padding-right: 10px;
+  white-space: nowrap;
+  min-width: 120px;
 }
 
 .ingredients-section,
