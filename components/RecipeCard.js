@@ -7,33 +7,31 @@ link.href = '../styles/recipeCard.css';
 
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
-	<article class="recipe-card">
-    <div class="dropdown">
-    	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
-		  <div class="dropdown-content">
-    	  <label class="entry">Create a new list: 
-      		  <input type="text" class="user-input">
-    	  </label>
-    	  <button class="submit">Submit </button>
-  	  </div>
-	  </div>
-	  <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
-	  <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
+  <article class="recipe-card">
+    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+    <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
+    <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
       <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
     </div>
   </article>
+  <div class="dropdown-content">
+    <label class="entry">Create a new list: 
+      <input type="text" class="user-input">
+    </label>
+    <button class="submit">Submit</button>
+  </div>
 `;
 
 const listEntryTemplate = document.createElement('template');
 listEntryTemplate.innerHTML = `
-<label class="container">
-	<span>My Favorites</span>
-	<input type="checkbox">
-	<span class="checkmark"> </span>
-</label>
+  <label class="container">
+	  <span>My Favorites</span>
+	  <input type="checkbox">
+	  <span class="checkmark"> </span>
+  </label>
 `;
 
 class RecipeCard extends HTMLElement {
@@ -277,7 +275,6 @@ class RecipeCard extends HTMLElement {
         this.addToCheckedLists();
         this.addToCustomList();
         /* Reload the page as a shortcut for showing new lists */
-
         location.reload();
       }
       event.stopPropagation();
