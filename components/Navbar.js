@@ -27,6 +27,38 @@ navbarTemplate.innerHTML = `
     </div>
 	</nav>
   <section class="sidebar-content">
+    <h5>Cuisine</h5>
+    <ul>
+      <li><input type="checkbox" id="american" class="cuisine"> American</li>
+      <li><input type="checkbox" id="chinese" class="cuisine"> Chinese</li>
+      <li><input type="checkbox" id="italian" class="cuisine"> Italian</li>
+      <li><input type="checkbox" id="mexican" class="cuisine"> Mexican</li>
+      <li><input type="checkbox" id="indian" class="cuisine"> Indian</li>
+      <li><input type="checkbox" id="thai" class="cuisine"> Thai</li>
+    </ul>
+    <h5>Diet</h5>
+    <ul>
+      <li><input type="checkbox" id="vegetarian" class="diet"> Vegetarian</li>
+      <li><input type="checkbox" id="vegan" class="diet"> Vegan</li>
+      <li><input type="checkbox" id="gluten-Free" class="diet"> Gluten-Free</li>
+      <li><input type="checkbox" id="paleo" class="diet"> Paleo</li>
+      <li><input type="checkbox" id="keto" class="diet"> Keto</li>
+    </ul>
+    <h5>Time</h5>
+    <ul>
+      <li><input type="checkbox" id="15min" class="time"> 15 Minutes</li>
+      <li><input type="checkbox" id="30mim" class="time"> 30 Minutes</li>
+      <li><input type="checkbox" id="45min" class="time"> 45 Minutes</li>
+      <li><input type="checkbox" id="1hr" class="time"> 1 Hour</li>
+      <li><input type="checkbox" id="over1hr" class="time"> Over 1 Hour</li>
+    </ul>
+    <h5>Type of Meal</h5>
+    <ul>
+      <li><input type="checkbox" id="breakfast" class="typeOfMeal"> Breakfast</li>
+      <li><input type="checkbox" id="lunch" class="typeOfMeal"> Lunch</li>
+      <li><input type="checkbox" id="dinner" class="typeOfMeal"> Dinner</li>
+      <li><input type="checkbox" id="other" class="typeOfMeal"> Other</li>
+    </ul>
     <button class="sidebar-filter">Apply filter</button>
     <button class="sidebar-filter">Search this</button>
 	</section>`;
