@@ -21,7 +21,7 @@ recipeCardTemplate.innerHTML = `
     <label class="entry">Create a new list: 
       <input type="text" class="user-input">
     </label>
-    <button class="submit">Submit</button>
+    <button class="submit">Add to Favorite</button>
   </div>
 `;
 
@@ -67,7 +67,7 @@ class RecipeCard extends HTMLElement {
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
-      if (localStorage.key(i) === 'favorites-master') continue;
+      // if (localStorage.key(i) === 'favorites-master') continue;
       const entry = listEntryTemplate.content.cloneNode(true);
       entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
       dropdownElem.insertBefore(entry, dropdownElem.firstChild);
@@ -142,7 +142,6 @@ class RecipeCard extends HTMLElement {
    * Shows the favorites dropdown on the recipe card
    */
   showDropdown() {
-    console.log('showing dropdown');
     this.dropdown = true;
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
     dropdownContent.style.display = 'block';
@@ -152,7 +151,6 @@ class RecipeCard extends HTMLElement {
    * Hides the favorites dropdown on the recipe card
    */
   hideDropdown() {
-    console.log('hiding dropdown');
     this.dropdown = false;
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
     dropdownContent.style.display = 'none';
