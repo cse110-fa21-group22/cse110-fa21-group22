@@ -1,5 +1,24 @@
 @import "reset.css";
 
+.copy-here {
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 20px;
+  box-shadow: none;
+  display: inline-block;
+  font-size: 16px;
+  height: 30px;
+  line-height: 12px;
+  margin: 10px auto auto 10px;
+  position: absolute;
+  width: 150px;
+}
+
+.copy-here:hover {
+  background-color: var(--color-primary-blue);
+  color: var(--color-neutrals-white);
+}
+
 div.scroll {
   display: flex;
   flex-direction: column;
@@ -7,18 +26,23 @@ div.scroll {
   margin-bottom: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  white-space: nowrap;
+}
+
+div.list-container {
+  display: block;
 }
 
 div.list-name {
   margin-top: 10px;
   position: absolute;
+  display: block;
 }
 
 .list-name h4 {
   font-weight: bold;
   margin: 7px 0 auto;
   overflow-y: auto;
+  display: inline-block;
 }
 
 div.recipe-section {

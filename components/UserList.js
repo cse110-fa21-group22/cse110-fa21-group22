@@ -10,6 +10,7 @@ UserListTemplate.innerHTML = `
   <div class="scroll">
     <div class="list-name">
       <h4>Favorites Recipes</h4>
+      <button class="copy-here">Copy to This List</button>
     </div>
     <div class="recipe-section">
     </div>

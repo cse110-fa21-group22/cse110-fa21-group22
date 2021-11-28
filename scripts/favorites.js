@@ -72,7 +72,8 @@ async function init() {
 
     if (userList.listName === 'favorites-master') {
       userList.listName = 'Favorites';
-      mainSection.insertBefore(userList, mainSection.firstChild);
+      //mainSection.insertBefore(userList, mainSection.firstChild);
+      mainSection.appendChild(userList);
     } else {
       mainSection.appendChild(userList);
     }
