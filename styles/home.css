@@ -1,17 +1,22 @@
-@import 'reset.css';
+@import "reset.css";
+
+.home-page {
+  margin: 0;
+  padding: 10px 20px 10px 15px;
+}
 
 .home-page-favorite-section,
 .home-page-popular-recipe-list {
   display: flex;
   margin: 0 -10px 35px;
-  overflow-x: scroll;
+  overflow-x: auto;
+  height: 330px;
 }
 
 .home-page-popular-header {
   align-items: flex-start;
   display: flex;
   margin-right: -10px;
-  justify-content: space-between;
 }
 
 .home-page-popular-refresh {
@@ -21,4 +26,12 @@
   color: var(--color-neutrals-white);
   cursor: pointer;
   padding: 10px 20px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+@media (min-width: 768px) {
+  .home-page {
+    padding: 20px 50px 20px 50px;
+  }
 }

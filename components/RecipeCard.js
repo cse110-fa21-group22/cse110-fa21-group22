@@ -7,35 +7,31 @@ link.href = '../styles/recipeCard.css';
 
 const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
-	<article class="recipe-card">
-    <div class="dropdown">
-    	<img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
-		<div class="dropdown-content">
-			
-    	<label class="entry">Create a new list: 
-      		<input type="text" class="user-input">
-    	</label>
-    
-    	<button class="submit">Submit </button>
-  		</div>
-	</div>
-	<img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
-	<img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
+  <article class="recipe-card">
+    <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
+    <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
+    <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
       <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
     </div>
   </article>
+  <div class="dropdown-content">
+    <label class="entry">Create a new list: 
+      <input type="text" class="user-input">
+    </label>
+    <button class="submit">Add to Favorite</button>
+  </div>
 `;
 
 const listEntryTemplate = document.createElement('template');
 listEntryTemplate.innerHTML = `
-<label class="container">
-	<span>My Favorites</span>
-	<input type="checkbox">
-	<span class="checkmark"> </span>
-</label>
+  <label class="container">
+	  <span>My Favorites</span>
+	  <input type="checkbox">
+	  <span class="checkmark"> </span>
+  </label>
 `;
 
 class RecipeCard extends HTMLElement {
@@ -71,15 +67,15 @@ class RecipeCard extends HTMLElement {
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
-      if (localStorage.key(i) === 'favorites-master') continue;
       const entry = listEntryTemplate.content.cloneNode(true);
       entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+      if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
       dropdownElem.insertBefore(entry, dropdownElem.firstChild);
     }
   }
 
   initializeHearts() {
-    // console.log("Checking favorites");
+    // console.log('Checking favorites');
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
     this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
     if (this.isFavorite) {
@@ -133,10 +129,10 @@ class RecipeCard extends HTMLElement {
     const event = new CustomEvent('deselected', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
   }
+
   /**
    * Dispatches an event to remove this recipe
    */
-
   delete() {
     const event = new CustomEvent('removed', { detail: this.getAttribute('recipe-id') });
     this.dispatchEvent(event);
@@ -146,7 +142,6 @@ class RecipeCard extends HTMLElement {
    * Shows the favorites dropdown on the recipe card
    */
   showDropdown() {
-    console.log('showing dropdown');
     this.dropdown = true;
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
     dropdownContent.style.display = 'block';
@@ -156,7 +151,6 @@ class RecipeCard extends HTMLElement {
    * Hides the favorites dropdown on the recipe card
    */
   hideDropdown() {
-    console.log('hiding dropdown');
     this.dropdown = false;
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
     dropdownContent.style.display = 'none';
@@ -195,7 +189,9 @@ class RecipeCard extends HTMLElement {
     const submitFavorites = this.shadow.querySelector('.submit');
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
 
-    /* Click on recipe card changes page or selects card */
+    /*
+     * Click on recipe card changes page or selects card
+     */
     this.addEventListener('click', () => {
       // Check to see if selecting is allowable (only in edit/move mode)
       if (this.selectMode) {
@@ -222,9 +218,11 @@ class RecipeCard extends HTMLElement {
       } else {
         this.isFavorite = false;
         removeRecipe(this.getAttribute('recipe-id'));
-        console.log(containers.length);
+        // eslint-disable-next-line no-undef
         for (let i = 0; i < containers.length; i += 1) {
+          // eslint-disable-next-line no-undef
           console.log(containers[i].textContent);
+          // eslint-disable-next-line no-undef
           removeRecipebyList(containers[i].textContent, this.getAttribute('recipe-id'));
         }
         favoriteIcon.src = '../assets/favorite.svg';
@@ -241,6 +239,11 @@ class RecipeCard extends HTMLElement {
       if (!this.isFavorite) {
         favoriteIcon.src = '../assets/favorite.svg';
       }
+    });
+
+    /* When click the favorite icon, dropdown content showup */
+    favoriteIcon.addEventListener('click', () => {
+      this.showDropdown();
     });
 
     /* Remove button event listener */
@@ -270,7 +273,6 @@ class RecipeCard extends HTMLElement {
         this.addToCheckedLists();
         this.addToCustomList();
         /* Reload the page as a shortcut for showing new lists */
-
         location.reload();
       }
       event.stopPropagation();

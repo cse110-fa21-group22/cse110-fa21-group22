@@ -1,8 +1,10 @@
 /**
- * Handles favorites page functionality and storing the recipes a user favorites.
+ * API key for connecting with Spoonatular API
  */
+
+// eslint-disable-next-line no-unused-vars
+import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
 import apiKey from './apikey.js';
-import { initLocalStorage } from '../components/UserLocalStorage.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
 const storage = window.localStorage;
@@ -11,21 +13,6 @@ const steppingSize = 10; // Stepping-size number of recipes to append to end aft
 const recipeData = {}; // Data in each stepping size?
 const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
 const userFavoriteSection = document.querySelector('.home-page-favorite-section');
-/**
- * Clear the recipe cards from the recipe section element
- */
-function clearResults() {
-  while (recipeSection.firstChild) {
-    recipeSection.removeChild(recipeSection.firstChild);
-  }
-}
-
-/**
- * clear out recipeData
- */
-function clearObject() {
-  for (const member in recipeData) delete recipeData[member];
-}
 
 /**
  * it is possible that the user click the icon and coming back to the main page
@@ -73,6 +60,15 @@ async function fetchRandomRecipes() {
 }
 
 /**
+ * Clear the recipe cards from the recipe section element
+ */
+function clearResults() {
+  while (recipeSection.firstChild) {
+    recipeSection.removeChild(recipeSection.firstChild);
+  }
+}
+
+/**
  * Shows the search results on the page from a JSON array 'results' containing recipe objects
  * @param {object} results
  */
@@ -106,16 +102,21 @@ async function getRecipebyID(id) {
   return fetchResults;
 }
 
+/**
+ * clear out recipeData
+ */
+function clearObject() {
+  for (const member in recipeData) delete recipeData[member];
+}
+
 async function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-  console.log(array);
 
   for (let i = 0; i < array.length; i += 1) {
     const recipeCard = document.createElement('recipe-card-component');
     // eslint-disable-next-line no-await-in-loop
     recipeCard.recipe = await getRecipebyID(array[i]);
-
     userFavoriteSection.appendChild(recipeCard);
   }
 }
@@ -150,7 +151,7 @@ async function init() {
   showResults(recipeData);
 
   const button = document.querySelector('.home-page-popular-refresh');
-  button.addEventListener('click', async () => {
+  button.addEventListener('click', async function () {
     clearObject();
     try {
       await fetchRandomRecipes();
@@ -162,7 +163,8 @@ async function init() {
   });
 
   // populating local storage testing
-  // const list = storage.getItem('favorites-master');
+  // eslint-disable-next-line no-unused-vars
+  const list = storage.getItem('favorites-master');
   // createList("list%2");
   // createList("list%3");
   // createList("list%4");
@@ -175,5 +177,4 @@ async function init() {
 
   showFavoriteSection();
 }
-
 window.addEventListener('DOMContentLoaded', init);
