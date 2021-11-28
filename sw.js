@@ -6,7 +6,6 @@ self.addEventListener('activate', (event) => {
 });
 
 // Store fetches to reduce api calls
-// eslint-disable-next-line no-restricted-globals
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {

@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 div.scroll {
   display: flex;
@@ -17,7 +17,7 @@ div.list-name {
 
 .list-name h4 {
   font-weight: bold;
-  margin: 7px 0;
+  margin: 7px 0 auto;
   overflow-y: auto;
 }
 
