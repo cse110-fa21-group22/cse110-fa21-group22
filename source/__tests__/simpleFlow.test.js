@@ -7,7 +7,7 @@ jest.setTimeout(15000);
 describe('Simple User Flow', () => {
   // First, visit the iCook website
   beforeAll(async () => {
-    await page.goto('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto('http://127.0.0.1:5500/webpages/home.html');
     await page.waitForTimeout(800);
   });
 
@@ -49,7 +49,7 @@ describe('Simple User Flow', () => {
     await button.click();
 
     // Reload the page
-    await page.goto('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto('http://127.0.0.1:5500/webpages/home.html');
     await page.waitForTimeout('2000');
 
     // Retrieve the recipe in the favorites list
@@ -66,7 +66,7 @@ describe('Simple User Flow', () => {
   // only recipe there so far
   it('Check favorited recipe is on favorites page', async () => {
     // Go to favorites page
-    await page.goto('https://icookfood.netlify.app/webpages/favorite.html');
+    await page.goto('http://127.0.0.1:5500/webpages/favorite.html');
     await page.waitForTimeout('1500');
 
     const userList = await page.$$('user-list');
