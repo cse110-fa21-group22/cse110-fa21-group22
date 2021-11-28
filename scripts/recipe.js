@@ -85,9 +85,9 @@ listEntryTemplate.innerHTML = `
 function initializeDropdown() {
   const dropdownElem = document.querySelector('.dropdown-content');
   for (let i = 0; i < localStorage.length; i += 1) {
-    if (localStorage.key(i) === 'favorites-master') continue;
     const entry = listEntryTemplate.content.cloneNode(true);
     entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+    if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
     dropdownElem.insertBefore(entry, dropdownElem.firstChild);
   }
 }
@@ -170,7 +170,7 @@ async function init() {
         <label class="entry">Create a new list: 
            <input type="text" class="user-input">
         </label>
-        <button class="submit">Submit</button>
+        <button class="submit">Add to Favorite</button>
      </div>`;
   /*
    * show the drop-down box and change the heart color
@@ -244,6 +244,11 @@ async function init() {
   recipeIngredients.ingredients = recipe.extendedIngredients;
   document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
 
+  // Make the ingredients show the complete name
+  // const ingredientName = document.querySelector('.ingredient-name');
+  // const textWidth = ingredientName.length;
+  // console.log(textWidth);
+
   // Set equipment using custom element
   const recipeEquipment = document.createElement('image-card-component');
   recipeEquipment.equipment = equipment.equipment;
@@ -267,7 +272,7 @@ async function init() {
       const style = window.getComputedStyle(currStep, null);
       const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
       // eslint-disable-next-line camelcase
-      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 18;
       // eslint-disable-next-line camelcase
       nextButton.style.marginTop = `${margin_top}px`;
       nextButton.style.marginLeft = `${90}vw`;
@@ -276,7 +281,7 @@ async function init() {
       const style = window.getComputedStyle(currStep, null);
       const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
       // eslint-disable-next-line camelcase
-      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 27;
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 26;
       const backButton = document.createElement('button');
       backButton.innerHTML = `Back to first step`;
       backButton.className = 'backButton';
