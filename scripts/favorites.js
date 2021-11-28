@@ -72,7 +72,7 @@ async function init() {
 
     if (userList.listName === 'favorites-master') {
       userList.listName = 'Favorites';
-      //mainSection.insertBefore(userList, mainSection.firstChild);
+      // mainSection.insertBefore(userList, mainSection.firstChild);
       mainSection.appendChild(userList);
     } else {
       mainSection.appendChild(userList);
@@ -139,14 +139,10 @@ async function init() {
   });
 
   deleteButton.addEventListener('click', () => {
-    for (let i = 0; i < selectedRecipes.length; i++) {
+    for (let i = 0; i < selectedRecipes.length; i += 1) {
       selectedRecipes[i].delete();
     }
   });
 }
 
 window.addEventListener('DOMContentLoaded', init);
-
-
-
-

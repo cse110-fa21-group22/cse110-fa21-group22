@@ -1,16 +1,11 @@
-@import "reset.css";
+@import 'reset.css';
 
 .copy-here {
   background-color: transparent;
   border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
-  display: inline-block;
   font-size: 16px;
   height: 30px;
-  line-height: 12px;
-  margin: 10px auto auto 10px;
-  position: absolute;
   width: 150px;
 }
 
@@ -22,10 +17,6 @@
 div.scroll {
   display: flex;
   flex-direction: column;
-  height: 380px;
-  margin-bottom: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 div.list-container {
@@ -33,23 +24,20 @@ div.list-container {
 }
 
 div.list-name {
-  margin-top: 10px;
-  position: absolute;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
 }
 
 .list-name h4 {
   font-weight: bold;
-  margin: 7px 0 auto;
-  overflow-y: auto;
-  display: inline-block;
+  overflow-wrap: break-word;
+  width: calc(100% - 200px);
 }
 
-div.recipe-section {
+.recipe-section {
   display: flex;
-  gap: 0;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  height: 200px;
-  margin-top: 50px;
-  margin-bottom: 0;
+  flex-direction: row;
+  overflow-x: scroll;
 }

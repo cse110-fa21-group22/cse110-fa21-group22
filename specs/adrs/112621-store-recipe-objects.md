@@ -8,7 +8,7 @@ Technical Story: Deciding whether to store entire recipe objects to local storag
 
 ## Context and Problem Statement
 
-Storing entire recipes would make subsequent lookups much faster but would require rewriting how our current localStorage backend is written. 
+Storing entire recipes would make subsequent lookups much faster but would require rewriting how our current localStorage backend is written.
 
 ## Considered Options
 
