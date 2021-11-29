@@ -18,19 +18,20 @@ and possibly superior **CODEFACTOR.io.** Codefactor.io is it's own application, 
 when that special, certain someone decides to make a pull request to main. Codefactor will role play as a professor and assign the special someone's code
 a grade and it will list specific issues to fix so **that** certain someone can improve the grade and quality of their code. _C's don't get degrees in our repo._
 
-Additionally, our deployment on Netlify will create a preview link for the PR. The someone and the reviewer should check that the preview site works correctly, by locally running the end to end tests on the preview site. 
 
 After all the automated workflows have run, that certain someone might face some disappointing news and will have to fix their code, essentially putting them back
 at the beginning stage of our pipeline.
 
 However, on the off chance that their code is somehow perfect, the next step of our pipeline would to be assigned a different more special someone as their reviewer.
 
+Additionally, our deployment on Netlify will create a preview link for the PR. The someone and the reviewer should check that the preview site works correctly, by locally running the end to end tests on the preview site. 
+
 After the code has successfully merged to main, JsDocs will auto generate documentations to a separate repo titled group22xjsdocs which is published to a
 github pages at https://demyinn00.github.io/group22xjsdocs/
 
 The deployed site (on Netlify) will also be updated with the merged changes.
 
-The next step in our pipeline is for the end to end tests workflow to run against their code. Like we stated earlier, the end to end tests are linked to the site that is deployment from main. Thus, the someone pushing their code can manually change the link to run the tests locally, but that end to end tests will be run on the newly deployed site from main after merging. Because the expectation is that the someone will run the tests locally first, we do not anticipate the deployed link failing the end to end tests at this stage. 
+The next step in our pipeline is for the end to end tests workflow to run against the updated deployed site. Like we stated earlier, the end to end tests are linked to the site that is deployment from main. Thus, the someone pushing their code can manually change the link to run the tests locally, but that end to end tests will be run on the newly deployed site from main after merging. Because the expectation is that the someone will run the tests locally first, we do not anticipate the deployed link failing the end to end tests at this stage. 
 
 This concludes our superior pipeline :)
 
