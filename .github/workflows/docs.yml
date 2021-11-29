@@ -5,6 +5,8 @@ on:
   push:
     branches:
       - main
+      - to-demo
+      - demo
 
   workflow_dispatch:
 
