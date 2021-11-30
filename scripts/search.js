@@ -17,9 +17,8 @@ export default async function search(inputList) {
   const tokenSearchInput = `&query=${inputList.query}`;
   const tokenNumResults = `&number=${inputList.number}`;
   const tokenOffset = `&offset=${inputList.offset}`;
-  // const tokenTime = `&time=${inputList.timeFilter}`;
   const tokenNutritionBool = `&addRecipeNutrition=${inputList['recipe-nutrition']}`;
-  let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput; // + tokenTime;
+  let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput;
   if (inputList.cuisineFilter !== '') {
     const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
     fetchEndpoint += tokenCuisine;
@@ -28,11 +27,13 @@ export default async function search(inputList) {
     const tokenDiet = `&diet=${inputList.dietFilter}`;
     fetchEndpoint += tokenDiet;
   }
+  if (inputList.timeFilter !== '') {
+    const tokenTime = `&maxReadyTime=${inputList.timeFilter}`;
+    fetchEndpoint += tokenTime;
+  }
   if (inputList.typeFilter !== '') {
     const tokenType = `&type=${inputList.typeFilter}`;
-    console.log(tokenType);
     fetchEndpoint += tokenType;
-    console.log(fetchEndpoint);
   }
   fetchEndpoint += tokenNumResults + tokenOffset + tokenNutritionBool;
   console.log(fetchEndpoint);

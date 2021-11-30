@@ -87,7 +87,6 @@ function init() {
   inputList.dietFilter = '';
   inputList.timeFilter = '';
   inputList.typeFilter = '';
-  console.log(inputList);
   search(inputList).then(showResults);
 
   // apply for the filter search
