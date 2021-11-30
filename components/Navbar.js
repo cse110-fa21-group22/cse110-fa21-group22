@@ -40,14 +40,14 @@ navbarTemplate.innerHTML = `
     <ul>
       <li><input type="checkbox" id="vegetarian" class="diet"> Vegetarian</li>
       <li><input type="checkbox" id="vegan" class="diet"> Vegan</li>
-      <li><input type="checkbox" id="gluten-Free" class="diet"> Gluten-Free</li>
+      <li><input type="checkbox" id="glutenFree" class="diet"> Gluten-Free</li>
       <li><input type="checkbox" id="paleo" class="diet"> Paleo</li>
-      <li><input type="checkbox" id="keto" class="diet"> Keto</li>
+      <li><input type="checkbox" id="ketogenic" class="diet"> Keto</li>
     </ul>
     <h5>Time</h5>
     <ul>
       <li><input type="checkbox" id="15min" class="time"> 15 Minutes</li>
-      <li><input type="checkbox" id="30mim" class="time"> 30 Minutes</li>
+      <li><input type="checkbox" id="30min" class="time"> 30 Minutes</li>
       <li><input type="checkbox" id="45min" class="time"> 45 Minutes</li>
       <li><input type="checkbox" id="1hr" class="time"> 1 Hour</li>
       <li><input type="checkbox" id="over1hr" class="time"> Over 1 Hour</li>
@@ -55,11 +55,11 @@ navbarTemplate.innerHTML = `
     <h5>Type of Meal</h5>
     <ul>
       <li><input type="checkbox" id="breakfast" class="typeOfMeal"> Breakfast</li>
-      <li><input type="checkbox" id="lunch" class="typeOfMeal"> Lunch</li>
-      <li><input type="checkbox" id="dinner" class="typeOfMeal"> Dinner</li>
-      <li><input type="checkbox" id="other" class="typeOfMeal"> Other</li>
+      <li><input type="checkbox" id="main course" class="typeOfMeal"> Main Course</li>
+      <li><input type="checkbox" id="dessert" class="typeOfMeal"> Dessert</li>
+      <li><input type="checkbox" id="drink" class="typeOfMeal"> Drink</li>
     </ul>
-    <button class="sidebar-filter">Apply filter</button>
+    <button class="apply-filter">Apply filter</button>
     <button class="sidebar-filter">Search this</button>
 	</section>`;
 

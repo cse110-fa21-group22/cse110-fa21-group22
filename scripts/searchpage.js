@@ -83,16 +83,60 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
-  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
-  const checkboxCuisine = sidebarContent.querySelectorAll('.cuisine');
-  const checkboxDiet = sidebarContent.querySelectorAll('.diet');
-  const checkboxTime = sidebarContent.querySelectorAll('.time');
-  const checkboxType = sidebarContent.querySelectorAll('.typeOfMeal');
-  console.log(checkboxCuisine);
-  console.log(checkboxDiet);
-  console.log(checkboxTime);
-  console.log(checkboxType);
+  inputList.cuisineFilter = '';
+  inputList.dietFilter = '';
+  inputList.timeFilter = '';
+  inputList.typeFilter = '';
+  console.log(inputList);
   search(inputList).then(showResults);
+
+  // apply for the filter search
+  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
+  const applyButton = sidebarContent.querySelector('.apply-filter');
+  applyButton.addEventListener('click', () => {
+    const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
+    const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
+    const checkboxesTime = sidebarContent.querySelectorAll('.time');
+    const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
+    let cuisineFilter = '';
+    let dietFilter = '';
+    let timeFilter = '';
+    let typeFilter = '';
+    for (let i = 0; i < checkboxesCuisine.length; i += 1) {
+      const item = checkboxesCuisine[i];
+      if (item.checked) {
+        cuisineFilter = `${cuisineFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesDiet.length; i += 1) {
+      const item = checkboxesDiet[i];
+      if (item.checked) {
+        dietFilter = `${dietFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesTime.length; i += 1) {
+      const item = checkboxesTime[i];
+      if (item.checked) {
+        timeFilter = `${timeFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesType.length; i += 1) {
+      const item = checkboxesType[i];
+      if (item.checked) {
+        typeFilter = `${typeFilter + item.id},`;
+      }
+    }
+    if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
+    if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
+    if (timeFilter.length !== 0) timeFilter = timeFilter.substring(0, timeFilter.length - 1);
+    if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
+    inputList.cuisineFilter = cuisineFilter;
+    inputList.dietFilter = dietFilter;
+    inputList.timeFilter = timeFilter;
+    inputList.typeFilter = typeFilter;
+    console.log(inputList);
+    search(inputList).then(showResults);
+  });
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');
