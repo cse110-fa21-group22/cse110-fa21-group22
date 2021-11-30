@@ -14,7 +14,7 @@ recipeCardTemplate.innerHTML = `
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
-      <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
+      <p class="recipe-calories"><span class="recipe-calories-number">500</span><span class="recipe-calories-unit">calories</span></p>
     </div>
   </article>
   <div class="dropdown-content">
@@ -39,11 +39,13 @@ class RecipeCard extends HTMLElement {
     this.setAttribute('recipe-id', recipeObj.id);
     const recipeImg = this.shadow.querySelector('.recipe-image');
     const recipeCal = this.shadow.querySelector('.recipe-calories-number');
+    const recipeCalUnit = this.shadow.querySelector('.recipe-calories-unit');
     const recipeName = this.shadow.querySelector('.recipe-name');
 
     recipeImg.src = recipeObj.image;
     recipeName.innerHTML = recipeObj.title;
     recipeCal.innerHTML = recipeCal.innerHTML.replace('500', recipeObj.nutrition.nutrients[0].amount);
+    recipeCalUnit.innerHTML = recipeCalUnit.innerHTML.replace('calories', recipeObj.nutrition.nutrients[0].unit);
 
     if (checkFavorite(recipeObj.id)) {
       this.isFavorite = true;
