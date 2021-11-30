@@ -31,7 +31,7 @@ function init() {
   }
 
   const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  sidebarButton.addEventListener('click', ()=> {
+  sidebarButton.addEventListener('click', () => {
     if (sidebarContent.style.display !== 'none') {
       const mainSection = document.querySelector('.search-page');
       mainSection.style.marginLeft = `${225}px`;
