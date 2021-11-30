@@ -12,6 +12,7 @@ describe('Simple Favorites Flow', () => {
   });
 
   let favoritedRecipe;
+  let originalLength; 
   // Now, favorite a recipe and check it is hearted on favorite page
   it('Check favorited recipe has red heart on recipe page', async () => {
     console.log('Check favorited recipe has red heart on recipe page...');
@@ -33,7 +34,8 @@ describe('Simple Favorites Flow', () => {
     // Click favorited recipe
     const exploreCards2 = await page.$$('recipe-card-component');
     // Navigate to recipe page for favorited recipe
-    await exploreCards2[10].click();
+    originalLength = exploreCards2.length;
+    await exploreCards2[originalLength - 1].click();
     await page.waitForTimeout(1500);
 
     // Get image source
@@ -80,6 +82,6 @@ describe('Simple Favorites Flow', () => {
     const exploreCards = await page.$$('recipe-card-component');
 
     // Check that there are no favorited recipes (only explore cards shown)
-    expect(exploreCards.length).toBe(10);
+    expect(exploreCards.length).toBe(originalLength);
   });
 });
