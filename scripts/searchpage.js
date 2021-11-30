@@ -27,8 +27,19 @@ function init() {
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
   if (sidebarContent.style.display !== 'none') {
     const mainSection = document.querySelector('.search-page');
-    mainSection.style.marginLeft = `${200}px`;
+    mainSection.style.marginLeft = `${225}px`;
   }
+
+  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
+  sidebarButton.addEventListener('click', ()=> {
+    if (sidebarContent.style.display !== 'none') {
+      const mainSection = document.querySelector('.search-page');
+      mainSection.style.marginLeft = `${225}px`;
+    } else {
+      const mainSection = document.querySelector('.search-page');
+      mainSection.style.marginLeft = `${0}px`;
+    }
+  });
 
   const searchKeyword = document.querySelector('.search-word');
   const recipeSection = document.querySelector('.recipe-section');
