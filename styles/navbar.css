@@ -47,8 +47,13 @@
   width: calc(100vw - 50px);
 }
 
+h5 {
+  color: var(--color-neutrals-white);
+}
+
 ul > li {
   list-style-type: none;
+  color: var(--color-neutrals-white);
 }
 
 .logo {
