@@ -38,12 +38,12 @@ class RecipeCard extends HTMLElement {
   set recipe(recipeObj) {
     this.setAttribute('recipe-id', recipeObj.id);
     const recipeImg = this.shadow.querySelector('.recipe-image');
-    // const recipeCal = this.shadow.querySelector('.recipe-calorie-number');
+    const recipeCal = this.shadow.querySelector('.recipe-calories-number');
     const recipeName = this.shadow.querySelector('.recipe-name');
 
     recipeImg.src = recipeObj.image;
     recipeName.innerHTML = recipeObj.title;
-    // recipeCal.innerHTML = recipeObj['calories'];
+    recipeCal.innerHTML = recipeCal.innerHTML.replace('500', recipeObj.nutrition.nutrients[0].amount);
 
     if (checkFavorite(recipeObj.id)) {
       this.isFavorite = true;
