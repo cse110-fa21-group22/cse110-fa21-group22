@@ -88,7 +88,6 @@ function showResults(results) {
 
 async function getRecipebyID(id) {
   const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
-
   console.log('fetch_endpoint', fetchEndPoint);
 
   const fetchResults = await fetch(fetchEndPoint)
