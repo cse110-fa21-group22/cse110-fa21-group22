@@ -115,8 +115,6 @@ ul > li {
     width: min(100vh, 200px);
     z-index: 9999;
     position: absolute;
-    animation-name: animateleft;
-    animation-duration: 0.5s;
   }
 
   .logo {
