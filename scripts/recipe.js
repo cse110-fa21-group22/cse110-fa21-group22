@@ -272,7 +272,7 @@ async function init() {
       const style = window.getComputedStyle(currStep, null);
       const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
       // eslint-disable-next-line camelcase
-      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
+      const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 18;
       // eslint-disable-next-line camelcase
       nextButton.style.marginTop = `${margin_top}px`;
       nextButton.style.marginLeft = `${90}vw`;
