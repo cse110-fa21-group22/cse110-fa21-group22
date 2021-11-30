@@ -4,6 +4,16 @@
  */
 
 import search from './search.js';
+
+function choose(obj) {
+  const time = document.getElementsByClassName('.time');
+  for (let i = 0; i < time.length; i += 1) {
+    time[i].checked = false;
+  }
+  // eslint-disable-next-line no-param-reassign
+  obj.checked = true;
+}
+
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
@@ -116,7 +126,7 @@ function init() {
     for (let i = 0; i < checkboxesTime.length; i += 1) {
       const item = checkboxesTime[i];
       if (item.checked) {
-        timeFilter = `${timeFilter + item.id},`;
+        timeFilter = Math.max(timeFilter, item.id);
       }
     }
     for (let i = 0; i < checkboxesType.length; i += 1) {
@@ -127,7 +137,7 @@ function init() {
     }
     if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
     if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
-    if (timeFilter.length !== 0) timeFilter = timeFilter.substring(0, timeFilter.length - 1);
+    // if (timeFilter.length !== 0) timeFilter = timeFilter.substring(0, timeFilter.length - 1);
     if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
     inputList.cuisineFilter = cuisineFilter;
     inputList.dietFilter = dietFilter;
