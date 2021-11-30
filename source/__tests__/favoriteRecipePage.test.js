@@ -8,6 +8,7 @@ describe('Simple Favorites Flow', () => {
   // First, visit the iCook website
   beforeAll(async () => {
     await page.goto('https://icookfood.netlify.app/webpages/home.html');
+    await page.setCacheEnabled(false);
     await page.waitForTimeout(2000);
   });
 
