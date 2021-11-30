@@ -11,7 +11,7 @@ const recipeLists = [];
 const selectedRecipes = [];
 
 async function getRecipeArr(idArr) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${idArr.join(',')}${tokenKey}`;
+  const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${idArr.join(',')}${tokenKey}&includeNutrition=true`;
 
   console.log('fetch_endpoint', fetchEndPoint);
 
@@ -74,7 +74,7 @@ window.addEventListener('DOMContentLoaded', init);
 
 // eslint-disable-next-line no-unused-vars
 async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=false`;
+  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
 
   // console.log("fetch_endpoint", fetchEndPoint);
 

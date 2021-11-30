@@ -17,11 +17,11 @@ export default async function search(inputList) {
   const tokenSearchInput = `&query=${inputList.query}`;
   const tokenNumResults = `&number=${inputList.number}`;
   const tokenOffset = `&offset=${inputList.offset}`;
-  // const tokenNutritionBool = '&addRecipeNutrition=' + inputList['recipe-nutrition'];
-  const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; // + tokenNutritionBool;
+  const tokenNutritionBool = `&addRecipeNutrition=${inputList['recipe-nutrition']}`;
+  const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset + tokenNutritionBool;
+  console.log(fetchEndpoint);
 
   // fetch the data
-
   const fetchResults = await fetch(fetchEndpoint)
     .then((response) => response.json())
     .catch((error) => {
