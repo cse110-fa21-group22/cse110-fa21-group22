@@ -40,9 +40,9 @@ navbarTemplate.innerHTML = `
     <ul>
       <li><input type="checkbox" id="vegetarian" class="diet"> Vegetarian</li>
       <li><input type="checkbox" id="vegan" class="diet"> Vegan</li>
-      <li><input type="checkbox" id="glutenFree" class="diet"> Gluten-Free</li>
+      <li><input type="checkbox" id="gluten%20free" class="diet"> Gluten Free</li>
       <li><input type="checkbox" id="paleo" class="diet"> Paleo</li>
-      <li><input type="checkbox" id="ketogenic" class="diet"> Keto</li>
+      <li><input type="checkbox" id="ketogenic" class="diet"> Ketogenic</li>
     </ul>
     <h5>Time</h5>
     <ul>
@@ -55,7 +55,7 @@ navbarTemplate.innerHTML = `
     <h5>Type of Meal</h5>
     <ul>
       <li><input type="checkbox" id="breakfast" class="typeOfMeal"> Breakfast</li>
-      <li><input type="checkbox" id="main course" class="typeOfMeal"> Main Course</li>
+      <li><input type="checkbox" id="main%20course" class="typeOfMeal"> Main Course</li>
       <li><input type="checkbox" id="dessert" class="typeOfMeal"> Dessert</li>
       <li><input type="checkbox" id="drink" class="typeOfMeal"> Drink</li>
     </ul>

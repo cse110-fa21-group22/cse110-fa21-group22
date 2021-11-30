@@ -17,12 +17,24 @@ export default async function search(inputList) {
   const tokenSearchInput = `&query=${inputList.query}`;
   const tokenNumResults = `&number=${inputList.number}`;
   const tokenOffset = `&offset=${inputList.offset}`;
-  const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
-  const tokenDiet = `&diet=${inputList.dietFilter}`;
   // const tokenTime = `&time=${inputList.timeFilter}`;
-  const tokenType = `&type=${inputList.typeFilter}`;
   const tokenNutritionBool = `&addRecipeNutrition=${inputList['recipe-nutrition']}`;
-  const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset + tokenCuisine + tokenDiet + tokenType + tokenNutritionBool; // + tokenTime;
+  let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput; // + tokenTime;
+  if (inputList.cuisineFilter !== '') {
+    const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
+    fetchEndpoint += tokenCuisine;
+  }
+  if (inputList.dietFilter !== '') {
+    const tokenDiet = `&diet=${inputList.dietFilter}`;
+    fetchEndpoint += tokenDiet;
+  }
+  if (inputList.typeFilter !== '') {
+    const tokenType = `&type=${inputList.typeFilter}`;
+    console.log(tokenType);
+    fetchEndpoint += tokenType;
+    console.log(fetchEndpoint);
+  }
+  fetchEndpoint += tokenNumResults + tokenOffset + tokenNutritionBool;
   console.log(fetchEndpoint);
 
   // fetch the data
