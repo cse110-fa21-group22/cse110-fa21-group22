@@ -47,6 +47,10 @@
   width: calc(100vw - 50px);
 }
 
+ul > li {
+  list-style-type: none;
+}
+
 .logo {
   color: var(--color-neutrals-white);
   font-size: 22px;
