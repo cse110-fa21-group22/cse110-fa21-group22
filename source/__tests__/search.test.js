@@ -17,12 +17,16 @@ describe('Basic user flow for Search Page', () => {
     await page.waitForTimeout('500');
 
     const recipeCards = await page.$$('recipe-card-component');
-    firstSet = recipeCards;
-    // console.log('first set: ' + firstSet[0]);
-    // console.log('recipeCard: ' + recipeCards[0]);
+    for (let i = 0; i < recipeCards.length; i++) {
+      await page.waitForTimeout('500');
+      let root = await recipeCards[i].getProperty('shadowRoot');
+      let name = await root.$('.recipe-name');
+      let innerText = await name.getProperty('innerText');
+      firstSet.push(innerText['_remoteObject'].value);
+    }
 
     expect(recipeCards.length).toBe(10);
-  }, 10000);
+  }, 100000);
 
   /*
     
@@ -91,22 +95,18 @@ describe('Basic user flow for Search Page', () => {
   // After previous button is clicked, make sure the recipes are the same
   it('Check to the recipes are the same after previous button', async () => {
     const currentRecipes = await page.$$('recipe-card-component');
-    const isSame = true;
+    let isSame = true;
     for (let i = 0; i < currentRecipes.length; i += 1) {
-      // if (currentRecipes[i] != firstSet[i]) {
-      //   isSame = false;
-      //   break;
-      // }
-      // console.log(currentRecipes[0]);
-      // console.log(firstSet[0]);
+      let root = await currentRecipes[i].getProperty('shadowRoot');
+      let name = await root.$('.recipe-name');
+      let innerText = await name.getProperty('innerText');
+      let recipeTitle = innerText['_remoteObject'].value;
+      if (firstSet[i] != recipeTitle) {
+        isSame = false;
+        break;
+      }
     }
-    // console.log(currentRecipes[0].id);
-    // console.log(firstSet[0].id);
     // eslint-disable-next-line no-underscore-dangle
-    console.log(secondSet[0]._sessionId);
     expect(isSame).toBe(true);
-
-    // _sessionId: 'D2132ADEE2C148F25D3F4864B0C7A808'
-    // _sessionId: 'D2132ADEE2C148F25D3F4864B0C7A808'
   });
 });
