@@ -105,8 +105,6 @@ class Navbar extends HTMLElement {
 
     // Desktop Functionality
     let searchTerm = '';
-    // let inputList = [];
-
     const searchInput = this.shadow.querySelector('.nav-search').querySelector('input');
 
     searchInput.addEventListener('keyup', (event) => {
