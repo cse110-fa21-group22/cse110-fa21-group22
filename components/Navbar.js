@@ -47,7 +47,7 @@ navbarTemplate.innerHTML = `
     <h5>Time</h5>
     <ul>
       <li><input type="checkbox" id="15min" class="time"> 15 Minutes</li>
-      <li><input type="checkbox" id="30mim" class="time"> 30 Minutes</li>
+      <li><input type="checkbox" id="30min" class="time"> 30 Minutes</li>
       <li><input type="checkbox" id="45min" class="time"> 45 Minutes</li>
       <li><input type="checkbox" id="1hr" class="time"> 1 Hour</li>
       <li><input type="checkbox" id="over1hr" class="time"> Over 1 Hour</li>
