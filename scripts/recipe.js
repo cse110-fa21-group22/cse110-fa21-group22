@@ -85,9 +85,9 @@ listEntryTemplate.innerHTML = `
 function initializeDropdown() {
   const dropdownElem = document.querySelector('.dropdown-content');
   for (let i = 0; i < localStorage.length; i += 1) {
-    if (localStorage.key(i) === 'favorites-master') continue;
     const entry = listEntryTemplate.content.cloneNode(true);
     entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
+    if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
     dropdownElem.insertBefore(entry, dropdownElem.firstChild);
   }
 }
@@ -170,7 +170,7 @@ async function init() {
         <label class="entry">Create a new list: 
            <input type="text" class="user-input">
         </label>
-        <button class="submit">Submit</button>
+        <button class="submit">Add to Favorite</button>
      </div>`;
   /*
    * show the drop-down box and change the heart color
@@ -243,6 +243,11 @@ async function init() {
   const recipeIngredients = document.createElement('image-card-component');
   recipeIngredients.ingredients = recipe.extendedIngredients;
   document.querySelector('.ingredients-equipment').appendChild(recipeIngredients);
+
+  // Make the ingredients show the complete name
+  // const ingredientName = document.querySelector('.ingredient-name');
+  // const textWidth = ingredientName.length;
+  // console.log(textWidth);
 
   // Set equipment using custom element
   const recipeEquipment = document.createElement('image-card-component');
