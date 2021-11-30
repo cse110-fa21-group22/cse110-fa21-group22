@@ -19,6 +19,7 @@ export default async function search(inputList) {
   const tokenOffset = `&offset=${inputList.offset}`;
   const tokenNutritionBool = `&addRecipeNutrition=${inputList['recipe-nutrition']}`;
   const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset + tokenNutritionBool;
+  console.log(fetchEndpoint);
 
   // fetch the data
   const fetchResults = await fetch(fetchEndpoint)
