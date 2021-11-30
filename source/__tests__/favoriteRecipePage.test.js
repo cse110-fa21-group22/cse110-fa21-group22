@@ -36,6 +36,7 @@ describe('Simple Favorites Flow', () => {
     const exploreCards2 = await page.$$('recipe-card-component');
     // Navigate to recipe page for favorited recipe
     newLength = exploreCards2.length;
+    console.log(newLength);
     await exploreCards2[newLength - 1].click();
     await page.waitForTimeout(1500);
 
