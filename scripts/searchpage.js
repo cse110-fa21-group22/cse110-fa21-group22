@@ -21,6 +21,15 @@ function init() {
       );
     });
   }
+
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  if (sidebarContent.style.display !== 'none') {
+    const mainSection = document.querySelector('.search-page');
+    mainSection.style.marginLeft = `${200}px`;
+  }
+
   const searchKeyword = document.querySelector('.search-word');
   const recipeSection = document.querySelector('.recipe-section');
 
