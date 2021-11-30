@@ -21,7 +21,6 @@ export default async function search(inputList) {
   const fetchEndpoint = searchUrl + tokenKey + tokenSearchInput + tokenNumResults + tokenOffset; // + tokenNutritionBool;
 
   // fetch the data
-
   const fetchResults = await fetch(fetchEndpoint)
     .then((response) => response.json())
     .catch((error) => {

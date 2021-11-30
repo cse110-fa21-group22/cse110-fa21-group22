@@ -83,6 +83,15 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
+  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
+  const checkboxCuisine = sidebarContent.querySelectorAll('.cuisine');
+  const checkboxDiet = sidebarContent.querySelectorAll('.diet');
+  const checkboxTime = sidebarContent.querySelectorAll('.time');
+  const checkboxType = sidebarContent.querySelectorAll('.typeOfMeal');
+  console.log(checkboxCuisine);
+  console.log(checkboxDiet);
+  console.log(checkboxTime);
+  console.log(checkboxType);
   search(inputList).then(showResults);
 
   // Section is for next and previous buttons
