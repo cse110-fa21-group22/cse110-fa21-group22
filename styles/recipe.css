@@ -60,11 +60,6 @@ h3 {
   display: none;
 }
 
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark::after {
-  display: block;
-}
-
 /* Style the checkmark/indicator */
 .container .checkmark::after {
   left: 9px;
@@ -74,8 +69,11 @@ h3 {
   border: solid white;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
-  transform: rotate(45deg);
-  transform: rotate(45deg);
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark::after {
+  display: block;
 }
 
 .dropdown-content {
@@ -178,7 +176,7 @@ label {
 }
 
 .nextStep {
-  position: absolute;
+  position: relative;
   margin: 0;
   display: none;
 }
