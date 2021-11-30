@@ -5,15 +5,6 @@
 
 import search from './search.js';
 
-function choose(obj) {
-  const time = document.getElementsByClassName('.time');
-  for (let i = 0; i < time.length; i += 1) {
-    time[i].checked = false;
-  }
-  // eslint-disable-next-line no-param-reassign
-  obj.checked = true;
-}
-
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
