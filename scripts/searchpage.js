@@ -133,7 +133,6 @@ function init() {
     inputList.dietFilter = dietFilter;
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
-    console.log(inputList);
     search(inputList).then(showResults);
   });
 
