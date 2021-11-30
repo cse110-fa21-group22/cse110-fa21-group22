@@ -176,7 +176,7 @@ label {
 }
 
 .nextStep {
-  position: absolute;
+  position: relative;
   margin: 0;
   display: none;
 }
