@@ -14,7 +14,7 @@ recipeCardTemplate.innerHTML = `
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
-      <p class="recipe-calories"><span class="recipe-calories-number">500</span><span class="recipe-calories-unit">calories</span></p>
+      <p class="recipe-calories"><span class="recipe-calories-number">500</span> <span class="recipe-calories-unit">calories</span></p>
     </div>
   </article>
   <div class="dropdown-content">
