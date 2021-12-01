@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 describe('Basic user flow for Search Page', () => {
   // Launch the site
@@ -18,7 +18,7 @@ describe('Basic user flow for Search Page', () => {
 
     const recipeCards = await page.$$('recipe-card-component');
     for (let i = 0; i < recipeCards.length; i++) {
-      await page.waitForTimeout('500');
+      await page.waitForTimeout('1000');
       let root = await recipeCards[i].getProperty('shadowRoot');
       let name = await root.$('.recipe-name');
       let innerText = await name.getProperty('innerText');
