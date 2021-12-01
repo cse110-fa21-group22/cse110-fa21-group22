@@ -27,11 +27,14 @@ function init() {
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
-  sidebarContent.style.display = 'flex';
-  sidebarContent.style.flexDirection = 'column';
   if (!isMobile && sidebarContent.style.display !== 'none') {
+    sidebarContent.style.display = 'flex';
+    sidebarContent.style.flexDirection = 'column';
     const mainSection = document.querySelector('.search-page');
     mainSection.style.marginLeft = `${225}px`;
+  }
+  if (!isMobile) {
+    sidebarContent.style.display = 'none';
   }
 
   const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
