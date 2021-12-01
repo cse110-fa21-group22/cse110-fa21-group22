@@ -14,7 +14,7 @@ describe('Basic user flow for Search Page', () => {
   // Check the search page without a search
   it('Check for 10 default recipes on empty search', async () => {
     console.log('Check for 10 default recipe');
-    await page.waitForTimeout('500');
+    await page.waitForTimeout('1000');
 
     const recipeCards = await page.$$('recipe-card-component');
     for (let i = 0; i < recipeCards.length; i++) {
@@ -62,7 +62,7 @@ describe('Basic user flow for Search Page', () => {
   // User clicks the next results button, make sure there recipe cards are populated
   it('Check next results button', async () => {
     console.log('Check next button');
-    // await page.waitForTimeout('500');
+    await page.waitForTimeout('500');
 
     const nextButton = await page.$('.next-button');
 
@@ -115,7 +115,7 @@ describe('Basic user flow for Search Page', () => {
   // Click the next button again and check if those populated recipes are the same
   it('Check to the recipes are the same after next button', async () => {
     console.log('Check next button');
-    // await page.waitForTimeout('500');
+    await page.waitForTimeout('500');
 
     const nextButton = await page.$('.next-button');
 
