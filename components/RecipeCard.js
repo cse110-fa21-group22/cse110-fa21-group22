@@ -1,4 +1,4 @@
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -219,16 +219,15 @@ class RecipeCard extends HTMLElement {
         console.log('Prompting user to add to favorites lists');
       } else {
         this.isFavorite = false;
-        removeRecipe(this.getAttribute('recipe-id'));
-        // eslint-disable-next-line no-undef
+        const containers = this.shadow.querySelectorAll('.container');
+        // goes through all the lists and removes the recipe if it is found
         for (let i = 0; i < containers.length; i += 1) {
-          // eslint-disable-next-line no-undef
-          console.log(containers[i].textContent);
-          // eslint-disable-next-line no-undef
-          removeRecipebyList(containers[i].textContent, this.getAttribute('recipe-id'));
+          removeRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
         }
         favoriteIcon.src = '../assets/favorite.svg';
         console.log('Remove item from ALL favorites lists here');
+        /* Reload the page as a shortcut for showing updated lists */
+        location.reload();
       }
     });
 

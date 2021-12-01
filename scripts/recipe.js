@@ -2,7 +2,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from '../components/UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -193,11 +193,10 @@ async function init() {
       showDropdown(recipe, isMobile);
     } else {
       isFavorite = false;
-      removeRecipe(recipe.id);
       const containers = document.querySelectorAll('.container');
+      // goes through all the lists and deletes if it is in list
       for (let i = 0; i < containers.length; i += 1) {
-        console.log(containers[i].textContent);
-        removeRecipebyList(containers[i].textContent, recipe.id);
+        removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
       }
       favoriteIcon.src = '../assets/favorite.svg';
     }

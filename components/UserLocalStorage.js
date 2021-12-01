@@ -109,7 +109,7 @@ export function addRecipebyList(listName, recipeID) {
       return;
     }
   }
-  array.push(recipeID);
+  array.push(parseInt(recipeID, 10));
   storage.setItem(listName, JSON.stringify(array));
 }
 
