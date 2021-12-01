@@ -27,6 +27,8 @@ function init() {
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'flex';
+  sidebarContent.style.flexDirection = 'column';
   if (!isMobile && sidebarContent.style.display !== 'none') {
     const mainSection = document.querySelector('.search-page');
     mainSection.style.marginLeft = `${225}px`;
