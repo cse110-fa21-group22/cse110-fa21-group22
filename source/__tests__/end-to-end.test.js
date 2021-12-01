@@ -52,7 +52,7 @@ describe('Simple User Flow', () => {
 
     // Reload the page
     await page.goto('https://icookfood.netlify.app/webpages/home.html');
-    await page.waitForTimeout('2000');
+    await page.waitForTimeout('3000');
 
     // Retrieve the recipe in the favorites list
     const exploreCards2 = await page.$$('recipe-card-component');
