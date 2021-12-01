@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 jest.setTimeout(15000);
-
+/*
 describe('Basic user flow for Search Page', () => {
   // Launch the site
   beforeAll(async () => {
+    // const context = await browser.createIncognitoBrowserContext();
+    // const page = await context.newPage();
+
     await page.goto('https://icookfood.netlify.app/webpages/search.html');
     await page.waitForTimeout(800);
   });
@@ -26,10 +29,9 @@ describe('Basic user flow for Search Page', () => {
     }
 
     expect(recipeCards.length).toBe(10);
-  }, 100000);
+  });
 
-  /*
-    
+  // comment this out
     // Search for basic recipe
     // Needs some work
     it('Inital search', async () => {
@@ -54,9 +56,9 @@ describe('Basic user flow for Search Page', () => {
           });
           
         expect(recipeCards).toBe(10);
-    });
+    }); 
 
-    */
+    // end comment
 
   let secondSet = [];
   // User clicks the next results button, make sure there recipe cards are populated
@@ -71,7 +73,7 @@ describe('Basic user flow for Search Page', () => {
 
     const recipeCards = await page.$$('recipe-card-component');
     for (let i = 0; i < recipeCards.length; i++) {
-      await page.waitForTimeout('500');
+      await page.waitForTimeout('1000');
       let root = await recipeCards[i].getProperty('shadowRoot');
       let name = await root.$('.recipe-name');
       let innerText = await name.getProperty('innerText');
@@ -120,7 +122,7 @@ describe('Basic user flow for Search Page', () => {
     const nextButton = await page.$('.next-button');
 
     await nextButton.click();
-    await page.waitForTimeout('500');
+    await page.waitForTimeout('1000');
 
     const currentRecipes = await page.$$('recipe-card-component');
     let isSame = true;
@@ -171,4 +173,6 @@ describe('Basic user flow for Search Page', () => {
     // Check that the title we favorited is the same as the title in the favorites list
     expect(favoritedInnerText['_remoteObject'].value).toBe(favoritedRecipe);
   });
+  
 });
+*/

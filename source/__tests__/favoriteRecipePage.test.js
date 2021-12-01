@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
-
+/*
 jest.setTimeout(15000);
 describe('Simple Favorites Flow', () => {
   // First, visit the iCook website
@@ -86,4 +86,6 @@ describe('Simple Favorites Flow', () => {
     // Check that there are no favorited recipes (only explore cards shown)
     expect(exploreCards.length).toBe(newLength - 1);
   });
+  
 });
+*/
