@@ -181,7 +181,7 @@ describe('Basic user flow for Search Page', () => {
     await page.waitForTimeout('2000');
 
     const recipeCards = await page.$$('recipe-card-component');
-    for (let i = 0; i < 3; i +=1) {
+    for (let i = 0; i < 3; i += 1) {
       // await page.waitForTimeout('500');
       const root = await recipeCards[i].getProperty('shadowRoot');
       const name = await root.$('.recipe-name');
