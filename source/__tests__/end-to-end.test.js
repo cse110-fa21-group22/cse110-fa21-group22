@@ -15,7 +15,7 @@ const FAV_REMOVE = 'https://icookfood.netlify.app/assets/favorite-remove.svg';
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
-const prNum = 0; // change 0 -> (pr number);
+const prNum = 0; // change -> (your pr number);
 
 let homeLink = '';
 let searchLink = '';
