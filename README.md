@@ -12,4 +12,4 @@ The project will are working on is a Recipe Manager. Our application will allow 
 
 ## Link to Docs
 
-[Docs] (https://demyinn00.github.io/group22xjsdocs/)
+[Docs](https://demyinn00.github.io/group22xjsdocs/)
