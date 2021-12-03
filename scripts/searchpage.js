@@ -3,7 +3,7 @@
  *  Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
-import { search, searchPageNumber } from './search.js';
+import search from './search.js';
 
 /**
  * This function initializes the search page
