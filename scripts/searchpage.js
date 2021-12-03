@@ -198,8 +198,8 @@ function init() {
 
   // eslint-disable-next-line func-names
   window.onresize = function () {
-    // eslint-disable-next-line no-undef
-    const sidebarHeight = $(document).height();
+    const sidebarHeight = document.mainSection.scrollHeight;
+    console.log(sidebarHeight);
     sidebarContent.style.height = sidebarHeight;
   };
 }
