@@ -20,7 +20,6 @@ let searchLink = '';
 let favLink = '';
 let favSelected = '';
 
-
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
   searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
@@ -36,7 +35,7 @@ if (prNum > 0) {
 describe('Simple User Flow', () => {
   // First, visit the iCook website
   beforeAll(async () => {
-    await page.goto(homeLink); //('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto(homeLink);
     await page.setCacheEnabled(false);
     await page.waitForTimeout(800);
   });
@@ -318,7 +317,7 @@ describe('Simple Favorites Flow', () => {
     const client = await page.target().createCDPSession();
     await client.send('Network.clearBrowserCookies');
     await client.send('Network.clearBrowserCache');
-    await page.goto(homeLink) //('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto(homeLink);
     await page.waitForTimeout(2000);
   });
 
