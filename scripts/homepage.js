@@ -161,7 +161,7 @@ async function init() {
       }
     }
   });
-  
+
   const inputList = [];
   inputList.cuisineFilter = '';
   inputList.dietFilter = '';
@@ -226,7 +226,7 @@ async function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     clearObject();
-    await fetchRandomRecipes(inputList)
+    await fetchRandomRecipes(inputList);
     showResults(recipeData);
   });
 
