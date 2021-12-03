@@ -7,3 +7,7 @@ The project will are working on is a Recipe Manager. Our application will allow 
 ## Link to Team
 
 [Team](./admin/team.md)
+
+## Link to App
+
+## Link to Docs
