@@ -28,11 +28,6 @@ function init() {
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
-  // eslint-disable-next-line func-names
-  window.onresize = function () {
-    const sidebarHeight = document.mainSection.scrollHeight;
-    sidebarContent.style.height = sidebarHeight;
-  };
 
   if (!isMobile && sidebarContent.style.display !== 'none') {
     sidebarContent.style.display = 'flex';
@@ -200,6 +195,12 @@ function init() {
     search(inputList).then(showResults);
     previousButton.disabled = false;
   });
+
+  // eslint-disable-next-line func-names
+  window.onresize = function () {
+    const sidebarHeight = document.body.scrollHeight;
+    sidebarContent.style.height = sidebarHeight;
+  };
 }
 
 window.addEventListener('DOMContentLoaded', init);
