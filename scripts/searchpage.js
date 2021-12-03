@@ -205,7 +205,7 @@ function init() {
     currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
     totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
     let sidebarHeight = document.querySelector('.search-page').scrollHeight;
-    sidebarHeight += 75;
+    sidebarHeight += 55;
     sidebarContent.style.height = `${sidebarHeight}px`;
   });
 
@@ -255,9 +255,7 @@ function init() {
   // eslint-disable-next-line func-names
   window.onresize = function () {
     let sidebarHeight = document.querySelector('.search-page').scrollHeight;
-    sidebarHeight += 75;
-    console.log(sidebarHeight);
-
+    sidebarHeight += 55;
     sidebarContent.style.height = `${sidebarHeight}px`;
   };
 }
