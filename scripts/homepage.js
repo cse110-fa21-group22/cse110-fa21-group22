@@ -120,7 +120,10 @@ function clearObject() {
 async function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-
+  const noFavorite = document.querySelector('.noFavoriteHeader');
+  if (array.length !== 0) {
+    noFavorite.style.display = 'none';
+  }
   for (let i = 0; i < array.length; i += 1) {
     const recipeCard = document.createElement('recipe-card-component');
     // eslint-disable-next-line no-await-in-loop
