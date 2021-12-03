@@ -118,7 +118,7 @@ ul > li {
     display: flex;
     background-color: var(--color-primary-blue);
     padding: 0 25px;
-    height: max(700px, calc(100vh - 70px));
+    min-height: max(700px, calc(100vh - 70px));
     width: min(100vh, 200px);
     z-index: 9999;
     position: absolute;
