@@ -172,6 +172,13 @@ function init() {
     inputList.typeFilter = typeFilter;
     search(inputList).then((value) => {
       showResults(value.results);
+      const pageNumber = Math.ceil(value.totalResults / 10);
+      const totalResult = document.querySelector('.totalResults').querySelector('span');
+      const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+      const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+      totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
+      currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
+      totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
     });
   });
 
