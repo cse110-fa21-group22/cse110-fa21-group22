@@ -485,9 +485,9 @@ async function init() {
   const emailButton = document.querySelector('.email-recipe');
   emailButton.addEventListener('click', () => {
     const recipeURL = window.location;
-    const subject = recipe.title + " Recipe";
-    window.location.href = "mailto:?subject="+subject+"&body="+recipeURL;
-  })
+    const subject = `${recipe.title} Recipe`;
+    window.location.href = `mailto:?subject=${subject}&body=${recipeURL}`;
+  });
 }
 
 window.addEventListener('DOMContentLoaded', init);
