@@ -113,7 +113,9 @@ function clearObject() {
 async function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-
+  if (array.length === 0) {
+    console.log('No favorite');
+  }
   for (let i = 0; i < array.length; i += 1) {
     const recipeCard = document.createElement('recipe-card-component');
     // eslint-disable-next-line no-await-in-loop
@@ -166,7 +168,6 @@ async function init() {
    * design:
    * display 10 cards each time, when user a card, display another 10 random
    */
-  // console.log(recipeData);
   showResults(recipeData);
 
   const button = document.querySelector('.home-page-popular-refresh');
