@@ -212,13 +212,18 @@ async function init() {
       favoriteIcon.src = '../assets/favorite-selected.svg';
       showDropdown(recipe, isMobile);
     } else {
-      isFavorite = false;
-      const containers = document.querySelectorAll('.container');
-      // goes through all the lists and deletes if it is in list
-      for (let i = 0; i < containers.length; i += 1) {
-        removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+      let toRemove = false;
+      toRemove = confirm(`Unhearting a recipe removes from all favorite lists`);
+      
+      if (toRemove) {
+        isFavorite = false;
+        const containers = document.querySelectorAll('.container');
+        // goes through all the lists and deletes if it is in list
+        for (let i = 0; i < containers.length; i += 1) {
+          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+        }
+        favoriteIcon.src = '../assets/favorite.svg';
       }
-      favoriteIcon.src = '../assets/favorite.svg';
     }
   });
 
