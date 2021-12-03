@@ -59,7 +59,7 @@ navbarTemplate.innerHTML = `
       <li><input type="checkbox" id="dinner" class="typeOfMeal"> Dinner</li>
       <li><input type="checkbox" id="other" class="typeOfMeal"> Other</li>
     </ul>
-    <button class="sidebar-filter">Apply filter</button>
+    <button class="apply-filter">Apply filter</button>
     <button class="sidebar-filter">Search this</button>
 	</section>`;
 

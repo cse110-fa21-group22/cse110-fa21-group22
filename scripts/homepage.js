@@ -25,29 +25,41 @@ function initLocalStorageDoubt() {
   }
 }
 
-async function fetchRandomRecipes() {
+async function fetchRandomRecipes(inputList) {
   return new Promise((resolve, reject) => {
     // use 1 for now, save some points for querying
     // const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
-    const fetchResults = `https://api.spoonacular.com/recipes/complexSearch${tokenKey}&number=${steppingSize}&sort=random&addRecipeInformation=true&addRecipeNutrition=true`;
+    const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
+    const tokenNumResults = `&number=${steppingSize}`;
+    const tokenRecipeInformation = `&addRecipeInformation=true`;
+    const tokenNutritionBool = `&addRecipeNutrition=true`;
+    const tokenSort = `&sort=random`;
+    let fetchResults = searchUrl + tokenKey;
+    console.log('fetchRandomRecipes ', inputList);
+    if (inputList.cuisineFilter !== '') {
+      const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
+      fetchResults += tokenCuisine;
+    }
+    if (inputList.dietFilter !== '') {
+      const tokenDiet = `&diet=${inputList.dietFilter}`;
+      fetchResults += tokenDiet;
+    }
+    if (inputList.timeFilter !== '') {
+      const tokenTime = `&maxReadyTime=${inputList.timeFilter}`;
+      fetchResults += tokenTime;
+    }
+    if (inputList.typeFilter !== '') {
+      const tokenType = `&type=${inputList.typeFilter}`;
+      fetchResults += tokenType;
+    }
+    fetchResults += tokenSort + tokenRecipeInformation + tokenNutritionBool + tokenNumResults;
+    console.log(fetchResults);
 
     fetch(fetchResults)
       .then((response) => response.json())
       .then((data) => {
-        // change the 0
-        // need to be a for loop and put them into recipeData;
-        // console.log(data);
-        // console.log(data.recipes[0].id);
         for (let i = 0; i < parseInt(steppingSize, 10); i += 1) {
           recipeData[data.results[i].id] = data.results[i];
-
-          // // testing for local storage
-          // addRecipe(data.recipes[i].id);
-          // if(i % 2 == 0){addRecipebyList("list%2", data.recipes[i].id);}
-          // if(i % 3 == 0){addRecipebyList("list%3", data.recipes[i].id);}
-          // if(i % 4 == 0){addRecipebyList("list%4", data.recipes[i].id);}
-          // if(i % 5 == 0){addRecipebyList("list%5", data.recipes[i].id);}
-          // if(i % 10 == 0){addRecipebyList("list%10", data.recipes[i].id);}
         }
         resolve();
       })
@@ -73,8 +85,6 @@ function clearResults() {
  * @param {object} results
  */
 function showResults(results) {
-  // console.log(results);
-
   // Clear the results before searching
   clearResults();
 
@@ -133,12 +143,17 @@ async function init() {
     });
   }
 
-  // console.log('Init.. ');
-  // console.log('Fetching recipes...');
+  const inputList = [];
+  inputList.cuisineFilter = '';
+  inputList.dietFilter = '';
+  inputList.timeFilter = '';
+  inputList.typeFilter = '';
+
+  // initializing the page
   try {
-    await fetchRandomRecipes();
+    await fetchRandomRecipes(inputList);
   } catch (err) {
-    // console.log(`Error fetching recipes: ${err}`);
+    console.log(`Error fetching recipes: ${err}`);
     return;
   }
 
@@ -146,34 +161,66 @@ async function init() {
    * design:
    * display 10 cards each time, when user a card, display another 10 random
    */
-  // console.log(recipeData);
   showResults(recipeData);
+  showFavoriteSection();
+
+  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
+  const applyButton = sidebarContent.querySelector('.apply-filter');
+  applyButton.addEventListener('click', () => {
+    const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
+    const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
+    const checkboxesTime = sidebarContent.querySelectorAll('.time');
+    const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
+    let cuisineFilter = '';
+    let dietFilter = '';
+    let timeFilter = '';
+    let typeFilter = '';
+    for (let i = 0; i < checkboxesCuisine.length; i += 1) {
+      const item = checkboxesCuisine[i];
+      if (item.checked) {
+        cuisineFilter = `${cuisineFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesDiet.length; i += 1) {
+      const item = checkboxesDiet[i];
+      if (item.checked) {
+        dietFilter = `${dietFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesTime.length; i += 1) {
+      const item = checkboxesTime[i];
+      if (item.checked) {
+        timeFilter = Math.max(timeFilter, item.id);
+      }
+    }
+    for (let i = 0; i < checkboxesType.length; i += 1) {
+      const item = checkboxesType[i];
+      if (item.checked) {
+        typeFilter = `${typeFilter + item.id},`;
+      }
+    }
+    if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
+    if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
+    if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
+    inputList.cuisineFilter = cuisineFilter;
+    inputList.dietFilter = dietFilter;
+    inputList.timeFilter = timeFilter;
+    inputList.typeFilter = typeFilter;
+    fetchRandomRecipes(inputList).then(showResults(recipeData));
+    console.log(recipeData);
+  });
 
   const button = document.querySelector('.home-page-popular-refresh');
+  // eslint-disable-next-line func-names
   button.addEventListener('click', async function () {
     clearObject();
     try {
-      await fetchRandomRecipes();
+      await fetchRandomRecipes(inputList);
     } catch (err) {
       console.log(`Error fetching recipes: ${err}`);
       return;
     }
     showResults(recipeData);
   });
-
-  // populating local storage testing
-  // eslint-disable-next-line no-unused-vars
-  const list = storage.getItem('favorites-master');
-  // createList("list%2");
-  // createList("list%3");
-  // createList("list%4");
-  // createList("list%5");
-  // createList("list%10");
-
-  // return null if not found
-  // let a = storage.getItem("dsf");
-  // console.log(a);
-
-  showFavoriteSection();
 }
 window.addEventListener('DOMContentLoaded', init);
