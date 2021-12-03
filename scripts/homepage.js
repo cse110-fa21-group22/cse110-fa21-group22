@@ -27,8 +27,7 @@ function initLocalStorageDoubt() {
 
 async function fetchRandomRecipes(inputList) {
   return new Promise((resolve, reject) => {
-    // use 1 for now, save some points for querying
-    // const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
+    // The order of the token need to be fixed is something wrong happened.
     const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
     const tokenNumResults = `&number=${steppingSize}`;
     const tokenRecipeInformation = `&addRecipeInformation=true`;
