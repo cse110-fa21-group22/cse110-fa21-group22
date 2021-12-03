@@ -36,7 +36,7 @@ export default async function search(inputList) {
     const tokenType = `&type=${inputList.typeFilter}`;
     fetchEndpoint += tokenType;
   }
-  fetchEndpoint += tokenOffset + tokenNumResults + tokenNutritionBool;
+  fetchEndpoint += tokenNutritionBool + tokenOffset + tokenNumResults;
   console.log(fetchEndpoint);
 
   // fetch the data
