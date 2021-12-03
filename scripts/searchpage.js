@@ -206,7 +206,7 @@ function init() {
   window.onresize = function () {
     const sidebarHeight = document.querySelector('.search-page').scrollHeight;
     console.log(sidebarHeight);
-    sidebarContent.style.height = sidebarHeight;
+    sidebarContent.style.height = `${sidebarHeight}px`;
   };
 }
 
