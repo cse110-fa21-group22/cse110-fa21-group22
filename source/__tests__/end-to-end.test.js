@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
-/*eslint no-unused-vars: "error"*/
+/* eslint no-unused-vars: "error" */
 jest.setTimeout(15000);
 
 // Links for testing on deployment
@@ -39,12 +39,9 @@ if (prNum > 0) {
   searchLink = SEARCH_DEPLOY_LINK;
   favLink = FAV_DEPLOY_LINK;
   recipeLink = RECIPE_DEPLOY_LINK;
-  alert(recipeLink);
   favSelected = FAV_SELECTED;
   favUnselected = FAV_UNSELECTED;
-  alert(favUnselected);
   favRemove = FAV_REMOVE;
-  alert(favRemove);
 }
 
 describe('Simple User Flow', () => {
