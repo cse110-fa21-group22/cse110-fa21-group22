@@ -143,6 +143,26 @@ async function init() {
     });
   }
 
+  // Detect if the device is mobile or PC
+  const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
+
+  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
+  sidebarButton.addEventListener('click', () => {
+    if (!isMobile) {
+      if (sidebarContent.style.display !== 'none') {
+        const mainSection = document.querySelector('.home-page');
+        mainSection.style.marginLeft = `${225}px`;
+      } else {
+        const mainSection = document.querySelector('.home-page');
+        mainSection.style.marginLeft = `${0}px`;
+      }
+    }
+  });
+  
   const inputList = [];
   inputList.cuisineFilter = '';
   inputList.dietFilter = '';
