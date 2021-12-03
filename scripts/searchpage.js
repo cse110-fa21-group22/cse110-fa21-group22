@@ -171,14 +171,25 @@ function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     search(inputList).then((value) => {
-      if (value.totalResults !== 0) {
+      console.log('filter search start');
+      if (value.totalResults === 0) {
+        console.log('pageNum === 0');
+        const pageNumber = 0;
+        const totalResult = document.querySelector('.totalResults').querySelector('span');
+        const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+        const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+        totalResult.innerHTML = `${value.totalResults}recipe`;
+        currPageNumberPlace.innerHTML = '0';
+        totalPageNumberPlace.innerHTML = `${pageNumber}`;
+      } else {
+        console.log('pageNum !== 0');
         const pageNumber = Math.ceil(value.totalResults / 10);
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
         const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-        totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
-        currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
-        totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
+        totalResult.innerHTML = `${value.totalResults}recipe`;
+        currPageNumberPlace.innerHTML = '1';
+        totalPageNumberPlace.innerHTML = `${pageNumber}`;
       }
       showResults(value.results);
     });
