@@ -70,7 +70,7 @@ class RecipeCard extends HTMLElement {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
       const entry = listEntryTemplate.content.cloneNode(true);
-      if (localStorage.key(i) === 'favorites-master' || localStorage.key(i) === 'displayedMessage') continue;
+      if (localStorage.key(i) === 'favorites-master') continue;
       else if (localStorage.key(i) === 'My Favorites') entry.querySelector('input').checked = true;
       else entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
       dropdownElem.insertBefore(entry, dropdownElem.firstChild);
@@ -219,13 +219,11 @@ class RecipeCard extends HTMLElement {
         this.showDropdown();
         console.log('Prompting user to add to favorites lists');
       } else {
-        const displayedMessage = localStorage.getItem('displayedMessage') || '';
-        let toRemove = '';
-        if (displayedMessage != 'yes') {
-          toRemove = confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
-          localStorage.setItem('displayedMessage','yes');
-        }
-        if (!toRemove) {
+        let toRemove = false;
+        toRemove = confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
+
+        // continues to remove the recipe from list if user confirms they want to remove
+        if (toRemove) {
           this.isFavorite = false;
           const containers = this.shadow.querySelectorAll('.container');
           // goes through all the lists and removes the recipe if it is found
