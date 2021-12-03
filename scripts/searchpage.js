@@ -32,8 +32,7 @@ function init() {
     sidebarContent.style.flexDirection = 'column';
     const mainSection = document.querySelector('.search-page');
     mainSection.style.marginLeft = `${225}px`;
-  }
-  if (!isMobile) {
+  } else if (!isMobile) {
     sidebarContent.style.display = 'none';
   }
 
@@ -49,6 +48,9 @@ function init() {
       }
     }
   });
+
+  // fix the bug
+  sidebarButton.click();
 
   const searchKeyword = document.querySelector('.search-word');
   const recipeSection = document.querySelector('.recipe-section');
