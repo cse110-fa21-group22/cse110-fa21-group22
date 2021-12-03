@@ -30,7 +30,7 @@ function init() {
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
   // eslint-disable-next-line func-names
   window.onresize = function () {
-    const sidebarHeight = document.body.scrollHeight;
+    const sidebarHeight = document.mainSection.scrollHeight;
     sidebarContent.style.height = sidebarHeight;
   };
 
