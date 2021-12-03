@@ -184,7 +184,6 @@ async function init() {
   showResults(recipeData);
   showFavoriteSection();
 
-  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
   const applyButton = sidebarContent.querySelector('.apply-filter');
   // eslint-disable-next-line func-names
   applyButton.addEventListener('click', async function () {
