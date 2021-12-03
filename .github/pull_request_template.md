@@ -2,7 +2,7 @@
 ### BEFORE CREATING PR 
 *Complete this checklist*
 ---
-- [ ] Go into /cse110-fa21-group22/source/\_\_test\_\_/end-to-end.test.js
+- [ ] Go into cse110-fa21-group22/source/\_\_test\_\_/end-to-end.test.js
 - [ ] Change ```const prNum = 0;``` -> ```const prNum = {your pr number};``` _This should be on line 18_ 
 - [ ] Now push your change to the branch and create your PR
 
