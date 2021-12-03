@@ -214,7 +214,7 @@ async function init() {
     } else {
       let toRemove = false;
       toRemove = confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
-      
+      // continues to remove the recipe from list if user confirms they want to remove
       if (toRemove) {
         isFavorite = false;
         const containers = document.querySelectorAll('.container');
