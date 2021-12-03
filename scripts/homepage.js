@@ -25,6 +25,8 @@ function initLocalStorageDoubt() {
   }
 }
 
+// TODO
+// Have to change to search in search.js
 async function fetchRandomRecipes() {
   return new Promise((resolve, reject) => {
     // use 1 for now, save some points for querying
