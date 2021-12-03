@@ -147,7 +147,7 @@ describe('Basic user flow for Search Page', () => {
     const client = await page.target().createCDPSession();
     await client.send('Network.clearBrowserCookies');
     await client.send('Network.clearBrowserCache');
-    await page.goto(searchLink); 
+    await page.goto(searchLink);
     await page.waitForTimeout('2000');
   });
 
@@ -296,7 +296,7 @@ describe('Basic user flow for Search Page', () => {
     await page.waitForTimeout('2000');
 
     // Go to favorites page
-    await page.goto(favLink); 
+    await page.goto(favLink);
     await page.waitForTimeout('5000');
 
     // Retrieve the recipe in the favorites list
@@ -356,7 +356,7 @@ describe('Simple Favorites Flow', () => {
       return elem.src;
     });
     // Check that the heart of favorited recipe is red on recipe page
-    expect(src).toBe(favSelected); 
+    expect(src).toBe(favSelected);
   });
 
   // Now, check the title of the recipe page
