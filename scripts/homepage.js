@@ -166,7 +166,8 @@ async function init() {
 
   const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
   const applyButton = sidebarContent.querySelector('.apply-filter');
-  applyButton.addEventListener('click', () => {
+  // eslint-disable-next-line func-names
+  applyButton.addEventListener('click', async function () {
     const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
     const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
     const checkboxesTime = sidebarContent.querySelectorAll('.time');
@@ -208,7 +209,7 @@ async function init() {
     inputList.typeFilter = typeFilter;
     clearObject();
     console.log(recipeData);
-    fetchRandomRecipes(inputList).then(showResults(recipeData));
+    await fetchRandomRecipes(inputList).then(showResults(recipeData));
     console.log(recipeData);
   });
 
