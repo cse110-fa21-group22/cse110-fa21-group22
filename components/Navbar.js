@@ -50,7 +50,6 @@ navbarTemplate.innerHTML = `
       <li><input type="checkbox" id="30" class="time"> 0-30 Minutes</li>
       <li><input type="checkbox" id="45" class="time"> 0-45 Minutes</li>
       <li><input type="checkbox" id="60" class="time"> 0-1hr</li>
-      <li><input type="checkbox" id="9999" class="time"> 0-9999hr</li>
     </ul>
     <h5>Type of Meal</h5>
     <ul>
@@ -60,7 +59,6 @@ navbarTemplate.innerHTML = `
       <li><input type="checkbox" id="drink" class="typeOfMeal"> Drink</li>
     </ul>
     <button class="apply-filter">Apply filter</button>
-    <button class="sidebar-filter">Search this</button>
 	</section>`;
 
 class Navbar extends HTMLElement {

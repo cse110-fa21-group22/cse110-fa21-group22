@@ -160,21 +160,10 @@ async function init() {
   const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
-  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
-  sidebarContent.style.display = 'none';
-
   const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  sidebarButton.addEventListener('click', () => {
-    if (!isMobile) {
-      if (sidebarContent.style.display !== 'none') {
-        const mainSection = document.querySelector('.recipe-page');
-        mainSection.style.marginLeft = `${225}px`;
-      } else {
-        const mainSection = document.querySelector('.recipe-page');
-        mainSection.style.marginLeft = `${0}px`;
-      }
-    }
-  });
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarButton.style.display = 'none';
+  sidebarContent.style.display = 'none';
 
   const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
   const recipe = data[0];

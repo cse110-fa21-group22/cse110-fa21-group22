@@ -153,17 +153,7 @@ async function init() {
   sidebarContent.style.display = 'none';
 
   const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  sidebarButton.addEventListener('click', () => {
-    if (!isMobile) {
-      if (sidebarContent.style.display !== 'none') {
-        const mainSection = document.querySelector('.home-page');
-        mainSection.style.marginLeft = `${225}px`;
-      } else {
-        const mainSection = document.querySelector('.home-page');
-        mainSection.style.marginLeft = `${0}px`;
-      }
-    }
-  });
+  sidebarButton.style.display = 'none';
 
   const inputList = [];
   inputList.cuisineFilter = '';

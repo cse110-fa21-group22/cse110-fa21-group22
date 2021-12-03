@@ -46,18 +46,8 @@ async function init() {
   sidebarContent.style.display = 'none';
 
   const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  sidebarButton.addEventListener('click', () => {
-    if (!isMobile) {
-      if (sidebarContent.style.display !== 'none') {
-        const mainSection = document.querySelector('.favorites-page');
-        mainSection.style.marginLeft = `${225}px`;
-      } else {
-        const mainSection = document.querySelector('.favorites-page');
-        mainSection.style.marginLeft = `${0}px`;
-      }
-    }
-  });
-
+  sidebarButton.style.display = 'none';
+  
   const mainSection = document.querySelector('.favorites-page');
   for (let i = 0; i < localStorage.length; i += 1) {
     // do not display master favorites on favorites page

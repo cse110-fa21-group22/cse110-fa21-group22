@@ -120,7 +120,7 @@ function init() {
   inputList.query = searchTerm;
   inputList.number = 10;
   inputList.offset = 0;
-  inputList['recipe-nutrition'] = 'true';
+  inputList.recipeNutrition = 'true';
   inputList.cuisineFilter = '';
   inputList.dietFilter = '';
   inputList.timeFilter = '';
