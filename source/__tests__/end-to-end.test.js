@@ -21,10 +21,10 @@ const prNum = 240; // change -> (your pr number);
 let homeLink = '';
 let searchLink = '';
 let favLink = '';
-let recipeLink = '';
+var recipeLink = '';
 let favSelected = '';
-let favUnselected = ''
-let favRemove = '';
+var favUnselected = ''
+var favRemove = '';
 
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
