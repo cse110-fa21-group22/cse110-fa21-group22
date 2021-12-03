@@ -8,6 +8,7 @@ const store = window.localStorage;
 export function initLocalStorage() {
   const arrTemp = [];
   store.setItem('favorites-master', JSON.stringify(arrTemp));
+  store.setItem('My Favorites', JSON.stringify(arrTemp));
 }
 
 /*
