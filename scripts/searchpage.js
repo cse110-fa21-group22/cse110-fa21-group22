@@ -28,6 +28,8 @@ function init() {
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  const sidebarHeight = document.body.scrollHeight;
+  sidebarContent.style.height = sidebarHeight;
   if (!isMobile && sidebarContent.style.display !== 'none') {
     sidebarContent.style.display = 'flex';
     sidebarContent.style.flexDirection = 'column';
