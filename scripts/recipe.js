@@ -196,7 +196,8 @@ async function init() {
            <input type="text" class="user-input">
         </label>
         <button class="submit">Add to Favorite</button>
-     </div>`;
+     </div>
+     <button class="email-recipe">Email Recipe</button>`;
   /*
    * show the drop-down box and change the heart color
    */
@@ -495,6 +496,17 @@ async function init() {
     firstPrevButton.style.display = 'none';
     backButton.style.display = 'none';
     currPrevButton.style.display = 'none';
+  });
+
+  // Email the link of recipe
+  // Receiver is blank and should be entered by user
+  // Body of email is a short message with the link to recipe
+  const emailButton = document.querySelector('.email-recipe');
+  emailButton.addEventListener('click', () => {
+    const recipeURL = window.location;
+    const subject = `${recipe.title} Recipe`;
+    const body = `Here is a yummy recipe I found on ${recipeURL}. Enjoy!`;
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   });
 }
 

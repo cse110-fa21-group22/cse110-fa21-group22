@@ -201,6 +201,12 @@ label {
   width: 86vw;
 }
 
+.email-recipe {
+  font-size: 14px;
+  margin-left: 15px;
+  margin-top: -10px;
+}
+
 h5 {
   margin-bottom: 5px;
   margin-top: 20px;
