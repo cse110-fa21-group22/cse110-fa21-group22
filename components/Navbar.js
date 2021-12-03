@@ -40,26 +40,26 @@ navbarTemplate.innerHTML = `
     <ul>
       <li><input type="checkbox" id="vegetarian" class="diet"> Vegetarian</li>
       <li><input type="checkbox" id="vegan" class="diet"> Vegan</li>
-      <li><input type="checkbox" id="gluten-Free" class="diet"> Gluten-Free</li>
+      <li><input type="checkbox" id="gluten%20free" class="diet"> Gluten Free</li>
       <li><input type="checkbox" id="paleo" class="diet"> Paleo</li>
-      <li><input type="checkbox" id="keto" class="diet"> Keto</li>
+      <li><input type="checkbox" id="ketogenic" class="diet"> Ketogenic</li>
     </ul>
     <h5>Time</h5>
     <ul>
-      <li><input type="checkbox" id="15min" class="time"> 15 Minutes</li>
-      <li><input type="checkbox" id="30min" class="time"> 30 Minutes</li>
-      <li><input type="checkbox" id="45min" class="time"> 45 Minutes</li>
-      <li><input type="checkbox" id="1hr" class="time"> 1 Hour</li>
-      <li><input type="checkbox" id="over1hr" class="time"> Over 1 Hour</li>
+      <li><input type="checkbox" id="15" class="time"> 0-15 Minutes</li>
+      <li><input type="checkbox" id="30" class="time"> 0-30 Minutes</li>
+      <li><input type="checkbox" id="45" class="time"> 0-45 Minutes</li>
+      <li><input type="checkbox" id="60" class="time"> 0-1hr</li>
+      <li><input type="checkbox" id="9999" class="time"> 0-9999hr</li>
     </ul>
     <h5>Type of Meal</h5>
     <ul>
       <li><input type="checkbox" id="breakfast" class="typeOfMeal"> Breakfast</li>
-      <li><input type="checkbox" id="lunch" class="typeOfMeal"> Lunch</li>
-      <li><input type="checkbox" id="dinner" class="typeOfMeal"> Dinner</li>
-      <li><input type="checkbox" id="other" class="typeOfMeal"> Other</li>
+      <li><input type="checkbox" id="main%20course" class="typeOfMeal"> Main Course</li>
+      <li><input type="checkbox" id="dessert" class="typeOfMeal"> Dessert</li>
+      <li><input type="checkbox" id="drink" class="typeOfMeal"> Drink</li>
     </ul>
-    <button class="sidebar-filter"">Apply filter</button>
+    <button class="apply-filter">Apply filter</button>
     <button class="sidebar-filter">Search this</button>
 	</section>`;
 
@@ -105,8 +105,6 @@ class Navbar extends HTMLElement {
 
     // Desktop Functionality
     let searchTerm = '';
-    // let inputList = [];
-
     const searchInput = this.shadow.querySelector('.nav-search').querySelector('input');
 
     searchInput.addEventListener('keyup', (event) => {
