@@ -3,7 +3,7 @@
  *  Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
-import search from './search.js';
+import { search, searchPageNumber } from './search.js';
 
 /**
  * This function initializes the search page
@@ -168,6 +168,10 @@ function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     search(inputList).then(showResults);
+  });
+
+  searchPageNumber(inputList).then((value) => {
+    console.log(value);
   });
 
   // Section is for next and previous buttons

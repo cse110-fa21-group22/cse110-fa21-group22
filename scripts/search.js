@@ -11,7 +11,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * inputList['recipe-nutrition'] is a boolean specifying whether to show nutrition
  * @returns {object} json containing the results of the spoonacular query
  */
-export default async function search(inputList) {
+export async function search(inputList) {
   // Create the fetch url
   // The order of the token need to be fixed is something wrong happened.
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
@@ -59,7 +59,7 @@ export default async function search(inputList) {
  * inputList['recipe-nutrition'] is a boolean specifying whether to show nutrition
  * @returns {object} json containing the results of the spoonacular query
  */
- export default async function searchPageNumber(inputList) {
+export async function searchPageNumber(inputList) {
   // Create the fetch url
   // The order of the token need to be fixed is something wrong happened.
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
