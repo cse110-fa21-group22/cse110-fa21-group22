@@ -51,6 +51,9 @@ function init() {
 
   // fix the bug
   sidebarButton.click();
+  if (isMobile) {
+    sidebarButton.click();
+  }
 
   const searchKeyword = document.querySelector('.search-word');
   const recipeSection = document.querySelector('.recipe-section');
