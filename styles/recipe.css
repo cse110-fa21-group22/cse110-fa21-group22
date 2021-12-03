@@ -181,6 +181,12 @@ label {
   display: none;
 }
 
+.prevStep {
+  position: relative;
+  margin: 0;
+  display: none;
+}
+
 .normal-step {
   list-style-type: none;
   counter-increment: item;

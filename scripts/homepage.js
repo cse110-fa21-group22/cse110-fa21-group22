@@ -28,8 +28,8 @@ function initLocalStorageDoubt() {
 async function fetchRandomRecipes() {
   return new Promise((resolve, reject) => {
     // use 1 for now, save some points for querying
-    const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
-    // console.log(fetchResults);
+    // const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
+    const fetchResults = `https://api.spoonacular.com/recipes/complexSearch${tokenKey}&number=${steppingSize}&sort=random&addRecipeInformation=true&addRecipeNutrition=true`;
 
     fetch(fetchResults)
       .then((response) => response.json())
@@ -39,7 +39,7 @@ async function fetchRandomRecipes() {
         // console.log(data);
         // console.log(data.recipes[0].id);
         for (let i = 0; i < parseInt(steppingSize, 10); i += 1) {
-          recipeData[data.recipes[i].id] = data.recipes[i];
+          recipeData[data.results[i].id] = data.results[i];
 
           // // testing for local storage
           // addRecipe(data.recipes[i].id);
@@ -87,8 +87,7 @@ function showResults(results) {
 }
 
 async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=false`;
-
+  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
   console.log('fetch_endpoint', fetchEndPoint);
 
   const fetchResults = await fetch(fetchEndPoint)
@@ -134,8 +133,26 @@ async function init() {
     });
   }
 
-  // console.log('Init.. ');
-  // console.log('Fetching recipes...');
+  // Detect if the device is mobile or PC
+  const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
+
+  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
+  sidebarButton.addEventListener('click', () => {
+    if (!isMobile) {
+      if (sidebarContent.style.display !== 'none') {
+        const mainSection = document.querySelector('.home-page');
+        mainSection.style.marginLeft = `${225}px`;
+      } else {
+        const mainSection = document.querySelector('.home-page');
+        mainSection.style.marginLeft = `${0}px`;
+      }
+    }
+  });
+
   try {
     await fetchRandomRecipes();
   } catch (err) {

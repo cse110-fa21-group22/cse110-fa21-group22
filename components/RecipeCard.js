@@ -1,4 +1,4 @@
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from './UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -14,7 +14,7 @@ recipeCardTemplate.innerHTML = `
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
       <p class="recipe-name">Lorem ipsum dolor sit amet </p>
-      <p class="recipe-calories"><span class="recipe-calories-number">500</span> calories</p>
+      <p class="recipe-calories"><span class="recipe-calories-number">500</span> <span class="recipe-calories-unit">calories</span></p>
     </div>
   </article>
   <div class="dropdown-content">
@@ -38,12 +38,14 @@ class RecipeCard extends HTMLElement {
   set recipe(recipeObj) {
     this.setAttribute('recipe-id', recipeObj.id);
     const recipeImg = this.shadow.querySelector('.recipe-image');
-    // const recipeCal = this.shadow.querySelector('.recipe-calorie-number');
+    const recipeCal = this.shadow.querySelector('.recipe-calories-number');
+    const recipeCalUnit = this.shadow.querySelector('.recipe-calories-unit');
     const recipeName = this.shadow.querySelector('.recipe-name');
 
     recipeImg.src = recipeObj.image;
     recipeName.innerHTML = recipeObj.title;
-    // recipeCal.innerHTML = recipeObj['calories'];
+    recipeCal.innerHTML = recipeCal.innerHTML.replace('500', recipeObj.nutrition.nutrients[0].amount);
+    recipeCalUnit.innerHTML = recipeCalUnit.innerHTML.replace('calories', recipeObj.nutrition.nutrients[0].unit);
 
     if (checkFavorite(recipeObj.id)) {
       this.isFavorite = true;
@@ -68,8 +70,9 @@ class RecipeCard extends HTMLElement {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
     for (let i = 0; i < localStorage.length; i += 1) {
       const entry = listEntryTemplate.content.cloneNode(true);
-      entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
-      if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
+      if (localStorage.key(i) === 'favorites-master') continue;
+      else if (localStorage.key(i) === 'My Favorites') entry.querySelector('input').checked = true;
+      else entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
       dropdownElem.insertBefore(entry, dropdownElem.firstChild);
     }
   }
@@ -217,16 +220,16 @@ class RecipeCard extends HTMLElement {
         console.log('Prompting user to add to favorites lists');
       } else {
         this.isFavorite = false;
-        removeRecipe(this.getAttribute('recipe-id'));
-        // eslint-disable-next-line no-undef
+        const containers = this.shadow.querySelectorAll('.container');
+        // goes through all the lists and removes the recipe if it is found
+        removeRecipebyList('favorites-master', this.getAttribute('recipe-id'));
         for (let i = 0; i < containers.length; i += 1) {
-          // eslint-disable-next-line no-undef
-          console.log(containers[i].textContent);
-          // eslint-disable-next-line no-undef
-          removeRecipebyList(containers[i].textContent, this.getAttribute('recipe-id'));
+          removeRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
         }
         favoriteIcon.src = '../assets/favorite.svg';
         console.log('Remove item from ALL favorites lists here');
+        /* Reload the page as a shortcut for showing updated lists */
+        location.reload();
       }
     });
 

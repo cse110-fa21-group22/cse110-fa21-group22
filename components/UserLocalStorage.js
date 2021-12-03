@@ -8,6 +8,7 @@ const store = window.localStorage;
 export function initLocalStorage() {
   const arrTemp = [];
   store.setItem('favorites-master', JSON.stringify(arrTemp));
+  store.setItem('My Favorites', JSON.stringify(arrTemp));
 }
 
 /*
@@ -109,7 +110,7 @@ export function addRecipebyList(listName, recipeID) {
       return;
     }
   }
-  array.push(recipeID);
+  array.push(parseInt(recipeID, 10));
   storage.setItem(listName, JSON.stringify(array));
 }
 

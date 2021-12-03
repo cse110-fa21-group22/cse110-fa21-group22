@@ -2,7 +2,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipe, removeRecipebyList } from '../components/UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -86,8 +86,9 @@ function initializeDropdown() {
   const dropdownElem = document.querySelector('.dropdown-content');
   for (let i = 0; i < localStorage.length; i += 1) {
     const entry = listEntryTemplate.content.cloneNode(true);
-    entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
-    if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
+    if (localStorage.key(i) === 'favorites-master') continue;
+    else if (localStorage.key(i) === 'My Favorites') entry.querySelector('input').checked = true;
+    else entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
     dropdownElem.insertBefore(entry, dropdownElem.firstChild);
   }
 }
@@ -156,6 +157,23 @@ async function init() {
 
   // Detect if the device is mobile or PC
   const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+  // intiallize the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
+
+  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
+  sidebarButton.addEventListener('click', () => {
+    if (!isMobile) {
+      if (sidebarContent.style.display !== 'none') {
+        const mainSection = document.querySelector('.recipe-page');
+        mainSection.style.marginLeft = `${225}px`;
+      } else {
+        const mainSection = document.querySelector('.recipe-page');
+        mainSection.style.marginLeft = `${0}px`;
+      }
+    }
+  });
 
   const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
   const recipe = data[0];
@@ -193,11 +211,10 @@ async function init() {
       showDropdown(recipe, isMobile);
     } else {
       isFavorite = false;
-      removeRecipe(recipe.id);
       const containers = document.querySelectorAll('.container');
+      // goes through all the lists and deletes if it is in list
       for (let i = 0; i < containers.length; i += 1) {
-        console.log(containers[i].textContent);
-        removeRecipebyList(containers[i].textContent, recipe.id);
+        removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
       }
       favoriteIcon.src = '../assets/favorite.svg';
     }
@@ -266,24 +283,54 @@ async function init() {
     currStep.id = `step${stepNum}`;
     recipeSteps.appendChild(currStep);
     if (instructionsList[parseInt(instructionNumber, 10) + 1] != null) {
+      const prevButton = document.createElement('button');
+      prevButton.innerHTML = `Previous`;
+      prevButton.className = 'prevStep';
+      prevButton.id = `prevButton${stepNum}`;
       const nextButton = document.createElement('button');
       nextButton.innerHTML = `Next`;
       nextButton.className = 'nextStep';
-      nextButton.id = `button${stepNum}`;
-      if (!isMobile) {
+      nextButton.id = `nextButton${stepNum}`;
+      if (!isMobile && stepNum === 1) {
         const style = window.getComputedStyle(currStep, null);
         const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
         // eslint-disable-next-line camelcase
         const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
         // eslint-disable-next-line camelcase
+        const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
+        // eslint-disable-next-line camelcase
+        prevButton.style.marginTop = `${margin_top_prev}px`;
+        prevButton.style.marginLeft = `${90}vw`;
+        prevButton.style.position = 'absolute';
+        // eslint-disable-next-line camelcase
+        nextButton.style.marginTop = `${margin_top}px`;
+        nextButton.style.marginLeft = `${90}vw`;
+        nextButton.style.position = 'absolute';
+      } else if (!isMobile && stepNum !== 1) {
+        const style = window.getComputedStyle(currStep, null);
+        const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
+        // eslint-disable-next-line camelcase
+        const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 5;
+        // eslint-disable-next-line camelcase
+        const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
+        // eslint-disable-next-line camelcase
+        prevButton.style.marginTop = `${margin_top_prev}px`;
+        prevButton.style.marginLeft = `${90}vw`;
+        prevButton.style.position = 'absolute';
+        // eslint-disable-next-line camelcase
         nextButton.style.marginTop = `${margin_top}px`;
         nextButton.style.marginLeft = `${90}vw`;
         nextButton.style.position = 'absolute';
       }
+      recipeSteps.appendChild(prevButton);
       recipeSteps.appendChild(nextButton);
     } else {
+      const prevButton = document.createElement('button');
+      prevButton.innerHTML = `Previous`;
+      prevButton.className = 'prevStep';
+      prevButton.id = `prevButton${stepNum}`;
       const backButton = document.createElement('button');
-      backButton.innerHTML = `Back to first step`;
+      backButton.innerHTML = `Restart`;
       backButton.className = 'backButton';
       backButton.id = `backButton`;
       backButton.style.display = 'none';
@@ -291,12 +338,19 @@ async function init() {
         const style = window.getComputedStyle(currStep, null);
         const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
         // eslint-disable-next-line camelcase
-        const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 26;
+        const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 5;
+        // eslint-disable-next-line camelcase
+        const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
         backButton.style.marginLeft = `${90}vw`;
         // eslint-disable-next-line camelcase
         backButton.style.marginTop = `${margin_top}px`;
         backButton.style.position = 'absolute';
+        // eslint-disable-next-line camelcase
+        prevButton.style.marginTop = `${margin_top_prev}px`;
+        prevButton.style.marginLeft = `${90}vw`;
+        prevButton.style.position = 'absolute';
       }
+      recipeSteps.appendChild(prevButton);
       recipeSteps.appendChild(backButton);
     }
     stepNum += 1;
@@ -304,46 +358,142 @@ async function init() {
 
   // Initialize the first step to current step
   const firstStep = document.querySelector('#step1');
-  const firstButton = document.querySelector('#button1');
+  const firstNextButton = document.querySelector('#nextButton1');
+  const firstPrevButton = document.querySelector('#prevButton1');
   firstStep.className = 'current-step';
-  firstButton.style.display = 'block';
+  firstNextButton.style.display = 'block';
+  firstPrevButton.style.display = 'none';
 
-  // When the button is pressed, highlight the next step and normalize the current step
+  // When the next button is pressed, highlight the next step and normalize the current step
+  // When the previous button is pressed, highlight the previous step and normalize the current step
   for (let currStepNum = 1; currStepNum < parseInt(stepNum, 10) - 1; currStepNum += 1) {
-    const currButton = document.querySelector(`#button${currStepNum}`);
-    if (currStepNum !== parseInt(stepNum, 10) - 2) {
-      currButton.addEventListener('click', () => {
+    const currNextButton = document.querySelector(`#nextButton${currStepNum}`);
+    const currPrevButton = document.querySelector(`#prevButton${currStepNum}`);
+    if (currStepNum === 1 && currStepNum !== parseInt(stepNum, 10) - 2) {
+      currNextButton.addEventListener('click', () => {
         const nextStepNum = parseInt(currStepNum, 10) + 1;
         const currStep = document.querySelector(`#step${currStepNum}`);
         const nextStep = document.querySelector(`#step${nextStepNum}`);
-        const nextButton = document.querySelector(`#button${nextStepNum}`);
+        const nextNextButton = document.querySelector(`#nextButton${nextStepNum}`);
+        const nextPrevButton = document.querySelector(`#prevButton${nextStepNum}`);
         currStep.className = 'normal-step';
         nextStep.className = 'current-step';
-        currButton.style.display = 'none';
-        nextButton.style.display = 'block';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        nextNextButton.style.display = 'block';
+        nextPrevButton.style.display = 'block';
+      });
+    } else if (currStepNum === 2 && currStepNum !== parseInt(stepNum, 10) - 2) {
+      currNextButton.addEventListener('click', () => {
+        const nextStepNum = parseInt(currStepNum, 10) + 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const nextStep = document.querySelector(`#step${nextStepNum}`);
+        const nextNextButton = document.querySelector(`#nextButton${nextStepNum}`);
+        const nextPrevButton = document.querySelector(`#prevButton${nextStepNum}`);
+        currStep.className = 'normal-step';
+        nextStep.className = 'current-step';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        nextNextButton.style.display = 'block';
+        nextPrevButton.style.display = 'block';
+      });
+      currPrevButton.addEventListener('click', () => {
+        const prevStepNum = parseInt(currStepNum, 10) - 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const prevStep = document.querySelector(`#step${prevStepNum}`);
+        const prevNextButton = document.querySelector(`#nextButton${prevStepNum}`);
+        const prevPrevButton = document.querySelector(`#prevButton${prevStepNum}`);
+        currStep.className = 'normal-step';
+        prevStep.className = 'current-step';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        prevNextButton.style.display = 'block';
+        prevPrevButton.style.display = 'none';
+      });
+    } else if (currStepNum !== 1 && currStepNum !== 2 && currStepNum !== parseInt(stepNum, 10) - 2) {
+      currNextButton.addEventListener('click', () => {
+        const nextStepNum = parseInt(currStepNum, 10) + 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const nextStep = document.querySelector(`#step${nextStepNum}`);
+        const nextNextButton = document.querySelector(`#nextButton${nextStepNum}`);
+        const nextPrevButton = document.querySelector(`#prevButton${nextStepNum}`);
+        currStep.className = 'normal-step';
+        nextStep.className = 'current-step';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        nextNextButton.style.display = 'block';
+        nextPrevButton.style.display = 'block';
+      });
+      currPrevButton.addEventListener('click', () => {
+        const prevStepNum = parseInt(currStepNum, 10) - 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const prevStep = document.querySelector(`#step${prevStepNum}`);
+        const prevNextButton = document.querySelector(`#nextButton${prevStepNum}`);
+        const prevPrevButton = document.querySelector(`#prevButton${prevStepNum}`);
+        currStep.className = 'normal-step';
+        prevStep.className = 'current-step';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        prevNextButton.style.display = 'block';
+        prevPrevButton.style.display = 'block';
       });
     } else {
-      currButton.addEventListener('click', () => {
+      currNextButton.addEventListener('click', () => {
         const nextStepNum = parseInt(currStepNum, 10) + 1;
         const currStep = document.querySelector(`#step${currStepNum}`);
         const nextStep = document.querySelector(`#step${nextStepNum}`);
-        const nextButton = document.querySelector(`#backButton`);
+        const nextBackButton = document.querySelector(`#backButton`);
+        const nextPrevButton = document.querySelector(`#prevButton${nextStepNum}`);
         currStep.className = 'normal-step';
         nextStep.className = 'current-step';
-        currButton.style.display = 'none';
-        nextButton.style.display = 'block';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        nextBackButton.style.display = 'block';
+        nextPrevButton.style.display = 'block';
+      });
+      currPrevButton.addEventListener('click', () => {
+        const prevStepNum = parseInt(currStepNum, 10) - 1;
+        const currStep = document.querySelector(`#step${currStepNum}`);
+        const prevStep = document.querySelector(`#step${prevStepNum}`);
+        const prevNextButton = document.querySelector(`#nextButton${prevStepNum}`);
+        const prevPrevButton = document.querySelector(`#prevButton${prevStepNum}`);
+        currStep.className = 'normal-step';
+        prevStep.className = 'current-step';
+        currNextButton.style.display = 'none';
+        currPrevButton.style.display = 'none';
+        prevNextButton.style.display = 'block';
+        prevPrevButton.style.display = 'block';
       });
     }
   }
 
-  // The event listener for the last back button
+  // The event listener for the last prev button
+  const lastStepNum = parseInt(stepNum, 10) - 1;
+  const lastPrevButton = document.querySelector(`#prevButton${lastStepNum}`);
   const backButton = document.querySelector(`#backButton`);
+  lastPrevButton.addEventListener('click', () => {
+    const prevStepNum = parseInt(lastStepNum, 10) - 1;
+    const currStep = document.querySelector(`#step${lastStepNum}`);
+    const prevStep = document.querySelector(`#step${prevStepNum}`);
+    const prevNextButton = document.querySelector(`#nextButton${prevStepNum}`);
+    const prevPrevButton = document.querySelector(`#prevButton${prevStepNum}`);
+    currStep.className = 'normal-step';
+    prevStep.className = 'current-step';
+    lastPrevButton.style.display = 'none';
+    backButton.style.display = 'none';
+    prevNextButton.style.display = 'block';
+    prevPrevButton.style.display = 'block';
+  });
+  // The event listener for the last back button
   backButton.addEventListener('click', () => {
     const currStep = document.querySelector(`#step${parseInt(stepNum, 10) - 1}`);
+    const currPrevButton = document.querySelector(`#prevButton${parseInt(stepNum, 10) - 1}`);
     currStep.className = 'normal-step';
     firstStep.className = 'current-step';
-    firstButton.style.display = 'block';
+    firstNextButton.style.display = 'block';
+    firstPrevButton.style.display = 'none';
     backButton.style.display = 'none';
+    currPrevButton.style.display = 'none';
   });
 }
 
