@@ -9,10 +9,7 @@ jest.setTimeout(15000);
 const HOME_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/home.html';
 const SEARCH_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/search.html';
 const FAV_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/favorite.html';
-const RECIPE_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/recipe.html';
 const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg';
-const FAV_UNSELECTED = 'https://icookfood.netlify.app/assets/favorite.svg'
-const FAV_REMOVE = 'https://icookfood.netlify.app/assets/favorite-remove.svg';
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
@@ -21,27 +18,19 @@ const prNum = 240; // change -> (your pr number);
 let homeLink = '';
 let searchLink = '';
 let favLink = '';
-let recipeLink = '';
 let favSelected = '';
-let favUnselected = ''
-let favRemove = '';
+
 
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
   searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
   favLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/favorite.html`;
-  recipeLink = `${PREVIEW_TAG}${prNum}${END_TAG} webpages/recipe.html`;
   favSelected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-selected.svg`;
-  favUnselected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite.svg`;
-  favRemove = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-remove.svg`;
 } else {
   homeLink = HOME_DEPLOY_LINK;
   searchLink = SEARCH_DEPLOY_LINK;
   favLink = FAV_DEPLOY_LINK;
-  recipeLink = RECIPE_DEPLOY_LINK;
   favSelected = FAV_SELECTED;
-  favUnselected = FAV_UNSELECTED;
-  favRemove = FAV_REMOVE;
 }
 
 describe('Simple User Flow', () => {
