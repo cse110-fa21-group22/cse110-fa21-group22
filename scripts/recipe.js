@@ -213,7 +213,7 @@ async function init() {
       showDropdown(recipe, isMobile);
     } else {
       let toRemove = false;
-      toRemove = confirm(`Unhearting a recipe removes from all favorite lists`);
+      toRemove = confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page.`);
       
       if (toRemove) {
         isFavorite = false;
