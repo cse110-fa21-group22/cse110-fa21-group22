@@ -204,7 +204,7 @@ function init() {
 
   // eslint-disable-next-line func-names
   window.onresize = function () {
-    const sidebarHeight = document.querySelector('body').scrollHeight;
+    const sidebarHeight = document.querySelector('.search-page').scrollHeight;
     console.log(sidebarHeight);
     sidebarContent.style.height = sidebarHeight;
   };
