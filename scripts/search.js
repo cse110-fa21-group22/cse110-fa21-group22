@@ -1,3 +1,6 @@
+/**
+ * Handles all queries related to spoonacular api.
+ */
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
