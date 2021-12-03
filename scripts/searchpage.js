@@ -50,7 +50,7 @@ function init() {
     }
   });
 
-  // Fix the button bug. 
+  // Fix the button bug.
   // TODO: Find a new way to fix the sidebar button bug
   sidebarButton.click();
   if (isMobile) {
