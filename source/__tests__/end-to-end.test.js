@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
+/*eslint no-unused-vars: "error"*/
 jest.setTimeout(15000);
 
 // Links for testing on deployment
@@ -26,21 +27,24 @@ let favUnselected = ''
 let favRemove = '';
 
 if (prNum > 0) {
-  homeLink = PREVIEW_TAG + prNum + END_TAG + 'webpages/home.html';
-  searchLink = PREVIEW_TAG + prNum + END_TAG + 'webpages/search.html';
-  favLink = PREVIEW_TAG + prNum + END_TAG + 'webpages/favorite.html';
-  recipeLink = PREVIEW_TAG + prNum + END_TAG + 'webpages/recipe.html';
-  favSelected = PREVIEW_TAG + prNum + END_TAG + 'assets/favorite-selected.svg';
-  favUnselected = PREVIEW_TAG + prNum + END_TAG + 'assets/favorite.svg';
-  favRemove = PREVIEW_TAG + prNum + END_TAG + 'assets/favorite-remove.svg';
+  homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
+  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
+  favLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/favorite.html`;
+  recipeLink = `${PREVIEW_TAG}${prNum}${END_TAG} webpages/recipe.html`;
+  favSelected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-selected.svg`;
+  favUnselected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite.svg`;
+  favRemove = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-remove.svg`;
 } else {
   homeLink = HOME_DEPLOY_LINK;
   searchLink = SEARCH_DEPLOY_LINK;
   favLink = FAV_DEPLOY_LINK;
   recipeLink = RECIPE_DEPLOY_LINK;
+  alert(recipeLink);
   favSelected = FAV_SELECTED;
   favUnselected = FAV_UNSELECTED;
+  alert(favUnselected);
   favRemove = FAV_REMOVE;
+  alert(favRemove);
 }
 
 describe('Simple User Flow', () => {
@@ -398,7 +402,7 @@ describe('Simple Favorites Flow', () => {
     await heart.click();
 
     // Go back to home page
-    await page.goto(homeLink); //('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto(homeLink);
     await page.waitForTimeout(2000);
 
     const exploreCards = await page.$$('recipe-card-component');
