@@ -86,8 +86,9 @@ function initializeDropdown() {
   const dropdownElem = document.querySelector('.dropdown-content');
   for (let i = 0; i < localStorage.length; i += 1) {
     const entry = listEntryTemplate.content.cloneNode(true);
-    entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
-    if (localStorage.key(i) === 'favorites-master') entry.querySelector('input').checked = true;
+    if (localStorage.key(i) === 'favorites-master') continue;
+    else if (localStorage.key(i) === 'My Favorites') entry.querySelector('input').checked = true;
+    else entry.querySelector('.container').innerHTML = entry.querySelector('.container').innerHTML.replace('My Favorites', localStorage.key(i));
     dropdownElem.insertBefore(entry, dropdownElem.firstChild);
   }
 }
