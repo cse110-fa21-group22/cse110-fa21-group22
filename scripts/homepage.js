@@ -208,9 +208,8 @@ async function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     clearObject();
-    console.log(recipeData);
-    await fetchRandomRecipes(inputList).then(showResults(recipeData));
-    console.log(recipeData);
+    await fetchRandomRecipes(inputList)
+    showResults(recipeData);
   });
 
   const button = document.querySelector('.home-page-popular-refresh');
