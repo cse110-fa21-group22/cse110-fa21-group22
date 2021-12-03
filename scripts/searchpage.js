@@ -172,9 +172,9 @@ function init() {
     search(inputList).then(showResults);
   });
 
-  searchPageNumber(inputList).then((value) => {
-    console.log(value);
-  });
+  // searchPageNumber(inputList).then((value) => {
+  //   console.log(value);
+  // });
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');
