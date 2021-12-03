@@ -125,6 +125,7 @@ function init() {
   inputList.dietFilter = '';
   inputList.timeFilter = '';
   inputList.typeFilter = '';
+  // TODO:
   search(inputList).then((value) => {
     showResults(value.results);
   });
@@ -172,6 +173,7 @@ function init() {
     inputList.dietFilter = dietFilter;
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
+    // TODO:
     search(inputList).then((value) => {
       console.log('filter search start');
       if (value.totalResults === 0) {

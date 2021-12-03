@@ -11,6 +11,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * @param {string} inputList.query - The user input for search
  * @param {int} inputList.number - The number of expected results (between 1 and 100).
  * @param {int} inputList.offset - The number of results to skip (between 0 and 900).
+ * @param {string} inputList.sort - The sort mode of the results
  * @param {boolean} inputList.recipeNutrition - The token request for nutrition information
  * @param {string} inputList.cuisineFilter - The filter which select the cuisine(s) of the recipes.
  * @param {string} inputList.dietFilter - The filter which select the diet(s) of the recipes.
