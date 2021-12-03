@@ -28,6 +28,7 @@ function init() {
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+
   if (!isMobile && sidebarContent.style.display !== 'none') {
     sidebarContent.style.display = 'flex';
     sidebarContent.style.flexDirection = 'column';
@@ -50,6 +51,7 @@ function init() {
     }
   });
 
+  // TODO: need to find a better way
   // fix the bug
   sidebarButton.click();
   if (isMobile) {
@@ -193,6 +195,13 @@ function init() {
     search(inputList).then(showResults);
     previousButton.disabled = false;
   });
+
+  // eslint-disable-next-line func-names
+  window.onresize = function () {
+    // eslint-disable-next-line no-undef
+    const sidebarHeight = $(document).height();
+    sidebarContent.style.height = sidebarHeight;
+  };
 }
 
 window.addEventListener('DOMContentLoaded', init);
