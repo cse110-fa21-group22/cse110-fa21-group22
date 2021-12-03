@@ -13,6 +13,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  */
 export default async function search(inputList) {
   // Create the fetch url
+  // The order of the token need to be fixed is something wrong happened.
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
   const tokenSearchInput = `&query=${inputList.query}`;
   const tokenNumResults = `&number=${inputList.number}`;
