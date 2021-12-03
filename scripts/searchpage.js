@@ -3,6 +3,8 @@
  *  Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
+// Need to be fixed later
+// Because we fetch twice
 import { search, searchPageNumber } from './search.js';
 
 /**
@@ -171,27 +173,60 @@ function init() {
   });
 
   searchPageNumber(inputList).then((value) => {
-    console.log(value);
+    const pageNumber = Math.ceil(value / 10);
+    const totalResult = document.querySelector('.totalResults').querySelector('span');
+    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+    const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+    totalResult.innerHTML = totalResult.innerHTML.replace('0', value);
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
+    totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
   });
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');
   const nextButton = document.querySelector('.next-button');
+  const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+  const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
 
   previousButton.disabled = true;
+  nextButton.disabled = false;
 
   previousButton.addEventListener('click', () => {
+    console.log(inputList.offset);
+    const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    console.log(currPageNumber);
     inputList.offset -= 10;
+    const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    console.log(nextPageNumber);
     search(inputList).then(showResults);
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
     if (inputList.offset === 0) {
       previousButton.disabled = true;
+      nextButton.disabled = false;
+    } else {
+      previousButton.disabled = false;
+      nextButton.disabled = false;
     }
   });
 
   nextButton.addEventListener('click', () => {
+    console.log(inputList.offset);
+    const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    console.log(currPageNumber);
     inputList.offset += 10;
+    const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    console.log(nextPageNumber);
     search(inputList).then(showResults);
-    previousButton.disabled = false;
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
+    console.log(currPageNumber);
+    console.log(parseInt(totalPageNumberPlace.innerHTML, 10));
+    if (nextPageNumber === parseInt(totalPageNumberPlace.innerHTML, 10)) {
+      previousButton.disabled = false;
+      nextButton.disabled = true;
+    } else {
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+    }
   });
 }
 
