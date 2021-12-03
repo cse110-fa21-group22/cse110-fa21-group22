@@ -50,6 +50,7 @@ function init() {
     }
   });
 
+  // TODO: need to find a better way
   // fix the bug
   sidebarButton.click();
   if (isMobile) {
