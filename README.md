@@ -10,6 +10,8 @@ iCook is our app which is a Recipe Manager. iCook is to help those who have litt
 
 ## Link to App
 
+[iCook](https://icookfood.netlify.app/webpages/home.html)
+
 ## Link to Docs
 
 [Docs](https://demyinn00.github.io/group22xjsdocs/)
