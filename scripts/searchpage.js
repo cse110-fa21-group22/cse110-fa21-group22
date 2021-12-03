@@ -178,7 +178,7 @@ function init() {
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
         const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-        totalResult.innerHTML = `${value.totalResults}recipe`;
+        totalResult.innerHTML = `${value.totalResults} recipe`;
         currPageNumberPlace.innerHTML = '0';
         totalPageNumberPlace.innerHTML = `${pageNumber}`;
       } else {
@@ -187,7 +187,7 @@ function init() {
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
         const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-        totalResult.innerHTML = `${value.totalResults}recipe`;
+        totalResult.innerHTML = `${value.totalResults} recipes`;
         currPageNumberPlace.innerHTML = '1';
         totalPageNumberPlace.innerHTML = `${pageNumber}`;
       }
