@@ -3,7 +3,7 @@
  *  Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
-import { search } from './search.js';
+import search from './search.js';
 
 /**
  * This function initializes the search page
@@ -50,6 +50,7 @@ function init() {
       }
     }
   });
+
 
   // TODO: need to find a better way
   // fix the bug
@@ -125,9 +126,7 @@ function init() {
   inputList.timeFilter = '';
   inputList.typeFilter = '';
   search(inputList).then((value) => {
-    showResults(value);
-    const sidebarHeight = document.querySelector('body').scrollHeight;
-    console.log(sidebarHeight);
+    showResults(value.results);
   });
 
   // apply for the filter search
@@ -173,33 +172,82 @@ function init() {
     inputList.dietFilter = dietFilter;
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
-    search(inputList).then(showResults);
-    const sidebarHeight = document.querySelector('body').scrollHeight;
-    console.log(sidebarHeight);
+    search(inputList).then((value) => {
+      console.log('filter search start');
+      if (value.totalResults === 0) {
+        console.log('pageNum === 0');
+        const pageNumber = 0;
+        const totalResult = document.querySelector('.totalResults').querySelector('span');
+        const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+        const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+        totalResult.innerHTML = `${value.totalResults} recipe`;
+        currPageNumberPlace.innerHTML = '0';
+        totalPageNumberPlace.innerHTML = `${pageNumber}`;
+      } else {
+        console.log('pageNum !== 0');
+        const pageNumber = Math.ceil(value.totalResults / 10);
+        const totalResult = document.querySelector('.totalResults').querySelector('span');
+        const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+        const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+        totalResult.innerHTML = `${value.totalResults} recipes`;
+        currPageNumberPlace.innerHTML = '1';
+        totalPageNumberPlace.innerHTML = `${pageNumber}`;
+      }
+      showResults(value.results);
+    });
   });
 
-  // searchPageNumber(inputList).then((value) => {
-  //   console.log(value);
-  // });
+  search(inputList).then((value) => {
+    const pageNumber = Math.ceil(value.totalResults / 10);
+    const totalResult = document.querySelector('.totalResults').querySelector('span');
+    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+    const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+    totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
+    totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
+  });
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');
   const nextButton = document.querySelector('.next-button');
+  const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+  const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
 
   previousButton.disabled = true;
+  nextButton.disabled = false;
 
   previousButton.addEventListener('click', () => {
+    const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
     inputList.offset -= 10;
-    search(inputList).then(showResults);
+    const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    search(inputList).then((value) => {
+      showResults(value.results);
+    });
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
     if (inputList.offset === 0) {
       previousButton.disabled = true;
+      nextButton.disabled = false;
+    } else {
+      previousButton.disabled = false;
+      nextButton.disabled = false;
     }
   });
 
   nextButton.addEventListener('click', () => {
+    const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
     inputList.offset += 10;
-    search(inputList).then(showResults);
-    previousButton.disabled = false;
+    const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    search(inputList).then((value) => {
+      showResults(value.results);
+    });
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
+    if (nextPageNumber === parseInt(totalPageNumberPlace.innerHTML, 10)) {
+      previousButton.disabled = false;
+      nextButton.disabled = true;
+    } else {
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+    }
   });
 
   // eslint-disable-next-line func-names
