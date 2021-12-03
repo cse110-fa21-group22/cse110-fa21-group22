@@ -481,13 +481,10 @@ async function init() {
 
   // Email the link of recipe
   // Receiver is blank and should be entered by user
-  // Body of email is currently only the link to recipe
+  // Body of email is a short message with the link to recipe
   const emailButton = document.querySelector('.email-recipe');
   emailButton.addEventListener('click', () => {
-    // const recipeURL = recipe.title;
-    // const recipeLink = recipeURL.link(window.location);
     const recipeURL = window.location;
-    // console.log(recipeLink);
     const subject = `${recipe.title} Recipe`;
     const body = `Here is a yummy recipe I found on ${recipeURL}. Enjoy!`;
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
