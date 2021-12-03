@@ -28,6 +28,7 @@ function init() {
   // intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+
   if (!isMobile && sidebarContent.style.display !== 'none') {
     sidebarContent.style.display = 'flex';
     sidebarContent.style.flexDirection = 'column';
@@ -50,8 +51,9 @@ function init() {
     }
   });
 
-  // Fix the button bug.
-  // TODO: Find a new way to fix the sidebar button bug
+
+  // TODO: need to find a better way
+  // fix the bug
   sidebarButton.click();
   if (isMobile) {
     sidebarButton.click();
@@ -247,6 +249,13 @@ function init() {
       nextButton.disabled = false;
     }
   });
+
+  // eslint-disable-next-line func-names
+  window.onresize = function () {
+    const sidebarHeight = document.querySelector('body').scrollHeight;
+    console.log(sidebarHeight);
+    sidebarContent.style.height = sidebarHeight;
+  };
 }
 
 window.addEventListener('DOMContentLoaded', init);
