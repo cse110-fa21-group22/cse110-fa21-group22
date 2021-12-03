@@ -218,6 +218,7 @@ async function init() {
       for (let i = 0; i < containers.length; i += 1) {
         removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
       }
+      removeRecipebyList('favorites-master', recipe.id);
       favoriteIcon.src = '../assets/favorite.svg';
     }
   });
