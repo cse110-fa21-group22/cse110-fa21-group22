@@ -124,7 +124,11 @@ function init() {
   inputList.dietFilter = '';
   inputList.timeFilter = '';
   inputList.typeFilter = '';
-  search(inputList).then(showResults);
+  search(inputList).then((value) => {
+    showResults(value);
+    const sidebarHeight = document.querySelector('body').scrollHeight;
+    console.log(sidebarHeight);
+  });
 
   // apply for the filter search
   const applyButton = sidebarContent.querySelector('.apply-filter');
@@ -170,11 +174,13 @@ function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     search(inputList).then(showResults);
+    const sidebarHeight = document.querySelector('body').scrollHeight;
+    console.log(sidebarHeight);
   });
 
-  searchPageNumber(inputList).then((value) => {
-    console.log(value);
-  });
+  // searchPageNumber(inputList).then((value) => {
+  //   console.log(value);
+  // });
 
   // Section is for next and previous buttons
   const previousButton = document.querySelector('.previous-button');
@@ -198,7 +204,8 @@ function init() {
 
   // eslint-disable-next-line func-names
   window.onresize = function () {
-    const sidebarHeight = document.body.scrollHeight;
+    const sidebarHeight = document.querySelector('body').scrollHeight;
+    console.log(sidebarHeight);
     sidebarContent.style.height = sidebarHeight;
   };
 }
