@@ -79,7 +79,7 @@ describe('Simple User Flow', () => {
     await button.click();
 
     // Reload the page
-    await page.goto(homeLink); //('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto(homeLink);
     await page.waitForTimeout('3000');
 
     // Retrieve the recipe in the favorites list
@@ -102,7 +102,7 @@ describe('Simple User Flow', () => {
     const name = await root2.$('.recipe-name');
     const innerText = await name.getProperty('innerText');
 
-    await page.goto(favLink); //('https://icookfood.netlify.app/webpages/favorite.html');
+    await page.goto(favLink);
     await page.waitForTimeout('1500');
 
     const userList = await page.$$('user-list');
@@ -147,7 +147,7 @@ describe('Basic user flow for Search Page', () => {
     const client = await page.target().createCDPSession();
     await client.send('Network.clearBrowserCookies');
     await client.send('Network.clearBrowserCache');
-    await page.goto(searchLink); //('https://icookfood.netlify.app/webpages/search.html');
+    await page.goto(searchLink); 
     await page.waitForTimeout('2000');
   });
 
@@ -195,7 +195,8 @@ describe('Basic user flow for Search Page', () => {
             });
             
           expect(recipeCards).toBe(10);
-      }); */
+      }); 
+    */
 
   const secondSet = [];
   // User clicks the next results button, make sure there recipe cards are populated
@@ -295,7 +296,7 @@ describe('Basic user flow for Search Page', () => {
     await page.waitForTimeout('2000');
 
     // Go to favorites page
-    await page.goto(favLink); //('https://icookfood.netlify.app/webpages/favorite.html');
+    await page.goto(favLink); 
     await page.waitForTimeout('5000');
 
     // Retrieve the recipe in the favorites list
@@ -338,7 +339,7 @@ describe('Simple Favorites Flow', () => {
     const button = await root.$('button');
     await button.click();
 
-    await page.goto(homeLink); //('https://icookfood.netlify.app/webpages/home.html');
+    await page.goto(homeLink);
     await page.waitForTimeout(4000);
 
     // Click favorited recipe
@@ -355,7 +356,7 @@ describe('Simple Favorites Flow', () => {
       return elem.src;
     });
     // Check that the heart of favorited recipe is red on recipe page
-    expect(src).toBe(favSelected); //('https://icookfood.netlify.app/assets/favorite-selected.svg');
+    expect(src).toBe(favSelected); 
   });
 
   // Now, check the title of the recipe page
