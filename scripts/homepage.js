@@ -25,6 +25,8 @@ function initLocalStorageDoubt() {
   }
 }
 
+// TODO
+// Have to change to search in search.js
 async function fetchRandomRecipes() {
   return new Promise((resolve, reject) => {
     // use 1 for now, save some points for querying
@@ -111,7 +113,10 @@ function clearObject() {
 async function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-
+  const noFavorite = document.querySelector('.noFavoriteHeader');
+  if (array.length !== 0) {
+    noFavorite.style.display = 'none';
+  }
   for (let i = 0; i < array.length; i += 1) {
     const recipeCard = document.createElement('recipe-card-component');
     // eslint-disable-next-line no-await-in-loop
@@ -164,7 +169,6 @@ async function init() {
    * design:
    * display 10 cards each time, when user a card, display another 10 random
    */
-  // console.log(recipeData);
   showResults(recipeData);
 
   const button = document.querySelector('.home-page-popular-refresh');
