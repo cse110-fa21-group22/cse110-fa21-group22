@@ -61,7 +61,7 @@ async function init() {
   const mainSection = document.querySelector('.favorites-page');
   for (let i = 0; i < localStorage.length; i += 1) {
     // do not display master favorites on favorites page
-    if (localStorage.key(i) === 'favorites-master') continue;
+    if (localStorage.key(i) === 'favorites-master' || localStorage.key(i) === 'displayedMessage') continue;
     // get one list
     const userList = document.createElement('user-list');
     const arrRecipeId = JSON.parse(storage.getItem(localStorage.key(i)));
