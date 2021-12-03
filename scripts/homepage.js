@@ -210,6 +210,7 @@ async function init() {
       const item = checkboxesTime[i];
       if (item.checked) {
         timeFilter = Math.max(timeFilter, item.id);
+        console.log(timeFilter);
       }
     }
     for (let i = 0; i < checkboxesType.length; i += 1) {
