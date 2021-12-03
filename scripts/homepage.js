@@ -206,6 +206,8 @@ async function init() {
     inputList.dietFilter = dietFilter;
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
+    clearObject();
+    console.log(recipeData);
     fetchRandomRecipes(inputList).then(showResults(recipeData));
     console.log(recipeData);
   });
