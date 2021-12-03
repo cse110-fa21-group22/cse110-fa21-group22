@@ -204,6 +204,9 @@ function init() {
     totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
     currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
     totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
+    let sidebarHeight = document.querySelector('.search-page').scrollHeight;
+    sidebarHeight += 75;
+    sidebarContent.style.height = `${sidebarHeight}px`;
   });
 
   // Section is for next and previous buttons
