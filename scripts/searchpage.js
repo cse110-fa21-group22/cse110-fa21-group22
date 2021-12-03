@@ -125,7 +125,6 @@ function init() {
   search(inputList).then(showResults);
 
   // apply for the filter search
-  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
   const applyButton = sidebarContent.querySelector('.apply-filter');
   applyButton.addEventListener('click', () => {
     const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
