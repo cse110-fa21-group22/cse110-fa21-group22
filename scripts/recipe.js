@@ -118,6 +118,24 @@ function hideDropdown() {
   dropdownContent.style.display = 'none';
 }
 
+function checkCheckedList() {
+  const containers = document.querySelectorAll('.container');
+  let userInput = document.querySelector('.user-input');
+  userInput = userInput.value;
+  // check if trying to add to a newly created list
+  if (userInput !== '') {
+    return true;
+  }
+  // if above not true, will loop through all the lists to see if at least one is checked
+  for (let i = 0; i < containers.length; i += 1) {
+    const checkmark = containers[i].querySelector('input');
+    if (checkmark.checked) {
+      return true;
+    }
+  }
+  return false;
+}
+
 /**
  * Add the recipe to all checked lists in the dropdown
  */
@@ -250,12 +268,18 @@ async function init() {
   submitFavorites.addEventListener('click', () => {
     // TODO: need to check the values that are clicked
     if (!isFavorite) {
-      // TODO: add to custom list
-      addRecipe(recipe.id);
-      addToCheckedLists(recipe);
-      addToCustomList(recipe);
-      /* Reload the page as a shortcut for showing new lists */
-      location.reload();
+      if (!checkCheckedList()) {
+        //eslint-disable-line
+        window.alert(`Please add to at least one list`);
+      }
+      else {
+        // TODO: add to custom list
+        addRecipe(recipe.id);
+        addToCheckedLists(recipe);
+        addToCustomList(recipe);
+        /* Reload the page as a shortcut for showing new lists */
+        location.reload();
+      }
     }
   });
 

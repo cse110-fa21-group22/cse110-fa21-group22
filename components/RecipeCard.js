@@ -166,6 +166,7 @@ class RecipeCard extends HTMLElement {
     const containers = this.shadow.querySelectorAll('.container');
     let userInput = this.shadow.querySelector('.user-input');
     userInput = userInput.value;
+    // check if trying to add to a newly created list
     if (userInput !== '') {
       return true;
     }
@@ -293,7 +294,7 @@ class RecipeCard extends HTMLElement {
       if (!this.isFavorite) {
         if (!this.checkCheckedList()) {
           //eslint-disable-line
-          window.alert(`Please check at least one list to be added to`);
+          window.alert(`Please add to at least one list`);
         }
         else {
           // add to 'favorites-master' no matter what
