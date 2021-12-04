@@ -282,6 +282,30 @@ async function init() {
     }
   });
 
+  /**
+   *  Pressing enter functions the same as clicking the submit button
+   *  uses the same code from the submit button
+   */
+   function checkKey(event) {
+    const e = event || window.event;
+    if (e.key === 'Enter') {
+      if (!isFavorite) {
+        if (!checkCheckedList()) {
+          // eslint-disable-next-line
+          window.alert(`Please add to at least one list`);
+        } else {
+          // TODO: add to custom list
+          addRecipe(recipe.id);
+          addToCheckedLists(recipe);
+          addToCustomList(recipe);
+          /* Reload the page as a shortcut for showing new lists */
+          location.reload();
+        }
+      }
+    }
+  }
+  document.onkeydown = checkKey;
+
   // Set prep time
   const prepTime = document.querySelector('#prep-time');
   const time = recipe.readyInMinutes;
