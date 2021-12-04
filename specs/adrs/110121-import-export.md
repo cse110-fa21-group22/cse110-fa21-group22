@@ -1,6 +1,6 @@
 # Import/Export
 
-- Status: deprecated 
+- Status: deprecated
 - Deciders: all
 - Date: 11/01/2021
 

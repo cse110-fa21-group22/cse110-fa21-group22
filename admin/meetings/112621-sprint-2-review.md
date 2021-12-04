@@ -18,9 +18,9 @@
 - Egor Pustovalov
 
 ### Not in Attendance
+
 - Dennis Zhao
 - Joey Dang
-
 
 ### Agenda
 
@@ -31,12 +31,12 @@
 
 ### Sprint Review / Status Update by page
 
-#### Home Page / Explore  (Dennis, Fangqi, Samantha, Emily)
+#### Home Page / Explore (Dennis, Fangqi, Samantha, Emily)
 
 - What was done
   - Made an interface with the local storage that stored the recipe id and holds the lists for favorites
   - Created a side bar skeleton
-  - Made the hearts colored correctly 
+  - Made the hearts colored correctly
 - What we planned to complete that we did not yet get to
   - Add filters on the side bar
   - Refactor and change what we store in local storage (objects containing the recipe card preview info)
@@ -80,7 +80,7 @@
   - Deleting a list
   - Fix bugs with unhearting
 - Challenges faced
-  - Working with local storage 
+  - Working with local storage
   - Have to be unstyled to work correctly for dropdown
   - State machine for all buttons
 
