@@ -249,8 +249,10 @@ function init() {
     }
   });
 
-  // left/right keys move to the previous/next page
-  // uses the same code from the left and right buttons
+  /**
+   * left/right keys move to the previous/next page
+   *  uses the same code from the left and right buttons
+   */
   function checkKey(event) {
     const e = event || window.event;
     if (e.key === 'ArrowLeft') {
