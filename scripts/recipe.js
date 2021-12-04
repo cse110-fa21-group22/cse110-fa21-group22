@@ -286,7 +286,7 @@ async function init() {
    *  Pressing enter functions the same as clicking the submit button
    *  uses the same code from the submit button
    */
-   function checkKey(event) {
+  function checkKey(event) {
     const e = event || window.event;
     if (e.key === 'Enter') {
       if (!isFavorite) {
