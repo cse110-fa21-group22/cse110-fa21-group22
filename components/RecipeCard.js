@@ -259,7 +259,7 @@ class RecipeCard extends HTMLElement {
         }
       }
     });
-    
+
     /* Mouse hover for favorite icon */
     favoriteIcon.addEventListener('mouseover', () => {
       favoriteIcon.src = '../assets/favorite-selected.svg';
