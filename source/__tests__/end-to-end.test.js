@@ -344,7 +344,7 @@ describe('Simple Favorites Flow', () => {
     await button.click();
 
     await page.goto(homeLink);
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(5000);
 
     // Click favorited recipe
     const exploreCards2 = await page.$$('recipe-card-component');
@@ -352,7 +352,7 @@ describe('Simple Favorites Flow', () => {
     newLength = exploreCards2.length;
     console.log(newLength);
     await exploreCards2[newLength - 1].click();
-    await page.waitForTimeout(4000);
+    await page.waitForTimeout(5000);
 
     // Get image source
     const src = await page.evaluate(() => {
