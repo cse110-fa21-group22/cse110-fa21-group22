@@ -160,6 +160,27 @@ class RecipeCard extends HTMLElement {
   }
 
   /**
+   * Checks that at least one list is selected for adding recipe
+   */
+  checkCheckedList() {
+    const containers = this.shadow.querySelectorAll('.container');
+    let userInput = this.shadow.querySelector('.user-input');
+    userInput = userInput.value;
+    // check if trying to add to a newly created list
+    if (userInput !== '') {
+      return true;
+    }
+    // if above not true, will loop through all the lists to see if at least one is checked
+    for (let i = 0; i < containers.length; i += 1) {
+      const checkmark = containers[i].querySelector('input');
+      if (checkmark.checked) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Add the recipe to all checked lists in the dropdown
    */
   addToCheckedLists() {
@@ -277,12 +298,17 @@ class RecipeCard extends HTMLElement {
     submitFavorites.addEventListener('click', (event) => {
       // TODO: need to check the values that are clicked
       if (!this.isFavorite) {
-        // add to // must have 'favorites-master' no matter what
-        addRecipe(this.getAttribute('recipe-id'));
-        this.addToCheckedLists();
-        this.addToCustomList();
-        /* Reload the page as a shortcut for showing new lists */
-        location.reload();
+        if (!this.checkCheckedList()) {
+          // eslint-disable-next-line
+          window.alert(`Please add to at least one list`);
+        } else {
+          // add to 'favorites-master' no matter what
+          addRecipe(this.getAttribute('recipe-id'));
+          this.addToCheckedLists();
+          this.addToCustomList();
+          /* Reload the page as a shortcut for showing new lists */
+          location.reload();
+        }
       }
       event.stopPropagation();
     });
