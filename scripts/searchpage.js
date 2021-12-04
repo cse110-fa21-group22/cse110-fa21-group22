@@ -169,7 +169,6 @@ function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     search(inputList).then((value) => {
-      console.log('filter search start');
       if (value.totalResults === 0) {
         const pageNumber = 0;
         const totalResult = document.querySelector('.totalResults').querySelector('span');
