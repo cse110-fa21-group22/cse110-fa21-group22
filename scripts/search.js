@@ -28,9 +28,7 @@ export default async function search(inputList) {
   const tokenOffset = `&offset=${inputList.offset}`;
   const tokenSort = `&sort=${inputList.sort}`;
   const tokenNutritionBool = `&addRecipeNutrition=${inputList.recipeNutrition}`;
-  let fetchEndpoint = searchUrl + tokenKey;
-  if (inputList.query !== '') {
-    fetchEndpoint += tokenSearchInput;
+  let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput;
   }
   if (inputList.cuisineFilter !== '') {
     const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
