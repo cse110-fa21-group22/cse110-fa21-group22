@@ -110,8 +110,8 @@ function init() {
   // Automatically parse the query string and run a search on page load
   const searchTerm = parseQueryString();
   console.log(searchTerm);
-  const navbarInputbox = document.querySelector('.navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.innerHTML = `${searchTerm}`;
+  const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
+  navbarInputbox.value = `${searchTerm}`;
 
   // Send a query to spoonacular
   let inputList = [];
