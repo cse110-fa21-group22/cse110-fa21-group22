@@ -293,7 +293,7 @@ class RecipeCard extends HTMLElement {
       // TODO: need to check the values that are clicked
       if (!this.isFavorite) {
         if (!this.checkCheckedList()) {
-          // eslint-disable-line
+          // eslint-disable-next-line
           window.alert(`Please add to at least one list`);
         }
         else {
