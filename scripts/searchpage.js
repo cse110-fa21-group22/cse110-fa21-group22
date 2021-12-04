@@ -105,7 +105,6 @@ function init() {
     }
   }
 
-  console.log('init');
   // Automatically parse the query string and run a search on page load
   let searchTerm = parseQueryString();
   console.log(searchTerm);
@@ -140,7 +139,6 @@ function init() {
     }
   }
   search(inputList).then((value) => {
-    showResults(value.results);
     const pageNumber = Math.ceil(value.totalResults / 10);
     const totalResult = document.querySelector('.totalResults').querySelector('span');
     const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
@@ -148,6 +146,7 @@ function init() {
     totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
     currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
     totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
+    showResults(value.results);
   });
 
   // apply for the filter search
