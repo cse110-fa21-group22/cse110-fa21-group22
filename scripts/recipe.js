@@ -178,11 +178,12 @@ async function init() {
 
   // Detect if the device is mobile or PC
   const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
-  // intiallize the sidebar
-  const navbarComponent = document.querySelector('navbar-component');
-  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  // Disable the sidebar button
+  const sidebarButton = document.querySelector('navbar-component').shadow.querySelector('.sidebar-button');
   sidebarButton.style.display = 'none';
+  // Hide the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
   sidebarContent.style.display = 'none';
 
   const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after

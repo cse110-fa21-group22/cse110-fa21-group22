@@ -147,15 +147,13 @@ async function init() {
     });
   }
 
-  // Detect if the device is mobile or PC
-  const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
-  // intiallize the sidebar
+  // Disable the sidebar button
+  const sidebarButton = document.querySelector('navbar-component').shadow.querySelector('.sidebar-button');
+  sidebarButton.style.display = 'none';
+  // Hide the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
   sidebarContent.style.display = 'none';
-
-  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  sidebarButton.style.display = 'none';
 
   const inputList = [];
   inputList.cuisineFilter = '';
@@ -178,6 +176,7 @@ async function init() {
   showResults(recipeData);
   showFavoriteSection();
 
+  const sidebarContent = document.querySelector('navbar-component').shadow.querySelector('.sidebar-content');
   const applyButton = sidebarContent.querySelector('.apply-filter');
   // eslint-disable-next-line func-names
   applyButton.addEventListener('click', async function () {

@@ -180,8 +180,9 @@ class Navbar extends HTMLElement {
     });
 
     // Detect if the device is mobile or PC
-    const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+    // const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
 
+    // Sidebar Button listener
     const sidebarButton = this.shadow.querySelector('.sidebar-button');
     sidebarButton.addEventListener('click', () => {
       const sidebarContent = this.shadow.querySelector('.sidebar-content');
