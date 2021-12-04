@@ -295,8 +295,7 @@ class RecipeCard extends HTMLElement {
         if (!this.checkCheckedList()) {
           // eslint-disable-next-line
           window.alert(`Please add to at least one list`);
-        }
-        else {
+        } else {
           // add to 'favorites-master' no matter what
           addRecipe(this.getAttribute('recipe-id'));
           this.addToCheckedLists();

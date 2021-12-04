@@ -271,8 +271,7 @@ async function init() {
       if (!checkCheckedList()) {
         // eslint-disable-next-line
         window.alert(`Please add to at least one list`);
-      }
-      else {
+      } else {
         // TODO: add to custom list
         addRecipe(recipe.id);
         addToCheckedLists(recipe);
