@@ -3,6 +3,8 @@
  * pulls up for it.
  */
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
+
+// eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
