@@ -2,8 +2,8 @@
 
 ### After creating your PR, please complete this checklist!
 
-- [ ] Go into cse110-fa21-group22/source/\_\_test\_\_/end-to-end.test.js 
-- [ ] In this file, change `const prNum = 0;` -> `const prNum = {your pr number};` _This should be on line 18_
+- [ ] Go into cse110-fa21-group22/source/\_\_test\_\_/end-to-end.test.js
+- [ ] Change `const prNum = 0;` -> `const prNum = {your pr number};` _This should be on line 18_
 - [ ] Now push your change to the branch and it will rerun the checks
 
 You are ready to finish the rest of the template.
