@@ -37,24 +37,10 @@ function init() {
     sidebarContent.style.display = 'none';
   }
 
-  const sidebarButton = navbarComponent.shadow.querySelector('.sidebar-button');
-  sidebarButton.addEventListener('click', () => {
-    if (!isMobile) {
-      if (sidebarContent.style.display !== 'none') {
-        const mainSection = document.querySelector('.search-page');
-        mainSection.style.marginLeft = `${225}px`;
-      } else {
-        const mainSection = document.querySelector('.search-page');
-        mainSection.style.marginLeft = `${0}px`;
-      }
-    }
-  });
-
   // TODO: need to find a better way
-  // fix the bug
-  sidebarButton.click();
-  if (isMobile) {
-    sidebarButton.click();
+  // Fix the that the button cannot use for the first press
+  if (!isMobile) {
+    navbarComponent.shadow.querySelector('.sidebar-button').click();
   }
 
   const searchKeyword = document.querySelector('.search-word');

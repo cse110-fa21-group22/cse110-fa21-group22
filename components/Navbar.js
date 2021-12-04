@@ -180,13 +180,26 @@ class Navbar extends HTMLElement {
     });
 
     // Detect if the device is mobile or PC
-    // const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+    const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
 
     // Sidebar Button listener
     const sidebarButton = this.shadow.querySelector('.sidebar-button');
     sidebarButton.addEventListener('click', () => {
       const sidebarContent = this.shadow.querySelector('.sidebar-content');
-      if (!this.isSidebarShow) {
+      if (!isMobile) {
+        if (!this.isSidebarShow) {
+          const mainSection = document.querySelector('.search-page');
+          mainSection.style.marginLeft = `${225}px`;
+          sidebarContent.style.display = 'flex';
+          sidebarContent.style.flexDirection = 'column';
+          this.isSidebarShow = true;
+        } else {
+          const mainSection = document.querySelector('.search-page');
+          mainSection.style.marginLeft = `${0}px`;
+          sidebarContent.style.display = 'none';
+          this.isSidebarShow = false;
+        }
+      } else if (!this.isSidebarShow) {
         sidebarContent.style.display = 'flex';
         sidebarContent.style.flexDirection = 'column';
         this.isSidebarShow = true;
