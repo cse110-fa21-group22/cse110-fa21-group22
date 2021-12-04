@@ -245,13 +245,6 @@ function init() {
       nextButton.disabled = false;
     }
   });
-
-  // eslint-disable-next-line func-names
-  window.onresize = function () {
-    const sidebarHeight = document.querySelector('body').scrollHeight;
-    console.log(sidebarHeight);
-    sidebarContent.style.height = sidebarHeight;
-  };
 }
 
 window.addEventListener('DOMContentLoaded', init);
