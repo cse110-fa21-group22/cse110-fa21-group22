@@ -250,9 +250,9 @@ function init() {
   });
 
   // left/right keys move to the previous/next page
-  document.onkeydown = checkKey;
-  function checkKey(e) {
-    e = e || window.event;
+  // uses the same code from the left and right buttons
+  function checkKey(event) {
+    const e = event || window.event;
     if (e.key === 'ArrowLeft') {
       const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
       inputList.offset -= 10;
@@ -287,6 +287,7 @@ function init() {
       }
     }
   }
+  document.onkeydown = checkKey;
 
   // eslint-disable-next-line func-names
   window.onresize = function () {
