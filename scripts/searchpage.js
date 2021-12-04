@@ -249,6 +249,45 @@ function init() {
     }
   });
 
+  // left/right keys move to the previous/next page
+  document.onkeydown = checkKey;
+  function checkKey(e) {
+    e = e || window.event;
+    if (e.key === 'ArrowLeft') {
+      const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
+      inputList.offset -= 10;
+      const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+      search(inputList).then((value) => {
+        showResults(value.results);
+      });
+      currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
+      if (inputList.offset === 0) {
+        previousButton.disabled = true;
+        nextButton.disabled = false;
+      } else {
+        previousButton.disabled = false;
+        nextButton.disabled = false;
+      }
+    }
+    // right arrow
+    else if (e.key === 'ArrowRight') {
+      const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
+      inputList.offset += 10;
+      const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+      search(inputList).then((value) => {
+        showResults(value.results);
+      });
+      currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
+      if (nextPageNumber === parseInt(totalPageNumberPlace.innerHTML, 10)) {
+        previousButton.disabled = false;
+        nextButton.disabled = true;
+      } else {
+        previousButton.disabled = false;
+        nextButton.disabled = false;
+      }
+    }
+  }
+
   // eslint-disable-next-line func-names
   window.onresize = function () {
     const sidebarHeight = document.querySelector('body').scrollHeight;
