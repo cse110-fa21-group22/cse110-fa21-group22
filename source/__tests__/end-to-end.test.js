@@ -3,7 +3,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint no-unused-vars: "error" */
-jest.setTimeout(40000);
+jest.setTimeout(15000);
 
 // Links for testing on deployment
 const HOME_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/home.html';
@@ -261,7 +261,7 @@ describe('Basic user flow for Search Page', () => {
     const nextButton = await page.$('.next-button');
 
     await nextButton.click();
-    await page.waitForTimeout('1000');
+    await page.waitForTimeout('3000');
 
     const currentRecipes = await page.$$('recipe-card-component');
     let isSame = true;
@@ -275,7 +275,6 @@ describe('Basic user flow for Search Page', () => {
         break;
       }
     }
-    // eslint-disable-next-line no-underscore-dangle
     expect(isSame).toBe(true);
   });
 
@@ -320,6 +319,10 @@ describe('Simple Favorites Flow', () => {
     await client.send('Network.clearBrowserCookies');
     await client.send('Network.clearBrowserCache');
     await page.goto(homeLink);
+    page.on('dialog', async (dialog) => {
+      console.log(dialog.message());
+      await dialog.accept();
+    });
     await page.waitForTimeout(2000);
   });
 
@@ -349,7 +352,7 @@ describe('Simple Favorites Flow', () => {
     newLength = exploreCards2.length;
     console.log(newLength);
     await exploreCards2[newLength - 1].click();
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(3000);
 
     // Get image source
     const src = await page.evaluate(() => {
@@ -366,9 +369,9 @@ describe('Simple Favorites Flow', () => {
     // Get recipe page title
     const title = await page.$('.recipe-name');
     const innerText = await title.getProperty('innerText');
-    favoritedRecipe += ' ';
+    const recipeName = innerText['_remoteObject'].value.split('  ');
     // Check that the title matches the recipe you clicked
-    expect(innerText['_remoteObject'].value).toBe(favoritedRecipe);
+    expect(recipeName[0]).toBe(favoritedRecipe);
   });
 
   // Now, check that the steps are populated
@@ -390,11 +393,55 @@ describe('Simple Favorites Flow', () => {
 
     // Go back to home page
     await page.goto(homeLink);
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(7000);
 
     const exploreCards = await page.$$('recipe-card-component');
 
     // Check that there are no favorited recipes (only explore cards shown)
     expect(exploreCards.length).toBe(newLength - 1);
+  });
+});
+
+describe('Testing Refresh Button', () => {
+  beforeAll(async () => {
+    await page.goto(homeLink);
+    await page.setCacheEnabled(false);
+    await page.waitForTimeout(800);
+  });
+
+  // Check refresh button works and loads new recipes
+  it('Check refresh button works and loads new recipes', async () => {
+    const firstSet = [];
+    await page.waitForTimeout('500');
+
+    // Gets the first 3 recipe cards before refresh
+    const exploreCards = await page.$$('recipe-card-component');
+    for (let i = 0; i < 3; i += 1) {
+      const root = await exploreCards[i].getProperty('shadowRoot');
+      const name = await root.$('.recipe-name');
+      const innerText = await name.getProperty('innerText');
+      firstSet.push(innerText['_remoteObject'].value);
+    }
+
+    await page.waitForTimeout('500');
+    // Clicks refresh button
+    const refreshButton = await page.$('.home-page-popular-refresh');
+    await refreshButton.click();
+    await page.waitForTimeout('2000');
+
+    const newRecipeCards = await page.$$('recipe-card-component');
+    let isDifferent = true;
+    for (let i = 0; i < 3; i += 1) {
+      const root = await newRecipeCards[i].getProperty('shadowRoot');
+      const name = await root.$('.recipe-name');
+      const innerText = await name.getProperty('innerText');
+
+      if (firstSet[i] === innerText['_remoteObject'].value) {
+        isDifferent = false;
+        break;
+      }
+    }
+
+    expect(isDifferent).toBe(true);
   });
 });
