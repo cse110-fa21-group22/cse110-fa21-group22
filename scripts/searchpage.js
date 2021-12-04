@@ -119,7 +119,26 @@ function init() {
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
   const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
   // Set checkboxes
-  
+  for (let i = 0; i < inputList.cuisineFilterCheckbox.length; i += 1) {
+    if (inputList.cuisineFilterCheckbox[i] === 1) {
+      checkboxesCuisine[i].checked = true;
+    }
+  }
+  for (let i = 0; i < inputList.dietFilterCheckbox.length; i += 1) {
+    if (inputList.dietFilterCheckbox[i] === 1) {
+      checkboxesDiet[i].checked = true;
+    }
+  }
+  for (let i = 0; i < inputList.timeFilterCheckbox.length; i += 1) {
+    if (inputList.timeFilterCheckbox[i] === 1) {
+      checkboxesTime[i].checked = true;
+    }
+  }
+  for (let i = 0; i < inputList.typeFilterCheckbox.length; i += 1) {
+    if (inputList.typeFilterCheckbox[i] === 1) {
+      checkboxesType[i].checked = true;
+    }
+  }
   search(inputList).then((value) => {
     showResults(value.results);
   });

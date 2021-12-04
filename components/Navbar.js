@@ -29,34 +29,34 @@ navbarTemplate.innerHTML = `
   <section class="sidebar-content">
     <h5>Cuisine</h5>
     <ul>
-      <li><input type="checkbox" id="american" class="cuisine"> American</li>
-      <li><input type="checkbox" id="chinese" class="cuisine"> Chinese</li>
-      <li><input type="checkbox" id="italian" class="cuisine"> Italian</li>
-      <li><input type="checkbox" id="mexican" class="cuisine"> Mexican</li>
-      <li><input type="checkbox" id="indian" class="cuisine"> Indian</li>
-      <li><input type="checkbox" id="thai" class="cuisine"> Thai</li>
+      <li><input type="checkbox" id="american" class="cuisine cuisine0"> American</li>
+      <li><input type="checkbox" id="chinese" class="cuisine cuisine1"> Chinese</li>
+      <li><input type="checkbox" id="italian" class="cuisine cuisine2"> Italian</li>
+      <li><input type="checkbox" id="mexican" class="cuisine cuisine3"> Mexican</li>
+      <li><input type="checkbox" id="indian" class="cuisine cuisine4"> Indian</li>
+      <li><input type="checkbox" id="thai" class="cuisine cuisine5"> Thai</li>
     </ul>
     <h5>Diet</h5>
     <ul>
-      <li><input type="checkbox" id="vegetarian" class="diet"> Vegetarian</li>
-      <li><input type="checkbox" id="vegan" class="diet"> Vegan</li>
-      <li><input type="checkbox" id="gluten%20free" class="diet"> Gluten Free</li>
-      <li><input type="checkbox" id="paleo" class="diet"> Paleo</li>
-      <li><input type="checkbox" id="ketogenic" class="diet"> Ketogenic</li>
+      <li><input type="checkbox" id="vegetarian" class="diet diet0"> Vegetarian</li>
+      <li><input type="checkbox" id="vegan" class="diet diet1"> Vegan</li>
+      <li><input type="checkbox" id="gluten%20free" class="diet diet2"> Gluten Free</li>
+      <li><input type="checkbox" id="paleo" class="diet diet3"> Paleo</li>
+      <li><input type="checkbox" id="ketogenic" class="diet diet4"> Ketogenic</li>
     </ul>
     <h5>Time</h5>
     <ul>
-      <li><input type="checkbox" id="15" class="time"> 0-15 Minutes</li>
-      <li><input type="checkbox" id="30" class="time"> 0-30 Minutes</li>
-      <li><input type="checkbox" id="45" class="time"> 0-45 Minutes</li>
-      <li><input type="checkbox" id="60" class="time"> 0-1hr</li>
+      <li><input type="checkbox" id="15" class="time time0"> 0-15 Minutes</li>
+      <li><input type="checkbox" id="30" class="time time1"> 0-30 Minutes</li>
+      <li><input type="checkbox" id="45" class="time time2"> 0-45 Minutes</li>
+      <li><input type="checkbox" id="60" class="time time3"> 0-1 hr</li>
     </ul>
     <h5>Type of Meal</h5>
     <ul>
-      <li><input type="checkbox" id="breakfast" class="typeOfMeal"> Breakfast</li>
-      <li><input type="checkbox" id="main%20course" class="typeOfMeal"> Main Course</li>
-      <li><input type="checkbox" id="dessert" class="typeOfMeal"> Dessert</li>
-      <li><input type="checkbox" id="drink" class="typeOfMeal"> Drink</li>
+      <li><input type="checkbox" id="breakfast" class="typeOfMeal typeOfMeal0"> Breakfast</li>
+      <li><input type="checkbox" id="main%20course" class="typeOfMeal typeOfMeal1"> Main Course</li>
+      <li><input type="checkbox" id="dessert" class="typeOfMeal typeOfMeal2"> Dessert</li>
+      <li><input type="checkbox" id="drink" class="typeOfMeal typeOfMeal3"> Drink</li>
     </ul>
     <button class="apply-filter">Apply filter</button>
 	</section>`;
@@ -123,28 +123,44 @@ class Navbar extends HTMLElement {
         let dietFilter = '';
         let timeFilter = '';
         let typeFilter = '';
+        const cuisineFilterCheckbox = [];
+        const dietFilterCheckbox = [];
+        const timeFilterCheckbox = [];
+        const typeFilterCheckbox = [];
         for (let i = 0; i < checkboxesCuisine.length; i += 1) {
           const item = checkboxesCuisine[i];
           if (item.checked) {
             cuisineFilter = `${cuisineFilter + item.id},`;
+            cuisineFilterCheckbox[i] = 1;
+          } else {
+            cuisineFilterCheckbox[i] = 0;
           }
         }
         for (let i = 0; i < checkboxesDiet.length; i += 1) {
           const item = checkboxesDiet[i];
           if (item.checked) {
             dietFilter = `${dietFilter + item.id},`;
+            dietFilterCheckbox[i] = 1;
+          } else {
+            dietFilterCheckbox[i] = 0;
           }
         }
         for (let i = 0; i < checkboxesTime.length; i += 1) {
           const item = checkboxesTime[i];
           if (item.checked) {
             timeFilter = Math.max(timeFilter, item.id);
+            timeFilterCheckbox[i] = 1;
+          } else {
+            timeFilterCheckbox[i] = 0;
           }
         }
         for (let i = 0; i < checkboxesType.length; i += 1) {
           const item = checkboxesType[i];
           if (item.checked) {
             typeFilter = `${typeFilter + item.id},`;
+            typeFilterCheckbox[i] = 1;
+          } else {
+            typeFilterCheckbox[i] = 0;
           }
         }
         if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
@@ -154,6 +170,10 @@ class Navbar extends HTMLElement {
         inputList.dietFilter = dietFilter;
         inputList.timeFilter = timeFilter;
         inputList.typeFilter = typeFilter;
+        inputList.cuisineFilterCheckbox = cuisineFilterCheckbox;
+        inputList.dietFilterCheckbox = dietFilterCheckbox;
+        inputList.timeFilterCheckbox = timeFilterCheckbox;
+        inputList.typeFilterCheckbox = typeFilterCheckbox;
         window.localStorage.setItem('QueryList', JSON.stringify(inputList));
         window.location.href = `search.html${this.generateQueryString(searchTerm)}`;
       }
