@@ -51,7 +51,6 @@ function init() {
     }
   });
 
-
   // TODO: need to find a better way
   // fix the bug
   sidebarButton.click();
@@ -96,10 +95,9 @@ function init() {
 
     // Clear the results before searching
     clearResults();
-
     // Add the recipes to the page
     // eslint-disable-next-line no-use-before-define
-    searchKeyword.innerHTML = `"${inputList.query}"`;
+    searchKeyword.innerHTML = `${inputList.query}`;
     for (const recipe in results) {
       const recipeCard = document.createElement('recipe-card-component');
       recipeCard.recipe = results[recipe];
@@ -119,10 +117,45 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList.recipeNutrition = 'true';
-  inputList.cuisineFilter = '';
-  inputList.dietFilter = '';
-  inputList.timeFilter = '';
-  inputList.typeFilter = '';
+  const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
+  const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
+  const checkboxesTime = sidebarContent.querySelectorAll('.time');
+  const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
+  let cuisineFilter = '';
+  let dietFilter = '';
+  let timeFilter = '';
+  let typeFilter = '';
+  for (let i = 0; i < checkboxesCuisine.length; i += 1) {
+    const item = checkboxesCuisine[i];
+    if (item.checked) {
+      cuisineFilter = `${cuisineFilter + item.id},`;
+    }
+  }
+  for (let i = 0; i < checkboxesDiet.length; i += 1) {
+    const item = checkboxesDiet[i];
+    if (item.checked) {
+      dietFilter = `${dietFilter + item.id},`;
+    }
+  }
+  for (let i = 0; i < checkboxesTime.length; i += 1) {
+    const item = checkboxesTime[i];
+    if (item.checked) {
+      timeFilter = Math.max(timeFilter, item.id);
+    }
+  }
+  for (let i = 0; i < checkboxesType.length; i += 1) {
+    const item = checkboxesType[i];
+    if (item.checked) {
+      typeFilter = `${typeFilter + item.id},`;
+    }
+  }
+  if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
+  if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
+  if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
+  inputList.cuisineFilter = cuisineFilter;
+  inputList.dietFilter = dietFilter;
+  inputList.timeFilter = timeFilter;
+  inputList.typeFilter = typeFilter;
   search(inputList).then((value) => {
     showResults(value.results);
   });
@@ -130,14 +163,6 @@ function init() {
   // apply for the filter search
   const applyButton = sidebarContent.querySelector('.apply-filter');
   applyButton.addEventListener('click', () => {
-    const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
-    const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
-    const checkboxesTime = sidebarContent.querySelectorAll('.time');
-    const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
-    let cuisineFilter = '';
-    let dietFilter = '';
-    let timeFilter = '';
-    let typeFilter = '';
     for (let i = 0; i < checkboxesCuisine.length; i += 1) {
       const item = checkboxesCuisine[i];
       if (item.checked) {
@@ -207,7 +232,6 @@ function init() {
   const nextButton = document.querySelector('.next-button');
   const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
   const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-
   previousButton.disabled = true;
   nextButton.disabled = false;
 
