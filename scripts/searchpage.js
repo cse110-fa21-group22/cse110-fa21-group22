@@ -25,7 +25,7 @@ function init() {
 
   // Detect if the device is mobile or PC
   const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
-  // intiallize the sidebar
+  // Intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
   if (!isMobile && sidebarContent.style.display !== 'none') {
@@ -102,7 +102,7 @@ function init() {
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
   const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
-  // Set checkboxes
+  // Set checkboxes for the previous search
   for (let i = 0; i < inputList.cuisineFilterCheckbox.length; i += 1) {
     if (inputList.cuisineFilterCheckbox[i] === 1) {
       checkboxesCuisine[i].checked = true;
