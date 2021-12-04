@@ -3,6 +3,8 @@
  * pulls up for it.
  */
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
+
+// eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -116,6 +118,24 @@ function hideDropdown() {
   dropdownContent.style.display = 'none';
 }
 
+function checkCheckedList() {
+  const containers = document.querySelectorAll('.container');
+  let userInput = document.querySelector('.user-input');
+  userInput = userInput.value;
+  // check if trying to add to a newly created list
+  if (userInput !== '') {
+    return true;
+  }
+  // if above not true, will loop through all the lists to see if at least one is checked
+  for (let i = 0; i < containers.length; i += 1) {
+    const checkmark = containers[i].querySelector('input');
+    if (checkmark.checked) {
+      return true;
+    }
+  }
+  return false;
+}
+
 /**
  * Add the recipe to all checked lists in the dropdown
  */
@@ -201,13 +221,20 @@ async function init() {
       favoriteIcon.src = '../assets/favorite-selected.svg';
       showDropdown(recipe, isMobile);
     } else {
-      isFavorite = false;
-      const containers = document.querySelectorAll('.container');
-      // goes through all the lists and deletes if it is in list
-      for (let i = 0; i < containers.length; i += 1) {
-        removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+      let toRemove = false;
+      // eslint-disable-next-line
+      toRemove = window.confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
+      // continues to remove the recipe from list if user confirms they want to remove
+      if (toRemove) {
+        isFavorite = false;
+        const containers = document.querySelectorAll('.container');
+        // goes through all the lists and deletes if it is in list
+        for (let i = 0; i < containers.length; i += 1) {
+          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+        }
+        favoriteIcon.src = '../assets/favorite.svg';
       }
-      favoriteIcon.src = '../assets/favorite.svg';
+      removeRecipebyList('favorites-master', recipe.id);
     }
   });
 
@@ -230,12 +257,17 @@ async function init() {
   submitFavorites.addEventListener('click', () => {
     // TODO: need to check the values that are clicked
     if (!isFavorite) {
-      // TODO: add to custom list
-      addRecipe(recipe.id);
-      addToCheckedLists(recipe);
-      addToCustomList(recipe);
-      /* Reload the page as a shortcut for showing new lists */
-      location.reload();
+      if (!checkCheckedList()) {
+        // eslint-disable-next-line
+        window.alert(`Please add to at least one list`);
+      } else {
+        // TODO: add to custom list
+        addRecipe(recipe.id);
+        addToCheckedLists(recipe);
+        addToCustomList(recipe);
+        /* Reload the page as a shortcut for showing new lists */
+        location.reload();
+      }
     }
   });
 

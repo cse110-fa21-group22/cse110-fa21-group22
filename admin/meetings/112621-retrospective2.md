@@ -27,7 +27,6 @@
 - Everyone working well as a group
 - Communicating and responding(reacting) on Slack
 
-
 # What needs to be improved for the next sprint
 
 ## Broken merges
