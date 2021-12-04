@@ -29,7 +29,7 @@ h3 {
   grid-gap: 50px;
   grid-template-rows: auto auto;
   justify-content: flex-start;
-  overflow-x: hidden;
+  overflow-x: scroll;
   overflow-y: hidden;
   padding: 20px 50px 30px;
   scroll-behavior: smooth;
@@ -42,6 +42,10 @@ h3 {
   padding-right: 10px;
   white-space: nowrap;
   width: 120px;
+}
+
+.hidden {
+  display: none;
 }
 
 .ingredient-card {
@@ -84,10 +88,17 @@ h3 {
   position: relative;
 }
 
+.instructions-link {
+  background-color: transparent;
+  border: 0;
+  color: var(--color-neutrals-grey);
+}
+
 .left-arrow {
   background-color: transparent;
   border: 0;
   border-radius: 20%;
+  display: none;
   left: -10px;
   padding: 10px 20px;
   position: absolute;
@@ -99,6 +110,7 @@ h3 {
   background-color: transparent;
   border: 0;
   border-radius: 20%;
+  display: none;
   padding: 10px 20px;
   position: absolute;
   top: 50%;
@@ -112,12 +124,12 @@ h3 {
   color: white;
 }
 
-.hidden {
-  display: none;
-}
+@media (min-width: 768px) {
+  .left-arrow {
+    display: block;
+  }
 
-.instructions-link {
-  background-color: transparent;
-  border: 0;
-  color: var(--color-neutrals-grey);
+  .right-arrow {
+    display: block;
+  }
 }
