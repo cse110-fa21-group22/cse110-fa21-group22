@@ -3,7 +3,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint no-unused-vars: "error" */
-jest.setTimeout(30000);
+jest.setTimeout(40000);
 
 // Links for testing on deployment
 const HOME_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/home.html';
@@ -62,42 +62,6 @@ describe('Simple User Flow', () => {
     });
     // Expect there that array of recipe cards in explore is length 10
     expect(exploreCards).toBe(10);
-  });
-
-  // Check refresh button works and loads new recipes
-  it('Check refresh button works and loads new recipes', async () => {
-    const firstSet = [];
-    await page.waitForTimeout('500');
-    
-    // Gets the first 3 recipe cards before refresh
-    const exploreCards = await page.$$('recipe-card-component');
-    for (let i = 0; i < 3; i += 1) {
-      const root = await exploreCards[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-      firstSet.push(innerText['_remoteObject'].value);
-    }
-    
-    await page.waitForTimeout('500');
-    // Clicks refresh button
-    const refreshButton = await page.$('.home-page-popular-refresh');
-    await refreshButton.click();
-    await page.waitForTimeout('10000');
-
-    const newRecipeCards = await page.$$('recipe-card-component');
-    let isDifferent = true;
-    for (let i = 0; i < 3; i += 1) {
-      const root = await newRecipeCards[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-
-      if (firstSet[i] == innerText['_remoteObject'].value) {
-        isDifferent = false;
-        break;
-      }
-    }
-
-    expect(isDifferent).toBe(true);
   });
 
   // Now, favorite a recipe and check it is added to master-favorites
