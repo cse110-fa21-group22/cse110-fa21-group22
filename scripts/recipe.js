@@ -227,6 +227,8 @@ async function init() {
         }
         favoriteIcon.src = '../assets/favorite.svg';
       }
+      removeRecipebyList('favorites-master', recipe.id);
+
     }
   });
 
