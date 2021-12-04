@@ -12,6 +12,7 @@ import search from './search.js';
  * @returns {none}
  */
 function init() {
+  console.log('init');
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
@@ -121,6 +122,10 @@ function init() {
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
   const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
+  console.log(checkboxesCuisine);
+  console.log(checkboxesDiet);
+  console.log(checkboxesTime);
+  console.log(checkboxesType);
   let cuisineFilter = '';
   let dietFilter = '';
   let timeFilter = '';
