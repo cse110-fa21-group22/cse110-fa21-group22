@@ -59,6 +59,13 @@ function init() {
     return searchTerm;
   }
 
+  // Automatically parse the query string and run a search on page load
+  let searchTerm = parseQueryString();
+  const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
+  navbarInputbox.value = `${searchTerm}`;
+  const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
+  window.localStorage.removeItem('QueryList');
+
   /**
    * This function clears the results on the search page
    * @param {none}
@@ -79,7 +86,6 @@ function init() {
     // Clear the results before searching
     clearResults();
     // Add the recipes to the page
-    // eslint-disable-next-line no-use-before-define
     searchKeyword.innerHTML = `${inputList.query}`;
     for (const recipe in results) {
       const recipeCard = document.createElement('recipe-card-component');
@@ -88,13 +94,6 @@ function init() {
     }
   }
 
-  // Automatically parse the query string and run a search on page load
-  let searchTerm = parseQueryString();
-  const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.value = `${searchTerm}`;
-  // Send a query to spoonacular
-  const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
-  window.localStorage.removeItem('QueryList');
   const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
