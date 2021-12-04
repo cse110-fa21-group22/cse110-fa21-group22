@@ -59,13 +59,6 @@ function init() {
     return searchTerm;
   }
 
-  // Automatically parse the query string and run a search on page load
-  let searchTerm = parseQueryString();
-  const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.value = `${searchTerm}`;
-  const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
-  window.localStorage.removeItem('QueryList');
-
   /**
    * This function clears the results on the search page
    * @param {none}
@@ -86,7 +79,6 @@ function init() {
     // Clear the results before searching
     clearResults();
     // Add the recipes to the page
-    searchKeyword.innerHTML = `${inputList.query}`;
     for (const recipe in results) {
       const recipeCard = document.createElement('recipe-card-component');
       recipeCard.recipe = results[recipe];
@@ -94,6 +86,12 @@ function init() {
     }
   }
 
+  // Automatically parse the query string and run a search on page load
+  let searchTerm = parseQueryString();
+  const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
+  navbarInputbox.value = `${searchTerm}`;
+  const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
+  window.localStorage.removeItem('QueryList');
   const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
@@ -120,6 +118,7 @@ function init() {
     }
   }
   search(inputList).then((value) => {
+    searchKeyword.innerHTML = `${inputList.query}`;
     const pageNumber = Math.ceil(value.totalResults / 10);
     const totalResult = document.querySelector('.totalResults').querySelector('span');
     const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
@@ -196,6 +195,7 @@ function init() {
         currPageNumberPlace.innerHTML = '1';
         totalPageNumberPlace.innerHTML = `${pageNumber}`;
       }
+      searchKeyword.innerHTML = `${inputList.query}`;
       showResults(value.results);
     });
   });
