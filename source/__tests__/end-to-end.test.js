@@ -352,7 +352,7 @@ describe('Simple Favorites Flow', () => {
     newLength = exploreCards2.length;
     console.log(newLength);
     await exploreCards2[newLength - 1].click();
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(4000);
 
     // Get image source
     const src = await page.evaluate(() => {
