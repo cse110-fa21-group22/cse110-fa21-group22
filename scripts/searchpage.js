@@ -106,7 +106,7 @@ function init() {
   }
 
   // Automatically parse the query string and run a search on page load
-  const searchTerm = parseQueryString();
+  let searchTerm = parseQueryString();
   console.log(searchTerm);
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
   navbarInputbox.value = `${searchTerm}`;
@@ -163,6 +163,11 @@ function init() {
   // apply for the filter search
   const applyButton = sidebarContent.querySelector('.apply-filter');
   applyButton.addEventListener('click', () => {
+    searchTerm = parseQueryString();
+    inputList.query = searchTerm;
+    inputList.number = 10;
+    inputList.offset = 0;
+    inputList.recipeNutrition = 'true';
     for (let i = 0; i < checkboxesCuisine.length; i += 1) {
       const item = checkboxesCuisine[i];
       if (item.checked) {
