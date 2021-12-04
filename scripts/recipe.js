@@ -214,14 +214,20 @@ async function init() {
       favoriteIcon.src = '../assets/favorite-selected.svg';
       showDropdown(recipe, isMobile);
     } else {
-      isFavorite = false;
-      const containers = document.querySelectorAll('.container');
-      // goes through all the lists and deletes if it is in list
-      for (let i = 0; i < containers.length; i += 1) {
-        removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+      let toRemove = false;
+      // eslint-disable-next-line
+      toRemove = window.confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
+      // continues to remove the recipe from list if user confirms they want to remove
+      if (toRemove) {
+        isFavorite = false;
+        const containers = document.querySelectorAll('.container');
+        // goes through all the lists and deletes if it is in list
+        for (let i = 0; i < containers.length; i += 1) {
+          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+        }
+        favoriteIcon.src = '../assets/favorite.svg';
       }
       removeRecipebyList('favorites-master', recipe.id);
-      favoriteIcon.src = '../assets/favorite.svg';
     }
   });
 
