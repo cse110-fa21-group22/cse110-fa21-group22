@@ -12,7 +12,6 @@ import search from './search.js';
  * @returns {none}
  */
 function init() {
-  console.log('init');
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
@@ -106,12 +105,12 @@ function init() {
     }
   }
 
+  console.log('init');
   // Automatically parse the query string and run a search on page load
   let searchTerm = parseQueryString();
   console.log(searchTerm);
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
   navbarInputbox.value = `${searchTerm}`;
-
   // Send a query to spoonacular
   let inputList = [];
   inputList.query = searchTerm;
@@ -165,10 +164,58 @@ function init() {
     showResults(value.results);
   });
 
+  navbarInputbox.addEventListener('submit', () => {
+    console.log('inputbox listener');
+    searchTerm = parseQueryString();
+    console.log(searchTerm);
+    navbarInputbox.value = `${searchTerm}`;
+    inputList.query = searchTerm;
+    inputList.number = 10;
+    inputList.offset = 0;
+    inputList.recipeNutrition = 'true';
+    for (let i = 0; i < checkboxesCuisine.length; i += 1) {
+      const item = checkboxesCuisine[i];
+      if (item.checked) {
+        cuisineFilter = `${cuisineFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesDiet.length; i += 1) {
+      const item = checkboxesDiet[i];
+      if (item.checked) {
+        dietFilter = `${dietFilter + item.id},`;
+      }
+    }
+    for (let i = 0; i < checkboxesTime.length; i += 1) {
+      const item = checkboxesTime[i];
+      if (item.checked) {
+        timeFilter = Math.max(timeFilter, item.id);
+      }
+    }
+    for (let i = 0; i < checkboxesType.length; i += 1) {
+      const item = checkboxesType[i];
+      if (item.checked) {
+        typeFilter = `${typeFilter + item.id},`;
+      }
+    }
+    if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
+    if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
+    if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
+    inputList.cuisineFilter = cuisineFilter;
+    inputList.dietFilter = dietFilter;
+    inputList.timeFilter = timeFilter;
+    inputList.typeFilter = typeFilter;
+    search(inputList).then((value) => {
+      showResults(value.results);
+    });
+  });
+
   // apply for the filter search
   const applyButton = sidebarContent.querySelector('.apply-filter');
   applyButton.addEventListener('click', () => {
+    console.log('applybutton listener');
     searchTerm = parseQueryString();
+    navbarInputbox.value = `${searchTerm}`;
+    console.log(searchTerm);
     inputList.query = searchTerm;
     inputList.number = 10;
     inputList.offset = 0;
