@@ -269,7 +269,7 @@ async function init() {
     // TODO: need to check the values that are clicked
     if (!isFavorite) {
       if (!checkCheckedList()) {
-        //eslint-disable-line
+        // eslint-disable-line
         window.alert(`Please add to at least one list`);
       }
       else {
