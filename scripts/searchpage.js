@@ -76,8 +76,6 @@ function init() {
    * @returns {none}
    */
   function showResults(results) {
-    console.log(results);
-
     // Clear the results before searching
     clearResults();
     // Add the recipes to the page
@@ -92,7 +90,6 @@ function init() {
 
   // Automatically parse the query string and run a search on page load
   let searchTerm = parseQueryString();
-  console.log(searchTerm);
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
   navbarInputbox.value = `${searchTerm}`;
   // Send a query to spoonacular
