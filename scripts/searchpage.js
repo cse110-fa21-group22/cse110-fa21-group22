@@ -1,6 +1,6 @@
 /**
  * Handles the search page.
- *  Different from search.js because search.js handles search across all html pages that use the search function.
+ * Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
 import search from './search.js';
@@ -64,15 +64,12 @@ function init() {
 
   /**
    * This function parses the query string to retrieve relevant information
-   * @param {none}
    * @returns {string} the user's search term
    */
   function parseQueryString() {
     const queryString = window.location.search;
-
     // Get rid of '?search='
     let searchTerm = queryString.substring(8);
-
     // Convert string back to original formatting, with disallowed characters gone
     searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', '');
     return searchTerm;
@@ -112,11 +109,10 @@ function init() {
 
   // Automatically parse the query string and run a search on page load
   const searchTerm = parseQueryString();
-  let inputList = [];
-
   console.log(searchTerm);
 
   // Send a query to spoonacular
+  let inputList = [];
   inputList.query = searchTerm;
   inputList.number = 10;
   inputList.offset = 0;
