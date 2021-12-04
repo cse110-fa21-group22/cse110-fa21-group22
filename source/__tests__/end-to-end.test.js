@@ -3,7 +3,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint no-unused-vars: "error" */
-jest.setTimeout(20000);
+jest.setTimeout(30000);
 
 // Links for testing on deployment
 const HOME_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/home.html';
@@ -14,7 +14,7 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
 
-const prNum = 272; // change -> (your pr number);
+const prNum = 0; // change -> (your pr number);
 
 let homeLink = '';
 let searchLink = '';
@@ -77,16 +77,17 @@ describe('Simple User Flow', () => {
       const innerText = await name.getProperty('innerText');
       firstSet.push(innerText['_remoteObject'].value);
     }
-
+    
+    await page.waitForTimeout('500');
     // Clicks refresh button
     const refreshButton = await page.$('.home-page-popular-refresh');
     await refreshButton.click();
-    await page.waitForTimeout('3000');
+    await page.waitForTimeout('10000');
 
     const newRecipeCards = await page.$$('recipe-card-component');
     let isDifferent = true;
     for (let i = 0; i < 3; i += 1) {
-      const root = await exploreCards[i].getProperty('shadowRoot');
+      const root = await newRecipeCards[i].getProperty('shadowRoot');
       const name = await root.$('.recipe-name');
       const innerText = await name.getProperty('innerText');
 
