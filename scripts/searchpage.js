@@ -102,44 +102,6 @@ function init() {
     } else {
       nextButton.disabled = false;
     }
-
-    previousButton.addEventListener('click', () => {
-      const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
-      inputList.offset -= 10;
-      const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
-      console.log('Prev: ', currPageNumber);
-      console.log('Prev: ', nextPageNumber);
-      search(inputList).then((value) => {
-        showResults(value.results);
-      });
-      currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
-      if (inputList.offset === 0) {
-        previousButton.disabled = true;
-        nextButton.disabled = false;
-      } else {
-        previousButton.disabled = false;
-        nextButton.disabled = false;
-      }
-    });
-  
-    nextButton.addEventListener('click', () => {
-      const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
-      inputList.offset += 10;
-      const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
-      console.log('Next: ', currPageNumber);
-      console.log('Next: ', nextPageNumber);
-      search(inputList).then((value) => {
-        showResults(value.results);
-      });
-      currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
-      if (nextPageNumber === parseInt(totalPageNumberPlace.innerHTML, 10)) {
-        previousButton.disabled = false;
-        nextButton.disabled = true;
-      } else {
-        previousButton.disabled = false;
-        nextButton.disabled = false;
-      }
-    });
   }
 
   // Automatically parse the query string and run a search when page reload
@@ -187,7 +149,7 @@ function init() {
     currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
     totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
     showResults(value.results);
-    initializeButton()
+    initializeButton();
   });
 
   // apply for the filter search
@@ -203,10 +165,6 @@ function init() {
     let dietFilter = '';
     let timeFilter = '';
     let typeFilter = '';
-    inputList.query = searchTerm;
-    inputList.number = 10;
-    inputList.offset = 0;
-    inputList.recipeNutrition = 'true';
     for (let i = 0; i < checkboxesCuisine.length; i += 1) {
       const item = checkboxesCuisine[i];
       if (item.checked) {
@@ -258,8 +216,51 @@ function init() {
       }
       document.querySelector('.search-word').innerHTML = `${inputList.query}`;
       showResults(value.results);
-      initializeButton()
+      initializeButton();
     });
+  });
+
+  const previousButton = document.querySelector('.previous-button');
+  const nextButton = document.querySelector('.next-button');
+  previousButton.addEventListener('click', () => {
+    const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    inputList.offset -= 10;
+    const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    console.log('Prev: ', currPageNumber);
+    console.log('Prev: ', nextPageNumber);
+    search(inputList).then((newValue) => {
+      showResults(newValue.results);
+    });
+    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
+    if (inputList.offset === 0) {
+      previousButton.disabled = true;
+      nextButton.disabled = false;
+    } else {
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+    }
+  });
+
+  nextButton.addEventListener('click', () => {
+    const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    inputList.offset += 10;
+    const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
+    console.log('Next: ', currPageNumber);
+    console.log('Next: ', nextPageNumber);
+    search(inputList).then((newValue) => {
+      showResults(newValue.results);
+    });
+    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+    const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace(`${currPageNumber}`, `${nextPageNumber}`);
+    if (nextPageNumber === parseInt(totalPageNumberPlace.innerHTML, 10)) {
+      previousButton.disabled = false;
+      nextButton.disabled = true;
+    } else {
+      previousButton.disabled = false;
+      nextButton.disabled = false;
+    }
   });
 }
 
