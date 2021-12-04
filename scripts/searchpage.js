@@ -85,12 +85,16 @@ function init() {
     }
   }
 
-  // Automatically parse the query string and run a search on page load
+  // Automatically parse the query string and run a search when page reload
   let searchTerm = parseQueryString();
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
   navbarInputbox.value = `${searchTerm}`;
   const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
+  inputList.query = searchTerm;
+  if (searchTerm === '') {
+    inputList.sort = 'random';
+  }
   const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');

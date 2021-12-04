@@ -26,8 +26,12 @@ export default async function search(inputList) {
   const tokenSearchInput = `&query=${inputList.query}`;
   const tokenNumResults = `&number=${inputList.number}`;
   const tokenOffset = `&offset=${inputList.offset}`;
+  const tokenSort = `&sort=${inputList.sort}`;
   const tokenNutritionBool = `&addRecipeNutrition=${inputList.recipeNutrition}`;
-  let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput;
+  let fetchEndpoint = searchUrl + tokenKey;
+  if (inputList.query !== '') {
+    fetchEndpoint += tokenSearchInput;
+  }
   if (inputList.cuisineFilter !== '') {
     const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
     fetchEndpoint += tokenCuisine;
@@ -44,7 +48,7 @@ export default async function search(inputList) {
     const tokenType = `&type=${inputList.typeFilter}`;
     fetchEndpoint += tokenType;
   }
-  fetchEndpoint += tokenNutritionBool + tokenOffset + tokenNumResults;
+  fetchEndpoint += tokenNutritionBool + tokenSort + tokenOffset + tokenNumResults;
   console.log(fetchEndpoint);
 
   // fetch the data
