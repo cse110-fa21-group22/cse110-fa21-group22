@@ -121,10 +121,6 @@ function init() {
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
   const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
-  console.log(checkboxesCuisine);
-  console.log(checkboxesDiet);
-  console.log(checkboxesTime);
-  console.log(checkboxesType);
   let cuisineFilter = '';
   let dietFilter = '';
   let timeFilter = '';
