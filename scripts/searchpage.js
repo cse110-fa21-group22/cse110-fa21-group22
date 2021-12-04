@@ -141,6 +141,13 @@ function init() {
   }
   search(inputList).then((value) => {
     showResults(value.results);
+    const pageNumber = Math.ceil(value.totalResults / 10);
+    const totalResult = document.querySelector('.totalResults').querySelector('span');
+    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
+    const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
+    totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
+    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
+    totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
   });
 
   // apply for the filter search
@@ -186,7 +193,6 @@ function init() {
     }
     if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
     if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
-    // if (timeFilter.length !== 0) timeFilter = timeFilter.substring(0, timeFilter.length - 1);
     if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
     inputList.cuisineFilter = cuisineFilter;
     inputList.dietFilter = dietFilter;
@@ -212,16 +218,6 @@ function init() {
       }
       showResults(value.results);
     });
-  });
-
-  search(inputList).then((value) => {
-    const pageNumber = Math.ceil(value.totalResults / 10);
-    const totalResult = document.querySelector('.totalResults').querySelector('span');
-    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
-    const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-    totalResult.innerHTML = totalResult.innerHTML.replace('0', value.totalResults);
-    currPageNumberPlace.innerHTML = currPageNumberPlace.innerHTML.replace('0', '1');
-    totalPageNumberPlace.innerHTML = totalPageNumberPlace.innerHTML.replace('0', `${pageNumber}`);
   });
 
   // Section is for next and previous buttons
