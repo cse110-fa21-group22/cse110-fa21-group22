@@ -213,7 +213,7 @@ async function init() {
       showDropdown(recipe, isMobile);
     } else {
       let toRemove = false;
-      // eslint-disable-next-line no-restricted-globals
+      // eslint-disable-next-line
       toRemove = window.confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
       // continues to remove the recipe from list if user confirms they want to remove
       if (toRemove) {
