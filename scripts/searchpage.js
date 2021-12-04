@@ -171,7 +171,6 @@ function init() {
     search(inputList).then((value) => {
       console.log('filter search start');
       if (value.totalResults === 0) {
-        console.log('pageNum === 0');
         const pageNumber = 0;
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
@@ -180,7 +179,6 @@ function init() {
         currPageNumberPlace.innerHTML = '0';
         totalPageNumberPlace.innerHTML = `${pageNumber}`;
       } else {
-        console.log('pageNum !== 0');
         const pageNumber = Math.ceil(value.totalResults / 10);
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
