@@ -114,6 +114,12 @@ function init() {
   // Send a query to spoonacular
   const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
+  const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
+  const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
+  const checkboxesTime = sidebarContent.querySelectorAll('.time');
+  const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
+  // Set checkboxes
+  
   search(inputList).then((value) => {
     showResults(value.results);
   });
@@ -123,15 +129,10 @@ function init() {
   applyButton.addEventListener('click', () => {
     searchTerm = parseQueryString();
     navbarInputbox.value = `${searchTerm}`;
-    const inputList = [];
     inputList.query = searchTerm;
     inputList.number = 10;
     inputList.offset = 0;
     inputList.recipeNutrition = 'true';
-    const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
-    const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
-    const checkboxesTime = sidebarContent.querySelectorAll('.time');
-    const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
     let cuisineFilter = '';
     let dietFilter = '';
     let timeFilter = '';
