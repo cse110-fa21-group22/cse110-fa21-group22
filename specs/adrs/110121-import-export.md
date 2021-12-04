@@ -1,6 +1,6 @@
 # Import/Export
 
-- Status: accepted
+- Status: deprecated
 - Deciders: all
 - Date: 11/01/2021
 

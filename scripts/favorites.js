@@ -2,6 +2,8 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  */
 import { addRecipebyList } from '../components/UserLocalStorage.js';
+
+// eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `&apiKey=${apiKey}`;
