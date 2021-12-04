@@ -176,6 +176,7 @@ class RecipeCard extends HTMLElement {
         return true;
       }
     }
+    return false;
   }
 
   /**
@@ -291,6 +292,7 @@ class RecipeCard extends HTMLElement {
       // TODO: need to check the values that are clicked
       if (!this.isFavorite) {
         if (!this.checkCheckedList()) {
+          //eslint-disable-line
           window.alert(`Please check at least one list to be added to`);
         }
         else {
