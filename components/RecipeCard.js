@@ -22,6 +22,7 @@ recipeCardTemplate.innerHTML = `
       <input type="text" class="user-input">
     </label>
     <button class="submit">Add to Favorite</button>
+    <button class="cancel">Cancel</button>
   </div>
 `;
 
@@ -211,6 +212,7 @@ class RecipeCard extends HTMLElement {
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
     const favoriteRemove = this.shadow.querySelector('.recipe-remove');
     const submitFavorites = this.shadow.querySelector('.submit');
+    const cancelFavorites = this.shadow.querySelector('.cancel');
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
 
     /*
@@ -310,6 +312,12 @@ class RecipeCard extends HTMLElement {
           location.reload();
         }
       }
+      event.stopPropagation();
+    });
+
+    // cancel button for favorites dropdown
+    cancelFavorites.addEventListener('click', (event) => {
+      recipeCard.hideDropdown();
       event.stopPropagation();
     });
   }
