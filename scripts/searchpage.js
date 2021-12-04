@@ -43,7 +43,6 @@ function init() {
     navbarComponent.shadow.querySelector('.sidebar-button').click();
   }
 
-  const searchKeyword = document.querySelector('.search-word');
   const recipeSection = document.querySelector('.recipe-section');
 
   /**
@@ -118,7 +117,7 @@ function init() {
     }
   }
   search(inputList).then((value) => {
-    searchKeyword.innerHTML = `${inputList.query}`;
+    document.querySelector('.search-word').innerHTML = `${inputList.query}`;
     const pageNumber = Math.ceil(value.totalResults / 10);
     const totalResult = document.querySelector('.totalResults').querySelector('span');
     const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
@@ -195,7 +194,7 @@ function init() {
         currPageNumberPlace.innerHTML = '1';
         totalPageNumberPlace.innerHTML = `${pageNumber}`;
       }
-      searchKeyword.innerHTML = `${inputList.query}`;
+      document.querySelector('.search-word').innerHTML = `${inputList.query}`;
       showResults(value.results);
     });
   });
