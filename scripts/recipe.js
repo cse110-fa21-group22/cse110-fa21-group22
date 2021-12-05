@@ -317,88 +317,90 @@ async function init() {
 
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps');
-  const instructionsList = recipe.analyzedInstructions[0].steps;
-  const totalStep = instructionsList.length;
-  console.log(totalStep);
   let stepNum = 1;
-  for (const instructionNumber in instructionsList) {
-    const currStep = document.createElement('li');
-    currStep.innerText = instructionsList[instructionNumber].step;
-    currStep.className = 'normal-step';
-    currStep.id = `step${stepNum}`;
-    recipeSteps.appendChild(currStep);
-    if (instructionsList[parseInt(instructionNumber, 10) + 1] != null) {
-      const prevButton = document.createElement('button');
-      prevButton.innerHTML = `Previous`;
-      prevButton.className = 'prevStep';
-      prevButton.id = `prevButton${stepNum}`;
-      const nextButton = document.createElement('button');
-      nextButton.innerHTML = `Next`;
-      nextButton.className = 'nextStep';
-      nextButton.id = `nextButton${stepNum}`;
-      if (!isMobile && stepNum === 1) {
-        const style = window.getComputedStyle(currStep, null);
-        const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
-        // eslint-disable-next-line camelcase
-        const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
-        // eslint-disable-next-line camelcase
-        const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
-        // eslint-disable-next-line camelcase
-        prevButton.style.marginTop = `${margin_top_prev}px`;
-        prevButton.style.marginLeft = `${90}vw`;
-        prevButton.style.position = 'absolute';
-        // eslint-disable-next-line camelcase
-        nextButton.style.marginTop = `${margin_top}px`;
-        nextButton.style.marginLeft = `${90}vw`;
-        nextButton.style.position = 'absolute';
-      } else if (!isMobile && stepNum !== 1) {
-        const style = window.getComputedStyle(currStep, null);
-        const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
-        // eslint-disable-next-line camelcase
-        const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 5;
-        // eslint-disable-next-line camelcase
-        const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
-        // eslint-disable-next-line camelcase
-        prevButton.style.marginTop = `${margin_top_prev}px`;
-        prevButton.style.marginLeft = `${90}vw`;
-        prevButton.style.position = 'absolute';
-        // eslint-disable-next-line camelcase
-        nextButton.style.marginTop = `${margin_top}px`;
-        nextButton.style.marginLeft = `${90}vw`;
-        nextButton.style.position = 'absolute';
+  if (recipe.analyzedInstructions.length !== 0) {
+    const instructionsList = recipe.analyzedInstructions[0].steps;
+    const totalStep = instructionsList.length;
+    console.log(totalStep);
+    for (const instructionNumber in instructionsList) {
+      const currStep = document.createElement('li');
+      currStep.innerText = instructionsList[instructionNumber].step;
+      currStep.className = 'normal-step';
+      currStep.id = `step${stepNum}`;
+      recipeSteps.appendChild(currStep);
+      if (instructionsList[parseInt(instructionNumber, 10) + 1] != null) {
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = `Previous`;
+        prevButton.className = 'prevStep';
+        prevButton.id = `prevButton${stepNum}`;
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = `Next`;
+        nextButton.className = 'nextStep';
+        nextButton.id = `nextButton${stepNum}`;
+        if (!isMobile && stepNum === 1) {
+          const style = window.getComputedStyle(currStep, null);
+          const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
+          // eslint-disable-next-line camelcase
+          const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 20;
+          // eslint-disable-next-line camelcase
+          const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
+          // eslint-disable-next-line camelcase
+          prevButton.style.marginTop = `${margin_top_prev}px`;
+          prevButton.style.marginLeft = `${90}vw`;
+          prevButton.style.position = 'absolute';
+          // eslint-disable-next-line camelcase
+          nextButton.style.marginTop = `${margin_top}px`;
+          nextButton.style.marginLeft = `${90}vw`;
+          nextButton.style.position = 'absolute';
+        } else if (!isMobile && stepNum !== 1) {
+          const style = window.getComputedStyle(currStep, null);
+          const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
+          // eslint-disable-next-line camelcase
+          const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 5;
+          // eslint-disable-next-line camelcase
+          const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
+          // eslint-disable-next-line camelcase
+          prevButton.style.marginTop = `${margin_top_prev}px`;
+          prevButton.style.marginLeft = `${90}vw`;
+          prevButton.style.position = 'absolute';
+          // eslint-disable-next-line camelcase
+          nextButton.style.marginTop = `${margin_top}px`;
+          nextButton.style.marginLeft = `${90}vw`;
+          nextButton.style.position = 'absolute';
+        }
+        recipeSteps.appendChild(prevButton);
+        recipeSteps.appendChild(nextButton);
+      } else {
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = `Previous`;
+        prevButton.className = 'prevStep';
+        prevButton.id = `prevButton${stepNum}`;
+        const backButton = document.createElement('button');
+        backButton.innerHTML = `Restart`;
+        backButton.className = 'backButton';
+        backButton.id = `backButton`;
+        backButton.style.display = 'none';
+        if (!isMobile) {
+          const style = window.getComputedStyle(currStep, null);
+          const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
+          // eslint-disable-next-line camelcase
+          const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 5;
+          // eslint-disable-next-line camelcase
+          const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
+          backButton.style.marginLeft = `${90}vw`;
+          // eslint-disable-next-line camelcase
+          backButton.style.marginTop = `${margin_top}px`;
+          backButton.style.position = 'absolute';
+          // eslint-disable-next-line camelcase
+          prevButton.style.marginTop = `${margin_top_prev}px`;
+          prevButton.style.marginLeft = `${90}vw`;
+          prevButton.style.position = 'absolute';
+        }
+        recipeSteps.appendChild(prevButton);
+        recipeSteps.appendChild(backButton);
       }
-      recipeSteps.appendChild(prevButton);
-      recipeSteps.appendChild(nextButton);
-    } else {
-      const prevButton = document.createElement('button');
-      prevButton.innerHTML = `Previous`;
-      prevButton.className = 'prevStep';
-      prevButton.id = `prevButton${stepNum}`;
-      const backButton = document.createElement('button');
-      backButton.innerHTML = `Restart`;
-      backButton.className = 'backButton';
-      backButton.id = `backButton`;
-      backButton.style.display = 'none';
-      if (!isMobile) {
-        const style = window.getComputedStyle(currStep, null);
-        const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
-        // eslint-disable-next-line camelcase
-        const margin_top = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 5;
-        // eslint-disable-next-line camelcase
-        const margin_top_prev = ((parseFloat(stepHeight, 10) * -1) / 2) * 30 - 30;
-        backButton.style.marginLeft = `${90}vw`;
-        // eslint-disable-next-line camelcase
-        backButton.style.marginTop = `${margin_top}px`;
-        backButton.style.position = 'absolute';
-        // eslint-disable-next-line camelcase
-        prevButton.style.marginTop = `${margin_top_prev}px`;
-        prevButton.style.marginLeft = `${90}vw`;
-        prevButton.style.position = 'absolute';
-      }
-      recipeSteps.appendChild(prevButton);
-      recipeSteps.appendChild(backButton);
+      stepNum += 1;
     }
-    stepNum += 1;
   }
 
   const totalStepNum = stepNum - 1;
@@ -422,7 +424,7 @@ async function init() {
     firstNextButton.style.display = 'block';
     firstPrevButton.style.display = 'none';
   }
-  
+
   if (totalStepNum === 2) {
     for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
       if (currStepNum === 1) {
