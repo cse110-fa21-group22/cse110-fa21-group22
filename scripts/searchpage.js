@@ -78,7 +78,7 @@ function init() {
     // Get rid of '?search='
     let searchTerm = queryString.substring(8);
     // Convert string back to original formatting, with disallowed characters gone
-    searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', '');
+    searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', ' ');
     return searchTerm;
   }
 
