@@ -12,22 +12,6 @@ const storage = window.localStorage;
 const recipeLists = [];
 const selectedRecipes = [];
 
-async function getRecipeArr(idArr) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${idArr.join(',')}${tokenKey}&includeNutrition=true`;
-
-  console.log('fetch_endpoint', fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in favorite page failed');
-      console.error(error);
-    });
-
-  console.log('result is: ', fetchResults);
-  return fetchResults;
-}
-
 async function init() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -50,17 +34,11 @@ async function init() {
 
   const mainSection = document.querySelector('.favorites-page');
   for (let i = 0; i < localStorage.length; i += 1) {
-    // do not display master favorites on favorites page
+    // Do not display master favorites on favorites page
     if (localStorage.key(i) === 'favorites-master') continue;
-    // get one list
     const userList = document.createElement('user-list');
-    const arrRecipeId = JSON.parse(storage.getItem(localStorage.key(i)));
-    console.log('arrRecipeId = ', arrRecipeId);
-    let recipeArr = [];
-
-    // eslint-disable-next-line no-await-in-loop
-    if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
-    userList.list = recipeArr;
+    const arrRecipeObj = JSON.parse(storage.getItem(localStorage.key(i)));
+    userList.list = arrRecipeObj;
     userList.listName = localStorage.key(i);
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
@@ -80,23 +58,6 @@ async function init() {
 }
 
 window.addEventListener('DOMContentLoaded', init);
-
-// eslint-disable-next-line no-unused-vars
-async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
-
-  // console.log("fetch_endpoint", fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in favorite page failed');
-      console.error(error);
-    });
-
-  // console.log("result is: ", fetchResults);
-  return fetchResults;
-}
 
 let editMode = false;
 const editButton = document.getElementById('edit');
