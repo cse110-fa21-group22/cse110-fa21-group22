@@ -22,7 +22,7 @@ export function checkFavorite(recipeObj) {
 
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === recipeObj) {
+    if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
       return true;
     }
   }
@@ -39,7 +39,7 @@ export function addRecipe(recipeObj) {
 
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === recipeObj) {
+    if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
       return;
     }
   }
@@ -106,7 +106,7 @@ export function addRecipebyList(listName, recipeObj) {
   const list = storage.getItem(listName);
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    if (array[i] === recipeObj) {
+    if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
       return;
     }
   }
