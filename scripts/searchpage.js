@@ -140,6 +140,7 @@ function init() {
     inputList = {};
     inputList.number = 10;
     inputList.offset = 0;
+    inputList.sort = '';
     inputList.recipeNutrition = 'true';
     inputList.cuisineFilter = '';
     inputList.dietFilter = '';
