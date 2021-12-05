@@ -280,6 +280,17 @@ async function init() {
     event.stopPropagation();
   });
 
+  // Email the link of recipe
+  // Receiver is blank and should be entered by user
+  // Body of email is a short message with the link to recipe
+  const emailButton = document.querySelector('.email-recipe');
+  emailButton.addEventListener('click', () => {
+    const recipeURL = window.location;
+    const subject = `${recipe.title} Recipe`;
+    const body = `Here is a yummy recipe I found on ${recipeURL}. Enjoy!`;
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  });
+
   // Set prep time
   const prepTime = document.querySelector('#prep-time');
   const time = recipe.readyInMinutes;
@@ -593,17 +604,6 @@ async function init() {
       }
     }
   }
-
-  // Email the link of recipe
-  // Receiver is blank and should be entered by user
-  // Body of email is a short message with the link to recipe
-  const emailButton = document.querySelector('.email-recipe');
-  emailButton.addEventListener('click', () => {
-    const recipeURL = window.location;
-    const subject = `${recipe.title} Recipe`;
-    const body = `Here is a yummy recipe I found on ${recipeURL}. Enjoy!`;
-    window.location.href = `mailto:?subject=${subject}&body=${body}`;
-  });
 }
 
 window.addEventListener('DOMContentLoaded', init);
