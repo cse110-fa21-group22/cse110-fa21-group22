@@ -389,8 +389,6 @@ async function init() {
   }
 
   const totalStepNum = stepNum - 1;
-  console.log('total steps number: ', totalStepNum);
-
   // Initialize the first step to current step
   if (totalStepNum === 1) {
     const firstStep = document.querySelector('#step1');
