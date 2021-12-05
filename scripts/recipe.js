@@ -75,12 +75,12 @@ function initializeHearts(isFavorite) {
 
 const listEntryTemplate = document.createElement('template');
 listEntryTemplate.innerHTML = `
-   <label class="container">
-     <span>My Favorites</span>
-     <input type="checkbox">
-     <span class="checkmark"> </span>
-   </label>
- `;
+  <label class="container">
+	  <span>My Favorites</span>
+	  <input type="checkbox">
+	  <span class="checkmark"> </span>
+  </label>
+`;
 
 /**
  * Initialize the dropdown content
@@ -210,15 +210,15 @@ async function init() {
   // Set recipe title
   const recipeName = document.querySelector('.recipe-name');
   recipeName.innerHTML = `${recipe.title}
-       <img class="favorite-heart" src="../assets/favorite.svg"/ alt="favorite">
-       <div class="dropdown-content">
-         <label class="entry">Create a new list: 
-            <input type="text" class="user-input">
-         </label>
-         <button class="submit">Add to Favorite</button>
-         <button class="cancel">Cancel</button>
-      </div>
-      <button class="email-recipe">Email Recipe</button>`;
+      <img class="favorite-heart" src="../assets/favorite.svg"/ alt="favorite">
+      <div class="dropdown-content">
+        <label class="entry">Create a new list: 
+           <input type="text" class="user-input">
+        </label>
+        <button class="submit">Add to Favorite</button>
+        <button class="cancel">Cancel</button>
+     </div>
+     <button class="email-recipe">Email Recipe</button>`;
   /*
    * show the drop-down box and change the heart color
    */
