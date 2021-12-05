@@ -2,6 +2,7 @@
  * Handles all queries related to spoonacular api.
  */
 // eslint-disable-next-line import/no-unresolved
+import fetch from 'node-fetch';
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;

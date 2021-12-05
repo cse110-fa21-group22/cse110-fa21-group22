@@ -41,7 +41,7 @@ function lookup() {
  * @param   {number} time - A time in minutes
  * @returns {string} - A string in the form 'XX hours XX minutes'
  */
-function formatTime(time) {
+export default function formatTime(time) {
   if (parseInt(time, 10) === 1) return `${time.toString()} minute`;
   if (parseInt(time, 10) < 70) return `${time.toString()} minutes`;
   const hour = Math.floor(time / 60);
