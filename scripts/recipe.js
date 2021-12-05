@@ -3,7 +3,7 @@
  * pulls up for it.
  */
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
-
+import search from './search.js';
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
