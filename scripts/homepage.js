@@ -94,6 +94,7 @@ function init() {
   inputList.sort = 'random';
   inputList.recipeInformation = 'true';
   inputList.recipeNutrition = 'true';
+  inputList.fillIngredients = 'true';
   inputList.cuisineFilter = '';
   inputList.dietFilter = '';
   inputList.timeFilter = '';

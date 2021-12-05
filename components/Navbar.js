@@ -117,6 +117,7 @@ class Navbar extends HTMLElement {
         inputList.sort = '';
         inputList.recipeInformation = 'true';
         inputList.recipeNutrition = 'true';
+        inputList.fillIngredients = 'true';
         const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
         const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
         const checkboxesTime = sidebarContent.querySelectorAll('.time');

@@ -15,6 +15,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * @param {string} inputList.sort The token for sort mode
  * @param {boolean} inputList.recipeInformation The token request for recipe information
  * @param {boolean} inputList.recipeNutrition The token request for nutrition information
+ * @param {boolean} inputList.fillIngredients The token request for ingredients information
  * @param {string} inputList.cuisineFilter The filter which select the cuisine(s) of the recipes.
  * @param {string} inputList.dietFilter The filter which select the diet(s) of the recipes.
  * @param {int} inputList.timeFilter The filter which select the max ready time of the recipes.
@@ -30,6 +31,7 @@ export default async function search(inputList) {
   const tokenSort = `&sort=${inputList.sort}`;
   const tokenrecipeInformation = `&addRecipeInformation=${inputList.recipeInformation}`;
   const tokenNutritionBool = `&addRecipeNutrition=${inputList.recipeNutrition}`;
+  const tokenFillIngredients = `&fillIngredients=${inputList.fillIngredients}`;
   let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput;
   if (inputList.cuisineFilter !== '') {
     const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
@@ -47,7 +49,7 @@ export default async function search(inputList) {
     const tokenType = `&type=${inputList.typeFilter}`;
     fetchEndpoint += tokenType;
   }
-  fetchEndpoint += tokenrecipeInformation + tokenNutritionBool + tokenSort + tokenOffset + tokenNumResults;
+  fetchEndpoint += tokenrecipeInformation + tokenNutritionBool + tokenFillIngredients + tokenSort + tokenOffset + tokenNumResults;
   console.log(fetchEndpoint);
 
   // fetch the data

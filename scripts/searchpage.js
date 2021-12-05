@@ -143,6 +143,7 @@ function init() {
     inputList.sort = '';
     inputList.recipeInformation = 'true';
     inputList.recipeNutrition = 'true';
+    inputList.fillIngredients = 'true';
     inputList.cuisineFilter = '';
     inputList.dietFilter = '';
     inputList.timeFilter = '';
@@ -202,6 +203,7 @@ function init() {
     newInputList.sort = '';
     newInputList.recipeInformation = 'true';
     newInputList.recipeNutrition = 'true';
+    newInputList.fillIngredients = 'true';
     let cuisineFilter = '';
     let dietFilter = '';
     let timeFilter = '';
