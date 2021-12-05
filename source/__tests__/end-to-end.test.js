@@ -344,7 +344,7 @@ describe('Simple Favorites Flow', () => {
     const button = await root.$('.submit');
     await button.click();
 
-    await page.goto(searchLink);
+    await page.goto(homeLink);
     await page.waitForTimeout(5000);
 
     // Click favorited recipe
