@@ -1,8 +1,7 @@
 /**
- * API key for connecting with Spoonatular API
+ * Handles home page functionality.
  */
 
-// eslint-disable-next-line no-unused-vars
 import { initLocalStorage } from '../components/UserLocalStorage.js';
 import search from './search.js';
 
@@ -105,6 +104,15 @@ function init() {
   const button = document.querySelector('.home-page-popular-refresh');
   // eslint-disable-next-line func-names
   button.addEventListener('click', async function () {
+    inputList.query = '';
+    inputList.number = 10;
+    inputList.offset = 0;
+    inputList.sort = 'random';
+    inputList.recipeNutrition = 'true';
+    inputList.cuisineFilter = '';
+    inputList.dietFilter = '';
+    inputList.timeFilter = '';
+    inputList.typeFilter = '';
     search(inputList).then((value) => {
       showResults(value.results);
       showFavoriteSection();
