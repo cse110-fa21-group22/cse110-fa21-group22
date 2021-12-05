@@ -377,7 +377,6 @@ async function init() {
         backButton.innerHTML = `Restart`;
         backButton.className = 'backButton';
         backButton.id = `backButton`;
-        // backButton.style.display = 'none';
         if (!isMobile) {
           const style = window.getComputedStyle(currStep, null);
           const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));

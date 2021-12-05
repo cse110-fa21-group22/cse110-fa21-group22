@@ -189,13 +189,13 @@ label {
 .nextStep {
   position: relative;
   margin: 0;
-  display: none;
+  /* display: none; */
 }
 
 .prevStep {
   position: relative;
   margin: 0;
-  display: none;
+  /* display: none; */
 }
 
 .normal-step {
