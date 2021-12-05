@@ -2,8 +2,7 @@
  * API key for connecting with Spoonatular API
  */
 
-// eslint-disable-next-line no-unused-vars
-import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
+import { initLocalStorage } from '../components/UserLocalStorage.js';
 import search from './search.js';
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
