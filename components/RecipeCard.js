@@ -84,7 +84,6 @@ class RecipeCard extends HTMLElement {
   }
 
   initializeHearts() {
-    // console.log('Checking favorites');
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
     this.isFavorite = checkFavorite(this.recipeObj);
     if (this.isFavorite) {
