@@ -2,6 +2,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
+
+import search from "../../scripts/search";
+
 /* eslint no-unused-vars: "error" */
 jest.setTimeout(15000);
 
@@ -339,10 +342,10 @@ describe('Simple Favorites Flow', () => {
     // Favorite the first recipe that appears by adding it to default list
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
-    const button = await root.$('button');
+    const button = await root.$('.submit');
     await button.click();
 
-    await page.goto(homeLink);
+    await page.goto(searchLink);
     await page.waitForTimeout(5000);
 
     // Click favorited recipe
