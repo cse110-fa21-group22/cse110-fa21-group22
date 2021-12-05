@@ -402,12 +402,9 @@ async function init() {
   const totalStepNum = stepNum - 1;
   // Initialize the first step to current step
   if (totalStepNum === 1) {
-    const firstStep = document.querySelector('#step1');
-    const firstNextButton = document.querySelector('#nextButton1');
-    const firstPrevButton = document.querySelector('#prevButton1');
-    firstStep.className = 'current-step';
-    firstNextButton.style.display = 'none';
-    firstPrevButton.style.display = 'none';
+    const noInstruction = document.createElement('h4');
+    noInstruction.innerText = 'No Instruction';
+    recipeSteps.appendChild(noInstruction);
   } else {
     const firstStep = document.querySelector('#step1');
     const firstNextButton = document.querySelector('#nextButton1');
