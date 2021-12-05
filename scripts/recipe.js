@@ -428,7 +428,7 @@ async function init() {
   if (recipe.analyzedInstructions.length !== 0) {
     const instructionsList = recipe.analyzedInstructions[0].steps;
     const totalStepNum = instructionsList.length;
-    if (totalStepNum === 2) {
+    if (totalStepNum >= 2) {
       for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
         if (currStepNum === 1) {
           const currNextButton = document.querySelector(`#nextButton${currStepNum}`);
