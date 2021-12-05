@@ -207,8 +207,8 @@ async function init() {
         </label>
         <button class="submit">Add to Favorite</button>
         <button class="cancel">Cancel</button>
-     </div>
-     <button class="email-recipe">Email Recipe</button>`;
+      </div>
+    `;
 
   /*
    * show the drop-down box and change the heart color
