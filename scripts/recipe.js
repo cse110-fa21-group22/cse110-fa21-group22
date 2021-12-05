@@ -317,7 +317,6 @@ async function init() {
 
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps');
-  let stepNum = 1;
   if (recipe.analyzedInstructions.length !== 0) {
     const instructionsList = recipe.analyzedInstructions[0].steps;
     const totalStepNum = instructionsList.length;
@@ -325,18 +324,18 @@ async function init() {
       const currStep = document.createElement('li');
       currStep.innerText = instructionsList[currStepNum].step;
       currStep.className = 'normal-step';
-      currStep.id = `step${stepNum}`;
+      currStep.id = `step${currStepNum}`;
       recipeSteps.appendChild(currStep);
       if (currStepNum + 1 === totalStepNum) {
         const prevButton = document.createElement('button');
         prevButton.innerHTML = `Previous`;
         prevButton.className = 'prevStep';
-        prevButton.id = `prevButton${stepNum}`;
+        prevButton.id = `prevButton${currStepNum}`;
         const nextButton = document.createElement('button');
         nextButton.innerHTML = `Next`;
         nextButton.className = 'nextStep';
-        nextButton.id = `nextButton${stepNum}`;
-        if (!isMobile && stepNum === 1) {
+        nextButton.id = `nextButton${currStepNum}`;
+        if (!isMobile && currStepNum === 1) {
           const style = window.getComputedStyle(currStep, null);
           const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
           // eslint-disable-next-line camelcase
@@ -351,7 +350,7 @@ async function init() {
           nextButton.style.marginTop = `${margin_top}px`;
           nextButton.style.marginLeft = `${90}vw`;
           nextButton.style.position = 'absolute';
-        } else if (!isMobile && stepNum !== 1) {
+        } else if (!isMobile && currStepNum !== 1) {
           const style = window.getComputedStyle(currStep, null);
           const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
           // eslint-disable-next-line camelcase
@@ -373,7 +372,7 @@ async function init() {
         const prevButton = document.createElement('button');
         prevButton.innerHTML = `Previous`;
         prevButton.className = 'prevStep';
-        prevButton.id = `prevButton${stepNum}`;
+        prevButton.id = `prevButton${currStepNum}`;
         const backButton = document.createElement('button');
         backButton.innerHTML = `Restart`;
         backButton.className = 'backButton';
@@ -390,6 +389,7 @@ async function init() {
           // eslint-disable-next-line camelcase
           backButton.style.marginTop = `${margin_top}px`;
           backButton.style.position = 'absolute';
+          backButton.style.display = 'none';
           // eslint-disable-next-line camelcase
           prevButton.style.marginTop = `${margin_top_prev}px`;
           prevButton.style.marginLeft = `${90}vw`;
@@ -398,30 +398,32 @@ async function init() {
         recipeSteps.appendChild(prevButton);
         recipeSteps.appendChild(backButton);
       }
-      stepNum += 1;
     }
   }
 
-  const totalStepNum = stepNum - 1;
   // Initialize the first step to current step
-  if (totalStepNum === 0) {
+  if (recipe.analyzedInstructions.length === 0) {
     const noInstruction = document.createElement('h4');
     noInstruction.innerText = 'No Instruction';
     recipeSteps.appendChild(noInstruction);
-  } else if (totalStepNum === 1) {
-    const firstStep = document.querySelector('#step1');
-    const firstNextButton = document.querySelector('#nextButton1');
-    const firstPrevButton = document.querySelector('#prevButton1');
-    firstStep.className = 'current-step';
-    firstNextButton.style.display = 'none';
-    firstPrevButton.style.display = 'none';
   } else {
-    const firstStep = document.querySelector('#step1');
-    const firstNextButton = document.querySelector('#nextButton1');
-    const firstPrevButton = document.querySelector('#prevButton1');
-    firstStep.className = 'current-step';
-    firstNextButton.style.display = 'block';
-    firstPrevButton.style.display = 'none';
+    const instructionsList = recipe.analyzedInstructions[0].steps;
+    const totalStepNum = instructionsList.length;
+    if (totalStepNum === 1) {
+      const firstStep = document.querySelector('#step1');
+      const firstNextButton = document.querySelector('#nextButton1');
+      const firstPrevButton = document.querySelector('#prevButton1');
+      firstStep.className = 'current-step';
+      firstNextButton.style.display = 'none';
+      firstPrevButton.style.display = 'none';
+    } else {
+      const firstStep = document.querySelector('#step1');
+      const firstNextButton = document.querySelector('#nextButton1');
+      const firstPrevButton = document.querySelector('#prevButton1');
+      firstStep.className = 'current-step';
+      firstNextButton.style.display = 'block';
+      firstPrevButton.style.display = 'none';
+    }
   }
 
   if (totalStepNum === 2) {
