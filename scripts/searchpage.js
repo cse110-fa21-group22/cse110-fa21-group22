@@ -152,72 +152,99 @@ function init() {
     initializeButton();
   });
 
+  /**
+   * Generates a query string to pass the search to the search page
+   * @param {string} newSearchTerm the user's search phrase
+   * @return {string} the query string
+   */
+  // eslint-disable-next-line class-methods-use-this
+  function generateQueryString(newSearchTerm) {
+    let queryString = '?search=';
+    for (let i = 0; i < newSearchTerm.length; i += 1) {
+      const currChar = newSearchTerm.charAt(i);
+      const currCharCode = newSearchTerm.charCodeAt(i);
+      console.log(currChar);
+      // Allow all letters and numbers to enter the query
+      if ((currCharCode >= 65 && currCharCode <= 90) || (currCharCode >= 97 && currCharCode <= 122) || (currCharCode >= 48 && currCharCode <= 57)) {
+        queryString += currChar;
+        // Spaces become + signs
+      } else if (currCharCode === '32') {
+        queryString += '+';
+        // All other characters become - signs
+      } else {
+        queryString += '-';
+      }
+    }
+    return queryString;
+  }
+
   // apply for the filter search
   const applyButton = sidebarContent.querySelector('.apply-filter');
   applyButton.addEventListener('click', () => {
-    searchTerm = parseQueryString();
-    navbarInputbox.value = `${searchTerm}`;
-    inputList.query = searchTerm;
-    inputList.number = 10;
-    inputList.offset = 0;
-    inputList.recipeNutrition = 'true';
+    searchTerm = navbarInputbox.value;
+    const newInputList = {};
+    newInputList.query = searchTerm;
+    newInputList.number = 10; // Default returns 10 recipes
+    newInputList.offset = 0;
+    newInputList.sort = '';
+    newInputList.recipeNutrition = 'true';
     let cuisineFilter = '';
     let dietFilter = '';
     let timeFilter = '';
     let typeFilter = '';
+    const cuisineFilterCheckbox = [];
+    const dietFilterCheckbox = [];
+    const timeFilterCheckbox = [];
+    const typeFilterCheckbox = [];
     for (let i = 0; i < checkboxesCuisine.length; i += 1) {
       const item = checkboxesCuisine[i];
       if (item.checked) {
         cuisineFilter = `${cuisineFilter + item.id},`;
+        cuisineFilterCheckbox[i] = 1;
+      } else {
+        cuisineFilterCheckbox[i] = 0;
       }
     }
     for (let i = 0; i < checkboxesDiet.length; i += 1) {
       const item = checkboxesDiet[i];
       if (item.checked) {
         dietFilter = `${dietFilter + item.id},`;
+        dietFilterCheckbox[i] = 1;
+      } else {
+        dietFilterCheckbox[i] = 0;
       }
     }
     for (let i = 0; i < checkboxesTime.length; i += 1) {
       const item = checkboxesTime[i];
       if (item.checked) {
         timeFilter = Math.max(timeFilter, item.id);
+        timeFilterCheckbox[i] = 1;
+      } else {
+        timeFilterCheckbox[i] = 0;
       }
     }
     for (let i = 0; i < checkboxesType.length; i += 1) {
       const item = checkboxesType[i];
       if (item.checked) {
         typeFilter = `${typeFilter + item.id},`;
+        typeFilterCheckbox[i] = 1;
+      } else {
+        typeFilterCheckbox[i] = 0;
       }
     }
     if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
     if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
     if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
-    inputList.cuisineFilter = cuisineFilter;
-    inputList.dietFilter = dietFilter;
-    inputList.timeFilter = timeFilter;
-    inputList.typeFilter = typeFilter;
-    search(inputList).then((value) => {
-      if (value.totalResults === 0) {
-        const pageNumber = 0;
-        const totalResult = document.querySelector('.totalResults').querySelector('span');
-        const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
-        const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-        totalResult.innerHTML = `${value.totalResults} recipe`;
-        currPageNumberPlace.innerHTML = '0';
-        totalPageNumberPlace.innerHTML = `${pageNumber}`;
-      } else {
-        const pageNumber = Math.ceil(value.totalResults / 10);
-        const totalResult = document.querySelector('.totalResults').querySelector('span');
-        const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
-        const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-        totalResult.innerHTML = `${value.totalResults} recipes`;
-        currPageNumberPlace.innerHTML = '1';
-        totalPageNumberPlace.innerHTML = `${pageNumber}`;
-      }
-      document.querySelector('.search-word').innerHTML = `${inputList.query}`;
-      showResults(value.results);
-      initializeButton();
-    });
+    newInputList.cuisineFilter = cuisineFilter;
+    newInputList.dietFilter = dietFilter;
+    newInputList.timeFilter = timeFilter;
+    newInputList.typeFilter = typeFilter;
+    newInputList.cuisineFilterCheckbox = cuisineFilterCheckbox;
+    newInputList.dietFilterCheckbox = dietFilterCheckbox;
+    newInputList.timeFilterCheckbox = timeFilterCheckbox;
+    newInputList.typeFilterCheckbox = typeFilterCheckbox;
+    window.localStorage.setItem('QueryList', JSON.stringify(newInputList));
+    window.location.href = `search.html${generateQueryString(searchTerm)}`;
   });
 
   const previousButton = document.querySelector('.previous-button');
