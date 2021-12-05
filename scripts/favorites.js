@@ -3,11 +3,6 @@
  */
 import { addRecipebyList } from '../components/UserLocalStorage.js';
 
-// eslint-disable-next-line import/no-unresolved
-import apiKey from './apikey.js';
-
-const tokenKey = `&apiKey=${apiKey}`;
-
 const storage = window.localStorage;
 const recipeLists = [];
 const selectedRecipes = [];
