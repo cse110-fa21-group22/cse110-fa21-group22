@@ -92,6 +92,7 @@ function init() {
   inputList.number = 10;
   inputList.offset = 0;
   inputList.sort = 'random';
+  inputList.recipeInformation = 'true';
   inputList.recipeNutrition = 'true';
   inputList.cuisineFilter = '';
   inputList.dietFilter = '';

@@ -141,6 +141,7 @@ function init() {
     inputList.number = 10;
     inputList.offset = 0;
     inputList.sort = '';
+    inputList.recipeInformation = 'true';
     inputList.recipeNutrition = 'true';
     inputList.cuisineFilter = '';
     inputList.dietFilter = '';
@@ -199,6 +200,7 @@ function init() {
     newInputList.number = 10; // Default returns 10 recipes
     newInputList.offset = 0;
     newInputList.sort = '';
+    newInputList.recipeInformation = 'true';
     newInputList.recipeNutrition = 'true';
     let cuisineFilter = '';
     let dietFilter = '';
