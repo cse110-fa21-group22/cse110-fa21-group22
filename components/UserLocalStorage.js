@@ -7,11 +7,11 @@ const store = window.localStorage;
  */
 export function initLocalStorage() {
   const arrTemp = [];
-  store.setItem('favorites-master', JSON.stringify(arrTemp));
-  store.setItem('My Favorites', JSON.stringify(arrTemp));
+  store.setItem('favorites-master', JSON.stringify(arrTemp)); // Store all the recipes(hidden)
+  store.setItem('My Favorites', JSON.stringify(arrTemp)); // Default recipe set
 }
 
-/*
+/**
  * Fetches from localstorage whether the recipe is already favorited or not
  * @return {boolean} whether the recipe is already favorited
  */
