@@ -94,7 +94,6 @@ function init() {
    * @returns {none}
    */
   function showResults(results) {
-    console.log(results);
 
     // Clear the results before searching
     clearResults();
@@ -175,9 +174,7 @@ function init() {
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
     search(inputList).then((value) => {
-      console.log('filter search start');
       if (value.totalResults === 0) {
-        console.log('pageNum === 0');
         const pageNumber = 0;
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
@@ -186,7 +183,6 @@ function init() {
         currPageNumberPlace.innerHTML = '0';
         totalPageNumberPlace.innerHTML = `${pageNumber}`;
       } else {
-        console.log('pageNum !== 0');
         const pageNumber = Math.ceil(value.totalResults / 10);
         const totalResult = document.querySelector('.totalResults').querySelector('span');
         const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
@@ -297,7 +293,6 @@ function init() {
   // eslint-disable-next-line func-names
   window.onresize = function () {
     const sidebarHeight = document.querySelector('body').scrollHeight;
-    console.log(sidebarHeight);
     sidebarContent.style.height = sidebarHeight;
   };
 }
