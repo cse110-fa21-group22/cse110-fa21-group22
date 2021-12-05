@@ -46,8 +46,8 @@ function init() {
   const recipeSection = document.querySelector('.recipe-section');
   /**
    * Generates a query string to pass the search to the search page
-   * @param {string} newSearchTerm the user's search phrase
-   * @return {string} the query string
+   * @param {string} newSearchTerm - the user's search phrase
+   * @return {string} - the query string
    */
   // eslint-disable-next-line class-methods-use-this
   function generateQueryString(newSearchTerm) {
@@ -137,7 +137,9 @@ function init() {
     inputList.number = 10;
     inputList.offset = 0;
     inputList.sort = '';
+    inputList.recipeInformation = 'true';
     inputList.recipeNutrition = 'true';
+    inputList.fillIngredients = 'true';
     inputList.cuisineFilter = '';
     inputList.dietFilter = '';
     inputList.timeFilter = '';
@@ -195,7 +197,9 @@ function init() {
     newInputList.number = 10; // Default returns 10 recipes
     newInputList.offset = 0;
     newInputList.sort = '';
+    newInputList.recipeInformation = 'true';
     newInputList.recipeNutrition = 'true';
+    newInputList.fillIngredients = 'true';
     let cuisineFilter = '';
     let dietFilter = '';
     let timeFilter = '';
