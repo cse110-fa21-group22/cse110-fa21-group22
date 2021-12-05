@@ -38,6 +38,7 @@ listEntryTemplate.innerHTML = `
 class RecipeCard extends HTMLElement {
   set recipe(recipeObj) {
     this.recipeObj = recipeObj;
+    this.recipeId = recipeObj.id;
     const recipeImg = this.shadow.querySelector('.recipe-image');
     const recipeCal = this.shadow.querySelector('.recipe-calories-number');
     const recipeCalUnit = this.shadow.querySelector('.recipe-calories-unit');
@@ -122,7 +123,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = true;
     checkmark.style.display = 'block';
     this.style.filter = 'brightness(90%)';
-    const event = new CustomEvent('selected', { detail: this.getAttribute('recipe-id') });
+    const event = new CustomEvent('selected', { detail: this.recipeId });
     this.dispatchEvent(event);
   }
 
@@ -134,7 +135,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = false;
     checkmark.style.display = 'none';
     this.style.filter = 'brightness(100%)';
-    const event = new CustomEvent('deselected', { detail: this.getAttribute('recipe-id') });
+    const event = new CustomEvent('deselected', { detail: this.recipeId });
     this.dispatchEvent(event);
   }
 
@@ -142,7 +143,7 @@ class RecipeCard extends HTMLElement {
    * Dispatches an event to remove this recipe
    */
   delete() {
-    const event = new CustomEvent('removed', { detail: this.getAttribute('recipe-id') });
+    const event = new CustomEvent('removed', { detail: this.recipeId });
     this.dispatchEvent(event);
   }
 
@@ -232,8 +233,7 @@ class RecipeCard extends HTMLElement {
           this.select();
         }
       } else if (!this.dropdown) {
-        console.log('transferring page');
-        window.location.href = `recipe.html?id=${this.getAttribute('recipe-id')}`;
+        window.location.href = `recipe.html?id=${this.recipeId}`;
       }
     });
 
@@ -254,9 +254,9 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = false;
           const containers = this.shadow.querySelectorAll('.container');
           // goes through all the lists and removes the recipe if it is found
-          removeRecipebyList('favorites-master', this.getAttribute('recipe-id'));
+          removeRecipebyList('favorites-master', this.recipeObj);
           for (let i = 0; i < containers.length; i += 1) {
-            removeRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
+            removeRecipebyList(containers[i].querySelector('span').innerHTML, this.recipeObj);
           }
           favoriteIcon.src = '../assets/favorite.svg';
           console.log('Remove item from ALL favorites lists here');
@@ -291,8 +291,8 @@ class RecipeCard extends HTMLElement {
 
     /* stops propagation of clicks on dropdown content box to the recipe card
 		This prevents changing page when the dropdown menu is clicked.  */
-    dropdownContent.addEventListener('click', (e) => {
-      e.stopPropagation();
+    dropdownContent.addEventListener('click', (event) => {
+      event.stopPropagation();
     });
 
     /* handle hovering off of the dropdown so it hides */
@@ -302,13 +302,11 @@ class RecipeCard extends HTMLElement {
 
     // submit button for favorites dropdown
     submitFavorites.addEventListener('click', (event) => {
-      // TODO: need to check the values that are clicked
       if (!this.isFavorite) {
         if (!this.checkCheckedList()) {
           // eslint-disable-next-line
           window.alert(`Please add to at least one list`);
         } else {
-          // add to 'favorites-master' no matter what
           addRecipe(this.recipeObj);
           this.addToCheckedLists();
           this.addToCustomList();

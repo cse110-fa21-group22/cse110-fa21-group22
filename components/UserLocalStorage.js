@@ -57,11 +57,12 @@ export function removeRecipe(recipeObj) {
   const list = storage.getItem('favorites-master');
 
   const array = JSON.parse(list);
-  const index = array.indexOf(recipeObj);
-  if (index > -1) {
-    array.splice(index, 1);
+  for (let i = 0; i < array.length; i += 1) {
+    if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
+      array.splice(i, 1);
+      break;
+    }
   }
-
   storage.setItem('favorites-master', JSON.stringify(array));
 }
 
@@ -125,9 +126,11 @@ export function removeRecipebyList(listName, recipeObj) {
   if (storage.getItem(listName) != null) {
     const list = storage.getItem(listName);
     const array = JSON.parse(list);
-    const index = array.indexOf(recipeObj);
-    if (index > -1) {
-      array.splice(index, 1);
+    for (let i = 0; i < array.length; i += 1) {
+      if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
+        array.splice(i, 1);
+        break;
+      }
     }
     storage.setItem(listName, JSON.stringify(array));
   }
