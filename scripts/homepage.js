@@ -11,7 +11,6 @@ import apiKey from './apikey.js';
 const tokenKey = `?apiKey=${apiKey}`;
 const storage = window.localStorage;
 
-const recipeData = {};
 const recipeSection = document.querySelector('.home-page-popular-recipe-list');
 const userFavoriteSection = document.querySelector('.home-page-favorite-section');
 
@@ -34,6 +33,9 @@ function initLocalStorageDoubt() {
 function clearResults() {
   while (recipeSection.firstChild) {
     recipeSection.removeChild(recipeSection.firstChild);
+  }
+  while (userFavoriteSection.firstChild) {
+    userFavoriteSection.removeChild(userFavoriteSection.firstChild);
   }
 }
 
@@ -68,25 +70,20 @@ async function getRecipebyID(id) {
   return fetchResults;
 }
 
-/**
- * clear out recipeData
- */
-function clearObject() {
-  for (const member in recipeData) delete recipeData[member];
-}
-
 async function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-  const noFavorite = document.querySelector('.noFavoriteHeader');
-  if (array.length !== 0) {
-    noFavorite.style.display = 'none';
-  }
-  for (let i = 0; i < array.length; i += 1) {
-    const recipeCard = document.createElement('recipe-card-component');
-    // eslint-disable-next-line no-await-in-loop
-    recipeCard.recipe = await getRecipebyID(array[i]);
-    userFavoriteSection.appendChild(recipeCard);
+  if (array.length === 0) {
+    const noFavorite = document.createElement('h4');
+    noFavorite.innerText = 'No Favorites Added Yet';
+    userFavoriteSection.appendChild(noFavorite);
+  } else {
+    for (let i = 0; i < array.length; i += 1) {
+      const recipeCard = document.createElement('recipe-card-component');
+      // eslint-disable-next-line no-await-in-loop
+      recipeCard.recipe = await getRecipebyID(array[i]);
+      userFavoriteSection.appendChild(recipeCard);
+    }
   }
 }
 
@@ -129,7 +126,6 @@ async function init() {
   const button = document.querySelector('.home-page-popular-refresh');
   // eslint-disable-next-line func-names
   button.addEventListener('click', async function () {
-    clearObject();
     search(inputList).then((value) => {
       showResults(value.results);
       showFavoriteSection();
