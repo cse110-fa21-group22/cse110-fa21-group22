@@ -46,7 +46,6 @@ export default async function search(inputList) {
     fetchEndpoint += tokenType;
   }
   fetchEndpoint += tokenNutritionBool + tokenSort + tokenOffset + tokenNumResults;
-  console.log(fetchEndpoint);
 
   // fetch the data
   const fetchResults = await fetch(fetchEndpoint)

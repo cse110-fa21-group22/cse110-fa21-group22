@@ -54,6 +54,10 @@ class RecipeCard extends HTMLElement {
     }
   }
 
+  /**
+   * Construtor for recipe card
+   * @constructor
+   */
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });
