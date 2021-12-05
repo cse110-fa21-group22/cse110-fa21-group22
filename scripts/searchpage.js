@@ -113,10 +113,13 @@ function init() {
   const searchTerm = parseQueryString();
   let inputList = [];
 
-  console.log(searchTerm);
+  // Gets the search term and replaces '-' with ' ' for displaying what was searched for
+  const queryString = window.location.search;
+  let searchTermWithSpacing = queryString.substring(8);
+  searchTermWithSpacing = searchTermWithSpacing.replaceAll('-',' ');
 
   // Send a query to spoonacular
-  inputList.query = searchTerm;
+  inputList.query = searchTermWithSpacing;
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
