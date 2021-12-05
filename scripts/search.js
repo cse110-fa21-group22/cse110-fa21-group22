@@ -4,8 +4,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import fetch from 'node-fetch';
 // eslint-disable-next-line import/no-unresolved
-import apiKey from './apikey.js';
+//import apiKey from './apikey.js';
 
+// eslint-disable-next-line no-undef
 const tokenKey = `?apiKey=${apiKey}`;
 
 /**
