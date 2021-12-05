@@ -44,6 +44,31 @@ function init() {
   }
 
   const recipeSection = document.querySelector('.recipe-section');
+  /**
+   * Generates a query string to pass the search to the search page
+   * @param {string} newSearchTerm the user's search phrase
+   * @return {string} the query string
+   */
+  // eslint-disable-next-line class-methods-use-this
+  function generateQueryString(newSearchTerm) {
+    let queryString = '?search=';
+    for (let i = 0; i < newSearchTerm.length; i += 1) {
+      const currChar = newSearchTerm.charAt(i);
+      const currCharCode = newSearchTerm.charCodeAt(i);
+      console.log(currChar);
+      // Allow all letters and numbers to enter the query
+      if ((currCharCode >= 65 && currCharCode <= 90) || (currCharCode >= 97 && currCharCode <= 122) || (currCharCode >= 48 && currCharCode <= 57)) {
+        queryString += currChar;
+        // Spaces become + signs
+      } else if (currCharCode === '32') {
+        queryString += '+';
+        // All other characters become - signs
+      } else {
+        queryString += '-';
+      }
+    }
+    return queryString;
+  }
 
   /**
    * This function parses the query string to retrieve relevant information
@@ -108,8 +133,18 @@ function init() {
   let searchTerm = parseQueryString();
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
   navbarInputbox.value = `${searchTerm}`;
-  const inputList = JSON.parse(window.localStorage.getItem('QueryList'));
+  let inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
+  if (inputList === null) {
+    inputList = {};
+    inputList.number = 10;
+    inputList.offset = 0;
+    inputList.recipeNutrition = 'true';
+    inputList.cuisineFilter = '';
+    inputList.dietFilter = '';
+    inputList.timeFilter = '';
+    inputList.typeFilter = '';
+  }
   inputList.query = searchTerm;
   if (searchTerm === '') {
     inputList.sort = 'random';
@@ -151,32 +186,6 @@ function init() {
     showResults(value.results);
     initializeButton();
   });
-
-  /**
-   * Generates a query string to pass the search to the search page
-   * @param {string} newSearchTerm the user's search phrase
-   * @return {string} the query string
-   */
-  // eslint-disable-next-line class-methods-use-this
-  function generateQueryString(newSearchTerm) {
-    let queryString = '?search=';
-    for (let i = 0; i < newSearchTerm.length; i += 1) {
-      const currChar = newSearchTerm.charAt(i);
-      const currCharCode = newSearchTerm.charCodeAt(i);
-      console.log(currChar);
-      // Allow all letters and numbers to enter the query
-      if ((currCharCode >= 65 && currCharCode <= 90) || (currCharCode >= 97 && currCharCode <= 122) || (currCharCode >= 48 && currCharCode <= 57)) {
-        queryString += currChar;
-        // Spaces become + signs
-      } else if (currCharCode === '32') {
-        queryString += '+';
-        // All other characters become - signs
-      } else {
-        queryString += '-';
-      }
-    }
-    return queryString;
-  }
 
   // apply for the filter search
   const applyButton = sidebarContent.querySelector('.apply-filter');
