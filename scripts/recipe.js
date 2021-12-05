@@ -206,6 +206,7 @@ async function init() {
            <input type="text" class="user-input">
         </label>
         <button class="submit">Add to Favorite</button>
+        <button class="cancel">Cancel</button>
      </div>
      <button class="email-recipe">Email Recipe</button>`;
   /*
@@ -216,6 +217,7 @@ async function init() {
   initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
   const submitFavorites = document.querySelector('.submit');
+  const cancelFavorites = document.querySelector('.cancel');
   const dropdownContent = document.querySelector('.dropdown-content');
   favoriteIcon.addEventListener('click', () => {
     if (!isFavorite) {
@@ -270,6 +272,12 @@ async function init() {
         location.reload();
       }
     }
+  });
+
+  // cancel button for favorites dropdown
+  cancelFavorites.addEventListener('click', (event) => {
+    hideDropdown();
+    event.stopPropagation();
   });
 
   // Set prep time
