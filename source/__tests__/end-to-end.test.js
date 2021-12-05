@@ -234,6 +234,24 @@ describe('Basic user flow for Search Page', () => {
     expect(currentRecipes.length).toBe(10);
   });
 
+  // After previous button is clicked, make sure the recipes are the same
+  it('Check to the recipes are the same after previous button', async () => {
+    const currentRecipes = await page.$$('recipe-card-component');
+    let isSame = true;
+    for (let i = 0; i < 3; i += 1) {
+      const root = await currentRecipes[i].getProperty('shadowRoot');
+      const name = await root.$('.recipe-name');
+      const innerText = await name.getProperty('innerText');
+      const recipeTitle = innerText['_remoteObject'].value;
+      if (firstSet[i] !== recipeTitle) {
+        isSame = false;
+        break;
+      }
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    expect(isSame).toBe(true);
+  });
+
   // Click the next button again and check if those populated recipes are the same
   it('Check to the recipes are the same after next button', async () => {
     console.log('Check next button');
@@ -256,24 +274,6 @@ describe('Basic user flow for Search Page', () => {
         break;
       }
     }
-    expect(isSame).toBe(true);
-  });
-
-  // After previous button is clicked, make sure the recipes are the same
-  it('Check to the recipes are the same after previous button', async () => {
-    const currentRecipes = await page.$$('recipe-card-component');
-    let isSame = true;
-    for (let i = 0; i < 3; i += 1) {
-      const root = await currentRecipes[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-      const recipeTitle = innerText['_remoteObject'].value;
-      if (firstSet[i] !== recipeTitle) {
-        isSame = false;
-        break;
-      }
-    }
-    // eslint-disable-next-line no-underscore-dangle
     expect(isSame).toBe(true);
   });
 
