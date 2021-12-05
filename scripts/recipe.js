@@ -320,9 +320,9 @@ async function init() {
   if (recipe.analyzedInstructions.length !== 0) {
     const instructionsList = recipe.analyzedInstructions[0].steps;
     const totalStepNum = instructionsList.length;
-    for (let currStepNum = 0; currStepNum < totalStepNum; currStepNum += 1) {
+    for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
       const currStep = document.createElement('li');
-      currStep.innerText = instructionsList[currStepNum].step;
+      currStep.innerText = instructionsList[currStepNum - 1].step;
       currStep.className = 'normal-step';
       currStep.id = `step${currStepNum}`;
       recipeSteps.appendChild(currStep);
