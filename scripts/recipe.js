@@ -478,7 +478,9 @@ async function init() {
           });
         }
       }
-    } else if (totalStepNum >= 2) {
+    } else if (totalStepNum === 3) {
+      console.log(totalStepNum);
+    } else if (totalStepNum > 3) {
       // When the next button is pressed, highlight the next step and normalize the current step
       // When the previous button is pressed, highlight the previous step and normalize the current step
       for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
