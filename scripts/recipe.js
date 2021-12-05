@@ -410,7 +410,7 @@ async function init() {
     const totalStepNum = instructionsList.length;
     if (totalStepNum === 1) {
       const firstStep = document.querySelector('#step1');
-      const firstNextButton = document.querySelector('#nextButton1');
+      const firstNextButton = document.querySelector('#backButton');
       const firstPrevButton = document.querySelector('#prevButton1');
       firstStep.className = 'current-step';
       firstNextButton.style.display = 'none';
