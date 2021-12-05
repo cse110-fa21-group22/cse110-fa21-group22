@@ -216,6 +216,7 @@
             <input type="text" class="user-input">
          </label>
          <button class="submit">Add to Favorite</button>
+         <button class="cancel">Cancel</button>
       </div>
       <button class="email-recipe">Email Recipe</button>`;
    /*
@@ -226,6 +227,7 @@
    initializeDropdown();
    const favoriteIcon = document.querySelector('.favorite-heart');
    const submitFavorites = document.querySelector('.submit');
+   const cancelFavorites = document.querySelector('.cancel');
    const dropdownContent = document.querySelector('.dropdown-content');
    favoriteIcon.addEventListener('click', () => {
      if (!isFavorite) {
@@ -282,29 +284,11 @@
      }
    });
  
-   /**
-    *  Pressing enter functions the same as clicking the submit button
-    *  uses the same code from the submit button
-    */
-   function checkKey(event) {
-     const e = event || window.event;
-     if (e.key === 'Enter') {
-       if (!isFavorite) {
-         if (!checkCheckedList()) {
-           // eslint-disable-next-line
-           window.alert(`Please add to at least one list`);
-         } else {
-           // TODO: add to custom list
-           addRecipe(recipe.id);
-           addToCheckedLists(recipe);
-           addToCustomList(recipe);
-           /* Reload the page as a shortcut for showing new lists */
-           location.reload();
-         }
-       }
-     }
-   }
-   document.onkeydown = checkKey;
+   // cancel button for favorites dropdown
+   cancelFavorites.addEventListener('click', (event) => {
+     hideDropdown();
+     event.stopPropagation();
+   });
  
    // Set prep time
    const prepTime = document.querySelector('#prep-time');
@@ -564,7 +548,6 @@
      const body = `Here is a yummy recipe I found on ${recipeURL}. Enjoy!`;
      window.location.href = `mailto:?subject=${subject}&body=${body}`;
    });
- }
- 
- 
+ } 
+
 window.addEventListener('DOMContentLoaded', init);

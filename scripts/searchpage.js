@@ -73,7 +73,7 @@ function init() {
     let searchTerm = queryString.substring(8);
 
     // Convert string back to original formatting, with disallowed characters gone
-    searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', '');
+    searchTerm = searchTerm.replaceAll('+', ' ').replaceAll('-', ' ');
     return searchTerm;
   }
 
@@ -94,7 +94,6 @@ function init() {
    * @returns {none}
    */
   function showResults(results) {
-
     // Clear the results before searching
     clearResults();
 
@@ -112,13 +111,8 @@ function init() {
   const searchTerm = parseQueryString();
   let inputList = [];
 
-  // Gets the search term and replaces '-' with ' ' for displaying what was searched for
-  const queryString = window.location.search;
-  let searchTermWithSpacing = queryString.substring(8);
-  searchTermWithSpacing = searchTermWithSpacing.replaceAll('-',' ');
-
   // Send a query to spoonacular
-  inputList.query = searchTermWithSpacing;
+  inputList.query = searchTerm;
   inputList.number = 10;
   inputList.offset = 0;
   inputList['recipe-nutrition'] = 'true';
