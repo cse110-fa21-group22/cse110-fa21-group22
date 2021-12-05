@@ -318,6 +318,8 @@ async function init() {
   // Set instructions by getting the analyzedInstructions object
   const recipeSteps = document.querySelector('.recipe-steps');
   const instructionsList = recipe.analyzedInstructions[0].steps;
+  const totalStep = instructionsList.length;
+  console.log(totalStep);
   let stepNum = 1;
   for (const instructionNumber in instructionsList) {
     const currStep = document.createElement('li');
@@ -401,10 +403,17 @@ async function init() {
 
   const totalStepNum = stepNum - 1;
   // Initialize the first step to current step
-  if (totalStepNum === 1) {
+  if (totalStepNum === 0) {
     const noInstruction = document.createElement('h4');
     noInstruction.innerText = 'No Instruction';
     recipeSteps.appendChild(noInstruction);
+  } else if (totalStepNum === 1) {
+    const firstStep = document.querySelector('#step1');
+    const firstNextButton = document.querySelector('#nextButton1');
+    const firstPrevButton = document.querySelector('#prevButton1');
+    firstStep.className = 'current-step';
+    firstNextButton.style.display = 'none';
+    firstPrevButton.style.display = 'none';
   } else {
     const firstStep = document.querySelector('#step1');
     const firstNextButton = document.querySelector('#nextButton1');
@@ -413,7 +422,7 @@ async function init() {
     firstNextButton.style.display = 'block';
     firstPrevButton.style.display = 'none';
   }
-
+  
   if (totalStepNum === 2) {
     for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
       if (currStepNum === 1) {
