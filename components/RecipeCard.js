@@ -38,6 +38,7 @@ listEntryTemplate.innerHTML = `
 class RecipeCard extends HTMLElement {
   set recipe(recipeObj) {
     this.setAttribute('recipe-id', recipeObj.id);
+    this.setAttribute('recipe-obj', recipeObj);
     const recipeImg = this.shadow.querySelector('.recipe-image');
     const recipeCal = this.shadow.querySelector('.recipe-calories-number');
     const recipeCalUnit = this.shadow.querySelector('.recipe-calories-unit');
