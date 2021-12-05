@@ -151,9 +151,6 @@ function init() {
     inputList.typeFilterCheckbox = [0, 0, 0, 0];
   }
   inputList.query = searchTerm;
-  if (searchTerm === '') {
-    inputList.sort = 'random';
-  }
   const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
   const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
   const checkboxesTime = sidebarContent.querySelectorAll('.time');
