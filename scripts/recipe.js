@@ -326,7 +326,7 @@ async function init() {
       currStep.className = 'normal-step';
       currStep.id = `step${currStepNum}`;
       recipeSteps.appendChild(currStep);
-      if (currStepNum + 1 !== totalStepNum) {
+      if (currStepNum !== totalStepNum) {
         const prevButton = document.createElement('button');
         prevButton.innerHTML = `Previous`;
         prevButton.className = 'prevStep';
