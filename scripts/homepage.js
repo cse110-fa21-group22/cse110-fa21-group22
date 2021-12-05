@@ -138,10 +138,6 @@ async function init() {
       showResults(value.results);
       showFavoriteSection();
     });
-    search(inputList).then((value) => {
-      showResults(value.results);
-      showFavoriteSection();
-    });
   });
 }
 
