@@ -81,23 +81,6 @@ async function init() {
 
 window.addEventListener('DOMContentLoaded', init);
 
-// eslint-disable-next-line no-unused-vars
-async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
-
-  // console.log("fetch_endpoint", fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in favorite page failed');
-      console.error(error);
-    });
-
-  // console.log("result is: ", fetchResults);
-  return fetchResults;
-}
-
 let editMode = false;
 const editButton = document.getElementById('edit');
 const cancelButton = document.getElementById('cancel');
