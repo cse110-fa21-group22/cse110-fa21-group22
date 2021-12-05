@@ -135,6 +135,7 @@ function init() {
   navbarInputbox.value = `${searchTerm}`;
   let inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
+  // If someone try the search url, it's the default set
   if (inputList === null) {
     inputList = {};
     inputList.number = 10;
@@ -144,6 +145,10 @@ function init() {
     inputList.dietFilter = '';
     inputList.timeFilter = '';
     inputList.typeFilter = '';
+    inputList.cuisineFilterCheckbox = [0, 0, 0, 0, 0, 0];
+    inputList.dietFilterCheckbox = [0, 0, 0, 0, 0];
+    inputList.timeFilterCheckbox = [0, 0, 0, 0];
+    inputList.typeFilterCheckbox = [0, 0, 0, 0];
   }
   inputList.query = searchTerm;
   if (searchTerm === '') {
