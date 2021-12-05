@@ -55,7 +55,6 @@ function init() {
     for (let i = 0; i < newSearchTerm.length; i += 1) {
       const currChar = newSearchTerm.charAt(i);
       const currCharCode = newSearchTerm.charCodeAt(i);
-      console.log(currChar);
       // Allow all letters and numbers to enter the query
       if ((currCharCode >= 65 && currCharCode <= 90) || (currCharCode >= 97 && currCharCode <= 122) || (currCharCode >= 48 && currCharCode <= 57)) {
         queryString += currChar;
@@ -117,10 +116,7 @@ function init() {
     // Section is for next and previous buttons
     const previousButton = document.querySelector('.previous-button');
     const nextButton = document.querySelector('.next-button');
-    const currPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.currPageNumber');
     const totalPageNumberPlace = document.querySelector('.pageNumberSection').querySelector('.totalPageNumber');
-    console.log(currPageNumberPlace.innerHTML);
-    console.log(totalPageNumberPlace.innerHTML);
     previousButton.disabled = true;
     if (totalPageNumberPlace.innerHTML === '1') {
       nextButton.disabled = true;
@@ -132,7 +128,7 @@ function init() {
   // Automatically parse the query string and run a search when page reload
   let searchTerm = parseQueryString();
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.value = `${searchTerm}`;
+  navbarInputbox.value = `"${searchTerm}""`;
   let inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
   // If someone try the search url, it's the default set
@@ -265,8 +261,6 @@ function init() {
     const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
     inputList.offset -= 10;
     const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
-    console.log('Prev: ', currPageNumber);
-    console.log('Prev: ', nextPageNumber);
     search(inputList).then((newValue) => {
       showResults(newValue.results);
     });
@@ -285,8 +279,6 @@ function init() {
     const currPageNumber = Math.ceil(inputList.offset / 10 + 1);
     inputList.offset += 10;
     const nextPageNumber = Math.ceil(inputList.offset / 10 + 1);
-    console.log('Next: ', currPageNumber);
-    console.log('Next: ', nextPageNumber);
     search(inputList).then((newValue) => {
       showResults(newValue.results);
     });
