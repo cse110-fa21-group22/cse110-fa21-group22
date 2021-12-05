@@ -82,7 +82,7 @@ describe('Simple User Flow', () => {
 
     // Reload the page
     await page.goto(homeLink);
-    await page.waitForTimeout('3000');
+    await page.waitForTimeout('10000');
 
     // Retrieve the recipe in the favorites list
     const exploreCards2 = await page.$$('recipe-card-component');
