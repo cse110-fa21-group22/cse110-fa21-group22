@@ -4,8 +4,7 @@
 
 // eslint-disable-next-line no-unused-vars
 import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
-
-// eslint-disable-next-line import/no-unresolved
+import search from './search.js';
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
@@ -36,7 +35,6 @@ async function fetchRandomRecipes(inputList) {
     const tokenNutritionBool = `&addRecipeNutrition=true`;
     const tokenSort = `&sort=random`;
     let fetchResults = searchUrl + tokenKey;
-    console.log('fetchRandomRecipes ', inputList);
     if (inputList.cuisineFilter !== '') {
       const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
       fetchResults += tokenCuisine;
@@ -161,6 +159,7 @@ async function init() {
   inputList.timeFilter = '';
   inputList.typeFilter = '';
 
+  // TODO:
   // initializing the page
   try {
     await fetchRandomRecipes(inputList);
@@ -219,6 +218,7 @@ async function init() {
     inputList.dietFilter = dietFilter;
     inputList.timeFilter = timeFilter;
     inputList.typeFilter = typeFilter;
+    // TODO:
     clearObject();
     await fetchRandomRecipes(inputList);
     showResults(recipeData);
@@ -227,6 +227,7 @@ async function init() {
   const button = document.querySelector('.home-page-popular-refresh');
   // eslint-disable-next-line func-names
   button.addEventListener('click', async function () {
+    // TODO:
     clearObject();
     try {
       await fetchRandomRecipes(inputList);
