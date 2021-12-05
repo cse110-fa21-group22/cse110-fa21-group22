@@ -29,38 +29,36 @@ navbarTemplate.innerHTML = `
   <section class="sidebar-content">
     <h5>Cuisine</h5>
     <ul>
-      <li><input type="checkbox" id="american" class="cuisine"> American</li>
-      <li><input type="checkbox" id="chinese" class="cuisine"> Chinese</li>
-      <li><input type="checkbox" id="italian" class="cuisine"> Italian</li>
-      <li><input type="checkbox" id="mexican" class="cuisine"> Mexican</li>
-      <li><input type="checkbox" id="indian" class="cuisine"> Indian</li>
-      <li><input type="checkbox" id="thai" class="cuisine"> Thai</li>
+      <li><input type="checkbox" id="american" class="cuisine cuisine0"> American</li>
+      <li><input type="checkbox" id="chinese" class="cuisine cuisine1"> Chinese</li>
+      <li><input type="checkbox" id="italian" class="cuisine cuisine2"> Italian</li>
+      <li><input type="checkbox" id="mexican" class="cuisine cuisine3"> Mexican</li>
+      <li><input type="checkbox" id="indian" class="cuisine cuisine4"> Indian</li>
+      <li><input type="checkbox" id="thai" class="cuisine cuisine5"> Thai</li>
     </ul>
     <h5>Diet</h5>
     <ul>
-      <li><input type="checkbox" id="vegetarian" class="diet"> Vegetarian</li>
-      <li><input type="checkbox" id="vegan" class="diet"> Vegan</li>
-      <li><input type="checkbox" id="gluten%20free" class="diet"> Gluten Free</li>
-      <li><input type="checkbox" id="paleo" class="diet"> Paleo</li>
-      <li><input type="checkbox" id="ketogenic" class="diet"> Ketogenic</li>
+      <li><input type="checkbox" id="vegetarian" class="diet diet0"> Vegetarian</li>
+      <li><input type="checkbox" id="vegan" class="diet diet1"> Vegan</li>
+      <li><input type="checkbox" id="gluten%20free" class="diet diet2"> Gluten Free</li>
+      <li><input type="checkbox" id="paleo" class="diet diet3"> Paleo</li>
+      <li><input type="checkbox" id="ketogenic" class="diet diet4"> Ketogenic</li>
     </ul>
     <h5>Time</h5>
     <ul>
-      <li><input type="checkbox" id="15" class="time"> 0-15 Minutes</li>
-      <li><input type="checkbox" id="30" class="time"> 0-30 Minutes</li>
-      <li><input type="checkbox" id="45" class="time"> 0-45 Minutes</li>
-      <li><input type="checkbox" id="60" class="time"> 0-1hr</li>
-      <li><input type="checkbox" id="9999" class="time"> 0-9999hr</li>
+      <li><input type="checkbox" id="15" class="time time0"> 0-15 Minutes</li>
+      <li><input type="checkbox" id="30" class="time time1"> 0-30 Minutes</li>
+      <li><input type="checkbox" id="45" class="time time2"> 0-45 Minutes</li>
+      <li><input type="checkbox" id="60" class="time time3"> 0-1 hr</li>
     </ul>
     <h5>Type of Meal</h5>
     <ul>
-      <li><input type="checkbox" id="breakfast" class="typeOfMeal"> Breakfast</li>
-      <li><input type="checkbox" id="main%20course" class="typeOfMeal"> Main Course</li>
-      <li><input type="checkbox" id="dessert" class="typeOfMeal"> Dessert</li>
-      <li><input type="checkbox" id="drink" class="typeOfMeal"> Drink</li>
+      <li><input type="checkbox" id="breakfast" class="typeOfMeal typeOfMeal0"> Breakfast</li>
+      <li><input type="checkbox" id="main%20course" class="typeOfMeal typeOfMeal1"> Main Course</li>
+      <li><input type="checkbox" id="dessert" class="typeOfMeal typeOfMeal2"> Dessert</li>
+      <li><input type="checkbox" id="drink" class="typeOfMeal typeOfMeal3"> Drink</li>
     </ul>
     <button class="apply-filter">Apply filter</button>
-    <button class="sidebar-filter">Search this</button>
 	</section>`;
 
 class Navbar extends HTMLElement {
@@ -111,14 +109,98 @@ class Navbar extends HTMLElement {
       searchTerm = event.target.value;
 
       if (event.code === 'Enter') {
+        const sidebarContent = this.shadow.querySelector('.sidebar-content');
+        const inputList = {};
+        inputList.query = searchTerm;
+        inputList.number = 10; // Default returns 10 recipes
+        inputList.offset = 0;
+        inputList.sort = '';
+        inputList.recipeNutrition = 'true';
+        const checkboxesCuisine = sidebarContent.querySelectorAll('.cuisine');
+        const checkboxesDiet = sidebarContent.querySelectorAll('.diet');
+        const checkboxesTime = sidebarContent.querySelectorAll('.time');
+        const checkboxesType = sidebarContent.querySelectorAll('.typeOfMeal');
+        let cuisineFilter = '';
+        let dietFilter = '';
+        let timeFilter = '';
+        let typeFilter = '';
+        const cuisineFilterCheckbox = [];
+        const dietFilterCheckbox = [];
+        const timeFilterCheckbox = [];
+        const typeFilterCheckbox = [];
+        for (let i = 0; i < checkboxesCuisine.length; i += 1) {
+          const item = checkboxesCuisine[i];
+          if (item.checked) {
+            cuisineFilter = `${cuisineFilter + item.id},`;
+            cuisineFilterCheckbox[i] = 1;
+          } else {
+            cuisineFilterCheckbox[i] = 0;
+          }
+        }
+        for (let i = 0; i < checkboxesDiet.length; i += 1) {
+          const item = checkboxesDiet[i];
+          if (item.checked) {
+            dietFilter = `${dietFilter + item.id},`;
+            dietFilterCheckbox[i] = 1;
+          } else {
+            dietFilterCheckbox[i] = 0;
+          }
+        }
+        for (let i = 0; i < checkboxesTime.length; i += 1) {
+          const item = checkboxesTime[i];
+          if (item.checked) {
+            timeFilter = Math.max(timeFilter, item.id);
+            timeFilterCheckbox[i] = 1;
+          } else {
+            timeFilterCheckbox[i] = 0;
+          }
+        }
+        for (let i = 0; i < checkboxesType.length; i += 1) {
+          const item = checkboxesType[i];
+          if (item.checked) {
+            typeFilter = `${typeFilter + item.id},`;
+            typeFilterCheckbox[i] = 1;
+          } else {
+            typeFilterCheckbox[i] = 0;
+          }
+        }
+        if (cuisineFilter.length !== 0) cuisineFilter = cuisineFilter.substring(0, cuisineFilter.length - 1);
+        if (dietFilter.length !== 0) dietFilter = dietFilter.substring(0, dietFilter.length - 1);
+        if (typeFilter.length !== 0) typeFilter = typeFilter.substring(0, typeFilter.length - 1);
+        inputList.cuisineFilter = cuisineFilter;
+        inputList.dietFilter = dietFilter;
+        inputList.timeFilter = timeFilter;
+        inputList.typeFilter = typeFilter;
+        inputList.cuisineFilterCheckbox = cuisineFilterCheckbox;
+        inputList.dietFilterCheckbox = dietFilterCheckbox;
+        inputList.timeFilterCheckbox = timeFilterCheckbox;
+        inputList.typeFilterCheckbox = typeFilterCheckbox;
+        window.localStorage.setItem('QueryList', JSON.stringify(inputList));
         window.location.href = `search.html${this.generateQueryString(searchTerm)}`;
       }
     });
 
+    // Detect if the device is mobile or PC
+    const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;
+
+    // Sidebar Button listener
     const sidebarButton = this.shadow.querySelector('.sidebar-button');
     sidebarButton.addEventListener('click', () => {
       const sidebarContent = this.shadow.querySelector('.sidebar-content');
-      if (!this.isSidebarShow) {
+      if (!isMobile) {
+        if (!this.isSidebarShow) {
+          const mainSection = document.querySelector('.search-page');
+          mainSection.style.marginLeft = `${225}px`;
+          sidebarContent.style.display = 'flex';
+          sidebarContent.style.flexDirection = 'column';
+          this.isSidebarShow = true;
+        } else {
+          const mainSection = document.querySelector('.search-page');
+          mainSection.style.marginLeft = `${0}px`;
+          sidebarContent.style.display = 'none';
+          this.isSidebarShow = false;
+        }
+      } else if (!this.isSidebarShow) {
         sidebarContent.style.display = 'flex';
         sidebarContent.style.flexDirection = 'column';
         this.isSidebarShow = true;
