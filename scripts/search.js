@@ -12,6 +12,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * @param {string} inputList.query - The user input for search
  * @param {int} inputList.number - The number of expected results (between 1 and 100).
  * @param {int} inputList.offset - The number of results to skip (between 0 and 900).
+ * @param {string} inputList.sort - The token for sort mode
  * @param {boolean} inputList.recipeNutrition - The token request for nutrition information
  * @param {string} inputList.cuisineFilter - The filter which select the cuisine(s) of the recipes.
  * @param {string} inputList.dietFilter - The filter which select the diet(s) of the recipes.
@@ -25,7 +26,8 @@ export default async function search(inputList) {
   const tokenSearchInput = `&query=${inputList.query}`;
   const tokenNumResults = `&number=${inputList.number}`;
   const tokenOffset = `&offset=${inputList.offset}`;
-  const tokenNutritionBool = `&addRecipeNutrition=${inputList['recipe-nutrition']}`;
+  const tokenSort = `&sort=${inputList.sort}`;
+  const tokenNutritionBool = `&addRecipeNutrition=${inputList.recipeNutrition}`;
   let fetchEndpoint = searchUrl + tokenKey + tokenSearchInput;
   if (inputList.cuisineFilter !== '') {
     const tokenCuisine = `&cuisine=${inputList.cuisineFilter}`;
@@ -43,7 +45,7 @@ export default async function search(inputList) {
     const tokenType = `&type=${inputList.typeFilter}`;
     fetchEndpoint += tokenType;
   }
-  fetchEndpoint += tokenNutritionBool + tokenOffset + tokenNumResults;
+  fetchEndpoint += tokenNutritionBool + tokenSort + tokenOffset + tokenNumResults;
   console.log(fetchEndpoint);
 
   // fetch the data
