@@ -327,7 +327,7 @@ async function init() {
       currStep.className = 'normal-step';
       currStep.id = `step${stepNum}`;
       recipeSteps.appendChild(currStep);
-      if (instructionsList[currStepNum + 1] != null) {
+      if (currStepNum + 1 === totalStepNum) {
         const prevButton = document.createElement('button');
         prevButton.innerHTML = `Previous`;
         prevButton.className = 'prevStep';
@@ -378,7 +378,7 @@ async function init() {
         backButton.innerHTML = `Restart`;
         backButton.className = 'backButton';
         backButton.id = `backButton`;
-        backButton.style.display = 'none';
+        // backButton.style.display = 'none';
         if (!isMobile) {
           const style = window.getComputedStyle(currStep, null);
           const stepHeight = Math.ceil(Number(style.height.replace('px', '')) / Number(style.lineHeight.replace('px', '')));
