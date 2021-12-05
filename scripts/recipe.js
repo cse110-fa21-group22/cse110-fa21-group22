@@ -38,8 +38,8 @@ function lookup() {
 
 /**
  * Converts a value of minutes into a string that shows hours and minutes
- * @param   {number} time - A time in minutes
- * @returns {string} - A string in the form 'XX hours XX minutes'
+ * @param {number} time A time in minutes
+ * @returns {string} A string in the form 'XX hours XX minutes'
  */
 function formatTime(time) {
   if (parseInt(time, 10) === 1) return `${time.toString()} minute`;
@@ -61,10 +61,9 @@ function formatTime(time) {
 
 /**
  * Initialize the heart color
- * @param {boolean} isFavorite - check if in local storage
+ * @param {boolean} isFavorite Check if in local storage
  */
 function initializeHearts(isFavorite) {
-  // console.log('Checking favorites');
   const favoriteIcon = document.querySelector('.favorite-heart');
   if (isFavorite) {
     favoriteIcon.src = '../assets/favorite-selected.svg';
@@ -99,13 +98,13 @@ function initializeDropdown() {
 /**
  * Shows the favorites dropdown on the recipe card
  * The position will be the title length
- * @param {Object} recipe - recipe card
+ * @param {Object} recipeObj recipe card
  */
-function showDropdown(recipe, isMobile) {
+function showDropdown(recipeObj, isMobile) {
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'block';
   if (!isMobile) {
-    const pos = recipe.title.length * 17;
+    const pos = recipeObj.title.length * 17;
     dropdownContent.style.marginLeft = `${pos}px`;
   }
 }
@@ -139,12 +138,12 @@ function checkCheckedList() {
 /**
  * Add the recipe to all checked lists in the dropdown
  */
-function addToCheckedLists(recipe) {
+function addToCheckedLists(recipeObj) {
   const containers = document.querySelectorAll('.container');
   for (let i = 0; i < containers.length; i += 1) {
     const checkmark = containers[i].querySelector('input');
     if (checkmark.checked) {
-      addRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+      addRecipebyList(containers[i].querySelector('span').innerHTML, recipeObj);
     }
   }
 }
@@ -152,12 +151,12 @@ function addToCheckedLists(recipe) {
 /**
  * Adds the recipe to a custom list
  */
-function addToCustomList(recipe) {
+function addToCustomList(recipeObj) {
   let userInput = document.querySelector('.user-input');
   userInput = userInput.value;
   if (userInput !== '') {
     console.log(userInput);
-    addRecipebyList(userInput, recipe.id);
+    addRecipebyList(userInput, recipeObj);
   }
 }
 
@@ -209,10 +208,13 @@ async function init() {
         <button class="cancel">Cancel</button>
      </div>
      <button class="email-recipe">Email Recipe</button>`;
+
   /*
    * show the drop-down box and change the heart color
    */
-  let isFavorite = checkFavorite(recipe.id);
+  const recipeObj = JSON.parse(window.localStorage.getItem('recipeObj'));
+  window.localStorage.removeItem('recipeObj');
+  let isFavorite = checkFavorite(recipeObj);
   initializeHearts(isFavorite);
   initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
@@ -233,11 +235,11 @@ async function init() {
         const containers = document.querySelectorAll('.container');
         // goes through all the lists and deletes if it is in list
         for (let i = 0; i < containers.length; i += 1) {
-          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipeObj);
         }
         favoriteIcon.src = '../assets/favorite.svg';
       }
-      removeRecipebyList('favorites-master', recipe.id);
+      removeRecipebyList('favorites-master', recipeObj);
     }
   });
 
@@ -261,13 +263,12 @@ async function init() {
     // TODO: need to check the values that are clicked
     if (!isFavorite) {
       if (!checkCheckedList()) {
-        // eslint-disable-next-line
+        // eslint-disable-next-line no-alert
         window.alert(`Please add to at least one list`);
       } else {
-        // TODO: add to custom list
-        addRecipe(recipe.id);
-        addToCheckedLists(recipe);
-        addToCustomList(recipe);
+        addRecipe(recipeObj);
+        addToCheckedLists(recipeObj);
+        addToCustomList(recipeObj);
         /* Reload the page as a shortcut for showing new lists */
         location.reload();
       }
