@@ -23,7 +23,7 @@ let favSelected = '';
 
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
-  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html?search=`;
+  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
   favLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/favorite.html`;
   favSelected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-selected.svg`;
 } else {
