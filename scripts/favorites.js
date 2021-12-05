@@ -10,6 +10,7 @@ const storage = window.localStorage;
 const recipeLists = [];
 const selectedRecipes = [];
 let editMode = false;
+let copyMode = false;
 
 async function getRecipeArr(idArr) {
   const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${idArr.join(',')}${tokenKey}`;
@@ -97,44 +98,27 @@ async function init() {
     return fetchResults;
   }
 
-  editButton.addEventListener('click', () => {
-    if (editMode) return;
-    editMode = true;
-    document.body.style.backgroundColor = '#EEEEEE';
-    editButton.style.display = 'none';
-    cancelButton.style.display = 'inline-block';
-    deleteButton.style.display = 'inline-block';
-    copyButton.style.display = 'inline-block';
-    // edit favorites list titles
-    const listTitles = document.querySelectorAll('h4');
-    for (let i = 0; i < listTitles.length; i += 1) {
-      listTitles[i].setAttribute('contenteditable', true);
-    }
-    for (const list of recipeLists) {
-      for (let i = 0; i < list.list.length; i += 1) {
-        list.list[i].enterSelectMode();
+  copyButton.addEventListener('click', () => {
+    if (!copyMode) {
+      if (!editMode) {
+        enterEditMode();
       }
+      enterCopyMode();
+    }
+  });
+
+  editButton.addEventListener('click', () => {
+    if (!editMode) {
+      enterEditMode();
     }
   });
 
   cancelButton.addEventListener('click', () => {
-    if (!editMode) return;
-    // cancel the edit mode
-    editMode = false;
-    document.body.style.backgroundColor = '#FFFFFF';
-    editButton.style.display = 'inline-block';
-    cancelButton.style.display = 'none';
-    deleteButton.style.display = 'none';
-    copyButton.style.display = 'none';
-    // edit favorites list titles
-    const listTitles = document.querySelectorAll('h4');
-    for (let i = 0; i < listTitles.length; i += 1) {
-      listTitles[i].setAttribute('contenteditable', false);
+    if (editMode) {
+      exitEditMode();
     }
-    for (const list of recipeLists) {
-      for (let i = 0; i < list.list.length; i += 1) {
-        list.list[i].exitSelectMode();
-      }
+    if (copyMode) {
+      exitCopyMode();
     }
   });
 
@@ -143,6 +127,143 @@ async function init() {
       selectedRecipes[i].delete();
     }
   });
+
+  // Listen for a copy here button to be clicked
+  document.addEventListener('copy-to-list', (event) => {
+    console.log('calling copy');
+    copy(event.detail);
+  });
+}
+
+function copy(userList) {
+  console.log('copy called');
+  for (let i = 0; i < selectedRecipes.length; i++) {
+    // Iterate over the user list and see if a selected recipe is
+    // already in the list.
+    let foundInList = false;
+    for (let j = 0; j < userList.list.length; j++) {
+      if (selectedRecipes[i] == userList.list[j]) {
+        foundInList = true;
+        break;
+      }
+    }
+    // If the recipe wasn't in the user list, add it to the user list
+    if (foundInList) {
+      continue;
+    } else {
+      console.log('copying');
+      //userList.addRecipe(selectedRecipes[i]);
+      let tempList = userList.list;
+      tempList.push(selectedRecipes[i]);
+      userList.list = tempList;
+    }
+  }
+}
+
+/**
+ * Enter edit mode on favorites page
+ */
+function enterEditMode() {
+  if (editMode) return;
+  if (copyMode) {
+    exitCopyMode();
+    return;
+  }
+  editMode = true;
+  // Style page for edit mode
+  const editButton = document.getElementById('edit');
+  const cancelButton = document.getElementById('cancel');
+  const deleteButton = document.getElementById('delete');
+  const copyButton = document.getElementById('copy');
+  document.body.style.backgroundColor = '#EEEEEE';
+  editButton.style.display = 'none';
+  cancelButton.style.display = 'inline-block';
+  deleteButton.style.display = 'inline-block';
+  copyButton.style.display = 'inline-block';
+  // Make favorites list titles editable
+  const listTitles = document.querySelectorAll('h4');
+  for (let i = 0; i < listTitles.length; i += 1) {
+    listTitles[i].setAttribute('contenteditable', true);
+  }
+  // Enter select mode on all recipe cards
+  for (const list of recipeLists) {
+    for (let i = 0; i < list.list.length; i += 1) {
+      list.list[i].enterSelectMode();
+    }
+  }
+}
+
+/**
+ * Exit edit mode on favorites page
+ */
+function exitEditMode() {
+  if (!editMode) return;
+  if (copyMode) {
+    exitCopyMode();
+  }
+  editMode = false;
+  // Style page for default mode
+  const editButton = document.getElementById('edit');
+  const cancelButton = document.getElementById('cancel');
+  const deleteButton = document.getElementById('delete');
+  const copyButton = document.getElementById('copy');
+  document.body.style.backgroundColor = '#FFFFFF';
+  editButton.style.display = 'inline-block';
+  cancelButton.style.display = 'none';
+  deleteButton.style.display = 'none';
+  copyButton.style.display = 'none';
+  // Make favorites list titles uneditable
+  const listTitles = document.querySelectorAll('h4');
+  for (let i = 0; i < listTitles.length; i += 1) {
+    listTitles[i].setAttribute('contenteditable', false);
+  }
+  // Exit select mode on recipe cards
+  for (const list of recipeLists) {
+    for (let i = 0; i < list.list.length; i += 1) {
+      list.list[i].exitSelectMode();
+    }
+  }
+}
+
+
+/**
+ * Enter copy mode on favorites page.
+ */
+function enterCopyMode() {
+  if (copyMode) return;
+  if (!editMode) {
+    enterEditMode();
+  }
+  copyMode = true;
+  editMode = false;
+  // Format menu buttons for copy mode
+  const editButton = document.getElementById('edit');
+  const cancelButton = document.getElementById('cancel');
+  const deleteButton = document.getElementById('delete');
+  const copyButton = document.getElementById('copy');
+  copyButton.style.display = 'none';
+  editButton.style.display = 'none';
+  deleteButton.style.display = 'none';
+  cancelButton.style.display = 'inline-block';
+  // Make copy here buttons visible
+  for (let i = 0; i < recipeLists.length; i++) {
+    let copyHereButton = recipeLists[i].shadow.querySelector('.copy-here');
+    copyHereButton.style.display = 'inline-block';
+  }
+}
+
+
+/**
+ * Exit copy mode on favorites page. Returns you to edit mode.
+ */
+function exitCopyMode() {
+  if (!copyMode) return;
+  copyMode = false;
+  for (let i = 0; i < recipeLists.length; i++) {
+    let copyHereButton = recipeLists[i].shadow.querySelector('.copy-here');
+    copyHereButton.style.display = 'none';
+  }
+  enterEditMode();
 }
 
 window.addEventListener('DOMContentLoaded', init);

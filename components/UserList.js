@@ -1,4 +1,4 @@
-import { removeRecipebyList } from './UserLocalStorage.js';
+import { removeRecipebyList, addRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -58,6 +58,20 @@ class UserList extends HTMLElement {
     // populateRrecipe.appendChild(recipeCard);
   }
 
+  /**
+   * Adds a recipe to the userList, including localStorage
+   * @param {number} recipeId the ID of the recipe 
+   */
+  addRecipe(recipeId) {
+    console.log(`adding recipe ${recipeId} to list`);
+    addRecipebyList(this.name, recipeId)
+    const recipeCard = document.createElement('recipe-card-component');
+    const recipeSection = this.shadow.querySelector('.recipe-section');
+    console.log(listObj[recipeId]);
+    recipeCard.recipe = listObj[recipeId];
+    recipeSection.appendChild.recipeCard;
+  }
+
   get list() {
     return this.cardList;
   }
@@ -81,7 +95,14 @@ class UserList extends HTMLElement {
     this.shadow.appendChild(link.cloneNode(true));
   }
 
-  // connectedCallback() {}
+  connectedCallback() {
+    let copyHereButton = this.shadow.querySelector('.copy-here');
+    copyHereButton.addEventListener('click', () => {
+        console.log("dispatching event");
+        const event = new CustomEvent('copy-to-list', { detail: this });
+        document.dispatchEvent(event);
+    });
+  }
 }
 
 customElements.define('user-list', UserList);
