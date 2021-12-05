@@ -2,8 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
-
-import search from "../../scripts/search";
+// import search from '../../scripts/search';
 
 /* eslint no-unused-vars: "error" */
 jest.setTimeout(15000);
