@@ -48,7 +48,7 @@ class RecipeCard extends HTMLElement {
     recipeCal.innerHTML = recipeCal.innerHTML.replace('500', recipeObj.nutrition.nutrients[0].amount);
     recipeCalUnit.innerHTML = recipeCalUnit.innerHTML.replace('calories', recipeObj.nutrition.nutrients[0].unit);
 
-    if (checkFavorite(recipeObj.id)) {
+    if (checkFavorite(recipeObj)) {
       this.isFavorite = true;
       this.initializeHearts();
     }
@@ -85,7 +85,7 @@ class RecipeCard extends HTMLElement {
   initializeHearts() {
     // console.log('Checking favorites');
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
-    this.isFavorite = checkFavorite(this.getAttribute('recipe-id'));
+    this.isFavorite = checkFavorite(this.recipeObj);
     if (this.isFavorite) {
       favoriteIcon.src = '../assets/favorite-selected.svg';
     } else {
@@ -193,7 +193,7 @@ class RecipeCard extends HTMLElement {
     for (let i = 0; i < containers.length; i += 1) {
       const checkmark = containers[i].querySelector('input');
       if (checkmark.checked) {
-        addRecipebyList(containers[i].querySelector('span').innerHTML, this.getAttribute('recipe-id'));
+        addRecipebyList(containers[i].querySelector('span').innerHTML, this.recipeObj);
       }
     }
   }
@@ -206,7 +206,7 @@ class RecipeCard extends HTMLElement {
     userInput = userInput.value;
     if (userInput !== '') {
       console.log(userInput);
-      addRecipebyList(userInput, this.getAttribute('recipe-id'));
+      addRecipebyList(userInput, this.recipeObj);
     }
   }
 
@@ -309,7 +309,7 @@ class RecipeCard extends HTMLElement {
           window.alert(`Please add to at least one list`);
         } else {
           // add to 'favorites-master' no matter what
-          addRecipe(this.getAttribute('recipe-id'));
+          addRecipe(this.recipeObj);
           this.addToCheckedLists();
           this.addToCustomList();
           /* Reload the page as a shortcut for showing new lists */

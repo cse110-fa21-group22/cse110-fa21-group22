@@ -5,10 +5,7 @@
 // eslint-disable-next-line no-unused-vars
 import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
 import search from './search.js';
-// eslint-disable-next-line import/no-unresolved
-import apiKey from './apikey.js';
 
-const tokenKey = `?apiKey=${apiKey}`;
 const storage = window.localStorage;
 
 const recipeSection = document.querySelector('.home-page-popular-recipe-list');
@@ -19,7 +16,7 @@ const userFavoriteSection = document.querySelector('.home-page-favorite-section'
  * therefore, only initilize the favorite-master local storage when it does not even exist
  */
 function initLocalStorageDoubt() {
-  // meaning that favorites-master does not exist
+  // Meaning that favorites-master does not exist
   if (storage.getItem('favorites-master') == null) {
     initLocalStorage();
   }
@@ -27,8 +24,6 @@ function initLocalStorageDoubt() {
 
 /**
  * This function clears the results on the search page
- * @param {none}
- * @return {none}
  */
 function clearResults() {
   while (recipeSection.firstChild) {
@@ -55,22 +50,7 @@ function showResults(results) {
   }
 }
 
-async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
-  console.log('fetch_endpoint', fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in homepage failed');
-      console.error(error);
-    });
-
-  console.log('result is: ', fetchResults);
-  return fetchResults;
-}
-
-async function showFavoriteSection() {
+function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
   if (array.length === 0) {
@@ -80,14 +60,13 @@ async function showFavoriteSection() {
   } else {
     for (let i = 0; i < array.length; i += 1) {
       const recipeCard = document.createElement('recipe-card-component');
-      // eslint-disable-next-line no-await-in-loop
-      recipeCard.recipe = await getRecipebyID(array[i]);
+      recipeCard.recipe = array[i];
       userFavoriteSection.appendChild(recipeCard);
     }
   }
 }
 
-async function init() {
+function init() {
   initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
