@@ -1,5 +1,5 @@
 /**
- * API key for connecting with Spoonatular API
+ * Handles home page functionality.
  */
 
 import { initLocalStorage } from '../components/UserLocalStorage.js';
