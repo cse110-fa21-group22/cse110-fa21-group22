@@ -13,6 +13,8 @@ UserListTemplate.innerHTML = `
       <button class="copy-here">Copy to This List</button>
     </div>
     <section class="recipe-section">
+      <h5>No favorites added yet</h5>
+    </section>
     </div>
   </div>`;
 
@@ -43,6 +45,7 @@ class UserList extends HTMLElement {
       let cardList = this.cardList;
       // Remove a recipe from localStorage and the userList when it is deleted
       recipeCard.addEventListener('removed', (event) => {
+        console.log('removing recipe');
         removeRecipebyList(this.name, event.detail);
         recipeCard.remove();
         for (let i = 0; i < this.cardList.length; i++) {
@@ -50,6 +53,7 @@ class UserList extends HTMLElement {
             cardList.splice(i, 1);
           }
         }
+        this.checkForEmptyList();
       });
     }
   }
@@ -93,9 +97,24 @@ class UserList extends HTMLElement {
           cardList.splice(i, 1);
         }
       }
+      this.checkForEmptyList();
     });
     recipeSection.appendChild(recipeCard);
     this.cardList.push(recipeCard);
+    this.checkForEmptyList();
+  }
+
+  checkForEmptyList() {
+    console.log('checking for empty list');
+    let recipeSection = this.shadow.querySelector('.recipe-section');
+    let emptyNotice = this.shadow.querySelector('.recipe-section h5');
+    if (this.cardList.length == 0) {
+      recipeSection.style.height = '40px';
+      emptyNotice.style.display = 'inline-block';
+    } else {
+      recipeSection.style.height = 'auto';
+      emptyNotice.style.display = 'none';
+    }
   }
 
   /**
@@ -141,6 +160,8 @@ class UserList extends HTMLElement {
         const event = new CustomEvent('copy-to-list', { detail: this });
         document.dispatchEvent(event);
     });
+
+    this.checkForEmptyList();
   }
 }
 
