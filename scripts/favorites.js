@@ -8,6 +8,7 @@ const recipeLists = [];
 let selectedRecipes = [];
 let editMode = false;
 let copyMode = false;
+let performedOperation = false;
 
 async function init() {
   if ('serviceWorker' in navigator) {
@@ -34,7 +35,6 @@ async function init() {
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
   sidebarContent.style.display = 'none';
 
-  const mainSection = document.querySelector('.favorites-page');
   for (let i = 0; i < storage.length; i += 1) {
     // Do not display master favorites on favorites page
     if (storage.key(i) === 'favorites-master') continue;
@@ -54,12 +54,21 @@ async function init() {
     }
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
+      hideSelectGuideText();
+      copyButton.style.display = 'inline-block';
+      deleteButton.style.display = 'inline-block';
       console.log(selectedRecipes);
     });
 
     // Remove a recipe from the selectedRecipes list when deselected
     userList.addEventListener('deselected', (event) => {
       selectedRecipes.pop(event.detail);
+      if (selectedRecipes.length == 0) {
+        if (copyMode) exitCopyMode();
+        showSelectGuideText();
+        copyButton.style.display = 'none';
+        deleteButton.style.display = 'none';
+      }
       console.log(selectedRecipes);
     });
     if (userList.listName === 'My Favorites') {
@@ -111,40 +120,38 @@ async function init() {
   });
 
   deleteButton.addEventListener('click', () => {
-    for (let i = 0; i < selectedRecipes.length; i += 1) {
+    for (let i = 0; i < selectedRecipes.length; i++) {
       selectedRecipes[i].delete();
     }
     selectedRecipes = [];
+    // Update edit button text
+    const cancelButton = document.getElementById('cancel');
+    performedOperation = true;
+    cancelButton.innerText = 'Save';
+    showSelectGuideText();
+    copyButton.style.display = 'none';
+    deleteButton.style.display = 'none';
   });
 
   // Listen for a copy here button to be clicked
   document.addEventListener('copy-to-list', (event) => {
-    console.log('calling copy');
     copy(event.detail);
   });
 }
 
 function copy(userList) {
-  console.log('copy called');
   for (let i = 0; i < selectedRecipes.length; i++) {
     // Iterate over the user list and see if a selected recipe is
     // already in the list.
     let foundInList = false;
-    console.log(`userList: ${userList.list}`);
-    console.log(`selected: ${selectedRecipes}`)
     for (let j = 0; j < userList.list.length; j++) {
-      console.log(`if ${selectedRecipes[i].getAttribute('recipe-id')} == ${userList.list[j].getAttribute('recipe-id')}`);
-      if (selectedRecipes[i].getAttribute('recipe-id') == userList.list[j].getAttribute('recipe-id')) {
+      if (selectedRecipes[i].recipeId == userList.list[j].recipeId) {
         foundInList = true; 
         break;
       }
     }
     // If the recipe wasn't in the user list, add it to the user list
-    if (foundInList) {
-      console.log(`ignoring recipe ${parseInt(selectedRecipes[i].getAttribute('recipe-id'))}`);
-      continue;
-    } else {
-      console.log(`copying recipe ${parseInt(selectedRecipes[i].getAttribute('recipe-id'))}`);
+    if (!foundInList) {
       // Create a deep copy of the recicpe card
       let recipeCard = selectedRecipes[i].cloneNode(true);
       recipeCard.recipe = selectedRecipes[i].recipe;
@@ -154,6 +161,16 @@ function copy(userList) {
       userList.pushRecipe(recipeCard);
     }
   }
+  // Deselect recipes after copy operation
+  for (let i = selectedRecipes.length - 1; i > -1; i--) {
+    //console.log(`deselecting recipe ${selectedRecipes[i].recipeId}`);
+    selectedRecipes[i].deselect();
+  }
+  // Update edit button text
+  const cancelButton = document.getElementById('cancel');
+  performedOperation = true;
+  cancelButton.innerText = 'Save';
+  exitCopyMode();
 }
 
 /**
@@ -171,11 +188,25 @@ function enterEditMode() {
   const cancelButton = document.getElementById('cancel');
   const deleteButton = document.getElementById('delete');
   const copyButton = document.getElementById('copy');
+  let selectGuideText = document.getElementById('select-guide-text');
   document.body.style.backgroundColor = '#EEEEEE';
   editButton.style.display = 'none';
   cancelButton.style.display = 'inline-block';
-  deleteButton.style.display = 'inline-block';
-  copyButton.style.display = 'inline-block';
+  // Select guide text should hide if no recipes are selected
+  // Otherwise it should appear
+  if (selectedRecipes.length > 0) {
+    hideSelectGuideText();
+    deleteButton.style.display = 'inline-block';
+    copyButton.style.display = 'inline-block';
+  } else {
+    showSelectGuideText();
+  }
+  // Style edit button text appropriately
+  if (performedOperation) {
+    cancelButton.innerText = 'Save';
+  } else {
+    cancelButton.innerText = 'Cancel';
+  }
   // Make favorites list titles editable
   const listTitles = document.querySelectorAll('h4');
   for (let i = 0; i < listTitles.length; i += 1) {
@@ -198,12 +229,14 @@ function exitEditMode() {
     exitCopyMode();
   }
   editMode = false;
+  performedOperation = false;
   // Style page for default mode
   const editButton = document.getElementById('edit');
   const cancelButton = document.getElementById('cancel');
   const deleteButton = document.getElementById('delete');
   const copyButton = document.getElementById('copy');
   document.body.style.backgroundColor = '#FFFFFF';
+  hideSelectGuideText();
   editButton.style.display = 'inline-block';
   cancelButton.style.display = 'none';
   deleteButton.style.display = 'none';
@@ -241,10 +274,14 @@ function enterCopyMode() {
   editButton.style.display = 'none';
   deleteButton.style.display = 'none';
   cancelButton.style.display = 'inline-block';
+  cancelButton.innerText = 'Cancel';
   // Make copy here buttons visible
   for (let i = 0; i < recipeLists.length; i++) {
     let copyHereButton = recipeLists[i].shadow.querySelector('.copy-here');
     copyHereButton.style.display = 'inline-block';
+    // Title text should fit in space available
+    let titleText = recipeLists[i].shadow.querySelector('.list-name h4');
+    titleText.style.width = 'calc(100% - 160px)';
   }
 }
 
@@ -258,8 +295,30 @@ function exitCopyMode() {
   for (let i = 0; i < recipeLists.length; i++) {
     let copyHereButton = recipeLists[i].shadow.querySelector('.copy-here');
     copyHereButton.style.display = 'none';
+    // Title text should fit in ALL space available without wrapping
+    let titleText = recipeLists[i].shadow.querySelector('.list-name h4');
+    titleText.style.width = '50vw';
   }
   enterEditMode();
+}
+
+
+/**
+ * Hide the select guide text
+ */
+function hideSelectGuideText() {
+  let selectGuideText = document.getElementById('select-guide-text');
+  selectGuideText.style.visibility = 'hidden';
+  selectGuideText.style.height = '0px';
+}
+
+/**
+ * Show the select guide text
+ */
+function showSelectGuideText() {
+  let selectGuideText = document.getElementById('select-guide-text');
+  selectGuideText.style.visibility = 'visible';
+  selectGuideText.style.height = 'auto';
 }
 
 window.addEventListener('DOMContentLoaded', init);

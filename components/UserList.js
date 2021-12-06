@@ -46,9 +46,8 @@ class UserList extends HTMLElement {
         removeRecipebyList(this.name, event.detail);
         recipeCard.remove();
         for (let i = 0; i < this.cardList.length; i++) {
-          if (cardList[i].getAttribute('recipe-id') == event.detail) {
+          if (cardList[i].recipeId == event.detail.id) {
             cardList.splice(i, 1);
-            console.log('Splicing');
           }
         }
       });
@@ -73,7 +72,7 @@ class UserList extends HTMLElement {
    * @param {object} recipeCard the recipe card to add to the list
    */
   pushRecipe(recipeCard) {
-    addRecipebyList(this.name, parseInt(recipeCard.getAttribute('recipe-id')));
+    addRecipebyList(this.name, recipeCard.recipe);
     const recipeSection = this.shadow.querySelector('.recipe-section');
     // Add event listeners to the recipe card for when it is selected or deselected
     recipeCard.addEventListener('selected', (event) => {
@@ -90,9 +89,8 @@ class UserList extends HTMLElement {
       removeRecipebyList(this.name, event.detail);
       recipeCard.remove();
       for (let i = 0; i < this.cardList.length; i++) {
-        if (cardList[i].getAttribute('recipe-id') == event.detail) {
+        if (cardList[i].recipeId == event.detail.id) {
           cardList.splice(i, 1);
-          console.log('Splicing');
         }
       }
     });
@@ -140,7 +138,6 @@ class UserList extends HTMLElement {
 
     // Add an event listener to broadcast an event when copy here is clicked
     copyHereButton.addEventListener('click', () => {
-        console.log("dispatching event");
         const event = new CustomEvent('copy-to-list', { detail: this });
         document.dispatchEvent(event);
     });

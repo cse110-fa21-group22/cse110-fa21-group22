@@ -47,8 +47,6 @@ class RecipeCard extends HTMLElement {
     recipeCal.innerHTML = recipeCal.innerHTML.replace('500', recipeObj.nutrition.nutrients[0].amount);
     recipeCalUnit.innerHTML = recipeCalUnit.innerHTML.replace('calories', recipeObj.nutrition.nutrients[0].unit);
 
-    this.spoonacularData = recipeObj;
-
     if (checkFavorite(recipeObj)) {
       this.isFavorite = true;
       this.initializeHearts();
@@ -56,7 +54,7 @@ class RecipeCard extends HTMLElement {
   }
 
   get recipe() {
-    return this.spoonacularData;
+    return this.recipeObj;
   }
 
   /**
@@ -150,7 +148,7 @@ class RecipeCard extends HTMLElement {
    * Dispatches an event to remove this recipe
    */
   delete() {
-    const event = new CustomEvent('removed', { detail: this.recipeId });
+    const event = new CustomEvent('removed', { detail: this.recipeObj });
     this.dispatchEvent(event);
   }
 

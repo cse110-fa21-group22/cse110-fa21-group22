@@ -34,7 +34,7 @@ div.list-name {
 .list-name h4 {
   font-weight: bold;
   overflow-wrap: break-word;
-  width: calc(100% - 200px);
+  width: 50vw;
 }
 
 .recipe-section {
