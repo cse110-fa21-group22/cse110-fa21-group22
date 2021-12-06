@@ -128,7 +128,7 @@ function init() {
   // Automatically parse the query string and run a search when page reload
   let searchTerm = parseQueryString();
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.value = `"${searchTerm}""`;
+  navbarInputbox.value = `${searchTerm}`;
   let inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
   // If someone try the search url, it's the default set
