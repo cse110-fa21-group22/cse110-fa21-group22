@@ -3,30 +3,9 @@
  */
 import { addRecipebyList } from '../components/UserLocalStorage.js';
 
-// eslint-disable-next-line import/no-unresolved
-import apiKey from './apikey.js';
-
-const tokenKey = `&apiKey=${apiKey}`;
-
 const storage = window.localStorage;
 const recipeLists = [];
 const selectedRecipes = [];
-
-async function getRecipeArr(idArr) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/informationBulk?ids=${idArr.join(',')}${tokenKey}&includeNutrition=true`;
-
-  console.log('fetch_endpoint', fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in favorite page failed');
-      console.error(error);
-    });
-
-  console.log('result is: ', fetchResults);
-  return fetchResults;
-}
 
 async function init() {
   if ('serviceWorker' in navigator) {
@@ -49,19 +28,23 @@ async function init() {
   sidebarContent.style.display = 'none';
 
   const mainSection = document.querySelector('.favorites-page');
-  for (let i = 0; i < localStorage.length; i += 1) {
-    // do not display master favorites on favorites page
-    if (localStorage.key(i) === 'favorites-master') continue;
-    // get one list
+  for (let i = 0; i < storage.length; i += 1) {
+    // Do not display master favorites on favorites page
+    if (storage.key(i) === 'favorites-master') continue;
     const userList = document.createElement('user-list');
-    const arrRecipeId = JSON.parse(storage.getItem(localStorage.key(i)));
-    console.log('arrRecipeId = ', arrRecipeId);
-    let recipeArr = [];
-
-    // eslint-disable-next-line no-await-in-loop
-    if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
-    userList.list = recipeArr;
-    userList.listName = localStorage.key(i);
+    const arrRecipeObj = JSON.parse(storage.getItem(localStorage.key(i)));
+    if (arrRecipeObj.length === 0) {
+      const title = document.createElement('h4');
+      title.innerText = storage.key(i);
+      const noFavorite = document.createElement('h5');
+      noFavorite.innerText = 'No Favorites Added Yet';
+      mainSection.appendChild(title);
+      mainSection.appendChild(noFavorite);
+      continue;
+    } else {
+      userList.listName = storage.key(i);
+      userList.list = arrRecipeObj;
+    }
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
       console.log(selectedRecipes);
@@ -80,23 +63,6 @@ async function init() {
 }
 
 window.addEventListener('DOMContentLoaded', init);
-
-// eslint-disable-next-line no-unused-vars
-async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=true`;
-
-  // console.log("fetch_endpoint", fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in favorite page failed');
-      console.error(error);
-    });
-
-  // console.log("result is: ", fetchResults);
-  return fetchResults;
-}
 
 let editMode = false;
 const editButton = document.getElementById('edit');
