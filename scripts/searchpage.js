@@ -5,6 +5,23 @@
 
 import search from './search.js';
 
+export function searchapgeRefreshSearchResult() {
+  // clearResults(); // clear everything in the search result 
+  // showFavoriteSection(); // loading facorite section one more time 
+
+  let recipeSection = document.querySelector('.recipe-section');
+  /**
+   * call initilize dropDown and initilize heart  
+   */
+   let recipeCardList = recipeSection.querySelectorAll('recipe-card-component'); 
+   for(let i = 0; i < recipeCardList.length; i ++){
+     let recipeCard = recipeCardList[i]; 
+     recipeCard.initializeDropdown(); 
+     recipeCard.initializeHearts(); 
+   }
+}
+
+
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
@@ -15,7 +32,7 @@ function init() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
-        () => {},
+        () => { },
         (err) => {
           console.error(err);
         }

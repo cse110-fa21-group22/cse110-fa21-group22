@@ -1,5 +1,7 @@
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 import {homeapgeRefreshFavoriteSection} from '../scripts/homepage.js'; 
+import {searchapgeRefreshSearchResult} from '../scripts/searchpage.js'; 
+
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -75,6 +77,18 @@ class RecipeCard extends HTMLElement {
 
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
+
+    /**
+     * remove all container first
+     * reason: homepage, searchpage all recipeCards need to reflect all newly created lists
+     */
+    let removed = dropdownElem.querySelectorAll('.container'); 
+    console.log(removed); 
+    for(let i = 0; i < removed.length; i ++){
+      removed[i].remove(); 
+    }
+    /** ******************************** */
+
     for (let i = 0; i < localStorage.length; i += 1) {
       const entry = listEntryTemplate.content.cloneNode(true);
       if (localStorage.key(i) === 'favorites-master') continue;
@@ -210,10 +224,6 @@ class RecipeCard extends HTMLElement {
       console.log(userInput);
       addRecipebyList(userInput, this.recipeObj);
     }
-    /**
-     * added for making it not refresh 
-     */
-    //  initializeDropdown(); 
   }
 
   connectedCallback() {
@@ -328,8 +338,12 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true; 
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
+          // console.log(window.location.pathname); 
           if(window.location.pathname == "/webpages/home.html"){
             homeapgeRefreshFavoriteSection(); 
+          }
+          if(window.location.pathname == "/webpages/search.html"){
+            searchapgeRefreshSearchResult(); 
           }
           // location.reload();
         }
