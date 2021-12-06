@@ -33,8 +33,18 @@ async function init() {
     if (storage.key(i) === 'favorites-master') continue;
     const userList = document.createElement('user-list');
     const arrRecipeObj = JSON.parse(storage.getItem(localStorage.key(i)));
-    userList.listName = storage.key(i);
-    userList.list = arrRecipeObj;
+    if (arrRecipeObj.length === 0) {
+      const title = document.createElement('h4');
+      title.innerText = storage.key(i);
+      const noFavorite = document.createElement('h5');
+      noFavorite.innerText = 'No Favorites Added Yet';
+      mainSection.appendChild(title);
+      mainSection.appendChild(noFavorite);
+      continue;
+    } else {
+      userList.listName = storage.key(i);
+      userList.list = arrRecipeObj;
+    }
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
       console.log(selectedRecipes);
