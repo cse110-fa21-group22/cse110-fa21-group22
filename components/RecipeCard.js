@@ -310,9 +310,7 @@ class RecipeCard extends HTMLElement {
           this.addToCheckedLists();
           this.addToCustomList();
           const webpage = window.location.href;
-          console.log(webpage);
           this.isFavorite = true;
-          console.log(this.isFavorite);
           favoriteIcon.src = '../assets/favorite-selected.svg';
           recipeCard.hideDropdown();
           /* Reload the page if not on search page */

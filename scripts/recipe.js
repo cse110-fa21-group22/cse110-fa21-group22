@@ -277,11 +277,12 @@ async function init() {
         // eslint-disable-next-line no-alert
         window.alert(`Please add to at least one list`);
       } else {
+        isFavorite = true;
         addRecipe(recipe);
         addToCheckedLists(recipe);
         addToCustomList(recipe);
-        /* Reload the page as a shortcut for showing new lists */
-        location.reload();
+        favoriteIcon.src = '../assets/favorite-selected.svg';
+        hideDropdown();
       }
     }
   });
