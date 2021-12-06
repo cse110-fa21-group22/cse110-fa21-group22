@@ -281,9 +281,9 @@ async function init() {
         addRecipe(recipe);
         addToCheckedLists(recipe);
         addToCustomList(recipe);
-        location.reload();
-        // favoriteIcon.src = '../assets/favorite-selected.svg';
-        // hideDropdown();
+        // location.reload();
+        favoriteIcon.src = '../assets/favorite-selected.svg';
+        hideDropdown();
       }
     }
   });
