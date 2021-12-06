@@ -8,7 +8,7 @@ const tokenKey = `&apiKey=${apiKey}`;
 
 const storage = window.localStorage;
 const recipeLists = [];
-const selectedRecipes = [];
+let selectedRecipes = [];
 let editMode = false;
 let copyMode = false;
 
@@ -126,6 +126,7 @@ async function init() {
     for (let i = 0; i < selectedRecipes.length; i += 1) {
       selectedRecipes[i].delete();
     }
+    selectedRecipes = [];
   });
 
   // Listen for a copy here button to be clicked
@@ -141,21 +142,28 @@ function copy(userList) {
     // Iterate over the user list and see if a selected recipe is
     // already in the list.
     let foundInList = false;
+    console.log(`userList: ${userList.list}`);
+    console.log(`selected: ${selectedRecipes}`)
     for (let j = 0; j < userList.list.length; j++) {
-      if (selectedRecipes[i] == userList.list[j]) {
-        foundInList = true;
+      console.log(`if ${selectedRecipes[i].getAttribute('recipe-id')} == ${userList.list[j].getAttribute('recipe-id')}`);
+      if (selectedRecipes[i].getAttribute('recipe-id') == userList.list[j].getAttribute('recipe-id')) {
+        foundInList = true; 
         break;
       }
     }
     // If the recipe wasn't in the user list, add it to the user list
     if (foundInList) {
+      console.log(`ignoring recipe ${parseInt(selectedRecipes[i].getAttribute('recipe-id'))}`);
       continue;
     } else {
-      console.log('copying');
-      //userList.addRecipe(selectedRecipes[i]);
-      let tempList = userList.list;
-      tempList.push(selectedRecipes[i]);
-      userList.list = tempList;
+      console.log(`copying recipe ${parseInt(selectedRecipes[i].getAttribute('recipe-id'))}`);
+      // Create a deep copy of the recicpe card
+      let recipeCard = selectedRecipes[i].cloneNode(true);
+      recipeCard.recipe = selectedRecipes[i].recipe;
+      // Exit and reenter copy mode to reset styling
+      recipeCard.exitSelectMode();
+      recipeCard.enterSelectMode();
+      userList.pushRecipe(recipeCard);
     }
   }
 }

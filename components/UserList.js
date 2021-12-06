@@ -17,6 +17,10 @@ UserListTemplate.innerHTML = `
   </div>`;
 
 class UserList extends HTMLElement {
+  /**
+   * Setter used to initialize recipe cards
+   * @param {object} listObj recipe data fetched from spoonacular.
+   */
   set list(listObj) {
     const populateRrecipe = this.shadow.querySelector('.recipe-section');
     console.log('UserList component, ', listObj);
@@ -24,11 +28,9 @@ class UserList extends HTMLElement {
     for (const recipeid in listObj) {
       const recipeCard = document.createElement('recipe-card-component');
       recipeCard.recipe = listObj[recipeid];
-
-      // let favoriteIcon = recipeCard.shadowRoot.querySelector('.recipe-favorite');
-      // console.log("userList.js, favorite icon = ", favoriteIcon);
-
       populateRrecipe.appendChild(recipeCard);
+      this.cardList.push(recipeCard);
+      // Add event listeners to the recipe card for when it is selected or deselected
       recipeCard.addEventListener('selected', (event) => {
         const innerEvent = new CustomEvent('selected', { detail: event.detail });
         this.dispatchEvent(innerEvent);
@@ -37,51 +39,59 @@ class UserList extends HTMLElement {
         const innerEvent = new CustomEvent('deselected', { detail: event.detail });
         this.dispatchEvent(innerEvent);
       });
-
       // Remove a recipe from localStorage and the userList when it is deleted
       recipeCard.addEventListener('removed', (event) => {
         removeRecipebyList(this.name, event.detail);
         recipeCard.remove();
       });
-      this.cardList.push(recipeCard);
     }
-
-    // let RecipeCard = this.shadow.querySelectorAll('recipe-card-component');
-    // RecipeCard.forEach(function(card) {
-    //     console.log("inside the for loop");
-    //     let favoriteIcon = card.shadowRoot.querySelector('.recipe-favorite');
-    //     favoriteIcon.click();
-    // });
-
-    // testing
-    // const recipeCard = document.createElement('recipe-card-component');
-    // populateRrecipe.appendChild(recipeCard);
   }
 
   /**
    * Adds a recipe to the userList, including localStorage
    * @param {number} recipeId the ID of the recipe 
    */
-  addRecipe(recipeId) {
-    console.log(`adding recipe ${recipeId} to list`);
-    addRecipebyList(this.name, recipeId)
+  /*addRecipe(recipe) {
+    console.log(`adding recipe ${recipe.id} to list`);
+    addRecipebyList(this.name, recipe.id);
     const recipeCard = document.createElement('recipe-card-component');
     const recipeSection = this.shadow.querySelector('.recipe-section');
-    console.log(listObj[recipeId]);
-    recipeCard.recipe = listObj[recipeId];
-    recipeSection.appendChild.recipeCard;
+    recipeCard.recipe = recipe;
+    recipeSection.appendChild(recipeCard);
+  }*/
+
+  /**
+   * Pushes a recipe to the UserList
+   * @param {object} recipeCard the recipe card to add to the list
+   */
+  pushRecipe(recipeCard) {
+    addRecipebyList(this.name, parseInt(recipeCard.getAttribute('recipe-id')));
+    const recipeSection = this.shadow.querySelector('.recipe-section');
+    recipeSection.appendChild(recipeCard);
   }
 
+  /**
+   * Getter for the recipe list
+   * @returns {object} a list of recipe cards in this UserList
+   */
   get list() {
     return this.cardList;
   }
 
+  /**
+   * Setter for the UserList's name
+   * @param {string} name the name of the UserList
+   */
   set listName(name) {
     this.name = name;
     const listTitle = this.shadow.querySelector('.list-name h4');
     listTitle.textContent = name;
   }
 
+  /**
+   * Getter for the UserList's name
+   * @returns {string} the UserList's name
+   */
   get listName() {
     return this.name;
   }
@@ -97,6 +107,8 @@ class UserList extends HTMLElement {
 
   connectedCallback() {
     let copyHereButton = this.shadow.querySelector('.copy-here');
+
+    // Add an event listener to broadcast an event when copy here is clicked
     copyHereButton.addEventListener('click', () => {
         console.log("dispatching event");
         const event = new CustomEvent('copy-to-list', { detail: this });

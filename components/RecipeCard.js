@@ -39,15 +39,20 @@ class RecipeCard extends HTMLElement {
     const recipeImg = this.shadow.querySelector('.recipe-image');
     // const recipeCal = this.shadow.querySelector('.recipe-calorie-number');
     const recipeName = this.shadow.querySelector('.recipe-name');
-
     recipeImg.src = recipeObj.image;
     recipeName.innerHTML = recipeObj.title;
     // recipeCal.innerHTML = recipeObj['calories'];
+
+    this.spoonacularData = recipeObj;
 
     if (checkFavorite(recipeObj.id)) {
       this.isFavorite = true;
       this.initializeHearts();
     }
+  }
+
+  get recipe() {
+    return this.spoonacularData;
   }
 
   constructor() {
@@ -101,6 +106,9 @@ class RecipeCard extends HTMLElement {
   exitSelectMode() {
     this.selectMode = false;
     if (this.isSelected) this.deselect();
+    const checkmark = this.shadow.querySelector('.recipe-checkmark');
+    checkmark.style.display = 'none';
+    this.style.filter = 'brightness(100%)';
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
     favoriteIcon.style.display = 'block';
   }
