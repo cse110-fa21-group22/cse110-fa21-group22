@@ -28,13 +28,30 @@ async function init() {
   sidebarContent.style.display = 'none';
 
   const mainSection = document.querySelector('.favorites-page');
-  for (let i = 0; i < localStorage.length; i += 1) {
+  for (let i = 0; i < storage.length; i += 1) {
     // Do not display master favorites on favorites page
-    if (localStorage.key(i) === 'favorites-master') continue;
+    if (storage.key(i) === 'favorites-master') continue;
+
+    // get one list
     const userList = document.createElement('user-list');
-    const arrRecipeObj = JSON.parse(storage.getItem(localStorage.key(i)));
-    userList.list = arrRecipeObj;
-    userList.listName = localStorage.key(i);
+    const arrRecipeId = JSON.parse(storage.getItem(storage.key(i)));
+    console.log('arrRecipeId = ', arrRecipeId);
+    let recipeArr = [];
+
+    // eslint-disable-next-line no-await-in-loop
+    if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
+    if (recipeArr.length === 0) {
+      const title = document.createElement('h4');
+      title.innerText = storage.key(i);
+      const noFavorite = document.createElement('h5');
+      noFavorite.innerText = 'No Favorites Added Yet';
+      mainSection.appendChild(title);
+      mainSection.appendChild(noFavorite);
+      continue;
+    } else {
+      userList.listName = storage.key(i);
+      userList.list = recipeArr;
+    }
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
       console.log(selectedRecipes);
