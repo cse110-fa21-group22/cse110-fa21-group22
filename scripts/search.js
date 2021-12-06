@@ -1,6 +1,6 @@
 /**
- @module Search
-*/
+ * @module Search
+ */
 
 /*
  * Handles all queries related to spoonacular api.
