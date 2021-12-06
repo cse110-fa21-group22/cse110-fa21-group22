@@ -65,7 +65,7 @@ function showFavoriteSection() {
   }
 }
 
-export function homeapgeRefreshFavoriteSection() {
+export default function homeapgeRefreshFavoriteSection() {
   userFavoriteSection.innerHTML = ''; // clear everything in this section
   showFavoriteSection(); // loading facorite section one more time
 

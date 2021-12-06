@@ -5,7 +5,7 @@
 
 import search from './search.js';
 
-export function searchapgeRefreshSearchResult() {
+export default function searchapgeRefreshSearchResult() {
   // clearResults(); // clear everything in the search result
   // showFavoriteSection(); // loading facorite section one more time
 
