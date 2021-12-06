@@ -19,7 +19,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * @param {int} inputList.timeFilter - The filter which select the max ready time of the recipes.
  * @param {string} inputList.typeFilter - The filter which select the type of the recipes.
  * @param {*}
- * @returns {object} - json file containing the results of the spoonacular query
+ * @return {object} - json file containing the results of the spoonacular query
  */
 export default async function search(inputList) {
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
