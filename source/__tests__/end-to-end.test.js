@@ -16,7 +16,6 @@ const END_TAG = '--icookfood.netlify.app/';
 
 const prNum = 302; // change -> (your pr number);
 
-
 let homeLink = '';
 let searchLink = '';
 let favLink = '';
