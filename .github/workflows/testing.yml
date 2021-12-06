@@ -27,4 +27,4 @@ jobs:
         run: npm install
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: npm run test
+        run: npm run ./source/__test__/end-to-end.test.js
