@@ -2,10 +2,10 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavorite, checkFavoritebyID, removeRecipebyList, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
-import apiKey from './apikey.js';
+import {apiKey} from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
 
@@ -212,9 +212,19 @@ async function init() {
   /*
    * show the drop-down box and change the heart color
    */
-  const recipeObj = JSON.parse(window.localStorage.getItem('recipeObj'));
-  window.localStorage.removeItem('recipeObj');
-  let isFavorite = checkFavorite(recipeObj);
+
+  // const recipeObj = JSON.parse(window.localStorage.getItem('recipeObj'));
+  // window.localStorage.removeItem('recipeObj');
+  // let isFavorite = checkFavorite(recipeObj);
+
+  /********** modified by Dennis **********
+  * use the newly fetched recipe object to see if it is already contained in master-favorite 
+  * since this fetched recipe data may not have exactly the same field as what is in the storage, 
+  * must use checkFavoritebyID which is useind ID field for equivilency 
+  */
+  let isFavorite = checkFavoritebyID(recipe);
+  /* *************************************************** */ 
+
   initializeHearts(isFavorite);
   initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
@@ -235,11 +245,11 @@ async function init() {
         const containers = document.querySelectorAll('.container');
         // goes through all the lists and deletes if it is in list
         for (let i = 0; i < containers.length; i += 1) {
-          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipeObj);
+          removeRecipebyListbyID(containers[i].querySelector('span').innerHTML, recipe);
         }
         favoriteIcon.src = '../assets/favorite.svg';
       }
-      removeRecipebyList('favorites-master', recipeObj);
+      removeRecipebyID(recipe);
     }
   });
 
@@ -266,9 +276,9 @@ async function init() {
         // eslint-disable-next-line no-alert
         window.alert(`Please add to at least one list`);
       } else {
-        addRecipe(recipeObj);
-        addToCheckedLists(recipeObj);
-        addToCustomList(recipeObj);
+        addRecipe(recipe);
+        addToCheckedLists(recipe);
+        addToCustomList(recipe);
         /* Reload the page as a shortcut for showing new lists */
         location.reload();
       }

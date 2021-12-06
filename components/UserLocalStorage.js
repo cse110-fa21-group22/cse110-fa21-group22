@@ -30,6 +30,26 @@ export function checkFavorite(recipeObj) {
 }
 
 /**
+ * becuase differnet fetching from API returns object that has differnet field 
+ * Using ID field from recipe object to compare equivilence 
+ * @param {recipeObj} recipeObj 
+ * @returns {boolean} true if recipeOBJ.id === any(master-favorite).id
+ */
+export function checkFavoritebyID(recipeObj) {
+  const storage = window.localStorage;
+  const list = storage.getItem('favorites-master');
+
+  const array = JSON.parse(list);
+  for (let i = 0; i < array.length; i += 1) {
+    // compare two object by id 
+    if (array[i].id === recipeObj.id) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Add one recipe object into the favorite-master list. 'favorite-master' list is the default list
  * @param {object} recipeObj A recipe object
  */
@@ -65,6 +85,27 @@ export function removeRecipe(recipeObj) {
   }
   storage.setItem('favorites-master', JSON.stringify(array));
 }
+
+/**
+ * API may return object that are not exactly the same
+ * therefore, check ID for equivilence 
+ * remove an recipe by ID 
+ * @param {recipeObj} recipeObj  
+ */
+export function removeRecipebyID(recipeObj) {
+  const storage = window.localStorage;
+  const list = storage.getItem('favorites-master');
+
+  const array = JSON.parse(list);
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i].id === recipeObj.id) {
+      array.splice(i, 1);
+      break;
+    }
+  }
+  storage.setItem('favorites-master', JSON.stringify(array));
+}
+
 
 /**
  * create another list whose naem is listName.
@@ -128,6 +169,27 @@ export function removeRecipebyList(listName, recipeObj) {
     const array = JSON.parse(list);
     for (let i = 0; i < array.length; i += 1) {
       if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
+        array.splice(i, 1);
+        break;
+      }
+    }
+    storage.setItem(listName, JSON.stringify(array));
+  }
+}
+
+/**
+ * remove an recipeObj from the list by the id of the recipe Obj
+ * if the list is not found, do nothing
+ * @param {string} listName name of the list
+ * @param {object} recipeObj id property of the recipe
+ */
+ export function removeRecipebyListbyID(listName, recipeObj) {
+  const storage = window.localStorage;
+  if (storage.getItem(listName) != null) {
+    const list = storage.getItem(listName);
+    const array = JSON.parse(list);
+    for (let i = 0; i < array.length; i += 1) {
+      if (array[i].id === recipeObj.id) {
         array.splice(i, 1);
         break;
       }
