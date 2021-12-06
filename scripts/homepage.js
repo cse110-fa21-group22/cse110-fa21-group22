@@ -65,6 +65,12 @@ function showFavoriteSection() {
   }
 }
 
+export function homeapgeRefreshFavoriteSection(){
+  userFavoriteSection.innerHTML = ''; // clear everything in this section
+  showFavoriteSection(); // loading facorite section one more time 
+
+}
+
 function init() {
   initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {

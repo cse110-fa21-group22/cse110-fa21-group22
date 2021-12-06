@@ -1,4 +1,5 @@
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
+import {homeapgeRefreshFavoriteSection} from '../scripts/homepage.js'; 
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -209,6 +210,10 @@ class RecipeCard extends HTMLElement {
       console.log(userInput);
       addRecipebyList(userInput, this.recipeObj);
     }
+    /**
+     * added for making it not refresh 
+     */
+    //  initializeDropdown(); 
   }
 
   connectedCallback() {
@@ -264,8 +269,16 @@ class RecipeCard extends HTMLElement {
           }
           favoriteIcon.src = '../assets/favorite.svg';
           console.log('Remove item from ALL favorites lists here');
+
           /* Reload the page as a shortcut for showing updated lists */
-          location.reload();
+          console.log("testing for refreshing the page", window.location.pathname); // /webpages/home.html
+          /**
+           * call reloading function from homepage.js to reload specific place 
+           */
+          if(window.location.pathname == "/webpages/home.html"){
+            homeapgeRefreshFavoriteSection(); 
+          }
+          // location.reload();
         }
       }
     });
@@ -310,7 +323,15 @@ class RecipeCard extends HTMLElement {
           this.addToCheckedLists();
           this.addToCustomList();
           /* Reload the page as a shortcut for showing new lists */
-          location.reload();
+
+          /**  make this is a favorite  */
+          this.isFavorite = true; 
+          favoriteIcon.src = '../assets/favorite-selected.svg';
+          /**  **********************************  */
+          if(window.location.pathname == "/webpages/home.html"){
+            homeapgeRefreshFavoriteSection(); 
+          }
+          // location.reload();
         }
       }
       event.stopPropagation();

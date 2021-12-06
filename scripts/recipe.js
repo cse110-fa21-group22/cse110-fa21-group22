@@ -5,7 +5,7 @@
 import { addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
-import apiKey from './apikey.js';
+import {apiKey} from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
 
