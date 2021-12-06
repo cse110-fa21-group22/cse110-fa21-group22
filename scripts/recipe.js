@@ -2,7 +2,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavorite, checkFavoritebyID, removeRecipebyList, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
@@ -218,13 +218,13 @@ async function init() {
   // window.localStorage.removeItem('recipeObj');
   // let isFavorite = checkFavorite(recipeObj);
 
-  /********** modified by Dennis **********
-  * use the newly fetched recipe object to see if it is already contained in master-favorite 
-  * since this fetched recipe data may not have exactly the same field as what is in the storage, 
-  * must use checkFavoritebyID which is useind ID field for equivilency 
-  */
+  /** ******** modified by Dennis **********
+   * use the newly fetched recipe object to see if it is already contained in master-favorite
+   * since this fetched recipe data may not have exactly the same field as what is in the storage,
+   * must use checkFavoritebyID which is useind ID field for equivilency
+   */
   let isFavorite = checkFavoritebyID(recipe);
-  /* *************************************************** */ 
+  /* *************************************************** */
 
   initializeHearts(isFavorite);
   initializeDropdown();

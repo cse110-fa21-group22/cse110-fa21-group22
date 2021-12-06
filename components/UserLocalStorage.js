@@ -30,9 +30,9 @@ export function checkFavorite(recipeObj) {
 }
 
 /**
- * becuase differnet fetching from API returns object that has differnet field 
- * Using ID field from recipe object to compare equivilence 
- * @param {recipeObj} recipeObj 
+ * becuase differnet fetching from API returns object that has differnet field
+ * Using ID field from recipe object to compare equivilence
+ * @param {recipeObj} recipeObj
  * @returns {boolean} true if recipeOBJ.id === any(master-favorite).id
  */
 export function checkFavoritebyID(recipeObj) {
@@ -41,7 +41,7 @@ export function checkFavoritebyID(recipeObj) {
 
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
-    // compare two object by id 
+    // compare two object by id
     if (array[i].id === recipeObj.id) {
       return true;
     }
@@ -88,9 +88,9 @@ export function removeRecipe(recipeObj) {
 
 /**
  * API may return object that are not exactly the same
- * therefore, check ID for equivilence 
- * remove an recipe by ID 
- * @param {recipeObj} recipeObj  
+ * therefore, check ID for equivilence
+ * remove an recipe by ID
+ * @param {recipeObj} recipeObj
  */
 export function removeRecipebyID(recipeObj) {
   const storage = window.localStorage;
@@ -105,7 +105,6 @@ export function removeRecipebyID(recipeObj) {
   }
   storage.setItem('favorites-master', JSON.stringify(array));
 }
-
 
 /**
  * create another list whose naem is listName.
@@ -183,7 +182,7 @@ export function removeRecipebyList(listName, recipeObj) {
  * @param {string} listName name of the list
  * @param {object} recipeObj id property of the recipe
  */
- export function removeRecipebyListbyID(listName, recipeObj) {
+export function removeRecipebyListbyID(listName, recipeObj) {
   const storage = window.localStorage;
   if (storage.getItem(listName) != null) {
     const list = storage.getItem(listName);

@@ -234,9 +234,9 @@ class RecipeCard extends HTMLElement {
         }
       } else if (!this.dropdown) {
         // modified by Dennis
-        // do not need this line becasue recipe is doing another fetch 
+        // do not need this line becasue recipe is doing another fetch
         // window.localStorage.setItem('recipeObj', JSON.stringify(this.recipeObj));
-        
+
         window.location.href = `recipe.html?id=${this.recipeId}`;
       }
     });
