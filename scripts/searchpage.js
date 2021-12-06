@@ -39,9 +39,9 @@ function init() {
 
   // TODO: need to find a better way
   // Fix the that the button cannot use for the first press
-  // if (!isMobile) {
-  //   navbarComponent.shadow.querySelector('.sidebar-button').click();
-  // }
+  if (!isMobile) {
+    navbarComponent.shadow.querySelector('.sidebar-button').click();
+  }
 
   const recipeSection = document.querySelector('.recipe-section');
   /**
