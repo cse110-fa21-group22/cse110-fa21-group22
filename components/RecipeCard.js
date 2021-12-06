@@ -1,7 +1,6 @@
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
-import {homeapgeRefreshFavoriteSection} from '../scripts/homepage.js'; 
-import {searchapgeRefreshSearchResult} from '../scripts/searchpage.js'; 
-
+import { homeapgeRefreshFavoriteSection } from '../scripts/homepage.js';
+import { searchapgeRefreshSearchResult } from '../scripts/searchpage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -82,10 +81,10 @@ class RecipeCard extends HTMLElement {
      * remove all container first
      * reason: homepage, searchpage all recipeCards need to reflect all newly created lists
      */
-    let removed = dropdownElem.querySelectorAll('.container'); 
-    console.log(removed); 
-    for(let i = 0; i < removed.length; i ++){
-      removed[i].remove(); 
+    const removed = dropdownElem.querySelectorAll('.container');
+    console.log(removed);
+    for (let i = 0; i < removed.length; i += 1) {
+      removed[i].remove();
     }
     /** ******************************** */
 
@@ -281,12 +280,12 @@ class RecipeCard extends HTMLElement {
           console.log('Remove item from ALL favorites lists here');
 
           /* Reload the page as a shortcut for showing updated lists */
-          console.log("testing for refreshing the page", window.location.pathname); // /webpages/home.html
+          console.log('testing for refreshing the page', window.location.pathname); // /webpages/home.html
           /**
-           * call reloading function from homepage.js to reload specific place 
+           * call reloading function from homepage.js to reload specific place
            */
-          if(window.location.pathname == "/webpages/home.html"){
-            homeapgeRefreshFavoriteSection(); 
+          if (window.location.pathname === '/webpages/home.html') {
+            homeapgeRefreshFavoriteSection();
           }
           // location.reload();
         }
@@ -335,15 +334,15 @@ class RecipeCard extends HTMLElement {
           /* Reload the page as a shortcut for showing new lists */
 
           /**  make this is a favorite  */
-          this.isFavorite = true; 
+          this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
-          // console.log(window.location.pathname); 
-          if(window.location.pathname == "/webpages/home.html"){
-            homeapgeRefreshFavoriteSection(); 
+          // console.log(window.location.pathname);
+          if (window.location.pathname === '/webpages/home.html') {
+            homeapgeRefreshFavoriteSection();
           }
-          if(window.location.pathname == "/webpages/search.html"){
-            searchapgeRefreshSearchResult(); 
+          if (window.location.pathname === '/webpages/search.html') {
+            searchapgeRefreshSearchResult();
           }
           // location.reload();
         }

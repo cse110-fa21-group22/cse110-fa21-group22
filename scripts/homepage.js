@@ -67,16 +67,16 @@ function showFavoriteSection() {
 
 export function homeapgeRefreshFavoriteSection() {
   userFavoriteSection.innerHTML = ''; // clear everything in this section
-  showFavoriteSection(); // loading facorite section one more time 
+  showFavoriteSection(); // loading facorite section one more time
 
   /**
-   * call initilize dropDown and initilize heart  
+   * call initilize dropDown and initilize heart
    */
-  let recipeCardList = recipeSection.querySelectorAll('recipe-card-component'); 
-  for(let i = 0; i < recipeCardList.length; i ++){
-    let recipeCard = recipeCardList[i]; 
-    recipeCard.initializeDropdown(); 
-    recipeCard.initializeHearts(); 
+  const recipeCardList = recipeSection.querySelectorAll('recipe-card-component');
+  for (let i = 0; i < recipeCardList.length; i += 1) {
+    const recipeCard = recipeCardList[i];
+    recipeCard.initializeDropdown();
+    recipeCard.initializeHearts();
   }
 }
 
@@ -85,7 +85,7 @@ function init() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
-        () => { },
+        () => {},
         (err) => {
           console.error(err);
         }
