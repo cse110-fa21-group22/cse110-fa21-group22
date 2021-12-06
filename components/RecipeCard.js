@@ -264,11 +264,12 @@ class RecipeCard extends HTMLElement {
           }
           favoriteIcon.src = '../assets/favorite.svg';
           console.log('Remove item from ALL favorites lists here');
-          const webpage = window.location.href;
-          /* Reload the page if not on search page and home page */
-          if (webpage.indexOf('favorite.html') > -1) {
-            location.reload();
-          }
+          location.reload();
+          // const webpage = window.location.href;
+          // /* Reload the page if not on search page and home page */
+          // if (webpage.indexOf('favorite.html') > -1) {
+          //   location.reload();
+          // }
         }
       }
     });
@@ -312,14 +313,15 @@ class RecipeCard extends HTMLElement {
           addRecipe(this.recipeObj);
           this.addToCheckedLists();
           this.addToCustomList();
-          const webpage = window.location.href;
-          this.isFavorite = true;
-          favoriteIcon.src = '../assets/favorite-selected.svg';
-          recipeCard.hideDropdown();
-          /* Reload the page if not on search page and home page */
-          if (webpage.indexOf('favorites.html') > -1) {
-            location.reload();
-          }
+          location.reload();
+          // const webpage = window.location.href;
+          // this.isFavorite = true;
+          // favoriteIcon.src = '../assets/favorite-selected.svg';
+          // recipeCard.hideDropdown();
+          // /* Reload the page if not on search page and home page */
+          // if (webpage.indexOf('favorites.html') > -1) {
+          //   location.reload();
+          // }
         }
       }
       event.stopPropagation();

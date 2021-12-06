@@ -277,12 +277,13 @@ async function init() {
         // eslint-disable-next-line no-alert
         window.alert(`Please add to at least one list`);
       } else {
-        isFavorite = true;
+        // isFavorite = true;
         addRecipe(recipe);
         addToCheckedLists(recipe);
         addToCustomList(recipe);
-        favoriteIcon.src = '../assets/favorite-selected.svg';
-        hideDropdown();
+        location.reload();
+        // favoriteIcon.src = '../assets/favorite-selected.svg';
+        // hideDropdown();
       }
     }
   });
