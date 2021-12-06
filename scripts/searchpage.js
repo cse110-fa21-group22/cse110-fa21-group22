@@ -39,9 +39,9 @@ function init() {
 
   // TODO: need to find a better way
   // Fix the that the button cannot use for the first press
-  if (!isMobile) {
-    navbarComponent.shadow.querySelector('.sidebar-button').click();
-  }
+  // if (!isMobile) {
+  //   navbarComponent.shadow.querySelector('.sidebar-button').click();
+  // }
 
   const recipeSection = document.querySelector('.recipe-section');
   /**
@@ -128,7 +128,7 @@ function init() {
   // Automatically parse the query string and run a search when page reload
   let searchTerm = parseQueryString();
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.value = `"${searchTerm}""`;
+  navbarInputbox.value = `${searchTerm}`;
   let inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
   // If someone try the search url, it's the default set
