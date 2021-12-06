@@ -50,41 +50,43 @@ async function init() {
 
   const mainSection = document.querySelector('.favorites-page');
   for (let i = 0; i < storage.length; i += 1) {
-    const list = storage.getItem('favorites-master');
-    const array = JSON.parse(list);
-    if (array.length === 0) {
-      const noFavorite = document.createElement('h4');
+    // Do not display master favorites on favorites page
+    if (storage.key(i) === 'favorites-master') continue;
+
+    // get one list
+    const userList = document.createElement('user-list');
+    const arrRecipeId = JSON.parse(storage.getItem(storage.key(i)));
+    console.log('arrRecipeId = ', arrRecipeId);
+    let recipeArr = [];
+
+    // eslint-disable-next-line no-await-in-loop
+    if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
+    if (recipeArr.length === 0) {
+      const title = document.createElement('h4');
+      title.innerText = storage.key(i);
+      const noFavorite = document.createElement('h5');
       noFavorite.innerText = 'No Favorites Added Yet';
+      mainSection.appendChild(title);
       mainSection.appendChild(noFavorite);
+      continue;
     } else {
-      // Do not display master favorites on favorites page
-      if (storage.key(i) === 'favorites-master') continue;
-
-      // get one list
-      const userList = document.createElement('user-list');
-      const arrRecipeId = JSON.parse(storage.getItem(storage.key(i)));
-      console.log('arrRecipeId = ', arrRecipeId);
-      let recipeArr = [];
-
-      // eslint-disable-next-line no-await-in-loop
-      if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
-      userList.list = recipeArr;
       userList.listName = storage.key(i);
-      userList.addEventListener('selected', (event) => {
-        selectedRecipes.push(event.detail);
-        console.log(selectedRecipes);
-      });
-      userList.addEventListener('deselected', (event) => {
-        selectedRecipes.pop(event.detail);
-        console.log(selectedRecipes);
-      });
-      if (userList.listName === 'My Favorites') {
-        mainSection.insertBefore(userList, mainSection.firstChild);
-      } else {
-        mainSection.appendChild(userList);
-      }
-      recipeLists.push(userList);
+      userList.list = recipeArr;
     }
+    userList.addEventListener('selected', (event) => {
+      selectedRecipes.push(event.detail);
+      console.log(selectedRecipes);
+    });
+    userList.addEventListener('deselected', (event) => {
+      selectedRecipes.pop(event.detail);
+      console.log(selectedRecipes);
+    });
+    if (userList.listName === 'My Favorites') {
+      mainSection.insertBefore(userList, mainSection.firstChild);
+    } else {
+      mainSection.appendChild(userList);
+    }
+    recipeLists.push(userList);
   }
 }
 
