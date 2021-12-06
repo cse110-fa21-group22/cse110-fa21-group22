@@ -1,3 +1,6 @@
+/**
+ * @module UserLocalStorage
+ */
 // 'favorites-master' is the default list
 const store = window.localStorage;
 
