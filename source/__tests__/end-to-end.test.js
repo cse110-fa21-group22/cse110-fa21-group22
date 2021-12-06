@@ -298,7 +298,7 @@ describe('Basic user flow for Search Page', () => {
 
     // Go to favorites page
     await page.goto(favLink);
-    await page.waitForTimeout('10000');
+    await page.waitForTimeout('7000');
 
     // Retrieve the recipe in the favorites list
     const userList = await page.$$('user-list');
