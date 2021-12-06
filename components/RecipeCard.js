@@ -316,7 +316,7 @@ class RecipeCard extends HTMLElement {
           favoriteIcon.src = '../assets/favorite-selected.svg';
           recipeCard.hideDropdown();
           /* Reload the page if not on search page */
-          if (webpage.indexOf('search.html') === -1) {
+          if (webpage.indexOf('favorites.html') > -1) {
             location.reload();
           }
         }
