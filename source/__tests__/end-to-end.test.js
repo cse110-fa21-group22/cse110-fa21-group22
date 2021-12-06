@@ -13,7 +13,9 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
+
 const prNum = 302; // change -> (your pr number);
+
 
 let homeLink = '';
 let searchLink = '';
@@ -22,7 +24,7 @@ let favSelected = '';
 
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
-  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html?search=`;
+  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
   favLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/favorite.html`;
   favSelected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-selected.svg`;
 } else {
