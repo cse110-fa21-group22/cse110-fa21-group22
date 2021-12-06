@@ -36,22 +36,22 @@ async function init() {
     const userList = document.createElement('user-list');
     const arrRecipeId = JSON.parse(storage.getItem(storage.key(i)));
     console.log('arrRecipeId = ', arrRecipeId);
-    let recipeArr = [];
+    // let recipeArr = [];
 
     // eslint-disable-next-line no-await-in-loop
-    if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
-    if (recipeArr.length === 0) {
-      const title = document.createElement('h4');
-      title.innerText = storage.key(i);
-      const noFavorite = document.createElement('h5');
-      noFavorite.innerText = 'No Favorites Added Yet';
-      mainSection.appendChild(title);
-      mainSection.appendChild(noFavorite);
-      continue;
-    } else {
-      userList.listName = storage.key(i);
-      userList.list = recipeArr;
-    }
+    // if (arrRecipeId.length) recipeArr = await getRecipeArr(arrRecipeId);
+    // if (recipeArr.length === 0) {
+    //   const title = document.createElement('h4');
+    //   title.innerText = storage.key(i);
+    //   const noFavorite = document.createElement('h5');
+    //   noFavorite.innerText = 'No Favorites Added Yet';
+    //   mainSection.appendChild(title);
+    //   mainSection.appendChild(noFavorite);
+    //   continue;
+    // } else {
+    //   userList.listName = storage.key(i);
+    //   userList.list = recipeArr;
+    // }
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
       console.log(selectedRecipes);
