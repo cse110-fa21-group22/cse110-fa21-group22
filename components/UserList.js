@@ -39,10 +39,18 @@ class UserList extends HTMLElement {
         const innerEvent = new CustomEvent('deselected', { detail: event.detail });
         this.dispatchEvent(innerEvent);
       });
+
+      let cardList = this.cardList;
       // Remove a recipe from localStorage and the userList when it is deleted
       recipeCard.addEventListener('removed', (event) => {
         removeRecipebyList(this.name, event.detail);
         recipeCard.remove();
+        for (let i = 0; i < this.cardList.length; i++) {
+          if (cardList[i].getAttribute('recipe-id') == event.detail) {
+            cardList.splice(i, 1);
+            console.log('Splicing');
+          }
+        }
       });
     }
   }
@@ -67,7 +75,29 @@ class UserList extends HTMLElement {
   pushRecipe(recipeCard) {
     addRecipebyList(this.name, parseInt(recipeCard.getAttribute('recipe-id')));
     const recipeSection = this.shadow.querySelector('.recipe-section');
+    // Add event listeners to the recipe card for when it is selected or deselected
+    recipeCard.addEventListener('selected', (event) => {
+      const innerEvent = new CustomEvent('selected', { detail: event.detail });
+      this.dispatchEvent(innerEvent);
+    });
+    recipeCard.addEventListener('deselected', (event) => {
+      const innerEvent = new CustomEvent('deselected', { detail: event.detail });
+      this.dispatchEvent(innerEvent);
+    });
+    // Remove a recipe from localStorage and the userList when it is deleted
+    let cardList = this.cardList;
+    recipeCard.addEventListener('removed', (event) => {
+      removeRecipebyList(this.name, event.detail);
+      recipeCard.remove();
+      for (let i = 0; i < this.cardList.length; i++) {
+        if (cardList[i].getAttribute('recipe-id') == event.detail) {
+          cardList.splice(i, 1);
+          console.log('Splicing');
+        }
+      }
+    });
     recipeSection.appendChild(recipeCard);
+    this.cardList.push(recipeCard);
   }
 
   /**
