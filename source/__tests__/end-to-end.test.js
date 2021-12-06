@@ -5,7 +5,7 @@
 // import search from '../../scripts/search';
 
 /* eslint no-unused-vars: "error" */
-jest.setTimeout(15000);
+jest.setTimeout(20000);
 
 // Links for testing on deployment
 const HOME_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/home.html';
