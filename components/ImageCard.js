@@ -58,7 +58,6 @@ function capitalize(str) {
   const arr = str.split(' ');
 
   // loop through each element of the array and capitalize the first letter.
-
   for (let i = 0; i < arr.length; i += 1) {
     arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
   }
@@ -79,7 +78,6 @@ class ImageCard extends HTMLElement {
     // Set title to 'Ingredients'
     const title = this.shadow.querySelector('.title');
     title.innerHTML = 'Ingredients <button class="instructions-link" hidden>Go to Instructions</button>';
-
     // Create an ingredient entry for each element of ingredientsArr
     for (let i = 0; i < ingredientArr.length; i += 1) {
       const entry = entryElementTemplate.content.cloneNode(true);
@@ -89,7 +87,8 @@ class ImageCard extends HTMLElement {
       entry.querySelector('.ingredient-measurements').innerHTML = `${toFraction(ingredientArr[i].amount)} <span></span>`;
       entry.querySelector('span').innerHTML = ingredientArr[i].unit;
 
-      this.shadow.querySelector('.ingredients-list').appendChild(entry);
+      const ingredientList = this.shadow.querySelector('.ingredients-list');
+      ingredientList.appendChild(entry);
     }
   }
 

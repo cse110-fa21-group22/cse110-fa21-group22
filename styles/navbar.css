@@ -35,6 +35,8 @@
 
 .sidebar-filter {
   padding: 0 25px;
+  width: 200px;
+  height: 30px;
 }
 
 .navbar {
@@ -45,6 +47,15 @@
   height: 60px;
   padding: 0 25px;
   width: calc(100vw - 50px);
+}
+
+h5 {
+  color: var(--color-neutrals-white);
+}
+
+ul > li {
+  list-style-type: none;
+  color: var(--color-neutrals-white);
 }
 
 .logo {
@@ -101,6 +112,16 @@
 @media (min-width: 768px) {
   .sidebar-button {
     margin-left: -20px;
+  }
+
+  .sidebar-content {
+    display: flex;
+    background-color: var(--color-primary-blue);
+    padding: 0 25px;
+    height: max(600px, calc(100vh - 70px));
+    width: min(100vh, 200px);
+    z-index: 9999;
+    position: absolute;
   }
 
   .logo {

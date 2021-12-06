@@ -17,7 +17,6 @@
   align-items: flex-start;
   display: flex;
   margin-right: -10px;
-  justify-content: space-between;
 }
 
 .home-page-popular-refresh {
@@ -27,6 +26,8 @@
   color: var(--color-neutrals-white);
   cursor: pointer;
   padding: 10px 20px;
+  margin-left: 20px;
+  margin-top: 5px;
 }
 
 @media (min-width: 768px) {

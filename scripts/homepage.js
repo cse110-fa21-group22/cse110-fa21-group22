@@ -1,17 +1,13 @@
 /**
- * API key for connecting with Spoonatular API
+ * Handles home page functionality.
  */
 
-// eslint-disable-next-line no-unused-vars
-import { addRecipe, initLocalStorage, removeRecipe, createList, removeList, addRecipebyList, removeRecipebyList } from '../components/UserLocalStorage.js';
-import apiKey from './apikey.js';
+import { initLocalStorage } from '../components/UserLocalStorage.js';
+import search from './search.js';
 
-const tokenKey = `?apiKey=${apiKey}`;
 const storage = window.localStorage;
 
-const steppingSize = 10; // Stepping-size number of recipes to append to end after user scrolls to bottom
-const recipeData = {}; // Data in each stepping size?
-const recipeSection = document.querySelector('.home-page-popular-recipe-list'); // Where to place recipe cards
+const recipeSection = document.querySelector('.home-page-popular-recipe-list');
 const userFavoriteSection = document.querySelector('.home-page-favorite-section');
 
 /**
@@ -19,65 +15,32 @@ const userFavoriteSection = document.querySelector('.home-page-favorite-section'
  * therefore, only initilize the favorite-master local storage when it does not even exist
  */
 function initLocalStorageDoubt() {
-  // meaning that favorites-master does not exist
+  // Meaning that favorites-master does not exist
   if (storage.getItem('favorites-master') == null) {
     initLocalStorage();
   }
 }
 
-async function fetchRandomRecipes() {
-  return new Promise((resolve, reject) => {
-    // use 1 for now, save some points for querying
-    const fetchResults = `https://api.spoonacular.com/recipes/random${tokenKey}&number=${steppingSize}`;
-    // console.log(fetchResults);
-
-    fetch(fetchResults)
-      .then((response) => response.json())
-      .then((data) => {
-        // change the 0
-        // need to be a for loop and put them into recipeData;
-        // console.log(data);
-        // console.log(data.recipes[0].id);
-        for (let i = 0; i < parseInt(steppingSize, 10); i += 1) {
-          recipeData[data.recipes[i].id] = data.recipes[i];
-
-          // // testing for local storage
-          // addRecipe(data.recipes[i].id);
-          // if(i % 2 == 0){addRecipebyList("list%2", data.recipes[i].id);}
-          // if(i % 3 == 0){addRecipebyList("list%3", data.recipes[i].id);}
-          // if(i % 4 == 0){addRecipebyList("list%4", data.recipes[i].id);}
-          // if(i % 5 == 0){addRecipebyList("list%5", data.recipes[i].id);}
-          // if(i % 10 == 0){addRecipebyList("list%10", data.recipes[i].id);}
-        }
-        resolve();
-      })
-      .catch((err) => {
-        console.log('Error loading the recipe');
-        console.log(err);
-        reject(err);
-      });
-  });
-}
-
 /**
- * Clear the recipe cards from the recipe section element
+ * This function clears the results on the search page
  */
 function clearResults() {
   while (recipeSection.firstChild) {
     recipeSection.removeChild(recipeSection.firstChild);
   }
+  while (userFavoriteSection.firstChild) {
+    userFavoriteSection.removeChild(userFavoriteSection.firstChild);
+  }
 }
 
 /**
- * Shows the search results on the page from a JSON array 'results' containing recipe objects
- * @param {object} results
+ * Shows the search results on the page
+ * @param {Object} results The search results
+ * @returns {none}
  */
 function showResults(results) {
-  // console.log(results);
-
   // Clear the results before searching
   clearResults();
-
   // Add the recipes to the page
   for (const recipe in results) {
     const recipeCard = document.createElement('recipe-card-component');
@@ -86,42 +49,23 @@ function showResults(results) {
   }
 }
 
-async function getRecipebyID(id) {
-  const fetchEndPoint = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&includeNutrition=false`;
-
-  console.log('fetch_endpoint', fetchEndPoint);
-
-  const fetchResults = await fetch(fetchEndPoint)
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error('Fetch in homepage failed');
-      console.error(error);
-    });
-
-  console.log('result is: ', fetchResults);
-  return fetchResults;
-}
-
-/**
- * clear out recipeData
- */
-function clearObject() {
-  for (const member in recipeData) delete recipeData[member];
-}
-
-async function showFavoriteSection() {
+function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
-
-  for (let i = 0; i < array.length; i += 1) {
-    const recipeCard = document.createElement('recipe-card-component');
-    // eslint-disable-next-line no-await-in-loop
-    recipeCard.recipe = await getRecipebyID(array[i]);
-    userFavoriteSection.appendChild(recipeCard);
+  if (array.length === 0) {
+    const noFavorite = document.createElement('h4');
+    noFavorite.innerText = 'No Favorites Added Yet';
+    userFavoriteSection.appendChild(noFavorite);
+  } else {
+    for (let i = 0; i < array.length; i += 1) {
+      const recipeCard = document.createElement('recipe-card-component');
+      recipeCard.recipe = array[i];
+      userFavoriteSection.appendChild(recipeCard);
+    }
   }
 }
 
-async function init() {
+function init() {
   initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -134,47 +78,46 @@ async function init() {
     });
   }
 
-  // console.log('Init.. ');
-  // console.log('Fetching recipes...');
-  try {
-    await fetchRandomRecipes();
-  } catch (err) {
-    // console.log(`Error fetching recipes: ${err}`);
-    return;
-  }
+  // Disable the sidebar button
+  const sidebarButton = document.querySelector('navbar-component').shadow.querySelector('.sidebar-button');
+  sidebarButton.style.display = 'none';
+  // Hide the sidebar
+  const navbarComponent = document.querySelector('navbar-component');
+  const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+  sidebarContent.style.display = 'none';
 
-  /**
-   * design:
-   * display 10 cards each time, when user a card, display another 10 random
-   */
-  // console.log(recipeData);
-  showResults(recipeData);
-
-  const button = document.querySelector('.home-page-popular-refresh');
-  button.addEventListener('click', async function () {
-    clearObject();
-    try {
-      await fetchRandomRecipes();
-    } catch (err) {
-      console.log(`Error fetching recipes: ${err}`);
-      return;
-    }
-    showResults(recipeData);
+  const inputList = {};
+  inputList.query = '';
+  inputList.number = 10;
+  inputList.offset = 0;
+  inputList.sort = 'random';
+  inputList.recipeNutrition = 'true';
+  inputList.cuisineFilter = '';
+  inputList.dietFilter = '';
+  inputList.timeFilter = '';
+  inputList.typeFilter = '';
+  search(inputList).then((value) => {
+    showResults(value.results);
+    showFavoriteSection();
   });
 
-  // populating local storage testing
-  // eslint-disable-next-line no-unused-vars
-  const list = storage.getItem('favorites-master');
-  // createList("list%2");
-  // createList("list%3");
-  // createList("list%4");
-  // createList("list%5");
-  // createList("list%10");
-
-  // return null if not found
-  // let a = storage.getItem("dsf");
-  // console.log(a);
-
-  showFavoriteSection();
+  const button = document.querySelector('.home-page-popular-refresh');
+  // eslint-disable-next-line func-names
+  button.addEventListener('click', async function () {
+    inputList.query = '';
+    inputList.number = 10;
+    inputList.offset = 0;
+    inputList.sort = 'random';
+    inputList.recipeNutrition = 'true';
+    inputList.cuisineFilter = '';
+    inputList.dietFilter = '';
+    inputList.timeFilter = '';
+    inputList.typeFilter = '';
+    search(inputList).then((value) => {
+      showResults(value.results);
+      showFavoriteSection();
+    });
+  });
 }
+
 window.addEventListener('DOMContentLoaded', init);
