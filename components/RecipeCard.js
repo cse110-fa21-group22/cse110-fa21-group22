@@ -308,8 +308,16 @@ class RecipeCard extends HTMLElement {
           addRecipe(this.getAttribute('recipe-id'));
           this.addToCheckedLists();
           this.addToCustomList();
-          /* Reload the page as a shortcut for showing new lists */
-          location.reload();
+          const webpage = window.location.href;
+          console.log(webpage);
+          this.isFavorite = true;
+          console.log(this.isFavorite);
+          favoriteIcon.src = '../assets/favorite-selected.svg';
+          recipeCard.hideDropdown();
+          /* Reload the page if not on search page */
+          if (webpage.indexOf('search.html') === -1) {
+            location.reload();
+          }
         }
       }
       event.stopPropagation();
