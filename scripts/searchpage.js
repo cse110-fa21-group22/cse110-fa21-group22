@@ -46,8 +46,8 @@ function init() {
   const recipeSection = document.querySelector('.recipe-section');
   /**
    * Generates a query string to pass the search to the search page
-   * @param {string} newSearchTerm the user's search phrase
-   * @return {string} the query string
+   * @param {string} newSearchTerm - the user's search phrase
+   * @return {string} - the query string
    */
   // eslint-disable-next-line class-methods-use-this
   function generateQueryString(newSearchTerm) {
