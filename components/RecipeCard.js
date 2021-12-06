@@ -266,7 +266,7 @@ class RecipeCard extends HTMLElement {
           console.log('Remove item from ALL favorites lists here');
           const webpage = window.location.href;
           /* Reload the page if not on search page and home page*/
-          if (webpage.indexOf('favorites.html') > -1) {
+          if (webpage.indexOf('favorite.html') > -1) {
             location.reload();
           }
         }
