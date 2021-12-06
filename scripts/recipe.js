@@ -95,18 +95,9 @@ function initializeDropdown() {
   }
 }
 
-/**
- * Shows the favorites dropdown on the recipe card
- * The position will be the title length
- * @param {Object} recipeObj recipe card
- */
-function showDropdown(recipeObj, isMobile) {
+function showDropdown() {
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'block';
-  if (!isMobile) {
-    const pos = recipeObj.title.length * 17;
-    dropdownContent.style.marginLeft = `${pos}px`;
-  }
 }
 
 /**
@@ -235,7 +226,7 @@ async function init() {
   favoriteIcon.addEventListener('click', () => {
     if (!isFavorite) {
       favoriteIcon.src = '../assets/favorite-selected.svg';
-      showDropdown(recipe, isMobile);
+      showDropdown();
     } else {
       let toRemove = false;
       // eslint-disable-next-line
