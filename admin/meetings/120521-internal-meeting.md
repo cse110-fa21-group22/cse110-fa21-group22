@@ -32,10 +32,7 @@
 
 - difficulty in unit testing
 
-
 ### Ideas for Further Investigation
-
-- 
 
 ### When the meeting finished
 
