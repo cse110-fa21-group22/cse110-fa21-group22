@@ -264,6 +264,7 @@ class RecipeCard extends HTMLElement {
           }
           favoriteIcon.src = '../assets/favorite.svg';
           console.log('Remove item from ALL favorites lists here');
+          const webpage = window.location.href;
           /* Reload the page if not on search page and home page*/
           if (webpage.indexOf('favorites.html') > -1) {
             location.reload();
