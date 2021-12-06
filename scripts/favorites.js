@@ -33,6 +33,7 @@ async function init() {
     if (storage.key(i) === 'favorites-master') continue;
     const userList = document.createElement('user-list');
     const arrRecipeObj = JSON.parse(storage.getItem(localStorage.key(i)));
+    userList.listName = storage.key(i);
     userList.list = arrRecipeObj;
     userList.addEventListener('selected', (event) => {
       selectedRecipes.push(event.detail);
