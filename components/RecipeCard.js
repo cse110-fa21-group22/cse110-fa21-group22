@@ -265,7 +265,7 @@ class RecipeCard extends HTMLElement {
           favoriteIcon.src = '../assets/favorite.svg';
           console.log('Remove item from ALL favorites lists here');
           const webpage = window.location.href;
-          /* Reload the page if not on search page and home page*/
+          /* Reload the page if not on search page and home page */
           if (webpage.indexOf('favorite.html') > -1) {
             location.reload();
           }
@@ -316,7 +316,7 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           recipeCard.hideDropdown();
-          /* Reload the page if not on search page and home page*/
+          /* Reload the page if not on search page and home page */
           if (webpage.indexOf('favorites.html') > -1) {
             location.reload();
           }
