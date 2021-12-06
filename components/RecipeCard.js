@@ -273,11 +273,6 @@ class RecipeCard extends HTMLElement {
       }
     });
 
-    /* When click the favorite icon, dropdown content showup */
-    favoriteIcon.addEventListener('click', () => {
-      this.showDropdown();
-    });
-
     /* Remove button event listener */
     favoriteRemove.addEventListener('click', (event) => {
       event.stopPropagation();
