@@ -36,7 +36,7 @@
 
 ### When the meeting finished
 
-10:40 PM
+10:50 PM
 
 ### To Do
 
