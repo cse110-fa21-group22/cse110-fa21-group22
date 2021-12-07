@@ -39,16 +39,15 @@ export default async function search(inputList) {
     const tokenDiet = `&diet=${inputList.dietFilter}`;
     fetchEndpoint += tokenDiet;
   }
-  if (inputList.timeFilter !== '') {
-    const tokenTime = `&maxReadyTime=${inputList.timeFilter}`;
-    fetchEndpoint += tokenTime;
-  }
   if (inputList.typeFilter !== '') {
     const tokenType = `&type=${inputList.typeFilter}`;
     fetchEndpoint += tokenType;
   }
+  if (inputList.timeFilter !== '') {
+    const tokenTime = `&maxReadyTime=${inputList.timeFilter}`;
+    fetchEndpoint += tokenTime;
+  }
   fetchEndpoint += tokenNutritionBool + tokenSort + tokenOffset + tokenNumResults;
-  console.log(fetchEndpoint);
 
   // fetch the data
   const fetchResults = await fetch(fetchEndpoint)
