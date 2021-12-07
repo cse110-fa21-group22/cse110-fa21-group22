@@ -1,3 +1,7 @@
+/**
+ * @module UserList.js
+ */
+
 import { removeRecipebyList, addRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');

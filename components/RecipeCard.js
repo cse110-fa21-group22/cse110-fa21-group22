@@ -1,3 +1,8 @@
+/**
+ * Recipecard web component
+ * @module RecipeCard.js
+ */
+
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 
 const link = document.createElement('link');
