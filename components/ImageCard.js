@@ -1,6 +1,6 @@
 /**
  * Imagecard web component
- * @module ImageCard.js
+ * @module ImageCard
  */
 
 const link = document.createElement('link');
