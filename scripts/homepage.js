@@ -130,7 +130,7 @@ function init() {
     inputList.typeFilter = '';
     search(inputList).then((value) => {
       showResults(value.results);
-      // showFavoriteSection();
+      showFavoriteSection();
     });
   });
 }
