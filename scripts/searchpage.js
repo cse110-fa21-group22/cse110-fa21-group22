@@ -4,6 +4,20 @@
  */
 
 import search from './search.js';
+import { initLocalStorage } from '../components/UserLocalStorage.js';
+
+const storage = window.localStorage;
+
+/**
+ * it is possible that the user click the icon and coming back to the main page
+ * therefore, only initilize the favorite-master local storage when it does not even exist
+ */
+ function initLocalStorageDoubt() {
+  // Meaning that favorites-master does not exist
+  if (storage.getItem('favorites-master') == null) {
+    initLocalStorage();
+  }
+}
 
 /**
  * This function initializes the search page
@@ -22,6 +36,8 @@ function init() {
       );
     });
   }
+
+  initLocalStorageDoubt();
 
   // Detect if the device is mobile or PC
   const isMobile = window.matchMedia('only screen and (max-width: 768px)').matches;

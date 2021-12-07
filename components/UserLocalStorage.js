@@ -24,13 +24,12 @@ export function checkFavorite(recipeObj) {
   const list = storage.getItem('favorites-master');
 
   const array = JSON.parse(list);
-  if (array) {
+
     for (let i = 0; i < array.length; i += 1) {
       if (JSON.stringify(array[i]) === JSON.stringify(recipeObj)) {
         return true;
       }
     }
-  }
   return false;
 }
 
@@ -45,13 +44,11 @@ export function checkFavoritebyID(recipeObj) {
   const list = storage.getItem('favorites-master');
 
   const array = JSON.parse(list);
-  if (array) {
     for (let i = 0; i < array.length; i += 1) {
       // compare two object by id
       if (array[i].id === recipeObj.id) {
         return true;
       }
-    }
   }
   return false;
 }
