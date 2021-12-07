@@ -25,6 +25,7 @@ jobs:
 
       - name: Install
         run: npm install
-      # Runs a single command using the runners shell
+      - name: API File 
+        run: cd scripts && echo -e "const apiKey = ${{ secrets.ICOOK_KEY }};\n\nexport default apiKey;" > apikey.js
       - name: Run a one-line script
         run: npm run test
