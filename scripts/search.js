@@ -13,17 +13,17 @@ const tokenKey = `?apiKey=${apiKey}`;
 /**
  * Performs a text search through spoonacular
  * @function
- * @param {object} inputList - An object that contain a list of tokens as search filter
- * @param {string} inputList.query - The user input for search
- * @param {int} inputList.number - The number of expected results (between 1 and 100).
- * @param {int} inputList.offset - The number of results to skip (between 0 and 900).
- * @param {string} inputList.sort - The token for sort mode
- * @param {boolean} inputList.recipeNutrition - The token request for nutrition information
- * @param {string} inputList.cuisineFilter - The filter which select the cuisine(s) of the recipes.
- * @param {string} inputList.dietFilter - The filter which select the diet(s) of the recipes.
- * @param {int} inputList.timeFilter - The filter which select the max ready time of the recipes.
- * @param {string} inputList.typeFilter - The filter which select the type of the recipes.
- * @return {object} - json file containing the results of the spoonacular query
+ * @param {object} inputList An object that contain a list of tokens as search filter
+ * @param {string} inputList.query The user input for search
+ * @param {int} inputList.number The number of expected results (between 1 and 100).
+ * @param {int} inputList.offset The number of results to skip (between 0 and 900).
+ * @param {string} inputList.sort The token for sort mode
+ * @param {boolean} inputList.recipeNutrition The token request for nutrition information
+ * @param {string} inputList.cuisineFilter The filter which select the cuisine(s) of the recipes.
+ * @param {string} inputList.dietFilter The filter which select the diet(s) of the recipes.
+ * @param {int} inputList.timeFilter The filter which select the max ready time of the recipes.
+ * @param {string} inputList.typeFilter The filter which select the type of the recipes.
+ * @return {object} json file containing the results of the spoonacular query
  */
 export default async function search(inputList) {
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
