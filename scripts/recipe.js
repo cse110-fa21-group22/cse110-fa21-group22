@@ -15,7 +15,7 @@ const storage = window.localStorage;
  * it is possible that the user click the icon and coming back to the main page
  * therefore, only initilize the favorite-master local storage when it does not even exist
  */
- function initLocalStorageDoubt() {
+function initLocalStorageDoubt() {
   // Meaning that favorites-master does not exist
   if (storage.getItem('favorites-master') == null) {
     initLocalStorage();
