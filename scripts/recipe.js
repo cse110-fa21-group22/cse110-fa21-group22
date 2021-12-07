@@ -86,6 +86,14 @@ listEntryTemplate.innerHTML = `
  */
 function initializeDropdown() {
   const dropdownElem = document.querySelector('.dropdown-content');
+  // remove all container first otherwrise will create duplicate lists in dropdown
+  const removed = dropdownElem.querySelectorAll('.container');
+  for (let i = 0; i < removed.length; i += 1) {
+    removed[i].remove();
+  }
+  // clear custom list input
+  let userInput = document.querySelector('.user-input');
+  userInput.value = '';
   for (let i = 0; i < localStorage.length; i += 1) {
     const entry = listEntryTemplate.content.cloneNode(true);
     if (localStorage.key(i) === 'favorites-master') continue;
@@ -226,12 +234,14 @@ async function init() {
   favoriteIcon.addEventListener('click', () => {
     if (!isFavorite) {
       favoriteIcon.src = '../assets/favorite-selected.svg';
+      initializeDropdown();
       showDropdown();
     } else {
       let toRemove = false;
       // eslint-disable-next-line
       toRemove = window.confirm(`Unhearting a recipe removes from all favorite lists. To delete only from this list, try edit mode on favorite page. Are you sure you want to continue?`);
       // continues to remove the recipe from list if user confirms they want to remove
+      console.log(toRemove);
       if (toRemove) {
         isFavorite = false;
         const containers = document.querySelectorAll('.container');
@@ -240,8 +250,8 @@ async function init() {
           removeRecipebyListbyID(containers[i].querySelector('span').innerHTML, recipe);
         }
         favoriteIcon.src = '../assets/favorite.svg';
+        removeRecipebyID(recipe);
       }
-      removeRecipebyID(recipe);
     }
   });
 
@@ -271,8 +281,11 @@ async function init() {
         addRecipe(recipe);
         addToCheckedLists(recipe);
         addToCustomList(recipe);
-        /* Reload the page as a shortcut for showing new lists */
-        location.reload();
+        isFavorite = true;
+        favoriteIcon.src = '../assets/favorite-selected.svg';
+        hideDropdown();
+        // update the lists in dropdown
+        initializeDropdown();
       }
     }
   });
