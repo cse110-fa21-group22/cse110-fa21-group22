@@ -77,6 +77,7 @@ export default function homepageRefreshFavoriteSection() {
     const recipeCard = recipeCardList[i];
     recipeCard.initializeDropdown();
     recipeCard.initializeHearts();
+    recipeCard.hideDropdown(); 
   }
 }
 

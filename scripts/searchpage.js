@@ -18,6 +18,7 @@ export default function searchpageRefreshSearchResult() {
     const recipeCard = recipeCardList[i];
     recipeCard.initializeDropdown();
     recipeCard.initializeHearts();
+    recipeCard.hideDropdown(); 
   }
 }
 
