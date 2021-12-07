@@ -1,31 +1,44 @@
 @import 'reset.css';
 
+.copy-here {
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 20px;
+  font-size: 16px;
+  height: 30px;
+  width: 150px;
+  display: none;
+}
+
+.copy-here:hover {
+  background-color: var(--color-primary-blue);
+  color: var(--color-neutrals-white);
+}
+
 div.scroll {
   display: flex;
   flex-direction: column;
-  height: 380px;
-  margin-bottom: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
+}
+
+div.list-container {
+  display: block;
 }
 
 div.list-name {
-  margin-top: 10px;
-  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
 }
 
 .list-name h4 {
   font-weight: bold;
-  margin: 7px 0 auto;
-  overflow-y: auto;
+  overflow-wrap: break-word;
+  width: 50vw;
 }
 
-div.recipe-section {
+.recipe-section {
   display: flex;
-  gap: 0;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  height: 200px;
-  margin-top: 50px;
-  margin-bottom: 0;
+  flex-direction: row;
+  overflow-x: scroll;
 }

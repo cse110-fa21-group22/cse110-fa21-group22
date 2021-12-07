@@ -17,14 +17,6 @@ body {
   z-index: 9999;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  margin-top: -40px;
-  padding: 0;
-  width: auto;
-}
-
 .favorites-list {
   display: flex;
   flex-direction: column;
@@ -32,7 +24,6 @@ body {
   margin-bottom: 0;
   overflow-x: auto;
   overflow-y: hidden;
-  white-space: nowrap;
 }
 
 .list-name {
@@ -40,17 +31,8 @@ body {
   position: absolute;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0 0 0);
-  background-color: rgb(0 0 0 / 40%);
+main {
+  padding-top: 0;
 }
 
 .recipe-list {
@@ -62,24 +44,45 @@ body {
   margin-bottom: 0;
 }
 
+.button-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 26px;
+}
+
+.button-menu-container {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: calc(100vw - 25px);
+  flex-wrap: wrap;
+}
+
 #cancel {
   background-color: transparent;
   border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
   display: none;
-  font-size: 16px;
-  height: 30px;
-  line-height: 12px;
-  margin-top: 120px;
-  margin-right: 100px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
+  padding: 5px 15px;
 }
 
 #cancel:hover {
+  background-color: var(--color-primary-blue);
+  color: var(--color-neutrals-white);
+}
+
+#copy {
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 20px;
+  display: none;
+  padding: 5px 15px;
+}
+
+#copy:hover {
   background-color: var(--color-primary-blue);
   color: var(--color-neutrals-white);
 }
@@ -88,16 +91,7 @@ body {
   background-color: transparent;
   border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
-  line-height: 12px;
-  height: 30px;
-  font-size: 16px;
-  margin-top: 120px;
-  margin-right: 10px;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 80px;
+  padding: 5px 15px;
 }
 
 #edit:hover {
@@ -105,77 +99,47 @@ body {
   color: var(--color-neutrals-white);
 }
 
-#move {
+#delete {
   background-color: transparent;
   border: 1px solid;
   border-radius: 20px;
-  box-shadow: none;
   display: none;
-  font-size: 16px;
-  height: 30px;
-  line-height: 12px;
-  margin: 120px 10px auto auto;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 80px;
+  margin: 0 10px;
+  padding: 5px 15px;
 }
 
-#move:hover {
+#delete:hover {
   background-color: var(--color-primary-blue);
   color: var(--color-neutrals-white);
 }
 
-#export {
-  /* background-color: transparent;
-  border: 1px solid;
-  border-radius: 20px;
-  box-shadow: none; */
-  display: none;
-  font-size: 16px;
-  height: 30px;
-  line-height: 12px;
-  margin-top: 80px;
-  margin-right: 100px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-}
-
-#export:hover {
-  /* background-color: var(--color-primary-blue);
-  color: var(--color-neutrals-white); */
-}
-
-#import {
-  /* background-color: transparent;
-  border: 1px solid;
-  border-radius: 20px;
-  box-shadow: none; */
-  display: none;
-  font-size: 16px;
-  height: 30px;
-  line-height: 12px;
-  margin-top: 80px;
-  margin-right: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-}
-
-#import:hover {
-  /* background-color: var(--color-primary-blue);
-  color: var(--color-neutrals-white); */
+#select-guide-text {
+  font-size: 24px;
+  color: var(--color-neutrals-dark-grey);
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: 100vw;
+  margin-top: 10px;
+  overflow-wrap: break-word;
+  visibility: hidden;
+  height: 0;
 }
 
 @media (min-width: 768px) {
-  #export {
-    display: block;
+  .button-menu-container {
+    width: calc(100vw - 50px);
+    flex-wrap: nowrap;
+    flex-direction: row;
   }
 
-  #import {
-    display: block;
+  .button-menu {
+    width: auto;
+    justify-content: end;
+  }
+
+  #select-guide-text {
+    width: calc(100vw - 200px);
+    margin-top: 0;
   }
 }
