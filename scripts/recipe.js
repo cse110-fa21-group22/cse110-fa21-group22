@@ -283,9 +283,11 @@ async function init() {
     event.stopPropagation();
   });
 
-  // Email the link of recipe
-  // Receiver is blank and should be entered by user
-  // Body of email is a short message with the link to recipe
+  /** 
+   * Email the link of recipe
+   * Body of email is a short message with the link to recipe
+   * @listens click Receiver is blank and should be entered by user
+   */ 
   const emailButton = document.querySelector('.email-recipe');
   emailButton.addEventListener('click', () => {
     const recipeURL = window.location;
