@@ -14,7 +14,6 @@ const recipeCardTemplate = document.createElement('template');
 recipeCardTemplate.innerHTML = `
   <article class="recipe-card">
     <img class="recipe-favorite" src="../assets/favorite.svg" alt="favorite" />
-    <img class="recipe-remove" src="../assets/favorite-remove.svg" alt="remove" />
     <img class="recipe-checkmark" src="../assets/checkmark.svg" alt="selected" />
     <img class="recipe-image"><img/>
     <div class="recipe-subdescription">
@@ -41,6 +40,10 @@ listEntryTemplate.innerHTML = `
 `;
 
 class RecipeCard extends HTMLElement {
+  /**
+   * Setter for the recipe card's recipe
+   * @param {object} recipeObj The recipe object from spoonacular
+   */
   set recipe(recipeObj) {
     this.recipeObj = recipeObj;
     this.recipeId = recipeObj.id;
@@ -48,7 +51,6 @@ class RecipeCard extends HTMLElement {
     const recipeCal = this.shadow.querySelector('.recipe-calories-number');
     const recipeCalUnit = this.shadow.querySelector('.recipe-calories-unit');
     const recipeName = this.shadow.querySelector('.recipe-name');
-
     recipeImg.src = recipeObj.image;
     recipeName.innerHTML = recipeObj.title;
     recipeCal.innerHTML = recipeCal.innerHTML.replace('500', recipeObj.nutrition.nutrients[0].amount);
@@ -58,6 +60,14 @@ class RecipeCard extends HTMLElement {
       this.isFavorite = true;
       this.initializeHearts();
     }
+  }
+
+  /**
+   * Getter for the recipe card's recipe
+   * @return {object} The recipe card's recipe object from Spoonacular
+   */
+  get recipe() {
+    return this.recipeObj;
   }
 
   /**
@@ -105,8 +115,8 @@ class RecipeCard extends HTMLElement {
    */
   enterSelectMode() {
     this.selectMode = true;
-    const favoriteRemove = this.shadow.querySelector('.recipe-remove');
-    favoriteRemove.style.display = 'block';
+    const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+    favoriteIcon.style.display = 'none';
   }
 
   /**
@@ -116,8 +126,11 @@ class RecipeCard extends HTMLElement {
   exitSelectMode() {
     this.selectMode = false;
     if (this.isSelected) this.deselect();
-    const favoriteRemove = this.shadow.querySelector('.recipe-remove');
-    favoriteRemove.style.display = 'none';
+    const checkmark = this.shadow.querySelector('.recipe-checkmark');
+    checkmark.style.display = 'none';
+    this.style.filter = 'brightness(100%)';
+    const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
+    favoriteIcon.style.display = 'block';
   }
 
   /**
@@ -128,7 +141,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = true;
     checkmark.style.display = 'block';
     this.style.filter = 'brightness(90%)';
-    const event = new CustomEvent('selected', { detail: this.recipeId });
+    const event = new CustomEvent('selected', { detail: this });
     this.dispatchEvent(event);
   }
 
@@ -140,7 +153,7 @@ class RecipeCard extends HTMLElement {
     this.isSelected = false;
     checkmark.style.display = 'none';
     this.style.filter = 'brightness(100%)';
-    const event = new CustomEvent('deselected', { detail: this.recipeId });
+    const event = new CustomEvent('deselected', { detail: this });
     this.dispatchEvent(event);
   }
 
@@ -148,7 +161,7 @@ class RecipeCard extends HTMLElement {
    * Dispatches an event to remove this recipe
    */
   delete() {
-    const event = new CustomEvent('removed', { detail: this.recipeId });
+    const event = new CustomEvent('removed', { detail: this.recipeObj });
     this.dispatchEvent(event);
   }
 
@@ -220,7 +233,6 @@ class RecipeCard extends HTMLElement {
     // If the favorite icon is clicked, favorite the item
     const recipeCard = this;
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
-    const favoriteRemove = this.shadow.querySelector('.recipe-remove');
     const submitFavorites = this.shadow.querySelector('.submit');
     const cancelFavorites = this.shadow.querySelector('.cancel');
     const dropdownContent = this.shadow.querySelector('.dropdown-content');
@@ -286,11 +298,10 @@ class RecipeCard extends HTMLElement {
       }
     });
 
-    /* Remove button event listener */
-    favoriteRemove.addEventListener('click', (event) => {
+    /* When click the favorite icon, dropdown content showup */
+    favoriteIcon.addEventListener('click', (event) => {
       event.stopPropagation();
-      console.log('Removing recipe from THIS list...');
-      this.delete();
+      this.showDropdown();
     });
 
     /* stops propagation of clicks on dropdown content box to the recipe card
