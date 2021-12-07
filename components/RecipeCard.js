@@ -338,7 +338,7 @@ class RecipeCard extends HTMLElement {
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
           // console.log(window.location.pathname);
-          if (window.location.pathname === '/webpages/home.html') {
+          if (window.location.pathname === '../webpages/home.html') {
             homepageRefreshFavoriteSection();
           }
           // if (window.location.pathname === '/webpages/search.html') {
