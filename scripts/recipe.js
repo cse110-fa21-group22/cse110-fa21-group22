@@ -2,16 +2,28 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
+import { initLocalStorage, addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
+const storage = window.localStorage;
+
+/**
+ * it is possible that the user click the icon and coming back to the main page
+ * therefore, only initilize the favorite-master local storage when it does not even exist
+ */
+function initLocalStorageDoubt() {
+  // Meaning that favorites-master does not exist
+  if (storage.getItem('favorites-master') == null) {
+    initLocalStorage();
+  }
+}
 
 /**
  * Performs a recipe lookup based on the id passed in to the page URL
- * @returns {object} json containing recipe information
+ * @return {object} json containing recipe information
  */
 function lookup() {
   const regex = 'id=';
@@ -154,6 +166,7 @@ function addToCustomList(recipeObj) {
  * Initializes the recipe page
  */
 async function init() {
+  initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(

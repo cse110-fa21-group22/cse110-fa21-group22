@@ -1,5 +1,5 @@
 /**
- * @module Search
+ * @module search.js
  */
 
 /*
@@ -12,6 +12,7 @@ const tokenKey = `?apiKey=${apiKey}`;
 
 /**
  * Performs a text search through spoonacular
+ * @function
  * @param {object} inputList - An object that contain a list of tokens as search filter
  * @param {string} inputList.query - The user input for search
  * @param {int} inputList.number - The number of expected results (between 1 and 100).

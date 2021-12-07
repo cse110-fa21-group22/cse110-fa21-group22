@@ -3,7 +3,21 @@
  * Different from search.js because search.js handles search across all html pages that use the search function.
  */
 
+import { initLocalStorage } from '../components/UserLocalStorage.js';
 import search from './search.js';
+
+const storage = window.localStorage;
+
+/**
+ * it is possible that the user click the icon and coming back to the main page
+ * therefore, only initilize the favorite-master local storage when it does not even exist
+ */
+function initLocalStorageDoubt() {
+  // Meaning that favorites-master does not exist
+  if (storage.getItem('favorites-master') == null) {
+    initLocalStorage();
+  }
+}
 
 /**
  * This function initializes the search page
@@ -12,6 +26,7 @@ import search from './search.js';
  * @returns {none}
  */
 function init() {
+  initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
