@@ -1,6 +1,6 @@
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 import homepageRefreshFavoriteSection from '../scripts/homepage.js';
-import searchpageRefreshSearchResult from '../scripts/searchpage.js';
+// import searchpageRefreshSearchResult from '../scripts/searchpage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -341,10 +341,14 @@ class RecipeCard extends HTMLElement {
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
           }
-          if (window.location.pathname === '/webpages/search.html') {
-            searchpageRefreshSearchResult();
-          }
+          // if (window.location.pathname === '/webpages/search.html') {
+          //   searchpageRefreshSearchResult();
+          // }
           // location.reload();
+
+          if (window.location.pathname === '/webpages/search.html') {
+            location.reload();
+          }
         }
       }
       event.stopPropagation();
