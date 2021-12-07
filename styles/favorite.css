@@ -126,10 +126,6 @@ main {
   height: 0;
 }
 
-main {
-  padding-top: 0;
-}
-
 @media (min-width: 768px) {
   .button-menu-container {
     width: calc(100vw - 50px);
