@@ -1,3 +1,8 @@
+/**
+ * Naviagtion bar web component
+ * @module Navbar.js
+ */
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
