@@ -2,8 +2,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
-import { initLocalStorage } from '../components/UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavoritebyID, initLocalStorage, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
