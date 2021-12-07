@@ -5,7 +5,6 @@
 
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 import homepageRefreshFavoriteSection from '../scripts/homepage.js';
-// import searchpageRefreshSearchResult from '../scripts/searchpage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -100,6 +99,12 @@ class RecipeCard extends HTMLElement {
     console.log(removed);
     for (let i = 0; i < removed.length; i += 1) {
       removed[i].remove();
+    }
+
+    // clear custom list input
+    const userInput = document.querySelector('.user-input');
+    if (userInput) {
+      userInput.value = '';
     }
     /** ******************************** */
 
@@ -278,6 +283,7 @@ class RecipeCard extends HTMLElement {
       event.stopPropagation();
       if (!this.isFavorite) {
         favoriteIcon.src = '../assets/favorite-selected.svg';
+        this.initializeDropdown();
         this.showDropdown();
         console.log('Prompting user to add to favorites lists');
       } else {
@@ -303,9 +309,13 @@ class RecipeCard extends HTMLElement {
            */
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
+          } else if (window.location.pathname === '/webpages/search.html') {
+            recipeCard.hideDropdown();
+          } else {
+            location.reload();
           }
-          // location.reload();
         }
+        // recipeCard.hideDropdown();
       }
     });
 
@@ -353,17 +363,14 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
-          // console.log(window.location.pathname);
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
+          } else if (window.location.pathname === '/webpages/search.html') {
+            this.initializeDropdown();
+            recipeCard.hideDropdown();
           } else {
             location.reload();
           }
-          // if (window.location.pathname === '/webpages/search.html') {
-          //   // searchpageRefreshSearchResult();
-          //   location.reload();
-          // }
-          // location.reload();
         }
       }
       event.stopPropagation();
