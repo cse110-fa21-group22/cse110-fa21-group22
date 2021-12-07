@@ -340,15 +340,13 @@ class RecipeCard extends HTMLElement {
           // console.log(window.location.pathname);
           if (window.location.pathname === '../webpages/home.html') {
             homepageRefreshFavoriteSection();
+          } else {
+            location.reload();
           }
           // if (window.location.pathname === '/webpages/search.html') {
           //   searchpageRefreshSearchResult();
           // }
           // location.reload();
-
-          if (window.location.pathname === '/webpages/search.html') {
-            location.reload();
-          }
         }
       }
       event.stopPropagation();
