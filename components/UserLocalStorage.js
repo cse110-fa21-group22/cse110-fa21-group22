@@ -1,7 +1,8 @@
 /**
- * @module UserLocalStorage
+ * Functions deal with local storage
+ * @module UserLocalStorage.js
  */
-// 'favorites-master' is the default list
+
 const store = window.localStorage;
 
 /**

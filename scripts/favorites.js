@@ -1,5 +1,6 @@
 /**
  * Handles favorites page functionality and storing the recipes a user favorites.
+ * @module favorites.js
  */
 import { initLocalStorage, addRecipebyList } from '../components/UserLocalStorage.js';
 
