@@ -5,7 +5,6 @@
 
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 import homepageRefreshFavoriteSection from '../scripts/homepage.js';
-// import searchpageRefreshSearchResult from '../scripts/searchpage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -303,8 +302,12 @@ class RecipeCard extends HTMLElement {
            */
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
+          } else if (window.location.pathname === '/webpages/search.html') {
+            this.initializeDropdown();
+            this.hideDropdown();
+          } else {
+            location.reload();
           }
-          // location.reload();
         }
       }
     });
@@ -353,9 +356,16 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
-          // console.log(window.location.pathname);
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
+          } else if (window.location.pathname === '/webpages/search.html') {
+            this.initializeDropdown();
+            // clear custom list input
+            const userInput = document.querySelector('.user-input');
+            if (userInput) {
+              userInput.value = '';
+            }
+            this.hideDropdown();
           } else {
             location.reload();
           }
