@@ -92,7 +92,7 @@ function initializeDropdown() {
     removed[i].remove();
   }
   // clear custom list input
-  let userInput = document.querySelector('.user-input');
+  const userInput = document.querySelector('.user-input');
   userInput.value = '';
   for (let i = 0; i < localStorage.length; i += 1) {
     const entry = listEntryTemplate.content.cloneNode(true);
