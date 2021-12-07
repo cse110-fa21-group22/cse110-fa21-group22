@@ -1,7 +1,8 @@
 /**
- * @module UserLocalStorage
+ * Functions deal with local storage
+ * @module UserLocalStorage.js
  */
-// 'favorites-master' is the default list
+
 const store = window.localStorage;
 
 /**
@@ -147,7 +148,7 @@ export function addRecipebyList(listName, recipeObj) {
   const storage = window.localStorage;
 
   createList(listName);
-  console.log(storage.getItem(listName));
+  // console.log(storage.getItem(listName));
   const list = storage.getItem(listName);
   const array = JSON.parse(list);
   for (let i = 0; i < array.length; i += 1) {
