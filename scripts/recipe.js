@@ -28,7 +28,7 @@ function initLocalStorageDoubt() {
 function lookup() {
   const regex = 'id=';
   const id = window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
-  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&addRecipeNutrition=true`;
+  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}?includeNutrition=true`;
   const fetchEndpointE = `https://api.spoonacular.com/recipes/${id}/equipmentWidget.json${tokenKey}`;
 
   const fetchResultsR = fetch(fetchEndpointR)
