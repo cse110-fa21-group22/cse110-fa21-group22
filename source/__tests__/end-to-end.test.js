@@ -5,7 +5,7 @@
 // import search from '../../scripts/search';
 
 /* eslint no-unused-vars: "error" */
-jest.setTimeout(15000);
+jest.setTimeout(20000);
 
 // Links for testing on deployment
 const HOME_DEPLOY_LINK = 'https://icookfood.netlify.app/webpages/home.html';
@@ -15,7 +15,6 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
-
 const prNum = 322; // change -> (your pr number);
 
 let homeLink = '';
@@ -299,7 +298,7 @@ describe('Basic user flow for Search Page', () => {
 
     // Go to favorites page
     await page.goto(favLink);
-    await page.waitForTimeout('10000');
+    await page.waitForTimeout('7000');
 
     // Retrieve the recipe in the favorites list
     const userList = await page.$$('user-list');
