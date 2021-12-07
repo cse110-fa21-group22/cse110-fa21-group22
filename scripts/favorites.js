@@ -2,7 +2,7 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  * @module favorites.js
  */
-import { initLocalStorage } from '../components/UserLocalStorage.js';
+import { initLocalStorage, removeList } from '../components/UserLocalStorage.js';
 
 const storage = window.localStorage;
 const recipeLists = [];
@@ -68,10 +68,14 @@ function enterEditMode() {
   for (let i = 0; i < listTitles.length; i += 1) {
     listTitles[i].setAttribute('contenteditable', true);
   }
-  // Enter select mode on all recipe cards
+  // Enter select mode on all recipe cards and show list delete icon
   for (const list of recipeLists) {
     for (let i = 0; i < list.list.length; i += 1) {
       list.list[i].enterSelectMode();
+    }
+    if (list.name !== 'My Favorites') {
+      const userListDeleteIcon = list.shadow.querySelector('.delete-icon');
+      userListDeleteIcon.style.display = 'inline-block';
     }
   }
 }
@@ -103,11 +107,13 @@ function exitEditMode() {
   for (let i = 0; i < listTitles.length; i += 1) {
     listTitles[i].setAttribute('contenteditable', false);
   }
-  // Exit select mode on recipe cards
+  // Exit select mode on recipe cards and hide list delete icon
   for (const list of recipeLists) {
     for (let i = 0; i < list.list.length; i += 1) {
       list.list[i].exitSelectMode();
     }
+    const userListDeleteIcon = list.shadow.querySelector('.delete-icon');
+    userListDeleteIcon.style.display = 'none';
   }
 }
 
@@ -135,9 +141,6 @@ function enterCopyMode() {
   for (let i = 0; i < recipeLists.length; i += 1) {
     const copyHereButton = recipeLists[i].shadow.querySelector('.copy-here');
     copyHereButton.style.display = 'inline-block';
-    // Title text should fit in space available
-    const titleText = recipeLists[i].shadow.querySelector('.list-name h4');
-    titleText.style.width = 'calc(100% - 160px)';
   }
 }
 
@@ -150,9 +153,6 @@ function exitCopyMode() {
   for (let i = 0; i < recipeLists.length; i += 1) {
     const copyHereButton = recipeLists[i].shadow.querySelector('.copy-here');
     copyHereButton.style.display = 'none';
-    // Title text should fit in ALL space available without wrapping
-    const titleText = recipeLists[i].shadow.querySelector('.list-name h4');
-    titleText.style.width = '50vw';
   }
   enterEditMode();
 }
@@ -262,6 +262,22 @@ async function init() {
       }
       console.log(selectedRecipes);
     });
+
+    if (userList.listName !== 'My Favorites') {
+      const deleteIcon = userList.shadow.querySelector('.delete-icon');
+      // eslint-disable-next-line no-loop-func
+      deleteIcon.addEventListener('click', () => {
+        // eslint-disable-next-line no-alert
+        const confirmation = window.confirm('Are you sure you want to delete this list?');
+        if (confirmation) {
+          removeList(userList.name);
+          userList.remove();
+          performedOperation = true;
+          cancelButton.innerText = 'Save';
+        }
+      });
+    }
+
     if (userList.listName === 'My Favorites') {
       mainSection.insertBefore(userList, mainSection.firstChild);
     } else {
