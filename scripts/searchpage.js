@@ -40,7 +40,7 @@ function initLocalStorageDoubt() {
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
  * @param {none}
- * @returns {none}
+ * @return {none}
  */
 function init() {
   initLocalStorageDoubt();
