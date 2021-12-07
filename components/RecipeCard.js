@@ -100,6 +100,12 @@ class RecipeCard extends HTMLElement {
     for (let i = 0; i < removed.length; i += 1) {
       removed[i].remove();
     }
+
+    // clear custom list input
+    const userInput = document.querySelector('.user-input');
+    if (userInput) {
+      userInput.value = '';
+    }
     /** ******************************** */
 
     for (let i = 0; i < localStorage.length; i += 1) {
@@ -277,6 +283,7 @@ class RecipeCard extends HTMLElement {
       event.stopPropagation();
       if (!this.isFavorite) {
         favoriteIcon.src = '../assets/favorite-selected.svg';
+        this.initializeDropdown();
         this.showDropdown();
         console.log('Prompting user to add to favorites lists');
       } else {
@@ -303,12 +310,12 @@ class RecipeCard extends HTMLElement {
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
           } else if (window.location.pathname === '/webpages/search.html') {
-            this.initializeDropdown();
-            this.hideDropdown();
+            recipeCard.hideDropdown();
           } else {
             location.reload();
           }
         }
+        // recipeCard.hideDropdown();
       }
     });
 
@@ -360,20 +367,10 @@ class RecipeCard extends HTMLElement {
             homepageRefreshFavoriteSection();
           } else if (window.location.pathname === '/webpages/search.html') {
             this.initializeDropdown();
-            // clear custom list input
-            const userInput = document.querySelector('.user-input');
-            if (userInput) {
-              userInput.value = '';
-            }
-            this.hideDropdown();
+            recipeCard.hideDropdown();
           } else {
             location.reload();
           }
-          // if (window.location.pathname === '/webpages/search.html') {
-          //   // searchpageRefreshSearchResult();
-          //   location.reload();
-          // }
-          // location.reload();
         }
       }
       event.stopPropagation();
