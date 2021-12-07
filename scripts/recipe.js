@@ -7,7 +7,7 @@ import { initLocalStorage, addRecipe, addRecipebyList, checkFavoritebyID, remove
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
-const tokenKey = `?apiKey=${apiKey}`;
+const tokenKey = `apiKey=${apiKey}`;
 const storage = window.localStorage;
 
 /**
@@ -28,8 +28,8 @@ function initLocalStorageDoubt() {
 function lookup() {
   const regex = 'id=';
   const id = window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
-  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}?includeNutrition=true`;
-  const fetchEndpointE = `https://api.spoonacular.com/recipes/${id}/equipmentWidget.json${tokenKey}`;
+  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&${tokenKey}`;
+  const fetchEndpointE = `https://api.spoonacular.com/recipes/${id}/equipmentWidget.json?${tokenKey}`;
 
   const fetchResultsR = fetch(fetchEndpointR)
     .then((response) => response.json())
