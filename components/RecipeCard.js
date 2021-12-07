@@ -359,7 +359,7 @@ class RecipeCard extends HTMLElement {
           }
           if (window.location.pathname === '/webpages/search.html') {
             // searchpageRefreshSearchResult();
-            location.reload(); 
+            location.reload();
           }
           // location.reload();
         }
