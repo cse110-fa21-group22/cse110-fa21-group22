@@ -65,58 +65,58 @@ describe('Simple User Flow', () => {
     expect(exploreCards).toBe(10);
   });
 
-  // // Now, favorite a recipe and check it is added to master-favorites
-  // it('Add a new recipe to default favorites list', async () => {
-  //   console.log('Add new recipe card in default favorite list...');
-  //   // Query select all of the sections and then select all of the recipe cards
-  //   const exploreCards = await page.$$('recipe-card-component');
-  //   const root = await exploreCards[0].getProperty('shadowRoot');
-  //   const name = await root.$('.recipe-name');
-  //   const innerText = await name.getProperty('innerText');
-  //   favoritedRecipe = innerText['_remoteObject'].value;
-  //   // Favorite the first recipe that appears by adding it to default list
-  //   const favoriteIcon = await root.$('.recipe-favorite');
-  //   await favoriteIcon.click();
-  //   const button = await root.$('button');
-  //   await button.click();
+  // Now, favorite a recipe and check it is added to master-favorites
+  it('Add a new recipe to default favorites list', async () => {
+    console.log('Add new recipe card in default favorite list...');
+    // Query select all of the sections and then select all of the recipe cards
+    const exploreCards = await page.$$('recipe-card-component');
+    const root = await exploreCards[0].getProperty('shadowRoot');
+    const name = await root.$('.recipe-name');
+    const innerText = await name.getProperty('innerText');
+    favoritedRecipe = innerText['_remoteObject'].value;
+    // Favorite the first recipe that appears by adding it to default list
+    const favoriteIcon = await root.$('.recipe-favorite');
+    await favoriteIcon.click();
+    const button = await root.$('button');
+    await button.click();
 
-  //   // Reload the page
-  //   await page.goto(homeLink);
-  //   await page.waitForTimeout('10000');
+    // Reload the page
+    await page.goto(homeLink);
+    await page.waitForTimeout('10000');
 
-  //   // Retrieve the recipe in the favorites list
-  //   const exploreCards2 = await page.$$('recipe-card-component');
-  //   const root2 = await exploreCards2[10].getProperty('shadowRoot');
-  //   const favoritedName = await root2.$('.recipe-name');
-  //   const favoritedInnerText = await favoritedName.getProperty('innerText');
+    // Retrieve the recipe in the favorites list
+    const exploreCards2 = await page.$$('recipe-card-component');
+    const root2 = await exploreCards2[10].getProperty('shadowRoot');
+    const favoritedName = await root2.$('.recipe-name');
+    const favoritedInnerText = await favoritedName.getProperty('innerText');
 
-  //   // Check that the title we favorited is the same as the title in the favorites list
-  //   expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
-  // });
+    // Check that the title we favorited is the same as the title in the favorites list
+    expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
+  });
 
-  // // Now go to the favorites page and make sure the favorited recipe is the
-  // // only recipe there so far
-  // it('Check favorited recipe is on favorites page', async () => {
-  //   // Go to favorites page
-  //   console.log('Add new recipe card in default favorite list...');
-  //   const exploreCards2 = await page.$$('recipe-card-component');
-  //   const root2 = await exploreCards2[10].getProperty('shadowRoot');
-  //   const name = await root2.$('.recipe-name');
-  //   const innerText = await name.getProperty('innerText');
+  // Now go to the favorites page and make sure the favorited recipe is the
+  // only recipe there so far
+  it('Check favorited recipe is on favorites page', async () => {
+    // Go to favorites page
+    console.log('Add new recipe card in default favorite list...');
+    const exploreCards2 = await page.$$('recipe-card-component');
+    const root2 = await exploreCards2[10].getProperty('shadowRoot');
+    const name = await root2.$('.recipe-name');
+    const innerText = await name.getProperty('innerText');
 
-  //   await page.goto(favLink);
-  //   await page.waitForTimeout('1500');
+    await page.goto(favLink);
+    await page.waitForTimeout('1500');
 
-  //   const userList = await page.$$('user-list');
-  //   const root = await userList[0].getProperty('shadowRoot');
-  //   const recipeCard = await root.$('recipe-card-component');
+    const userList = await page.$$('user-list');
+    const root = await userList[0].getProperty('shadowRoot');
+    const recipeCard = await root.$('recipe-card-component');
 
-  //   const recipeRoot = await recipeCard.getProperty('shadowRoot');
-  //   const favoritedName = await recipeRoot.$('.recipe-name');
-  //   const favoritedInnerText = await favoritedName.getProperty('innerText');
+    const recipeRoot = await recipeCard.getProperty('shadowRoot');
+    const favoritedName = await recipeRoot.$('.recipe-name');
+    const favoritedInnerText = await favoritedName.getProperty('innerText');
 
-  //   expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
-  // });
+    expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
+  });
 
   /*
     // Now, unfavorite the recipe and check the favorited recipe is gone
@@ -143,175 +143,175 @@ describe('Simple User Flow', () => {
     */
 });
 
-describe('Basic user flow for Search Page', () => {
-  // Launch the site
-  beforeAll(async () => {
-    const client = await page.target().createCDPSession();
-    await client.send('Network.clearBrowserCookies');
-    await client.send('Network.clearBrowserCache');
-    await page.goto(searchLink);
-    await page.waitForTimeout('2000');
-  });
+// describe('Basic user flow for Search Page', () => {
+//   // Launch the site
+//   beforeAll(async () => {
+//     const client = await page.target().createCDPSession();
+//     await client.send('Network.clearBrowserCookies');
+//     await client.send('Network.clearBrowserCache');
+//     await page.goto(searchLink);
+//     await page.waitForTimeout('2000');
+//   });
 
-  const firstSet = [];
+//   const firstSet = [];
 
-  // Check the search page without a search
-  it('Check for 10 default recipes on empty search', async () => {
-    console.log('Check for 10 default recipe');
-    // await page.waitForTimeout('1000');
+//   // Check the search page without a search
+//   it('Check for 10 default recipes on empty search', async () => {
+//     console.log('Check for 10 default recipe');
+//     // await page.waitForTimeout('1000');
 
-    const recipeCards = await page.$$('recipe-card-component');
-    for (let i = 0; i < 3; i += 1) {
-      // await page.waitForTimeout('1000');
-      const root = await recipeCards[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-      firstSet.push(innerText['_remoteObject'].value);
-    }
+//     const recipeCards = await page.$$('recipe-card-component');
+//     for (let i = 0; i < 3; i += 1) {
+//       // await page.waitForTimeout('1000');
+//       const root = await recipeCards[i].getProperty('shadowRoot');
+//       const name = await root.$('.recipe-name');
+//       const innerText = await name.getProperty('innerText');
+//       firstSet.push(innerText['_remoteObject'].value);
+//     }
 
-    expect(recipeCards.length).toBe(10);
-  });
+//     expect(recipeCards.length).toBe(10);
+//   });
 
-  /*
-      // Search for basic recipe
-      // Needs some work
-      it('Inital search', async () => {
-          // const navBarComp = await page.$('navbar-component');
-          // const root = await navBarComp.getProperty('shadowRoot');
-          // //const navBarSearchInput = await root.$('.nav-search-input');
-          // //await root.type('.nav-search-input', 'chicken');
-          
-          // const navBar = await root.$('.navbar');//.$('.nav-search').$('input').value = 'chicken';
-          // const navSearch = await navBar.$('.nav-search');
-          // let input = await navSearch.$('input');
-          // input.value = 'chicken';
-  
-          await page.goto('https://619eba98b1f5aa97eda3fee5--icookfood.netlify.app/webpages/search.html?search=chicken');
-          //await page.reload();
-          await page.waitForTimeout('500');
-  
-          // Checks search result to be 10 recipes 
-          // Will need to modify this to check for chicken recipes 
-          const recipeCards = await page.$$eval('.recipe-section', (sections) => {
-              return sections[0].querySelectorAll('recipe-card-component').length;
-            });
-            
-          expect(recipeCards).toBe(10);
-      }); 
-    */
+//   /*
+//       // Search for basic recipe
+//       // Needs some work
+//       it('Inital search', async () => {
+//           // const navBarComp = await page.$('navbar-component');
+//           // const root = await navBarComp.getProperty('shadowRoot');
+//           // //const navBarSearchInput = await root.$('.nav-search-input');
+//           // //await root.type('.nav-search-input', 'chicken');
 
-  const secondSet = [];
-  // User clicks the next results button, make sure there recipe cards are populated
-  it('Check next results button', async () => {
-    console.log('Check next button');
-    await page.waitForTimeout('500');
+//           // const navBar = await root.$('.navbar');//.$('.nav-search').$('input').value = 'chicken';
+//           // const navSearch = await navBar.$('.nav-search');
+//           // let input = await navSearch.$('input');
+//           // input.value = 'chicken';
 
-    const nextButton = await page.$('.next-button');
+//           await page.goto('https://619eba98b1f5aa97eda3fee5--icookfood.netlify.app/webpages/search.html?search=chicken');
+//           //await page.reload();
+//           await page.waitForTimeout('500');
 
-    await nextButton.click();
-    await page.waitForTimeout('2000');
+//           // Checks search result to be 10 recipes
+//           // Will need to modify this to check for chicken recipes
+//           const recipeCards = await page.$$eval('.recipe-section', (sections) => {
+//               return sections[0].querySelectorAll('recipe-card-component').length;
+//             });
 
-    const recipeCards = await page.$$('recipe-card-component');
-    for (let i = 0; i < 3; i += 1) {
-      // await page.waitForTimeout('500');
-      const root = await recipeCards[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-      secondSet.push(innerText['_remoteObject'].value);
-    }
+//           expect(recipeCards).toBe(10);
+//       });
+//     */
 
-    expect(recipeCards.length).toBe(10);
-  });
+//   const secondSet = [];
+//   // User clicks the next results button, make sure there recipe cards are populated
+//   it('Check next results button', async () => {
+//     console.log('Check next button');
+//     await page.waitForTimeout('500');
 
-  // User clicks the previous button, make sure the recipes are populated
-  it('Check previous results button', async () => {
-    console.log('Check previous button');
-    const prevButton = await page.$('.previous-button');
+//     const nextButton = await page.$('.next-button');
 
-    await prevButton.click();
-    await page.waitForTimeout('2000');
+//     await nextButton.click();
+//     await page.waitForTimeout('2000');
 
-    const currentRecipes = await page.$$('recipe-card-component');
+//     const recipeCards = await page.$$('recipe-card-component');
+//     for (let i = 0; i < 3; i += 1) {
+//       // await page.waitForTimeout('500');
+//       const root = await recipeCards[i].getProperty('shadowRoot');
+//       const name = await root.$('.recipe-name');
+//       const innerText = await name.getProperty('innerText');
+//       secondSet.push(innerText['_remoteObject'].value);
+//     }
 
-    expect(currentRecipes.length).toBe(10);
-  });
+//     expect(recipeCards.length).toBe(10);
+//   });
 
-  // After previous button is clicked, make sure the recipes are the same
-  it('Check to the recipes are the same after previous button', async () => {
-    const currentRecipes = await page.$$('recipe-card-component');
-    let isSame = true;
-    for (let i = 0; i < 3; i += 1) {
-      const root = await currentRecipes[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-      const recipeTitle = innerText['_remoteObject'].value;
-      if (firstSet[i] !== recipeTitle) {
-        isSame = false;
-        break;
-      }
-    }
-    // eslint-disable-next-line no-underscore-dangle
-    expect(isSame).toBe(true);
-  });
+//   // User clicks the previous button, make sure the recipes are populated
+//   it('Check previous results button', async () => {
+//     console.log('Check previous button');
+//     const prevButton = await page.$('.previous-button');
 
-  // Click the next button again and check if those populated recipes are the same
-  it('Check to the recipes are the same after next button', async () => {
-    console.log('Check next button');
-    await page.waitForTimeout('500');
+//     await prevButton.click();
+//     await page.waitForTimeout('2000');
 
-    const nextButton = await page.$('.next-button');
+//     const currentRecipes = await page.$$('recipe-card-component');
 
-    await nextButton.click();
-    await page.waitForTimeout('3000');
+//     expect(currentRecipes.length).toBe(10);
+//   });
 
-    const currentRecipes = await page.$$('recipe-card-component');
-    let isSame = true;
-    for (let i = 0; i < 3; i += 1) {
-      const root = await currentRecipes[i].getProperty('shadowRoot');
-      const name = await root.$('.recipe-name');
-      const innerText = await name.getProperty('innerText');
-      const recipeTitle = innerText['_remoteObject'].value;
-      if (secondSet[i] !== recipeTitle) {
-        isSame = false;
-        break;
-      }
-    }
-    expect(isSame).toBe(true);
-  });
+//   // After previous button is clicked, make sure the recipes are the same
+//   it('Check to the recipes are the same after previous button', async () => {
+//     const currentRecipes = await page.$$('recipe-card-component');
+//     let isSame = true;
+//     for (let i = 0; i < 3; i += 1) {
+//       const root = await currentRecipes[i].getProperty('shadowRoot');
+//       const name = await root.$('.recipe-name');
+//       const innerText = await name.getProperty('innerText');
+//       const recipeTitle = innerText['_remoteObject'].value;
+//       if (firstSet[i] !== recipeTitle) {
+//         isSame = false;
+//         break;
+//       }
+//     }
+//     // eslint-disable-next-line no-underscore-dangle
+//     expect(isSame).toBe(true);
+//   });
 
-  // let favoritedRecipe;
-  // // Now, favorite a recipe and check it is added to master-favorites
-  // it('Add a new recipe to default favorites list', async () => {
-  //   console.log('Check for new recipe card in default list');
-  //   // Query select all of the sections and then select all of the recipe cards
-  //   const recipeCards = await page.$$('recipe-card-component');
-  //   const root = await recipeCards[0].getProperty('shadowRoot');
-  //   const name = await root.$('.recipe-name');
-  //   const innerText = await name.getProperty('innerText');
-  //   favoritedRecipe = innerText['_remoteObject'].value;
-  //   // Favorite the first recipe that appears by adding it to default list
-  //   const favoriteIcon = await root.$('.recipe-favorite');
-  //   await favoriteIcon.click();
-  //   const button = await root.$('button');
-  //   await button.click();
-  //   await page.waitForTimeout('5000');
+//   // Click the next button again and check if those populated recipes are the same
+//   it('Check to the recipes are the same after next button', async () => {
+//     console.log('Check next button');
+//     await page.waitForTimeout('500');
 
-  //   // Go to favorites page
-  //   await page.goto(favLink);
-  //   await page.waitForTimeout('7000');
+//     const nextButton = await page.$('.next-button');
 
-  //   // Retrieve the recipe in the favorites list
-  //   const userList = await page.$$('user-list');
-  //   const userRoot = await userList[0].getProperty('shadowRoot');
-  //   const favRecipeCard = await userRoot.$$('recipe-card-component');
-  //   const favRoot = await favRecipeCard[favRecipeCard.length - 1].getProperty('shadowRoot');
-  //   const favoritedName = await favRoot.$('.recipe-name');
-  //   const favoritedInnerText = await favoritedName.getProperty('innerText');
+//     await nextButton.click();
+//     await page.waitForTimeout('3000');
 
-  //   // Check that the title we favorited is the same as the title in the favorites list
-  //   expect(favoritedInnerText['_remoteObject'].value).toBe(favoritedRecipe);
-  // });
-});
+//     const currentRecipes = await page.$$('recipe-card-component');
+//     let isSame = true;
+//     for (let i = 0; i < 3; i += 1) {
+//       const root = await currentRecipes[i].getProperty('shadowRoot');
+//       const name = await root.$('.recipe-name');
+//       const innerText = await name.getProperty('innerText');
+//       const recipeTitle = innerText['_remoteObject'].value;
+//       if (secondSet[i] !== recipeTitle) {
+//         isSame = false;
+//         break;
+//       }
+//     }
+//     expect(isSame).toBe(true);
+//   });
+
+// let favoritedRecipe;
+// // Now, favorite a recipe and check it is added to master-favorites
+// it('Add a new recipe to default favorites list', async () => {
+//   console.log('Check for new recipe card in default list');
+//   // Query select all of the sections and then select all of the recipe cards
+//   const recipeCards = await page.$$('recipe-card-component');
+//   const root = await recipeCards[0].getProperty('shadowRoot');
+//   const name = await root.$('.recipe-name');
+//   const innerText = await name.getProperty('innerText');
+//   favoritedRecipe = innerText['_remoteObject'].value;
+//   // Favorite the first recipe that appears by adding it to default list
+//   const favoriteIcon = await root.$('.recipe-favorite');
+//   await favoriteIcon.click();
+//   const button = await root.$('button');
+//   await button.click();
+//   await page.waitForTimeout('5000');
+
+//   // Go to favorites page
+//   await page.goto(favLink);
+//   await page.waitForTimeout('7000');
+
+//   // Retrieve the recipe in the favorites list
+//   const userList = await page.$$('user-list');
+//   const userRoot = await userList[0].getProperty('shadowRoot');
+//   const favRecipeCard = await userRoot.$$('recipe-card-component');
+//   const favRoot = await favRecipeCard[favRecipeCard.length - 1].getProperty('shadowRoot');
+//   const favoritedName = await favRoot.$('.recipe-name');
+//   const favoritedInnerText = await favoritedName.getProperty('innerText');
+
+//   // Check that the title we favorited is the same as the title in the favorites list
+//   expect(favoritedInnerText['_remoteObject'].value).toBe(favoritedRecipe);
+// });
+// });
 
 // describe('Simple Favorites Flow', () => {
 //   // First, visit the iCook website
