@@ -96,27 +96,27 @@ describe('Simple User Flow', () => {
 
   // // Now go to the favorites page and make sure the favorited recipe is the
   // // only recipe there so far
-  it('Check favorited recipe is on favorites page', async () => {
-    // Go to favorites page
-    console.log('Add new recipe card in default favorite list...');
-    const exploreCards2 = await page.$$('recipe-card-component');
-    const root2 = await exploreCards2[10].getProperty('shadowRoot');
-    const name = await root2.$('.recipe-name');
-    const innerText = await name.getProperty('innerText');
+  // it('Check favorited recipe is on favorites page', async () => {
+  //   // Go to favorites page
+  //   console.log('Add new recipe card in default favorite list...');
+  //   const exploreCards2 = await page.$$('recipe-card-component');
+  //   const root2 = await exploreCards2[10].getProperty('shadowRoot');
+  //   const name = await root2.$('.recipe-name');
+  //   const innerText = await name.getProperty('innerText');
 
-    await page.goto(favLink);
-    await page.waitForTimeout('1500');
+  //   await page.goto(favLink);
+  //   await page.waitForTimeout('1500');
 
-    const userList = await page.$$('user-list');
-    const root = await userList[0].getProperty('shadowRoot');
-    const recipeCard = await root.$('recipe-card-component');
+  //   const userList = await page.$$('user-list');
+  //   const root = await userList[0].getProperty('shadowRoot');
+  //   const recipeCard = await root.$('recipe-card-component');
 
-    const recipeRoot = await recipeCard.getProperty('shadowRoot');
-    const favoritedName = await recipeRoot.$('.recipe-name');
-    const favoritedInnerText = await favoritedName.getProperty('innerText');
+  //   const recipeRoot = await recipeCard.getProperty('shadowRoot');
+  //   const favoritedName = await recipeRoot.$('.recipe-name');
+  //   const favoritedInnerText = await favoritedName.getProperty('innerText');
 
-    expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
-  });
+  //   expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
+  // });
 
   /*
     // Now, unfavorite the recipe and check the favorited recipe is gone
