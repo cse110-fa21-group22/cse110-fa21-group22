@@ -1,6 +1,6 @@
 /**
  * Handles home page functionality.
- * @module homepage.js
+ * @module homepage
  */
 
 import { initLocalStorage } from '../components/UserLocalStorage.js';
@@ -63,6 +63,22 @@ function showFavoriteSection() {
       recipeCard.recipe = array[i];
       userFavoriteSection.appendChild(recipeCard);
     }
+  }
+}
+
+export default function homepageRefreshFavoriteSection() {
+  userFavoriteSection.innerHTML = ''; // clear everything in this section
+  showFavoriteSection(); // loading facorite section one more time
+
+  /**
+   * call initilize dropDown and initilize heart
+   */
+  const recipeCardList = recipeSection.querySelectorAll('recipe-card-component');
+  for (let i = 0; i < recipeCardList.length; i += 1) {
+    const recipeCard = recipeCardList[i];
+    recipeCard.initializeDropdown();
+    recipeCard.initializeHearts();
+    recipeCard.hideDropdown();
   }
 }
 

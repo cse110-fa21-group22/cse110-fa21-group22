@@ -1,5 +1,5 @@
 /**
- * @module UserList.js
+ * @module UserList
  */
 
 import { removeRecipebyList, addRecipebyList } from './UserLocalStorage.js';

@@ -15,7 +15,7 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
-const prNum = 327; // change -> (your pr number);
+const prNum = 335; // change -> (your pr number);
 
 let homeLink = '';
 let searchLink = '';
@@ -24,7 +24,7 @@ let favSelected = '';
 
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
-  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
+  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html?search=`;
   favLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/favorite.html`;
   favSelected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-selected.svg`;
 } else {
@@ -180,24 +180,24 @@ describe('Basic user flow for Search Page', () => {
           // const root = await navBarComp.getProperty('shadowRoot');
           // //const navBarSearchInput = await root.$('.nav-search-input');
           // //await root.type('.nav-search-input', 'chicken');
-          
+
           // const navBar = await root.$('.navbar');//.$('.nav-search').$('input').value = 'chicken';
           // const navSearch = await navBar.$('.nav-search');
           // let input = await navSearch.$('input');
           // input.value = 'chicken';
-  
+
           await page.goto('https://619eba98b1f5aa97eda3fee5--icookfood.netlify.app/webpages/search.html?search=chicken');
           //await page.reload();
           await page.waitForTimeout('500');
-  
-          // Checks search result to be 10 recipes 
-          // Will need to modify this to check for chicken recipes 
+
+          // Checks search result to be 10 recipes
+          // Will need to modify this to check for chicken recipes
           const recipeCards = await page.$$eval('.recipe-section', (sections) => {
               return sections[0].querySelectorAll('recipe-card-component').length;
             });
-            
+
           expect(recipeCards).toBe(10);
-      }); 
+      });
     */
 
   const secondSet = [];
@@ -341,7 +341,7 @@ describe('Simple Favorites Flow', () => {
     // Favorite the first recipe that appears by adding it to default list
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
-    const button = await root.$('.submit');
+    const button = await root.$('button');
     await button.click();
 
     await page.goto(homeLink);
