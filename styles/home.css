@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 .home-page {
   margin: 0;
@@ -32,6 +32,6 @@
 
 @media (min-width: 768px) {
   .home-page {
-    padding: 20px 50px 20px 50px;
+    padding: 20px 50px;
   }
 }

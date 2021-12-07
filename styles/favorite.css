@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 html,
 body {
@@ -123,11 +123,11 @@ main {
   margin-top: 10px;
   overflow-wrap: break-word;
   visibility: hidden;
-  height: 0px;
+  height: 0;
 }
 
 main {
-  padding-top: 0px;
+  padding-top: 0;
 }
 
 @media (min-width: 768px) {
@@ -144,6 +144,6 @@ main {
 
   #select-guide-text {
     width: calc(100vw - 200px);
-    margin-top: 0px;
+    margin-top: 0;
   }
 }

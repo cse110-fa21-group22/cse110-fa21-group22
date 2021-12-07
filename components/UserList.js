@@ -42,14 +42,14 @@ class UserList extends HTMLElement {
         this.dispatchEvent(innerEvent);
       });
 
-      let cardList = this.cardList;
+      const { cardList } = this;
       // Remove a recipe from localStorage and the userList when it is deleted
       recipeCard.addEventListener('removed', (event) => {
         console.log('removing recipe');
         removeRecipebyList(this.name, event.detail);
         recipeCard.remove();
-        for (let i = 0; i < this.cardList.length; i++) {
-          if (cardList[i].recipeId == event.detail.id) {
+        for (let i = 0; i < this.cardList.length; i += 1) {
+          if (cardList[i].recipeId === event.detail.id) {
             // Remove the item from cardList
             cardList.splice(i, 1);
           }
@@ -58,6 +58,14 @@ class UserList extends HTMLElement {
         this.checkForEmptyList();
       });
     }
+  }
+
+  /**
+   * Getter for the recipe list
+   * @returns {object} a list of recipe cards in this UserList
+   */
+  get list() {
+    return this.cardList;
   }
 
   /**
@@ -77,12 +85,12 @@ class UserList extends HTMLElement {
       this.dispatchEvent(innerEvent);
     });
     // Remove a recipe from localStorage and the userList when it is deleted
-    let cardList = this.cardList;
+    const { cardList } = this;
     recipeCard.addEventListener('removed', (event) => {
       removeRecipebyList(this.name, event.detail);
       recipeCard.remove();
-      for (let i = 0; i < this.cardList.length; i++) {
-        if (cardList[i].recipeId == event.detail.id) {
+      for (let i = 0; i < this.cardList.length; i += 1) {
+        if (cardList[i].recipeId === event.detail.id) {
           // Remove the item from cardList
           cardList.splice(i, 1);
         }
@@ -99,24 +107,16 @@ class UserList extends HTMLElement {
    * Checks whether the UserList is empty and formats it appropriately if so
    */
   checkForEmptyList() {
-    let recipeSection = this.shadow.querySelector('.recipe-section');
-    let emptyNotice = this.shadow.querySelector('.recipe-section h5');
+    const recipeSection = this.shadow.querySelector('.recipe-section');
+    const emptyNotice = this.shadow.querySelector('.recipe-section h5');
     // If the list is empty, show the empty notice and reduce the height
-    if (this.cardList.length == 0) {
+    if (this.cardList.length === 0) {
       recipeSection.style.height = '40px';
       emptyNotice.style.display = 'inline-block';
     } else {
       recipeSection.style.height = 'auto';
       emptyNotice.style.display = 'none';
     }
-  }
-
-  /**
-   * Getter for the recipe list
-   * @returns {object} a list of recipe cards in this UserList
-   */
-  get list() {
-    return this.cardList;
   }
 
   /**
@@ -147,13 +147,13 @@ class UserList extends HTMLElement {
   }
 
   connectedCallback() {
-    let copyHereButton = this.shadow.querySelector('.copy-here');
+    const copyHereButton = this.shadow.querySelector('.copy-here');
 
     // Add an event listener to broadcast an event when copy here is clicked
     // This event will be received in favorites.js
     copyHereButton.addEventListener('click', () => {
-        const event = new CustomEvent('copy-to-list', { detail: this });
-        document.dispatchEvent(event);
+      const event = new CustomEvent('copy-to-list', { detail: this });
+      document.dispatchEvent(event);
     });
 
     // Check whether the list is empty when loaded and format it appropriately
