@@ -1,23 +1,34 @@
 /**
- * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
- * pulls up for it.
+ * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information pulls up for it.
+ * @module recipe.js
  */
-import { addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
+import { initLocalStorage, addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
+const storage = window.localStorage;
 
-// TODO:Need to use search in search.js
+/**
+ * it is possible that the user click the icon and coming back to the main page
+ * therefore, only initilize the favorite-master local storage when it does not even exist
+ */
+function initLocalStorageDoubt() {
+  // Meaning that favorites-master does not exist
+  if (storage.getItem('favorites-master') == null) {
+    initLocalStorage();
+  }
+}
+
 /**
  * Performs a recipe lookup based on the id passed in to the page URL
- * @returns {object} json containing recipe information
+ * @return {object} json containing recipe information
  */
 function lookup() {
   const regex = 'id=';
   const id = window.location.href.substring(window.location.href.search(regex) + 3, window.location.href.length); // Using regex to grab id from URL
-  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}`;
+  const fetchEndpointR = `https://api.spoonacular.com/recipes/${id}/information${tokenKey}&addRecipeNutrition=true`;
   const fetchEndpointE = `https://api.spoonacular.com/recipes/${id}/equipmentWidget.json${tokenKey}`;
 
   const fetchResultsR = fetch(fetchEndpointR)
@@ -39,7 +50,7 @@ function lookup() {
 /**
  * Converts a value of minutes into a string that shows hours and minutes
  * @param {number} time A time in minutes
- * @returns {string} A string in the form 'XX hours XX minutes'
+ * @return {string} A string in the form 'XX hours XX minutes'
  */
 function formatTime(time) {
   if (parseInt(time, 10) === 1) return `${time.toString()} minute`;
@@ -155,6 +166,7 @@ function addToCustomList(recipeObj) {
  * Initializes the recipe page
  */
 async function init() {
+  initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
@@ -204,19 +216,7 @@ async function init() {
   /*
    * show the drop-down box and change the heart color
    */
-
-  // const recipeObj = JSON.parse(window.localStorage.getItem('recipeObj'));
-  // window.localStorage.removeItem('recipeObj');
-  // let isFavorite = checkFavorite(recipeObj);
-
-  /** ******** modified by Dennis **********
-   * use the newly fetched recipe object to see if it is already contained in master-favorite
-   * since this fetched recipe data may not have exactly the same field as what is in the storage,
-   * must use checkFavoritebyID which is useind ID field for equivilency
-   */
   let isFavorite = checkFavoritebyID(recipe);
-  /* *************************************************** */
-
   initializeHearts(isFavorite);
   initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
@@ -283,9 +283,11 @@ async function init() {
     event.stopPropagation();
   });
 
-  // Email the link of recipe
-  // Receiver is blank and should be entered by user
-  // Body of email is a short message with the link to recipe
+  /**
+   * Email the link of recipe
+   * Body of email is a short message with the link to recipe
+   * @listens click Receiver is blank and should be entered by user
+   */
   const emailButton = document.querySelector('.email-recipe');
   emailButton.addEventListener('click', () => {
     const recipeURL = window.location;
