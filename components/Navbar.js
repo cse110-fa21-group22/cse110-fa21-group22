@@ -1,6 +1,6 @@
 /**
  * Naviagtion bar web component
- * @module Navbar.js
+ * @module Navbar
  */
 
 const link = document.createElement('link');

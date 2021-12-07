@@ -1,9 +1,11 @@
 /**
  * Recipecard web component
- * @module RecipeCard.js
+ * @module RecipeCard
  */
 
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
+import homepageRefreshFavoriteSection from '../scripts/homepage.js';
+// import searchpageRefreshSearchResult from '../scripts/searchpage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -89,6 +91,18 @@ class RecipeCard extends HTMLElement {
 
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
+
+    /**
+     * remove all container first
+     * reason: homepage, searchpage all recipeCards need to reflect all newly created lists
+     */
+    const removed = dropdownElem.querySelectorAll('.container');
+    console.log(removed);
+    for (let i = 0; i < removed.length; i += 1) {
+      removed[i].remove();
+    }
+    /** ******************************** */
+
     for (let i = 0; i < localStorage.length; i += 1) {
       const entry = listEntryTemplate.content.cloneNode(true);
       if (localStorage.key(i) === 'favorites-master') continue;
@@ -281,8 +295,16 @@ class RecipeCard extends HTMLElement {
           }
           favoriteIcon.src = '../assets/favorite.svg';
           console.log('Remove item from ALL favorites lists here');
+
           /* Reload the page as a shortcut for showing updated lists */
-          location.reload();
+          console.log('testing for refreshing the page', window.location.pathname); // /webpages/home.html
+          /**
+           * call reloading function from homepage.js to reload specific place
+           */
+          if (window.location.pathname === '/webpages/home.html') {
+            homepageRefreshFavoriteSection();
+          }
+          // location.reload();
         }
       }
     });
@@ -326,7 +348,22 @@ class RecipeCard extends HTMLElement {
           this.addToCheckedLists();
           this.addToCustomList();
           /* Reload the page as a shortcut for showing new lists */
-          location.reload();
+
+          /**  make this is a favorite  */
+          this.isFavorite = true;
+          favoriteIcon.src = '../assets/favorite-selected.svg';
+          /**  **********************************  */
+          // console.log(window.location.pathname);
+          if (window.location.pathname === '/webpages/home.html') {
+            homepageRefreshFavoriteSection();
+          } else {
+            location.reload();
+          }
+          // if (window.location.pathname === '/webpages/search.html') {
+          //   // searchpageRefreshSearchResult();
+          //   location.reload();
+          // }
+          // location.reload();
         }
       }
       event.stopPropagation();

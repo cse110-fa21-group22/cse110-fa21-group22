@@ -1,6 +1,6 @@
 /**
  * Functions deal with local storage
- * @module UserLocalStorage.js
+ * @module UserLocalStorage
  */
 
 const store = window.localStorage;
