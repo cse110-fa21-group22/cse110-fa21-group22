@@ -35,6 +35,10 @@ listEntryTemplate.innerHTML = `
 `;
 
 class RecipeCard extends HTMLElement {
+  /**
+   * Setter for the recipe card's recipe
+   * @param {object} recipeObj The recipe object from spoonacular
+   */
   set recipe(recipeObj) {
     this.recipeObj = recipeObj;
     this.recipeId = recipeObj.id;
@@ -53,6 +57,10 @@ class RecipeCard extends HTMLElement {
     }
   }
 
+  /**
+   * Getter for the recipe card's recipe
+   * @return {object} The recipe card's recipe object from Spoonacular
+   */
   get recipe() {
     return this.recipeObj;
   }

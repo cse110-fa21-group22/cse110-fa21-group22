@@ -85,6 +85,7 @@ async function init() {
     return fetchResults;
   }
 
+  // When copy is clicked, copy mode should be entered
   copyButton.addEventListener('click', () => {
     if (!copyMode) {
       if (!editMode) {
@@ -94,12 +95,15 @@ async function init() {
     }
   });
 
+  // When edit is clicked, edit mode should be entered
   editButton.addEventListener('click', () => {
     if (!editMode) {
       enterEditMode();
     }
   });
 
+  // When cancel is clicked, the user should either exit
+  // copy mode or edit mode
   cancelButton.addEventListener('click', () => {
     if (editMode) {
       exitEditMode();
@@ -109,15 +113,20 @@ async function init() {
     }
   });
 
+  // Delete all selected recipes when the user clicks delete
   deleteButton.addEventListener('click', () => {
+    // Iterate and delete selected recipes
     for (let i = 0; i < selectedRecipes.length; i++) {
       selectedRecipes[i].delete();
     }
+    // Clear the user's selection once recipes are deleted
     selectedRecipes = [];
-    // Update edit button text
+    // Update cancel button text to say "Save"
     const cancelButton = document.getElementById('cancel');
     performedOperation = true;
     cancelButton.innerText = 'Save';
+    // The user has no selected recipes, so show the select guide text
+    // and hide operations buttons
     showSelectGuideText();
     copyButton.style.display = 'none';
     deleteButton.style.display = 'none';
@@ -127,8 +136,29 @@ async function init() {
   document.addEventListener('copy-to-list', (event) => {
     copy(event.detail);
   });
+
+  // Event listener for escape keybind. Will attempt to deselect first.
+  // If it fails, it will attempt to exit edit mode. If it fails,
+  // it will attempt to exit copy mode.
+  document.addEventListener('keydown', (event) => {
+    if (event.key == 'Escape') {
+      if (selectedRecipes.length > 0) {
+        for (let i = selectedRecipes.length - 1; i > -1; i--) {
+          selectedRecipes[i].deselect();
+        }
+      } else if (editMode) {
+        exitEditMode();
+      } else if (copyMode) {
+        exitCopyMode();
+      }
+    }
+  });
 }
 
+/**
+ * Copy the selection to the UserList, ignoring duplicates
+ * @param {object} userList the UserList to copy to
+ */
 function copy(userList) {
   for (let i = 0; i < selectedRecipes.length; i++) {
     // Iterate over the user list and see if a selected recipe is
@@ -148,6 +178,7 @@ function copy(userList) {
       // Exit and reenter copy mode to reset styling
       recipeCard.exitSelectMode();
       recipeCard.enterSelectMode();
+      // Add the card to the user list
       userList.pushRecipe(recipeCard);
     }
   }
@@ -156,7 +187,7 @@ function copy(userList) {
     //console.log(`deselecting recipe ${selectedRecipes[i].recipeId}`);
     selectedRecipes[i].deselect();
   }
-  // Update edit button text
+  // Update edit button text because the user has performed an operation
   const cancelButton = document.getElementById('cancel');
   performedOperation = true;
   cancelButton.innerText = 'Save';

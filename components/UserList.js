@@ -50,26 +50,15 @@ class UserList extends HTMLElement {
         recipeCard.remove();
         for (let i = 0; i < this.cardList.length; i++) {
           if (cardList[i].recipeId == event.detail.id) {
+            // Remove the item from cardList
             cardList.splice(i, 1);
           }
         }
+        // Check whether the list is now empty and format appropriately
         this.checkForEmptyList();
       });
     }
   }
-
-  /**
-   * Adds a recipe to the userList, including localStorage
-   * @param {number} recipeId the ID of the recipe 
-   */
-  /*addRecipe(recipe) {
-    console.log(`adding recipe ${recipe.id} to list`);
-    addRecipebyList(this.name, recipe.id);
-    const recipeCard = document.createElement('recipe-card-component');
-    const recipeSection = this.shadow.querySelector('.recipe-section');
-    recipeCard.recipe = recipe;
-    recipeSection.appendChild(recipeCard);
-  }*/
 
   /**
    * Pushes a recipe to the UserList
@@ -94,9 +83,11 @@ class UserList extends HTMLElement {
       recipeCard.remove();
       for (let i = 0; i < this.cardList.length; i++) {
         if (cardList[i].recipeId == event.detail.id) {
+          // Remove the item from cardList
           cardList.splice(i, 1);
         }
       }
+      // Check whether the list is now empty and format appropriately
       this.checkForEmptyList();
     });
     recipeSection.appendChild(recipeCard);
@@ -104,10 +95,13 @@ class UserList extends HTMLElement {
     this.checkForEmptyList();
   }
 
+  /**
+   * Checks whether the UserList is empty and formats it appropriately if so
+   */
   checkForEmptyList() {
-    console.log('checking for empty list');
     let recipeSection = this.shadow.querySelector('.recipe-section');
     let emptyNotice = this.shadow.querySelector('.recipe-section h5');
+    // If the list is empty, show the empty notice and reduce the height
     if (this.cardList.length == 0) {
       recipeSection.style.height = '40px';
       emptyNotice.style.display = 'inline-block';
@@ -156,11 +150,13 @@ class UserList extends HTMLElement {
     let copyHereButton = this.shadow.querySelector('.copy-here');
 
     // Add an event listener to broadcast an event when copy here is clicked
+    // This event will be received in favorites.js
     copyHereButton.addEventListener('click', () => {
         const event = new CustomEvent('copy-to-list', { detail: this });
         document.dispatchEvent(event);
     });
 
+    // Check whether the list is empty when loaded and format it appropriately
     this.checkForEmptyList();
   }
 }
