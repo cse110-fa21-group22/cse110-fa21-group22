@@ -2,7 +2,7 @@
  * Handles favorites page functionality and storing the recipes a user favorites.
  * @module favorites.js
  */
-import { initLocalStorage, addRecipebyList } from '../components/UserLocalStorage.js'
+import { initLocalStorage } from '../components/UserLocalStorage.js';
 
 const storage = window.localStorage;
 const recipeLists = [];
