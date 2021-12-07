@@ -1,6 +1,6 @@
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
-import { homeapgeRefreshFavoriteSection } from '../scripts/homepage.js';
-import { searchapgeRefreshSearchResult } from '../scripts/searchpage.js';
+import { homepageRefreshFavoriteSection } from '../scripts/homepage.js';
+import { searchpageRefreshSearchResult } from '../scripts/searchpage.js';
 
 const link = document.createElement('link');
 link.rel = 'stylesheet';
@@ -285,7 +285,7 @@ class RecipeCard extends HTMLElement {
            * call reloading function from homepage.js to reload specific place
            */
           if (window.location.pathname === '/webpages/home.html') {
-            homeapgeRefreshFavoriteSection();
+            homepageRefreshFavoriteSection();
           }
           // location.reload();
         }
@@ -342,7 +342,7 @@ class RecipeCard extends HTMLElement {
             homeapgeRefreshFavoriteSection();
           }
           if (window.location.pathname === '/webpages/search.html') {
-            searchapgeRefreshSearchResult();
+            searchpageRefreshSearchResult();
           }
           // location.reload();
         }
