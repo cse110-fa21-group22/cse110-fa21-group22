@@ -2,6 +2,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-mixed-spaces-and-tabs */
+// import search from '../../scripts/search';
+
 /* eslint no-unused-vars: "error" */
 jest.setTimeout(20000);
 
@@ -15,7 +17,9 @@ const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
 
 
+
 const prNum = 296; // change -> (your pr number);
+
 
 
 let homeLink = '';
@@ -82,7 +86,7 @@ describe('Simple User Flow', () => {
 
     // Reload the page
     await page.goto(homeLink);
-    await page.waitForTimeout('3000');
+    await page.waitForTimeout('10000');
 
     // Retrieve the recipe in the favorites list
     const exploreCards2 = await page.$$('recipe-card-component');
@@ -242,11 +246,11 @@ describe('Basic user flow for Search Page', () => {
     await favoriteIcon.click();
     const button = await root.$('button');
     await button.click();
-    await page.waitForTimeout('2000');
+    await page.waitForTimeout('5000');
 
     // Go to favorites page
     await page.goto(favLink);
-    await page.waitForTimeout('5000');
+    await page.waitForTimeout('7000');
 
     // Retrieve the recipe in the favorites list
     const userList = await page.$$('user-list');
@@ -289,7 +293,7 @@ describe('Simple Favorites Flow', () => {
     // Favorite the first recipe that appears by adding it to default list
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
-    const button = await root.$('button');
+    const button = await root.$('.submit');
     await button.click();
 
     await page.goto(homeLink);

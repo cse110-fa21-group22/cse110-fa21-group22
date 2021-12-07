@@ -46,8 +46,8 @@ function init() {
   const recipeSection = document.querySelector('.recipe-section');
   /**
    * Generates a query string to pass the search to the search page
-   * @param {string} newSearchTerm the user's search phrase
-   * @return {string} the query string
+   * @param {string} newSearchTerm - the user's search phrase
+   * @return {string} - the query string
    */
   // eslint-disable-next-line class-methods-use-this
   function generateQueryString(newSearchTerm) {
@@ -128,7 +128,7 @@ function init() {
   // Automatically parse the query string and run a search when page reload
   let searchTerm = parseQueryString();
   const navbarInputbox = document.querySelector('navbar-component').shadow.querySelector('.nav-search-input');
-  navbarInputbox.value = `"${searchTerm}""`;
+  navbarInputbox.value = `${searchTerm}`;
   let inputList = JSON.parse(window.localStorage.getItem('QueryList'));
   window.localStorage.removeItem('QueryList');
   // If someone try the search url, it's the default set

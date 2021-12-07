@@ -1,4 +1,8 @@
 /**
+ * @module Search
+ */
+
+/*
  * Handles all queries related to spoonacular api.
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -20,7 +24,7 @@ const tokenKey = `?apiKey=${apiKey}`;
  * @param {string} inputList.dietFilter - The filter which select the diet(s) of the recipes.
  * @param {int} inputList.timeFilter - The filter which select the max ready time of the recipes.
  * @param {string} inputList.typeFilter - The filter which select the type of the recipes.
- * @returns {object} - json file containing the results of the spoonacular query
+ * @return {object} - json file containing the results of the spoonacular query
  */
 export default async function search(inputList) {
   const searchUrl = 'https://api.spoonacular.com/recipes/complexSearch';
@@ -48,7 +52,6 @@ export default async function search(inputList) {
     fetchEndpoint += tokenType;
   }
   fetchEndpoint += tokenNutritionBool + tokenSort + tokenOffset + tokenNumResults;
-  console.log(fetchEndpoint);
 
   // fetch the data
   const fetchResults = await fetch(fetchEndpoint)

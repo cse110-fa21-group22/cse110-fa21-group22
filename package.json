@@ -7,7 +7,7 @@
     "build": "browserify main.js -o bundle.js",
     "test": "jest",
     "coverage": "npx coverage scripts/index.js",
-    "generateDocs": "npx jsdoc scripts/*",
+    "generateDocs": "npx jsdoc scripts/search.js",
     "lint": "eslint \"**/*.js\" && npx stylelint \"**/*.css\"",
     "lint:fix": "eslint \"**/*.js\" --fix && npx stylelint \"**/*.css\" --fix"
   },

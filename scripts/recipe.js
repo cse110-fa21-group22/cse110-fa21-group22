@@ -2,7 +2,7 @@
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information
  * pulls up for it.
  */
-import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from '../components/UserLocalStorage.js';
+import { addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
@@ -38,8 +38,8 @@ function lookup() {
 
 /**
  * Converts a value of minutes into a string that shows hours and minutes
- * @param   {number} time - A time in minutes
- * @returns {string} - A string in the form 'XX hours XX minutes'
+ * @param {number} time A time in minutes
+ * @returns {string} A string in the form 'XX hours XX minutes'
  */
 function formatTime(time) {
   if (parseInt(time, 10) === 1) return `${time.toString()} minute`;
@@ -61,10 +61,9 @@ function formatTime(time) {
 
 /**
  * Initialize the heart color
- * @param {boolean} isFavorite - check if in local storage
+ * @param {boolean} isFavorite Check if in local storage
  */
 function initializeHearts(isFavorite) {
-  // console.log('Checking favorites');
   const favoriteIcon = document.querySelector('.favorite-heart');
   if (isFavorite) {
     favoriteIcon.src = '../assets/favorite-selected.svg';
@@ -96,18 +95,9 @@ function initializeDropdown() {
   }
 }
 
-/**
- * Shows the favorites dropdown on the recipe card
- * The position will be the title length
- * @param {Object} recipe - recipe card
- */
-function showDropdown(recipe, isMobile) {
+function showDropdown() {
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'block';
-  if (!isMobile) {
-    const pos = recipe.title.length * 17;
-    dropdownContent.style.marginLeft = `${pos}px`;
-  }
 }
 
 /**
@@ -139,12 +129,12 @@ function checkCheckedList() {
 /**
  * Add the recipe to all checked lists in the dropdown
  */
-function addToCheckedLists(recipe) {
+function addToCheckedLists(recipeObj) {
   const containers = document.querySelectorAll('.container');
   for (let i = 0; i < containers.length; i += 1) {
     const checkmark = containers[i].querySelector('input');
     if (checkmark.checked) {
-      addRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+      addRecipebyList(containers[i].querySelector('span').innerHTML, recipeObj);
     }
   }
 }
@@ -152,12 +142,12 @@ function addToCheckedLists(recipe) {
 /**
  * Adds the recipe to a custom list
  */
-function addToCustomList(recipe) {
+function addToCustomList(recipeObj) {
   let userInput = document.querySelector('.user-input');
   userInput = userInput.value;
   if (userInput !== '') {
     console.log(userInput);
-    addRecipebyList(userInput, recipe.id);
+    addRecipebyList(userInput, recipeObj);
   }
 }
 
@@ -208,11 +198,25 @@ async function init() {
         </label>
         <button class="submit">Add to Favorite</button>
         <button class="cancel">Cancel</button>
-     </div>`;
+      </div>
+    `;
+
   /*
    * show the drop-down box and change the heart color
    */
-  let isFavorite = checkFavorite(recipe.id);
+
+  // const recipeObj = JSON.parse(window.localStorage.getItem('recipeObj'));
+  // window.localStorage.removeItem('recipeObj');
+  // let isFavorite = checkFavorite(recipeObj);
+
+  /** ******** modified by Dennis **********
+   * use the newly fetched recipe object to see if it is already contained in master-favorite
+   * since this fetched recipe data may not have exactly the same field as what is in the storage,
+   * must use checkFavoritebyID which is useind ID field for equivilency
+   */
+  let isFavorite = checkFavoritebyID(recipe);
+  /* *************************************************** */
+
   initializeHearts(isFavorite);
   initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
@@ -222,7 +226,7 @@ async function init() {
   favoriteIcon.addEventListener('click', () => {
     if (!isFavorite) {
       favoriteIcon.src = '../assets/favorite-selected.svg';
-      showDropdown(recipe, isMobile);
+      showDropdown();
     } else {
       let toRemove = false;
       // eslint-disable-next-line
@@ -233,11 +237,11 @@ async function init() {
         const containers = document.querySelectorAll('.container');
         // goes through all the lists and deletes if it is in list
         for (let i = 0; i < containers.length; i += 1) {
-          removeRecipebyList(containers[i].querySelector('span').innerHTML, recipe.id);
+          removeRecipebyListbyID(containers[i].querySelector('span').innerHTML, recipe);
         }
         favoriteIcon.src = '../assets/favorite.svg';
       }
-      removeRecipebyList('favorites-master', recipe.id);
+      removeRecipebyID(recipe);
     }
   });
 
@@ -261,11 +265,10 @@ async function init() {
     // TODO: need to check the values that are clicked
     if (!isFavorite) {
       if (!checkCheckedList()) {
-        // eslint-disable-next-line
+        // eslint-disable-next-line no-alert
         window.alert(`Please add to at least one list`);
       } else {
-        // TODO: add to custom list
-        addRecipe(recipe.id);
+        addRecipe(recipe);
         addToCheckedLists(recipe);
         addToCustomList(recipe);
         /* Reload the page as a shortcut for showing new lists */
@@ -476,7 +479,85 @@ async function init() {
           });
         }
       }
-    } else if (totalStepNum >= 2) {
+    } else if (totalStepNum === 3) {
+      for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
+        if (currStepNum === 1) {
+          const currNextButton = document.querySelector(`#nextButton${currStepNum}`);
+          const currPrevButton = document.querySelector(`#prevButton${currStepNum}`);
+          currNextButton.addEventListener('click', () => {
+            const nextStepNum = parseInt(currStepNum, 10) + 1;
+            const currStep = document.querySelector(`#step${currStepNum}`);
+            const nextStep = document.querySelector(`#step${nextStepNum}`);
+            const nextNextButton = document.querySelector(`#nextButton${nextStepNum}`);
+            const nextPrevButton = document.querySelector(`#prevButton${nextStepNum}`);
+            currStep.className = 'normal-step';
+            nextStep.className = 'current-step';
+            currNextButton.style.display = 'none';
+            currPrevButton.style.display = 'none';
+            nextNextButton.style.display = 'block';
+            nextPrevButton.style.display = 'block';
+          });
+        } else if (currStepNum === 2) {
+          const currNextButton = document.querySelector(`#nextButton${currStepNum}`);
+          const currPrevButton = document.querySelector(`#prevButton${currStepNum}`);
+          currNextButton.addEventListener('click', () => {
+            const nextStepNum = currStepNum + 1;
+            const currStep = document.querySelector(`#step${currStepNum}`);
+            const nextStep = document.querySelector(`#step${nextStepNum}`);
+            const nextNextButton = document.querySelector(`#backButton`);
+            const nextPrevButton = document.querySelector(`#prevButton${nextStepNum}`);
+            currStep.className = 'normal-step';
+            nextStep.className = 'current-step';
+            currNextButton.style.display = 'none';
+            currPrevButton.style.display = 'none';
+            nextNextButton.style.display = 'block';
+            nextPrevButton.style.display = 'block';
+          });
+          currPrevButton.addEventListener('click', () => {
+            const prevStepNum = currStepNum - 1;
+            const currStep = document.querySelector(`#step${currStepNum}`);
+            const prevStep = document.querySelector(`#step${prevStepNum}`);
+            const prevNextButton = document.querySelector(`#nextButton${prevStepNum}`);
+            const prevPrevButton = document.querySelector(`#prevButton${prevStepNum}`);
+            currStep.className = 'normal-step';
+            prevStep.className = 'current-step';
+            currNextButton.style.display = 'none';
+            currPrevButton.style.display = 'none';
+            prevNextButton.style.display = 'block';
+            prevPrevButton.style.display = 'none';
+          });
+        } else if (currStepNum === totalStepNum) {
+          const backButton = document.querySelector(`#backButton`);
+          const currPrevButton = document.querySelector(`#prevButton${currStepNum}`);
+          currPrevButton.addEventListener('click', () => {
+            const prevStepNum = currStepNum - 1;
+            const currStep = document.querySelector(`#step${currStepNum}`);
+            const prevStep = document.querySelector(`#step${prevStepNum}`);
+            const prevNextButton = document.querySelector(`#nextButton${prevStepNum}`);
+            const prevPrevButton = document.querySelector(`#prevButton${prevStepNum}`);
+            currStep.className = 'normal-step';
+            prevStep.className = 'current-step';
+            backButton.style.display = 'none';
+            currPrevButton.style.display = 'none';
+            prevNextButton.style.display = 'block';
+            prevPrevButton.style.display = 'block';
+          });
+          // The event listener for the last back button
+          backButton.addEventListener('click', () => {
+            const firstStep = document.querySelector('#step1');
+            const firstNextButton = document.querySelector('#nextButton1');
+            const firstPrevButton = document.querySelector('#prevButton1');
+            const currStep = document.querySelector(`#step${currStepNum}`);
+            currStep.className = 'normal-step';
+            firstStep.className = 'current-step';
+            firstNextButton.style.display = 'block';
+            firstPrevButton.style.display = 'none';
+            backButton.style.display = 'none';
+            currPrevButton.style.display = 'none';
+          });
+        }
+      }
+    } else if (totalStepNum > 3) {
       // When the next button is pressed, highlight the next step and normalize the current step
       // When the previous button is pressed, highlight the previous step and normalize the current step
       for (let currStepNum = 1; currStepNum <= totalStepNum; currStepNum += 1) {
