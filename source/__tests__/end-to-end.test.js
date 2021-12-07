@@ -66,33 +66,33 @@ describe('Simple User Flow', () => {
   });
 
   // // Now, favorite a recipe and check it is added to master-favorites
-  it('Add a new recipe to default favorites list', async () => {
-    console.log('Add new recipe card in default favorite list...');
-    // Query select all of the sections and then select all of the recipe cards
-    const exploreCards = await page.$$('recipe-card-component');
-    const root = await exploreCards[0].getProperty('shadowRoot');
-    const name = await root.$('.recipe-name');
-    const innerText = await name.getProperty('innerText');
-    favoritedRecipe = innerText['_remoteObject'].value;
-    // Favorite the first recipe that appears by adding it to default list
-    const favoriteIcon = await root.$('.recipe-favorite');
-    await favoriteIcon.click();
-    const button = await root.$('button');
-    await button.click();
+  // it('Add a new recipe to default favorites list', async () => {
+  //   console.log('Add new recipe card in default favorite list...');
+  //   // Query select all of the sections and then select all of the recipe cards
+  //   const exploreCards = await page.$$('recipe-card-component');
+  //   const root = await exploreCards[0].getProperty('shadowRoot');
+  //   const name = await root.$('.recipe-name');
+  //   const innerText = await name.getProperty('innerText');
+  //   favoritedRecipe = innerText['_remoteObject'].value;
+  //   // Favorite the first recipe that appears by adding it to default list
+  //   const favoriteIcon = await root.$('.recipe-favorite');
+  //   await favoriteIcon.click();
+  //   const button = await root.$('button');
+  //   await button.click();
 
-    // Reload the page
-    await page.goto(homeLink);
-    await page.waitForTimeout('10000');
+  //   // Reload the page
+  //   await page.goto(homeLink);
+  //   await page.waitForTimeout('10000');
 
-    // Retrieve the recipe in the favorites list
-    const exploreCards2 = await page.$$('recipe-card-component');
-    const root2 = await exploreCards2[10].getProperty('shadowRoot');
-    const favoritedName = await root2.$('.recipe-name');
-    const favoritedInnerText = await favoritedName.getProperty('innerText');
+  //   // Retrieve the recipe in the favorites list
+  //   const exploreCards2 = await page.$$('recipe-card-component');
+  //   const root2 = await exploreCards2[10].getProperty('shadowRoot');
+  //   const favoritedName = await root2.$('.recipe-name');
+  //   const favoritedInnerText = await favoritedName.getProperty('innerText');
 
-    // Check that the title we favorited is the same as the title in the favorites list
-    expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
-  });
+  //   // Check that the title we favorited is the same as the title in the favorites list
+  //   expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
+  // });
 
   // // Now go to the favorites page and make sure the favorited recipe is the
   // // only recipe there so far
