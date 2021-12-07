@@ -1,4 +1,4 @@
-@import "reset.css";
+@import 'reset.css';
 
 h3 {
   padding-top: 25px;
@@ -66,7 +66,7 @@ h3 {
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark::after {
-  content: "";
+  content: '';
   position: absolute;
   display: none;
 }
@@ -237,7 +237,7 @@ ol > li {
 
 ol > li::before {
   font-weight: bold;
-  content: counter(item) ". ";
+  content: counter(item) '. ';
 }
 
 @media (min-width: 768px) {
