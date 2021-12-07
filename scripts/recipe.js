@@ -9,7 +9,6 @@ import apiKey from './apikey.js';
 
 const tokenKey = `?apiKey=${apiKey}`;
 
-// TODO:Need to use search in search.js
 /**
  * Performs a recipe lookup based on the id passed in to the page URL
  * @returns {object} json containing recipe information
@@ -39,7 +38,7 @@ function lookup() {
 /**
  * Converts a value of minutes into a string that shows hours and minutes
  * @param {number} time A time in minutes
- * @returns {string} A string in the form 'XX hours XX minutes'
+ * @return {string} A string in the form 'XX hours XX minutes'
  */
 function formatTime(time) {
   if (parseInt(time, 10) === 1) return `${time.toString()} minute`;
