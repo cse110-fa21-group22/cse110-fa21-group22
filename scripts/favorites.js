@@ -327,6 +327,7 @@ async function init() {
   // If it fails, it will attempt to exit edit mode. If it fails,
   // it will attempt to exit copy mode.
   document.addEventListener('keydown', (event) => {
+    // eslint-disable-next-line eqeqeq
     if (event.key == 'Escape') {
       if (selectedRecipes.length > 0) {
         for (let i = selectedRecipes.length - 1; i > -1; i -= 1) {
