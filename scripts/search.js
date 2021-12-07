@@ -6,7 +6,7 @@
  * Handles all queries related to spoonacular api.
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 // eslint-disable-next-line import/no-unresolved
 import apiKey from './apikey.js';
 
