@@ -15,7 +15,7 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
-const prNum = 327; // change -> (your pr number);
+const prNum = 335; // change -> (your pr number);
 
 let homeLink = '';
 let searchLink = '';
@@ -24,7 +24,7 @@ let favSelected = '';
 
 if (prNum > 0) {
   homeLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/home.html`;
-  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html`;
+  searchLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/search.html?search=`;
   favLink = `${PREVIEW_TAG}${prNum}${END_TAG}webpages/favorite.html`;
   favSelected = `${PREVIEW_TAG}${prNum}${END_TAG}assets/favorite-selected.svg`;
 } else {
@@ -288,7 +288,7 @@ describe('Simple Favorites Flow', () => {
     // Favorite the first recipe that appears by adding it to default list
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
-    const button = await root.$('.submit');
+    const button = await root.$('button');
     await button.click();
 
     await page.goto(homeLink);

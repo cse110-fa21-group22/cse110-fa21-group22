@@ -1,12 +1,28 @@
 /**
  * Handles the search page.
  * Different from search.js because search.js handles search across all html pages that use the search function.
- * @module searchpage.js
+ * @module searchpage
  */
 
 import { initLocalStorage } from '../components/UserLocalStorage.js';
 import search from './search.js';
 
+export default function searchpageRefreshSearchResult() {
+  // clearResults(); // clear everything in the search result
+  // showFavoriteSection(); // loading facorite section one more time
+
+  const recipeSection = document.querySelector('.recipe-section');
+  /**
+   * call initilize dropDown and initilize heart
+   */
+  const recipeCardList = recipeSection.querySelectorAll('recipe-card-component');
+  for (let i = 0; i < recipeCardList.length; i += 1) {
+    const recipeCard = recipeCardList[i];
+    recipeCard.initializeDropdown();
+    recipeCard.initializeHearts();
+    recipeCard.hideDropdown();
+  }
+}
 const storage = window.localStorage;
 
 /**
@@ -24,7 +40,7 @@ function initLocalStorageDoubt() {
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
  * @param {none}
- * @returns {none}
+ * @return {none}
  */
 function init() {
   initLocalStorageDoubt();
