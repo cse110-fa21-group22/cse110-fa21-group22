@@ -340,7 +340,7 @@ class RecipeCard extends HTMLElement {
           // console.log(window.location.pathname);
           if (window.location.pathname === '/webpages/home.html') {
             homepageRefreshFavoriteSection();
-          } 
+          }
           if (window.location.pathname === '/webpages/search.html') {
             searchpageRefreshSearchResult();
           }
