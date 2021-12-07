@@ -20,7 +20,9 @@ export default function searchpageRefreshSearchResult() {
     const recipeCard = recipeCardList[i];
     recipeCard.initializeDropdown();
     recipeCard.initializeHearts();
-    recipeCard.hideDropdown(); 
+    recipeCard.hideDropdown();
+  }
+}
 const storage = window.localStorage;
 
 /**
@@ -45,7 +47,7 @@ function init() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
-        () => {},
+        () => { },
         (err) => {
           console.error(err);
         }
