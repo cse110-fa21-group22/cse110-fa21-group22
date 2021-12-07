@@ -47,7 +47,7 @@ function init() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('../sw.js').then(
-        () => { },
+        () => {},
         (err) => {
           console.error(err);
         }
