@@ -204,19 +204,7 @@ async function init() {
   /*
    * show the drop-down box and change the heart color
    */
-
-  // const recipeObj = JSON.parse(window.localStorage.getItem('recipeObj'));
-  // window.localStorage.removeItem('recipeObj');
-  // let isFavorite = checkFavorite(recipeObj);
-
-  /** ******** modified by Dennis **********
-   * use the newly fetched recipe object to see if it is already contained in master-favorite
-   * since this fetched recipe data may not have exactly the same field as what is in the storage,
-   * must use checkFavoritebyID which is useind ID field for equivilency
-   */
   let isFavorite = checkFavoritebyID(recipe);
-  /* *************************************************** */
-
   initializeHearts(isFavorite);
   initializeDropdown();
   const favoriteIcon = document.querySelector('.favorite-heart');
