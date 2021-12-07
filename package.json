@@ -53,6 +53,7 @@
   },
   "jest": {
     "preset": "jest-puppeteer",
-    "verbose": true
+    "verbose": true,
+    "testPathIgnorePatterns": ["source/__test__/unittest.test.js"]
   }
 }
