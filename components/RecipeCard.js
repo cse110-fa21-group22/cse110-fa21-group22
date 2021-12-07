@@ -1,3 +1,8 @@
+/**
+ * Recipecard web component
+ * @module RecipeCard.js
+ */
+
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';
 import homepageRefreshFavoriteSection from '../scripts/homepage.js';
 import searchpageRefreshSearchResult from '../scripts/searchpage.js';

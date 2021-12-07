@@ -1,5 +1,6 @@
 /**
  * Handles home page functionality.
+ * @module homepage.js
  */
 
 import { initLocalStorage } from '../components/UserLocalStorage.js';

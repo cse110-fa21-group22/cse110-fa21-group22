@@ -1,3 +1,8 @@
+/**
+ * Imagecard web component
+ * @module ImageCard.js
+ */
+
 const link = document.createElement('link');
 link.rel = 'stylesheet';
 link.type = 'text/css';
