@@ -1,6 +1,6 @@
 /**
  * Handles the recipe page functionality. Recipe page is when the user clicks on a recipe and the actual full page with all information pulls up for it.
- * @module recipe.js
+ * @module recipe
  */
 import { initLocalStorage, addRecipe, addRecipebyList, checkFavoritebyID, removeRecipebyListbyID, removeRecipebyID } from '../components/UserLocalStorage.js';
 
@@ -157,7 +157,6 @@ function addToCustomList(recipeObj) {
   let userInput = document.querySelector('.user-input');
   userInput = userInput.value;
   if (userInput !== '') {
-    console.log(userInput);
     addRecipebyList(userInput, recipeObj);
   }
 }
@@ -191,9 +190,6 @@ async function init() {
   const data = await lookup(); // This might actually be slow, might be better to load concurrently with DOM elements rather than after
   const recipe = data[0];
   const equipment = data[1];
-
-  console.log(recipe);
-  console.log(equipment);
 
   // Set recipe image
   const recipeImg = document.querySelector('.recipe-image');

@@ -1,6 +1,6 @@
 /**
  * Recipecard web component
- * @module RecipeCard.js
+ * @module RecipeCard
  */
 
 import { addRecipe, addRecipebyList, checkFavorite, removeRecipebyList } from './UserLocalStorage.js';

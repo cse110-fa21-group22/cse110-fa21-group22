@@ -1,6 +1,6 @@
 /**
  * Handles all queries related to spoonacular api.
- * @module search.js
+ * @module search
  */
 
 // eslint-disable-next-line import/no-unresolved
