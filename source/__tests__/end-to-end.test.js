@@ -77,7 +77,7 @@ describe('Simple User Flow', () => {
     // Favorite the first recipe that appears by adding it to default list
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
-    const button = await root.$('button');
+    const button = await root.$('.submit');
     await button.click();
 
     // Reload the page
