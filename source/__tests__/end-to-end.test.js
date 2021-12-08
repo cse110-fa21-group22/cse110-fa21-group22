@@ -15,7 +15,7 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 // Links for testing on PR
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
-const prNum = 341; // change -> (your pr number);
+const prNum = 342; // change -> (your pr number);
 
 let homeLink = '';
 let searchLink = '';
@@ -73,7 +73,6 @@ describe('Simple User Flow', () => {
     const root = await exploreCards[0].getProperty('shadowRoot');
     const name = await root.$('.recipe-name');
     const innerText = await name.getProperty('innerText');
-    favoritedRecipe = innerText['_remoteObject'].value;
     // Favorite the first recipe that appears by adding it to default list
     const favoriteIcon = await root.$('.recipe-favorite');
     await favoriteIcon.click();
@@ -117,30 +116,6 @@ describe('Simple User Flow', () => {
 
     expect(favoritedInnerText['_remoteObject'].value).toBe(innerText['_remoteObject'].value);
   });
-
-  /*
-    // Now, unfavorite the recipe and check the favorited recipe is gone
-    it('Check unfavorited recipe is removed', async () => {
-      await page.waitForTimeout('200');
-      const userList = await page.$('user-list');
-      const root = await userList.getProperty('shadowRoot');
-      const recipeCard = await root.$('recipe-card-component');
-      const recipeRoot = await recipeCard.getProperty('shadowRoot');
-  
-      // Click the heart to unfavorite
-      const favoriteIcon = await recipeRoot.$('.recipe-favorite');
-      await favoriteIcon.click();
-      await page.waitForTimeout('100');
-  
-      // Go back to home page
-      await page.goto('https://icookfood.netlify.app/webpages/home.html');
-      await page.waitForTimeout('1500');
-  
-      const exploreCards = await page.$$('recipe-card-component');
-      // Expect there that array of recipe cards in explore is length 10
-      expect(exploreCards.length).toBe(10);
-    });
-    */
 });
 
 describe('Basic user flow for Search Page', () => {
@@ -171,34 +146,6 @@ describe('Basic user flow for Search Page', () => {
 
     expect(recipeCards.length).toBe(10);
   });
-
-  /*
-      // Search for basic recipe
-      // Needs some work
-      it('Inital search', async () => {
-          // const navBarComp = await page.$('navbar-component');
-          // const root = await navBarComp.getProperty('shadowRoot');
-          // //const navBarSearchInput = await root.$('.nav-search-input');
-          // //await root.type('.nav-search-input', 'chicken');
-
-          // const navBar = await root.$('.navbar');//.$('.nav-search').$('input').value = 'chicken';
-          // const navSearch = await navBar.$('.nav-search');
-          // let input = await navSearch.$('input');
-          // input.value = 'chicken';
-
-          await page.goto('https://619eba98b1f5aa97eda3fee5--icookfood.netlify.app/webpages/search.html?search=chicken');
-          //await page.reload();
-          await page.waitForTimeout('500');
-
-          // Checks search result to be 10 recipes
-          // Will need to modify this to check for chicken recipes
-          const recipeCards = await page.$$eval('.recipe-section', (sections) => {
-              return sections[0].querySelectorAll('recipe-card-component').length;
-            });
-
-          expect(recipeCards).toBe(10);
-      });
-    */
 
   const secondSet = [];
   // User clicks the next results button, make sure there recipe cards are populated
