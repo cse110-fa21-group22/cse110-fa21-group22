@@ -2,12 +2,12 @@
   "name": "cse110-fa21-group22",
   "version": "1.0.0",
   "description": "Recipe Manager: iCook",
-  "main": "scripts/index.js",
+  "main": "source/scripts/homepage.js",
   "scripts": {
     "build": "browserify main.js -o bundle.js",
     "test": "jest",
-    "coverage": "npx coverage scripts/index.js",
-    "generateDocs": "npx jsdoc scripts/search.js",
+    "coverage": "npx coverage scripts/homepage.js",
+    "generateDocs": "npx jsdoc source/scripts/*",
     "lint": "eslint \"**/*.js\" && npx stylelint \"**/*.css\"",
     "lint:fix": "eslint \"**/*.js\" --fix && npx stylelint \"**/*.css\" --fix"
   },
