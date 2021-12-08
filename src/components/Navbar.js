@@ -16,17 +16,17 @@ navbarTemplate.innerHTML = `
       <img class="sidebar-icon" src="../assets/sidebar.svg" alt="sidebar"></img>
     </a>
     <div class="navbar-section">
-		  <a href="/webpages/home.html">
+		  <a href="home.html">
 			  <h1 class="logo">iCook</h1>
 		  </a>
 		  <div class="nav-search">
 			  <img class="nav-search-icon" src="../assets/search.svg" alt="search" />
 			  <input class="nav-search-input" type='text' placeholder="Search" />
 		  </div>
-		  <a class="nav-favorite" href="/webpages/favorite.html">
+		  <a class="nav-favorite" href="favorite.html">
   			<p>Favorites</p>
 		  </a>
-		  <a class="nav-favorite-mobile" href="/webpages/favorite.html">
+		  <a class="nav-favorite-mobile" href="favorite.html">
   			<img src="../assets/favorite.svg" alt="favorite" />
 		  </a>
     </div>
