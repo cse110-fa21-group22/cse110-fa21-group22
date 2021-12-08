@@ -309,7 +309,7 @@ class RecipeCard extends HTMLElement {
            * call reloading function from homepage.js to reload specific place
            */
           const homePageReg = new RegExp('home.html');
-          const searchPageReg = new RegExp('search.html'); 
+          const searchPageReg = new RegExp('search.html');
           if (homePageReg.test(window.location.pathname) === true) {
             homepageRefreshFavoriteSection();
           } else if (searchPageReg.test(window.location.pathname) === true) {
