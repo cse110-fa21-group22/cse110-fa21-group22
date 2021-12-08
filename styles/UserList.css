@@ -28,9 +28,8 @@ div.list-container {
 
 div.list-name {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: flex-start;
-  flex-flow: wrap;
   margin: 10px 0;
 }
 
