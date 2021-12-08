@@ -60,6 +60,10 @@ function init() {
   // Intiallize the sidebar
   const navbarComponent = document.querySelector('navbar-component');
   const sidebarContent = navbarComponent.shadow.querySelector('.sidebar-content');
+
+  // make sure side-bar button always appears on searchPage
+  navbarComponent.shadow.querySelector('.sidebar-button').style.display = 'inline';
+
   if (!isMobile && sidebarContent.style.display !== 'none') {
     sidebarContent.style.display = 'flex';
     sidebarContent.style.flexDirection = 'column';
