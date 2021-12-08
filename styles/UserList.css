@@ -1,4 +1,4 @@
-@import 'reset.css';
+@import "reset.css";
 
 .copy-here {
   background-color: transparent;
@@ -30,7 +30,7 @@ div.list-name {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-flow: wrap;
   margin: 10px 0;
 }
 
