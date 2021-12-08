@@ -1,3 +1,4 @@
+/* eslint-disable prefer-regex-literals */
 /**
  * Recipecard web component
  * @module RecipeCard
