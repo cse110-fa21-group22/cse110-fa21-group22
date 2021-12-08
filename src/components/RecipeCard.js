@@ -365,8 +365,8 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
-          let homePageReg = new RegExp("home.html");
-          let searchPageReg = new RegExp('search.html');
+          const homePageReg = new RegExp('home.html');
+          const searchPageReg = new RegExp('search.html');
           if (homePageReg.test(window.location.pathname) === true) {
             homepageRefreshFavoriteSection();
           } else if (searchPageReg.test(window.location.pathname) === true) {
