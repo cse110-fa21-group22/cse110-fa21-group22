@@ -307,9 +307,9 @@ class RecipeCard extends HTMLElement {
           /**
            * call reloading function from homepage.js to reload specific place
            */
-          if (window.location.pathname === '/webpages/home.html') {
+          if (window.location.pathname === '/src/webpages/home.html') {
             homepageRefreshFavoriteSection();
-          } else if (window.location.pathname === '/webpages/search.html') {
+          } else if (window.location.pathname === '/src/webpages/search.html') {
             recipeCard.hideDropdown();
           } else {
             location.reload();
@@ -363,9 +363,9 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
-          if (window.location.pathname === '/webpages/home.html') {
+          if (window.location.pathname === '/src/webpages/home.html') {
             homepageRefreshFavoriteSection();
-          } else if (window.location.pathname === '/webpages/search.html') {
+          } else if (window.location.pathname === '/src/webpages/search.html') {
             this.initializeDropdown();
             recipeCard.hideDropdown();
           } else {
