@@ -1,6 +1,6 @@
 {
   "name": "cse110-fa21-group22",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Recipe Manager: iCook",
   "main": "src/scripts/homepage.js",
   "scripts": {
