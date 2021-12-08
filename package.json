@@ -6,7 +6,7 @@
   "scripts": {
     "build": "browserify main.js -o bundle.js",
     "test": "jest",
-    "coverage": "npx coverage scripts/homepage.js",
+    "coverage": "npx coverage source/scripts/homepage.js",
     "generateDocs": "npx jsdoc source/scripts/*",
     "lint": "eslint \"**/*.js\" && npx stylelint \"**/*.css\"",
     "lint:fix": "eslint \"**/*.js\" --fix && npx stylelint \"**/*.css\" --fix"
