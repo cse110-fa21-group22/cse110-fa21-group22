@@ -274,6 +274,11 @@ async function init() {
           userList.remove();
           performedOperation = true;
           cancelButton.innerText = 'Save';
+          if (selectedRecipes.length > 0) {
+            for (let i = selectedRecipes.length - 1; i > -1; i -= 1) {
+              selectedRecipes[i].deselect();
+            }
+          }
         }
       });
     }
