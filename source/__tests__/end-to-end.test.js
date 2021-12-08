@@ -16,7 +16,7 @@ const FAV_SELECTED = 'https://icookfood.netlify.app/assets/favorite-selected.svg
 const PREVIEW_TAG = 'https://deploy-preview-';
 const END_TAG = '--icookfood.netlify.app/';
 
-const prNum = 343; // change -> (your pr number);
+const prNum = 344; // change -> (your pr number);
 
 let homeLink = '';
 let searchLink = '';
