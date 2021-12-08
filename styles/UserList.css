@@ -7,6 +7,8 @@
   font-size: 16px;
   height: 30px;
   width: 150px;
+  min-width: 150px;
+  margin-left: 10px;
   display: none;
 }
 
@@ -26,15 +28,24 @@ div.list-container {
 
 div.list-name {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   margin: 10px 0;
 }
+
+.delete-icon {
+  display: none;
+  padding-top: 6px;
+  height: 24px;
+}
+
+/* This is edited in favorites.css before and after the copy button appears */
 
 .list-name h4 {
   font-weight: bold;
   overflow-wrap: break-word;
-  width: 50vw;
+  width: auto;
+  padding-right: 10px;
 }
 
 .recipe-section {

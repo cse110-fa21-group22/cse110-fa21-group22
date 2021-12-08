@@ -14,6 +14,7 @@ UserListTemplate.innerHTML = `
   <div class="scroll">
     <div class="list-name">
       <h4>Favorites Recipes</h4>
+      <img src="../assets/favorite-delete-list.svg" class="delete-icon">
       <button class="copy-here">Copy to This List</button>
     </div>
     <section class="recipe-section">
@@ -152,7 +153,6 @@ class UserList extends HTMLElement {
 
   connectedCallback() {
     const copyHereButton = this.shadow.querySelector('.copy-here');
-
     // Add an event listener to broadcast an event when copy here is clicked
     // This event will be received in favorites.js
     copyHereButton.addEventListener('click', () => {
