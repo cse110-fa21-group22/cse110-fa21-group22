@@ -303,13 +303,15 @@ class RecipeCard extends HTMLElement {
           console.log('Remove item from ALL favorites lists here');
 
           /* Reload the page as a shortcut for showing updated lists */
-          console.log('testing for refreshing the page', window.location.pathname); // /webpages/home.html
+          // console.log('testing for refreshing the page', window.location.pathname); // /webpages/home.html
           /**
            * call reloading function from homepage.js to reload specific place
            */
-          if (window.location.pathname === '/src/webpages/home.html') {
+          let homePageReg = new RegExp("home.html");
+          let searchPageReg = new RegExp('search.html'); 
+          if (homePageReg.test(window.location.pathname) === true) {
             homepageRefreshFavoriteSection();
-          } else if (window.location.pathname === '/src/webpages/search.html') {
+          } else if (searchPageReg.test(window.location.pathname) === true) {
             recipeCard.hideDropdown();
           } else {
             location.reload();
@@ -363,9 +365,11 @@ class RecipeCard extends HTMLElement {
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */
-          if (window.location.pathname === '/src/webpages/home.html') {
+          let homePageReg = new RegExp("home.html");
+          let searchPageReg = new RegExp('search.html');
+          if (homePageReg.test(window.location.pathname) === true) {
             homepageRefreshFavoriteSection();
-          } else if (window.location.pathname === '/src/webpages/search.html') {
+          } else if (searchPageReg.test(window.location.pathname) === true) {
             this.initializeDropdown();
             recipeCard.hideDropdown();
           } else {
