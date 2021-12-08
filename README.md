@@ -1,4 +1,5 @@
 # cse110-fa21-group22
+[![CodeFactor](https://www.codefactor.io/repository/github/cse110-fa21-group22/cse110-fa21-group22/badge)](https://www.codefactor.io/repository/github/cse110-fa21-group22/cse110-fa21-group22)
 
 ## Project Description
 
