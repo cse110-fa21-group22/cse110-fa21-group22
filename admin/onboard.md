@@ -1,4 +1,5 @@
 # Welcome!
+
 Greetings new recruit! Welcome to Team22x Plus Pro Max! We have developed a recipe application called iCook! Here's some things to know about this repo:
 1. README.MD
 2. Workflow and Pipeline
