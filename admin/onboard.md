@@ -12,7 +12,7 @@ In this file, there is our **team number**, a **project description** and links 
 ___
 ### Workflow
 
-The workflow or CICD Pipeline can be found in ./admin/cipipeline, or [Click Here](./admin/cipipeline). In here, take a look at the phase1.drawio.png. This is our diagram that describes our workflow process. 
+The workflow or CICD Pipeline can be found in ./admin/cipipeline, or [Click Here](./cipipeline). In here, take a look at the phase1.drawio.png. This is our diagram that describes our workflow process. 
 
 If you'd like to investigate this further, you can look at /.github/workflows or [Click Here](/.github/workflows) to see the yml files that will run with Github actions. 
 ___
