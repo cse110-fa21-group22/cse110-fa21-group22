@@ -15,8 +15,10 @@ iCook is our app which is a Recipe Manager. iCook is to help those who have litt
 ## Link to Docs
 
 [Docs](https://demyinn00.github.io/group22xjsdocs/)
+<br />
 [Repo](https://github.com/demyinn00/group22xjsdocs)
 
 ## Links to Design Boards
 [Figma-Wire Frame](./admin/designs/CSE110-Recipe-Design-Figma.pdf)
+<br />
 [Miro-Design Plan](./admin/designs/Recipe-Manager-Brainstorm-Miro.pdf)
