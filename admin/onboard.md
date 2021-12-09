@@ -18,3 +18,21 @@ If you'd like to investigate this further, you can look at /.github/workflows or
 ___
 ### Repo Organization
 
+In the root there are 4 directories:
+- [.github](/.github)
+- [admin](/admin)
+- [specs](/specs)
+- [src](/src)
+
+There are also 8 stand-alone files that should -- for the most part -- not be touched unless needed to i.e making updates to README.md, adding files to .gitignore, etc. 
+
+---
+### Inside [.github](/.github)
+
+In here there is a folder [workflows](/.github/workflows) which has 3 yml files for github actions. 
+- [docs.yml](/.github/workflows/docs.yml) generates JSDocs on Push to main
+- [lint.yml](/.github/workflows/lint.yml) runs ESLint and Prettier on PR and Push to main
+- [testing.yml](/.github/workflows/testing.yml) runs our E2E tests on PR to main
+
+---
+
