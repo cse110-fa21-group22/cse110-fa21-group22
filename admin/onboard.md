@@ -1,9 +1,10 @@
 # Welcome!
 
-Greetings new recruit! Welcome to Team22x Plus Pro Max! We have developed a recipe application called iCook! Here's some things to know about this repo:
+Greetings and welcome to Team22x Plus Pro Max! We have developed a recipe application called iCook! Here's some things to know about this repo:
 1. README.MD
 2. Workflow and Pipeline
 3. Repo Organization
+
 ___
 ### README.md
 
@@ -29,10 +30,14 @@ There are also 8 stand-alone files that should -- for the most part -- not be to
 ---
 ### Inside [.github](/.github)
 
-In here there is a folder [workflows](/.github/workflows) which has 3 yml files for github actions. 
+In here, there is a folder [workflows](/.github/workflows) which has 3 yml files for github actions. 
 - [docs.yml](/.github/workflows/docs.yml) generates JSDocs on Push to main
 - [lint.yml](/.github/workflows/lint.yml) runs ESLint and Prettier on PR and Push to main
 - [testing.yml](/.github/workflows/testing.yml) runs our E2E tests on PR to main
 
+There is also a [pull_request_template.md](/.github/pull_request_template.md) that is used to create a template for our PRs
+
 ---
+### Inside [admin](/admin)
+
 
