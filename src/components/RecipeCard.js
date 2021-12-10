@@ -362,7 +362,7 @@ class RecipeCard extends HTMLElement {
           this.addToCustomList();
           /* Reload the page as a shortcut for showing new lists */
 
-          /**  make this is a favorite  */
+          // make this is a favorite
           this.isFavorite = true;
           favoriteIcon.src = '../assets/favorite-selected.svg';
           /**  **********************************  */

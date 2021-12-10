@@ -8,8 +8,9 @@ link.rel = 'stylesheet';
 link.type = 'text/css';
 link.href = '../styles/imagecard.css';
 
+// TODO (Not a priority)
 /**
- * TODO (Not a priority) The class names for each template still refer to every entry as 'ingredient'
+ * The class names for each template still refer to every entry as 'ingredient'
  * Currently works as is and reworking this will not change any functionality. It would only be for code readability.
  */
 const imageCardTemplate = document.createElement('template');
@@ -32,8 +33,12 @@ entryElementTemplate.innerHTML = `
   </article>
 `;
 
-// This function takes in a number and return it in fraction form and as a string
-// If it can't do this, the value is returned as a string rounded to 2 decimal places
+/**
+ * This function takes in a number and return it in fraction form and as a string
+ * If it can't do this, the value is returned as a string rounded to 2 decimal places
+ * @param {*} value
+ * @returns
+ */
 function toFraction(value) {
   if (value % 1 === 0) {
     return value.toString();
@@ -56,7 +61,11 @@ function toFraction(value) {
   return value.toFixed(2);
 }
 
-// Taken from https://flexiple.com/javascript-capitalize-first-letter/
+/**
+ * Taken from https://flexiple.com/javascript-capitalize-first-letter/
+ * @param {*} str
+ * @returns
+ */
 function capitalize(str) {
   // split the above string into an array of strings
   // whenever a blank space is encountered

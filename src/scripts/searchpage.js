@@ -7,6 +7,9 @@
 import { initLocalStorage } from '../components/UserLocalStorage.js';
 import search from './search.js';
 
+/**
+ * connect with recipeCard to refresh SearchPage
+ */
 export default function searchpageRefreshSearchResult() {
   // clearResults(); // clear everything in the search result
   // showFavoriteSection(); // loading facorite section one more time
@@ -28,6 +31,7 @@ const storage = window.localStorage;
 /**
  * it is possible that the user click the icon and coming back to the main page
  * therefore, only initilize the favorite-master local storage when it does not even exist
+ * @function
  */
 function initLocalStorageDoubt() {
   // Meaning that favorites-master does not exist
@@ -39,6 +43,7 @@ function initLocalStorageDoubt() {
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
+ * @function
  * @param {none}
  * @return {none}
  */

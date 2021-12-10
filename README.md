@@ -24,10 +24,10 @@ iCook is our app which is a Recipe Manager. iCook is to help those who have litt
 
 ## Links to Design Boards
 
-[Miro Brainstorming](./specs/Recipe-Manager-Brainstorm.pdf)
+[Miro Brainstorming](./specs/brainstorm/Recipe-Manager-Brainstorm.pdf)
 <br />
-[Wireframe lofi](./specs/wireframelofi.pdf)
+[Wireframe lofi](./specs/brainstorm/wireframelofi.pdf)
 <br />
-[Wireframe hifi](./specs/wireframehifi.pdf)
+[Wireframe hifi](./specs/brainstorm/wireframehifi.pdf)
 <br />
-[UML Diagram](./specs/uml.drawio.png)
+[UML Diagram](./specs/brainstorm/uml.drawio.png)
