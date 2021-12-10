@@ -114,6 +114,9 @@ function initializeDropdown() {
   }
 }
 
+/**
+ * show drop down menu
+ */
 function showDropdown() {
   const dropdownContent = document.querySelector('.dropdown-content');
   dropdownContent.style.display = 'block';
@@ -127,6 +130,10 @@ function hideDropdown() {
   dropdownContent.style.display = 'none';
 }
 
+/**
+ * check if at least one of the list is being checked 
+ * @returns true if checked false otherwise 
+ */
 function checkCheckedList() {
   const containers = document.querySelectorAll('.container');
   let userInput = document.querySelector('.user-input');

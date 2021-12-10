@@ -36,7 +36,7 @@ export function checkFavorite(recipeObj) {
 /**
  * becuase differnet fetching from API returns object that has differnet field
  * Using ID field from recipe object to compare equivilence
- * @param {recipeObj} recipeObj
+ * @param {recipeObj} recipeObj recipe Object
  * @returns {boolean} true if recipeOBJ.id === any(master-favorite).id
  */
 export function checkFavoritebyID(recipeObj) {

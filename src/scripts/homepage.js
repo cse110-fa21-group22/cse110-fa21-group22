@@ -12,7 +12,7 @@ const recipeSection = document.querySelector('.home-page-popular-recipe-list');
 const userFavoriteSection = document.querySelector('.home-page-favorite-section');
 
 /**
- * it is possible that the user click the icon and coming back to the main page
+ * it is possible that the user click the icon and coming back to the main page \n
  * therefore, only initilize the favorite-master local storage when it does not even exist
  */
 function initLocalStorageDoubt() {
@@ -50,6 +50,9 @@ function showResults(results) {
   }
 }
 
+/**
+ * Show Favorited section on HomePage
+ */
 function showFavoriteSection() {
   const list = storage.getItem('favorites-master');
   const array = JSON.parse(list);
@@ -66,6 +69,10 @@ function showFavoriteSection() {
   }
 }
 
+/**
+ * conncect with RecipeCard \n 
+ * refresh the favorite section when a RecipeCard is being favorited
+ */
 export default function homepageRefreshFavoriteSection() {
   userFavoriteSection.innerHTML = ''; // clear everything in this section
   showFavoriteSection(); // loading facorite section one more time
