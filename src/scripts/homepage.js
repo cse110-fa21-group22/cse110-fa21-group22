@@ -70,7 +70,7 @@ function showFavoriteSection() {
 }
 
 /**
- * conncect with RecipeCard \n 
+ * conncect with RecipeCard \n
  * refresh the favorite section when a RecipeCard is being favorited
  */
 export default function homepageRefreshFavoriteSection() {

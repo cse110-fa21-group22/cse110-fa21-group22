@@ -1,5 +1,5 @@
 /**
- * UserList Web component 
+ * UserList Web component
  * @module UserList
  */
 

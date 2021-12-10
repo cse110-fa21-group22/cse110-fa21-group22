@@ -31,7 +31,7 @@ const storage = window.localStorage;
 /**
  * it is possible that the user click the icon and coming back to the main page
  * therefore, only initilize the favorite-master local storage when it does not even exist
- * @function 
+ * @function
  */
 function initLocalStorageDoubt() {
   // Meaning that favorites-master does not exist
@@ -43,7 +43,7 @@ function initLocalStorageDoubt() {
 /**
  * This function initializes the search page
  * and automatically extracts data from the query string and runs a search
- * @function 
+ * @function
  * @param {none}
  * @return {none}
  */

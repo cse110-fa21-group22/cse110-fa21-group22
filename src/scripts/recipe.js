@@ -131,8 +131,8 @@ function hideDropdown() {
 }
 
 /**
- * check if at least one of the list is being checked 
- * @returns true if checked false otherwise 
+ * check if at least one of the list is being checked
+ * @returns true if checked false otherwise
  */
 function checkCheckedList() {
   const containers = document.querySelectorAll('.container');
