@@ -143,6 +143,9 @@ class UserList extends HTMLElement {
     return this.name;
   }
 
+  /**
+   * constructor for UserList web-component
+   */
   constructor() {
     super();
     this.cardList = [];

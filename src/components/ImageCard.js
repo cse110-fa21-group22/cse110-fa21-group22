@@ -36,7 +36,8 @@ entryElementTemplate.innerHTML = `
 /**
  * This function takes in a number and return it in fraction form and as a string
  * If it can't do this, the value is returned as a string rounded to 2 decimal places
- * @param {*} value
+ * @function
+ * @param {string} a value to convert to fraction
  * @returns fraction value
  */
 function toFraction(value) {
@@ -63,7 +64,8 @@ function toFraction(value) {
 
 /**
  * Taken from https://flexiple.com/javascript-capitalize-first-letter/
- * @param {*} str
+ * @function
+ * @param {string} a string to be convert with captilized 
  * @returns captalized string
  */
 function capitalize(str) {
