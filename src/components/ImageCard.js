@@ -65,7 +65,7 @@ function toFraction(value) {
 /**
  * Taken from https://flexiple.com/javascript-capitalize-first-letter/
  * @function
- * @param {string} a string to be convert with captilized 
+ * @param {string} a string to be convert with captilized
  * @returns captalized string
  */
 function capitalize(str) {
@@ -85,6 +85,10 @@ function capitalize(str) {
 }
 
 class ImageCard extends HTMLElement {
+  /**
+   * setter for ingredient
+   * @param {Arr} an array of ingredient
+   */
   set ingredients(ingredientArr) {
     if (this.equipment) {
       console.err('Already set as equipment'); // Check if card has already been set
@@ -108,6 +112,10 @@ class ImageCard extends HTMLElement {
     }
   }
 
+  /**
+   * setter for equipment
+   * @param {Arr} an arry of equipment
+   */
   set equipment(equipmentArr) {
     if (this.equipment) {
       console.err('Already set as ingredients'); // Check if card has already been set
@@ -129,6 +137,10 @@ class ImageCard extends HTMLElement {
     }
   }
 
+  /**
+   * construct an ImageCard object
+   * @constructor
+   */
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });

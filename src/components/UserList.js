@@ -145,6 +145,7 @@ class UserList extends HTMLElement {
 
   /**
    * constructor for UserList web-component
+   * @constructor
    */
   constructor() {
     super();

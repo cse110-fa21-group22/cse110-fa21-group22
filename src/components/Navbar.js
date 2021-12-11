@@ -69,6 +69,7 @@ navbarTemplate.innerHTML = `
 class Navbar extends HTMLElement {
   /**
    * Contructor for the Navbar class
+   * @constructor
    */
   constructor() {
     super();

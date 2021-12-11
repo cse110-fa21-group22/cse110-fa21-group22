@@ -207,6 +207,9 @@ function initLocalStorageDoubt() {
   }
 }
 
+/**
+ * initilize favorite page
+ */
 async function init() {
   initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {

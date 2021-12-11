@@ -89,6 +89,9 @@ export default function homepageRefreshFavoriteSection() {
   }
 }
 
+/**
+ * initilize homePage
+ */
 function init() {
   initLocalStorageDoubt();
   if ('serviceWorker' in navigator) {
