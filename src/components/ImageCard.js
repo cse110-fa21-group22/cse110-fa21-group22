@@ -37,7 +37,7 @@ entryElementTemplate.innerHTML = `
  * This function takes in a number and return it in fraction form and as a string
  * If it can't do this, the value is returned as a string rounded to 2 decimal places
  * @param {*} value
- * @returns
+ * @returns fraction value
  */
 function toFraction(value) {
   if (value % 1 === 0) {
@@ -64,7 +64,7 @@ function toFraction(value) {
 /**
  * Taken from https://flexiple.com/javascript-capitalize-first-letter/
  * @param {*} str
- * @returns
+ * @returns captalized string
  */
 function capitalize(str) {
   // split the above string into an array of strings
