@@ -12,6 +12,8 @@ iCook is our app which is a Recipe Manager. iCook is to help those who have litt
 
 [Public Video](https://www.youtube.com/watch?v=TwI-k_ukOR4)
 
+[Private Video](https://www.youtube.com/watch?v=pCnoV-rKzpA)
+
 ## Link to App
 
 [iCook](https://icookfood.netlify.app/webpages/home.html)
