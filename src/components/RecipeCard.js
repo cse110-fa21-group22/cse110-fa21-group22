@@ -89,6 +89,9 @@ class RecipeCard extends HTMLElement {
     this.initializeDropdown();
   }
 
+  /**
+   * initilize drop down menu
+   */
   initializeDropdown() {
     const dropdownElem = this.shadow.querySelector('.dropdown-content');
 
@@ -118,6 +121,9 @@ class RecipeCard extends HTMLElement {
     }
   }
 
+  /**
+   * initilize heart, based on current status
+   */
   initializeHearts() {
     // console.log('Checking favorites');
     const favoriteIcon = this.shadow.querySelector('.recipe-favorite');
